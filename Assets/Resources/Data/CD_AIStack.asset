@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6f6b85576bc4b5cb83c9385e006f001, type: 3}
   m_Name: CD_AIStack
   m_EditorClassIdentifier: 
-  AIMoneyStackData:
-    MoneyCapacity: 0
-    MoneyOffset: {x: 0, y: 0, z: 0}
-  AmmoStackData:
-    AmmoCapacity: 0
-    AmmoOffset: {x: 0, y: 0, z: 0}
+  AIStackList:
+  - AIStackType: 0
+    Capacity: {x: 1, y: 3}
+    Offset: {x: 0, y: 0, z: 0}
+  - AIStackType: 1
+    Capacity: {x: 1, y: 3}
+    Offset: {x: 0, y: 0, z: 0}

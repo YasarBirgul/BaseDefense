@@ -6,7 +6,7 @@ namespace Data.ValueObject.PlayerData
     public class PlayerData
     {
         public int PlayerHealth;
-        public float PlayerSpeed;
+        public PlayerMovementData PlayerMovementData;
         public float AttackRange;
     }
 }

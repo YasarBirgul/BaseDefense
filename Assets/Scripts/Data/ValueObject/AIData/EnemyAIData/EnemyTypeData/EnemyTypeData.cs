@@ -1,5 +1,5 @@
 ﻿using System;
-using Enums.Enemy;
+using Enums;
 
 namespace Data.ValueObject.AIData
 {

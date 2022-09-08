@@ -1,5 +1,5 @@
 ﻿using System;
-using Enums.Weapon;
+using Enums;
 
 namespace Data.ValueObject.WeaponData
 {
