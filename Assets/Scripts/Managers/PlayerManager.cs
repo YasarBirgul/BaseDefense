@@ -13,11 +13,13 @@ namespace Managers
 
         #region Public Variables
         
-        
         #endregion
 
         #region Serialized Variables
 
+        [SerializeField] private PlayerMeshController meshController;
+        [SerializeField] private PlayerAnimationController animationController;
+        
         #endregion
 
         #region Private Variables
@@ -29,7 +31,6 @@ namespace Managers
         #endregion
         
         #endregion
-
         private void Awake()
         {
             _data = GetPlayerData();
@@ -67,6 +68,8 @@ namespace Managers
         private void OnGetInputValues(HorizontalInputParams inputParams)
         {
             _movementController.UpdateInputValues(inputParams);
+            meshController.LookRotation(inputParams);
+            animationController.PlayAnimation(inputParams);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using Signals;
+﻿using Signals;
 using UnityEngine;
 
 namespace Managers
