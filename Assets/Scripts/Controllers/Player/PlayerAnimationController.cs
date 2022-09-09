@@ -31,7 +31,7 @@ namespace Controllers
         }
         public void PlayAnimation(HorizontalInputParams inputParams)
         {
-            ChangeAnimations( inputParams.InputVector.magnitude > 0
+            ChangeAnimations( inputParams.MovementVector.magnitude > 0
                 ? PlayerAnimationStates.Run
                 : PlayerAnimationStates.Idle);
         }

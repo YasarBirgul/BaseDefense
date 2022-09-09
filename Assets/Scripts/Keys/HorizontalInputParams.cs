@@ -4,6 +4,6 @@ namespace Keys
 {
     public struct HorizontalInputParams
     {
-        public Vector2 InputVector;
+        public Vector2 MovementVector;
     }
 }

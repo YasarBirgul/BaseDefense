@@ -27,6 +27,8 @@ namespace Controllers
 
         private Vector2 _inputVector;
 
+        private bool _isReadyToMove;
+        
         #endregion
 
         #endregion
@@ -36,7 +38,12 @@ namespace Controllers
         }
         public void UpdateInputValues(HorizontalInputParams inputParams)
         {
-            _inputVector = inputParams.InputVector;
+            _inputVector = inputParams.MovementVector;
+            EnableMovement(_inputVector.sqrMagnitude > 0);
+        }
+        private void EnableMovement(bool movementStatus)
+        {
+            _isReadyToMove = movementStatus;
         }
         private void FixedUpdate()
         {
@@ -44,9 +51,16 @@ namespace Controllers
         }
         private void PlayerMove()
         {
-            var velocity = rigidbody.velocity; 
-            velocity = new Vector3(_inputVector.x,velocity.y, _inputVector.y)*_data.PlayerSpeed;
-            rigidbody.velocity = velocity;
+            if (_isReadyToMove)
+            {
+                var velocity = rigidbody.velocity; 
+                velocity = new Vector3(_inputVector.x,velocity.y, _inputVector.y)*_data.PlayerSpeed;
+                rigidbody.velocity = velocity;
+            }
+            else if(rigidbody.velocity != Vector3.zero)
+            {
+                rigidbody.velocity = Vector3.zero;
+            }
         }
     }
 }
