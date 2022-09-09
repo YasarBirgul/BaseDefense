@@ -40,7 +40,7 @@ BoxCollider:
   m_GameObject: {fileID: 3713571008055851516}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1.3076632, y: 3.7572796, z: 1.4204726}
   m_Center: {x: 0.020510912, y: 1.8955859, z: 0.0051276684}
@@ -201,6 +201,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: b8fb37ad25d384a4dae1dfcd8439e5c7, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 51933600013893048bab4241a0c242d4, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51933600013893048bab4241a0c242d4, type: 3}
 --- !u!1 &6426189504811682341 stripped
@@ -230,7 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cac5693d05194fa093e436870ea617b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  managerTransform: {fileID: 3713571008269248073}
+  manager: {fileID: 3713571008269248073}
 --- !u!114 &3256136071381465238
 MonoBehaviour:
   m_ObjectHideFlags: 0

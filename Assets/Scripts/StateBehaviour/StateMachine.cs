@@ -2,18 +2,33 @@
 using System.Collections.Generic;
 using System.Linq;
 using Abstract;
-using UnityEngine;
 
 namespace StateBehaviour
 { 
-    public class StateMachine : MonoBehaviour
+    public class StateMachine 
     {
+        #region Self Variables
+
+        #region Public Variables
+        
+        #endregion
+
+        #region Serialized Variables,
+
+        #endregion
+
+        #region Private Variables
+
         private IState _currentState;
         private Dictionary<Type, List<Transition>> _transitions = new Dictionary<Type,List<Transition>>();
         private List<Transition> _currentTransitions = new List<Transition>();
         private List<Transition> _anyTransitions = new List<Transition>();
         private static List<Transition> _emptyTransitions = new List<Transition>(0);
-
+        
+        #endregion
+        
+        #endregion
+        
         public void UpdateIState()
         {
             var transition = GetTransition();

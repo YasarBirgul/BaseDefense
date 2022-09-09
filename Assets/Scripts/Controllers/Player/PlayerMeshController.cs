@@ -1,5 +1,6 @@
 ﻿using Keys;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Controllers
 {
@@ -13,7 +14,7 @@ namespace Controllers
 
         #region Serialized Variables,
          
-        [SerializeField] private Transform managerTransform;
+        [SerializeField] private Transform manager;
 
         #endregion
 
@@ -28,7 +29,7 @@ namespace Controllers
             if (movementDirection != Vector3.zero)
             {
                 Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
-                managerTransform.rotation = Quaternion.RotateTowards( managerTransform.rotation,toRotation,30);
+                manager.rotation = Quaternion.RotateTowards( manager.rotation,toRotation,30);
             }
         }
     }

@@ -1,11 +1,11 @@
-﻿using System;
+﻿
 using Data.UnityObject;
 using Data.ValueObject.InputData;
 using Keys;
 using Signals;
-using UnityEditor;
+
 using UnityEngine;
-using UnityEngine.PlayerLoop;
+
 
 namespace Managers
 { 
@@ -28,6 +28,7 @@ namespace Managers
         private InputData _data;
         private Vector2 _inputDeltaValuesVector = Vector2.zero;
         private float _inputPrecision;
+        
         #endregion
         
         #endregion
@@ -47,7 +48,7 @@ namespace Managers
         }
         private void JoystickInputUpdate()
         {
-            if (Math.Abs(joystickInput.Direction.sqrMagnitude-_inputDeltaValuesVector.sqrMagnitude) == 0) return;
+            if ((joystickInput.Direction - _inputDeltaValuesVector).sqrMagnitude == 0) return;
             _inputDeltaValuesVector = new Vector2(joystickInput.Horizontal, joystickInput.Vertical);
             InputSignals.Instance.onInputDragged?.Invoke(new HorizontalInputParams()
             {
