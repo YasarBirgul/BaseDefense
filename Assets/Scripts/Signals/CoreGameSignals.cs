@@ -8,6 +8,6 @@ namespace Signals
         public UnityAction onGameOpen = delegate {  };
         public UnityAction onApplicationPause = delegate {  };
         public UnityAction onApplicationQuit = delegate {  };
-        public UnityAction onPlay  =delegate {  };
+        public UnityAction onReadyToPlay  =delegate {  };
     }
 }

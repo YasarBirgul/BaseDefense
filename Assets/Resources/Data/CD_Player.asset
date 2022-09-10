@@ -15,5 +15,5 @@ MonoBehaviour:
   PlayerData:
     PlayerHealth: 0
     PlayerMovementData:
-      PlayerSpeed: 10
+      PlayerSpeed: 20
     AttackRange: 0

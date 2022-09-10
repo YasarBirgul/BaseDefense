@@ -1,4 +1,5 @@
-﻿using Signals;
+﻿using System;
+using Signals;
 using UnityEngine;
 
 namespace Managers
@@ -9,6 +10,10 @@ namespace Managers
         {
             Application.targetFrameRate = 60;
             GameOpen();
+        } 
+        private void Start()
+        {
+            ReadyToPlay();
         }
         private void OnApplicationPause(bool IsPaused)
         {
@@ -17,6 +22,10 @@ namespace Managers
         private void GameOpen()
         {
             CoreGameSignals.Instance.onGameOpen?.Invoke();
+        }
+        private void ReadyToPlay()
+        {
+            CoreGameSignals.Instance.onReadyToPlay?.Invoke();
         }
         private void OnApplicationQuit()
         {

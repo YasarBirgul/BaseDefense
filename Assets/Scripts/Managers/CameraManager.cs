@@ -27,7 +27,7 @@ namespace Managers
 
         private CameraStateTypes _cameraStateType;
         
-        private Transform _playerManager;
+        private PlayerManager _playerManager;
 
         #endregion
 
@@ -36,36 +36,33 @@ namespace Managers
         {
             _animator = GetComponent<Animator>();
         }
-        
         #region Event Subscriptions
         private void OnEnable()
         {
             SubscribeEvents();
         }
-
         private void SubscribeEvents()
         {
-            CoreGameSignals.Instance.onPlay += OnPlay;
+            CoreGameSignals.Instance.onReadyToPlay += OnReadyToPlay;
         }
         private void UnsubscribeEvents()
         {
-            CoreGameSignals.Instance.onPlay -= OnPlay;
+            CoreGameSignals.Instance.onReadyToPlay -= OnReadyToPlay;
         }
         private void OnDisable()
         {
             UnsubscribeEvents();
         }
         #endregion
-        private void OnPlay()
+        private void OnReadyToPlay()
         {
             OnSetCameraTarget();
         }
         private void OnSetCameraTarget()
         {
-            if (_playerManager) return;
-            _playerManager = FindObjectOfType<PlayerManager>().transform;
-            stateCam.LookAt = _playerManager;
-            stateCam.Follow = _playerManager;
+            if(!_playerManager)
+                _playerManager = FindObjectOfType<PlayerManager>();
+            stateCam.Follow = _playerManager.transform;
         }
     }
 }
