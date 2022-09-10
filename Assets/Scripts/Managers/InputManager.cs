@@ -26,8 +26,9 @@ namespace Managers
         #region Private Variables
 
         private InputData _data;
-        private Vector2 _inputDeltaValuesVector = Vector2.zero;
+        private Vector2 _inputValuesVector = Vector2.zero;
         private float _inputPrecision;
+        private bool _hasTouched;
         
         #endregion
         
@@ -48,12 +49,23 @@ namespace Managers
         }
         private void JoystickInputUpdate()
         {
-            if ((joystickInput.Direction - _inputDeltaValuesVector).sqrMagnitude == 0) return;
-            _inputDeltaValuesVector = new Vector2(joystickInput.Horizontal, joystickInput.Vertical);
-            InputSignals.Instance.onInputDragged?.Invoke(new HorizontalInputParams()
+            if (Input.GetMouseButton(0))
             {
-                MovementVector = _inputDeltaValuesVector,
-            });
+                _hasTouched = true;
+            }
+            if (!_hasTouched) return;
+            {
+                if ((joystickInput.Direction - _inputValuesVector).sqrMagnitude == 0) return;
+                _inputValuesVector = new Vector2(joystickInput.Horizontal,joystickInput.Vertical);
+                InputSignals.Instance.onInputDragged?.Invoke(new HorizontalInputParams()
+                {
+                    MovementVector = _inputValuesVector
+                });
+                if (_inputValuesVector.sqrMagnitude != 0) return;
+                _inputValuesVector = Vector2.zero;
+                _hasTouched = false;
+            }
+            
         }
     }
 }

@@ -19,18 +19,16 @@ namespace Controllers
         #endregion
 
         #region Private Variables
-        
+
         #endregion
 
         #endregion
         public void LookRotation(HorizontalInputParams inputParams)
         {
-            Vector3 movementDirection = new Vector3(inputParams.MovementVector.x, 0, inputParams.MovementVector.y);
-            if (movementDirection != Vector3.zero)
-            {
-                Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
-                manager.rotation = Quaternion.RotateTowards( manager.rotation,toRotation,30);
-            }
+            var movementDirection = new Vector3(inputParams.MovementVector.x, 0, inputParams.MovementVector.y);
+            if (movementDirection == Vector3.zero) return;
+            Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
+            manager.rotation = Quaternion.RotateTowards( manager.rotation,toRotation,30);
         }
     }
 }

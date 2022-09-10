@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: CD_Input
   m_EditorClassIdentifier: 
   InputData:
-    InputPrecision: 0.05
+    InputPrecision: 0.01

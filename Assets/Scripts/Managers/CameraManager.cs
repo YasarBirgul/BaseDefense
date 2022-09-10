@@ -27,7 +27,7 @@ namespace Managers
 
         private CameraStateTypes _cameraStateType;
         
-        private PlayerManager _playerManager;
+        private Transform _playerManager;
 
         #endregion
 
@@ -62,11 +62,10 @@ namespace Managers
         }
         private void OnSetCameraTarget()
         {
-            if (!_playerManager)
-            {
-                _playerManager = FindObjectOfType<PlayerManager>();
-                stateCam.LookAt = _playerManager.transform;
-            }
+            if (_playerManager) return;
+            _playerManager = FindObjectOfType<PlayerManager>().transform;
+            stateCam.LookAt = _playerManager;
+            stateCam.Follow = _playerManager;
         }
     }
 }

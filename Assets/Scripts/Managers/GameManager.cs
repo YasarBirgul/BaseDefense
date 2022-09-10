@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Managers
 {
     public class GameManager : MonoBehaviour
-    {
+    { 
         private void Awake()
         {
             Application.targetFrameRate = 60;
@@ -18,7 +18,6 @@ namespace Managers
         {
             CoreGameSignals.Instance.onGameOpen?.Invoke();
         }
-
         private void OnApplicationQuit()
         {
             CoreGameSignals.Instance.onApplicationQuit?.Invoke();
