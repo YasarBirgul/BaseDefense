@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3713571008055851491}
   - component: {fileID: 1335683913034451526}
+  - component: {fileID: 589220351}
   m_Layer: 0
   m_Name: PhysicsController
   m_TagString: Player
@@ -40,10 +41,26 @@ BoxCollider:
   m_GameObject: {fileID: 3713571008055851516}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.3076632, y: 3.7572796, z: 1.4204726}
   m_Center: {x: 0.020510912, y: 1.8955859, z: 0.0051276684}
+--- !u!54 &589220351
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3713571008055851516}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &3713571008269248074
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,7 +76,7 @@ GameObject:
   - component: {fileID: 4546731451011242625}
   m_Layer: 0
   m_Name: PlayerManager
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

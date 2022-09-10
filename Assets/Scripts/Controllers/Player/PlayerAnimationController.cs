@@ -13,7 +13,7 @@ namespace Controllers
         
         #endregion
 
-        #region Serialized Variables,
+        #region Serialized Variables
 
         #endregion
 

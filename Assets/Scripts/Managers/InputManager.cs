@@ -17,7 +17,7 @@ namespace Managers
         
         #endregion
 
-        #region Serialized Variables,
+        #region Serialized Variables
         
         [SerializeField] private FloatingJoystick joystickInput;
         

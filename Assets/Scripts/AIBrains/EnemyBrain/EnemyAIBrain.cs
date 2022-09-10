@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using Abstract;
+using Data.UnityObject;
+using Data.ValueObject.AIData;
+using Enums;
 using StateBehaviour;
 using UnityEngine;
 using UnityEngine.AI;
@@ -14,15 +18,26 @@ namespace AIBrains.EnemyBrain
         
         public Transform Target;
         
+        public NavMeshAgent NavMeshAgent;
+
+        // public List<Transform> TurretList;
+        
         #endregion
 
         #region Serialized Variables,
+
+        [SerializeField] private EnemyTypes enemyType;
         
         #endregion
 
         #region Private Variables
 
-        private NavMeshAgent _navMeshAgent;
+        private EnemyTypeData _data;
+        private int _health;
+        private int _damage;
+        private float _attackRange;
+        private float _moveSpeed;
+        private float _chaseSpeed;
         private Animator _animator;
         private StateMachine _stateMachine;
 
@@ -31,17 +46,28 @@ namespace AIBrains.EnemyBrain
         #endregion
         private void Awake()
         {
+            _data = GetData();
+            SetEnemyData();
             GetStatesReferences();
+        }
+        private EnemyTypeData GetData() => Resources.Load<CD_AI>("Data/CD_AI").EnemyAIData.EnemyList[(int)enemyType];
+        private void SetEnemyData()
+        {
+            _health = _data.Health;
+            _damage = _data.Damage;
+            _attackRange = _data.AttackRange;
+            _chaseSpeed = _data.ChaseSpeed;
+            _moveSpeed = _data.MoveSpeed;
         }
         private void GetStatesReferences()
         {
-            _navMeshAgent = GetComponent<NavMeshAgent>(); 
+            NavMeshAgent = GetComponent<NavMeshAgent>(); 
             _animator = GetComponent<Animator>();
-            var move = new Move(_navMeshAgent,_animator); 
-            var attack = new Attack(_navMeshAgent,_animator);
-            var death = new Death(_navMeshAgent,_animator);
-            var chase = new Chase(_navMeshAgent,_animator);
-            var moveToBomb = new MoveToBomb(_navMeshAgent,_animator);
+            var move = new Move(NavMeshAgent,_animator,this,_moveSpeed); 
+            var attack = new Attack(NavMeshAgent,_animator,this,_attackRange);
+            var death = new Death(NavMeshAgent,_animator);
+            var chase = new Chase(NavMeshAgent,_animator,this,_attackRange,_chaseSpeed);
+            var moveToBomb = new MoveToBomb(NavMeshAgent,_animator);
             _stateMachine = new StateMachine();
             At(move,chase,HasTarget());  
             At(chase,attack,AttackRange()); 
@@ -54,11 +80,10 @@ namespace AIBrains.EnemyBrain
             void At(IState to,IState from,Func<bool> condition) =>_stateMachine.AddTransition(to,from,condition);
             
             Func<bool> HasTarget() => () => Target != null;
-            Func<bool> AttackRange() => () => Target != null && chase.IsPlayerInRange;
-            Func<bool> AttackOffRange() => () => Target != null && !chase.IsPlayerInRange;
+            Func<bool> AttackRange() => () => Target != null && chase.InPlayerAttackRange();
+            Func<bool> AttackOffRange() => () => Target != null && !attack.IsPlayerAttackRange();
             Func<bool> TargetNull() => () => Target is null;
         }
-
         private void Update() => _stateMachine.UpdateIState();
     }
 }

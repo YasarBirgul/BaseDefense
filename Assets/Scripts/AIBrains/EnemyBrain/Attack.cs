@@ -20,28 +20,46 @@ namespace AIBrains.EnemyBrain
 
         private readonly NavMeshAgent _navMeshAgent;
         private readonly Animator _animator;
+        private readonly EnemyAIBrain _enemyAIBrain;
+        private readonly float _attackRange;
+
+        private bool _inAttack;
         
         #endregion
         
         #endregion
 
-        public Attack(NavMeshAgent navMeshAgent,Animator animator)
+        public Attack(NavMeshAgent navMeshAgent,Animator animator,EnemyAIBrain enemyAIBrain,float attackRange)
         {
-            
+            _navMeshAgent = navMeshAgent;
+            _animator = animator;
+            _enemyAIBrain = enemyAIBrain;
+            _attackRange = attackRange;
+
         }
+        public bool IsPlayerAttackRange() => _inAttack; 
         public void UpdateIState()
         {
-            throw new System.NotImplementedException();
+            _navMeshAgent.destination = _enemyAIBrain.Target.transform.position;
+            CheckDistanceAttack();
         }
 
         public void OnEnter()
         {
-            throw new System.NotImplementedException();
+            _inAttack = true;
+            _navMeshAgent.SetDestination(_enemyAIBrain.Target.transform.position);
         }
 
         public void OnExit()
         {
-            throw new System.NotImplementedException();
+            
+        }
+        private void CheckDistanceAttack()
+        {
+            if (_navMeshAgent.remainingDistance > _attackRange)
+            {
+                _inAttack = false;
+            }
         }
     }
 }

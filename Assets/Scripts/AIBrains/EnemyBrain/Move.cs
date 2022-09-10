@@ -14,7 +14,7 @@ namespace AIBrains.EnemyBrain
         
         #endregion
 
-        #region Serialized Variables,
+        #region Serialized Variables
 
         #endregion
 
@@ -25,14 +25,17 @@ namespace AIBrains.EnemyBrain
         private readonly Animator _animator;
         private static readonly int Speed = Animator.StringToHash("Speed");
         private Vector3 _lastPosition = Vector3.zero;
+        private readonly float _moveSpeed;
 
         #endregion
         
         #endregion
-        public Move(NavMeshAgent navMeshAgent,Animator animator)
+        public Move(NavMeshAgent navMeshAgent,Animator animator,EnemyAIBrain enemyAIBrain,float moveSpeed)
         {
             _navMeshAgent = navMeshAgent;
             _animator = animator;
+            _enemyAIBrain = enemyAIBrain;
+            _moveSpeed = moveSpeed;
         }
         public void UpdateIState()
         {
@@ -44,8 +47,10 @@ namespace AIBrains.EnemyBrain
         public void OnEnter()
         {
             _navMeshAgent.enabled = true;
-            _navMeshAgent.SetDestination(_enemyAIBrain.Target.transform.position);
-            _animator.SetFloat(Speed,1f);
+            _navMeshAgent.speed = _moveSpeed;
+          // var randomTarget = Random.Range(0, _enemyAIBrain.TurretList.Count);
+          // _navMeshAgent.SetDestination(_enemyAIBrain.TurretList[randomTarget].position);
+           // _animator.SetFloat(Speed,1f);
         }
         public void OnExit()
         {

@@ -29,21 +29,21 @@ MonoBehaviour:
     - EnemyType: 0
       Health: 0
       Damage: 0
-      AttackRange: 0
-      AttackSpeed: 0
-      MoveSpeed: 0
-      ChaseSpeed: 0
+      AttackRange: 2
+      AttackSpeed: 15
+      MoveSpeed: 5
+      ChaseSpeed: 12
     - EnemyType: 1
       Health: 0
       Damage: 0
-      AttackRange: 0
-      AttackSpeed: 0
-      MoveSpeed: 0
-      ChaseSpeed: 0
+      AttackRange: 2
+      AttackSpeed: 15
+      MoveSpeed: 9
+      ChaseSpeed: 15
     - EnemyType: 2
       Health: 0
       Damage: 0
-      AttackRange: 0
-      AttackSpeed: 0
+      AttackRange: 5
+      AttackSpeed: 14
       MoveSpeed: 0
       ChaseSpeed: 0
