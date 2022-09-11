@@ -1,6 +1,7 @@
 ﻿using Controllers;
 using Data.UnityObject;
 using Data.ValueObject.PlayerData;
+using Enums.GameStates;
 using Keys;
 using Signals;
 using UnityEngine;
@@ -12,6 +13,8 @@ namespace Managers
         #region Self Variables
 
         #region Public Variables
+
+        public GameStates CurrentGameState = GameStates.BaseDefense;
         
         #endregion
 
@@ -27,7 +30,8 @@ namespace Managers
         private PlayerData _data;
 
         private PlayerMovementController _movementController;
-            
+
+        private GameStates _nextState = GameStates.AttackField;
         #endregion
         
         #endregion
@@ -70,6 +74,19 @@ namespace Managers
             _movementController.UpdateInputValues(inputParams);
             meshController.LookRotation(inputParams);
             animationController.PlayAnimation(inputParams);
+        }
+
+        public void ChangeGameState()
+        {
+            if (CurrentGameState != _nextState)
+            {
+                CurrentGameState = _nextState;
+            }
+            else
+            {
+                CurrentGameState = GameStates.BaseDefense;
+            }
+            Debug.Log(CurrentGameState);
         }
     }
 }

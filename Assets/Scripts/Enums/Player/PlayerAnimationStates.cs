@@ -4,5 +4,6 @@
     {
         Idle,
         Run,
+        blendTree,
     }
 }
