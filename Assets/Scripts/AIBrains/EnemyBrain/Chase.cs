@@ -13,7 +13,6 @@ namespace AIBrains.EnemyBrain
 
         public bool IsPlayerInRange;
         
-        
         #endregion
 
         #region Serialized Variables,
@@ -53,13 +52,11 @@ namespace AIBrains.EnemyBrain
             _inAttack = false;
             _navMeshAgent.speed = _chaseSpeed;
             _navMeshAgent.SetDestination(_enemyAIBrain.Target.transform.position);
-        }
-
+        } 
         public void OnExit()
         {
             
         }
-
         private void CheckDistanceChase()
         {
             if (_navMeshAgent.remainingDistance <= _attackRange)

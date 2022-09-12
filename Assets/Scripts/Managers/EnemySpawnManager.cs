@@ -19,7 +19,7 @@ namespace Managers
         
         [SerializeField]private List<GameObject> enemies = new List<GameObject>();
         
-        [SerializeField]private List<Transform> targetList = new List<Transform>();
+      //  [SerializeField]private List<Transform> targetList = new List<Transform>();
         
 
         #endregion
@@ -54,7 +54,6 @@ namespace Managers
             {
                 ObjectPoolManager.Instance.AddObjectPool(()=>Instantiate(enemies[i]),TurnOnEnemyAI,TurnOffEnemyAI,((EnemyTypes)i).ToString(),50,true);
             }
-            
         }
 
         private void Awake()
@@ -129,7 +128,7 @@ namespace Managers
            if (!RandomPoint(SpawnPos.position, 20, out point)) return;
            
            _EnemyAIBrain.NavMeshAgent.Warp(point);
-           _EnemyAIBrain.Target = targetList[Random.Range(0,targetList.Count)];
+          // _EnemyAIBrain.Target = targetList[Random.Range(0,targetList.Count)];
 
         }
     }

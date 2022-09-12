@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Enums;
+using UnityEngine;
 
 namespace Data.ValueObject.AIData
 {
@@ -13,5 +15,7 @@ namespace Data.ValueObject.AIData
         public float AttackSpeed;
         public float MoveSpeed;
         public float ChaseSpeed;
+        public List<Transform> TargetList = new List<Transform>();
+        public Transform SpawnPosition;
     }
 }

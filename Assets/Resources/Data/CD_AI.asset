@@ -33,6 +33,12 @@ MonoBehaviour:
       AttackSpeed: 15
       MoveSpeed: 5
       ChaseSpeed: 12
+      TargetList:
+      - {fileID: 5998779934400247307, guid: c64aa164cf7cf734ca131c3f3e8d2015, type: 3}
+      - {fileID: 6244618316468488937, guid: 2916559811a8c1e49b9d35bc2d6bbc86, type: 3}
+      - {fileID: 1437402441047551168, guid: 2b338b1f6e415764c88ebef5d26aae08, type: 3}
+      - {fileID: 773442581660769327, guid: 5212bad1c90ec2b428635562748a98b8, type: 3}
+      SpawnPosition: {fileID: 4673745063218019471, guid: d4d745a794f7371489d7fcf3caf04327, type: 3}
     - EnemyType: 1
       Health: 0
       Damage: 0
@@ -40,10 +46,22 @@ MonoBehaviour:
       AttackSpeed: 15
       MoveSpeed: 9
       ChaseSpeed: 15
+      TargetList:
+      - {fileID: 5998779934400247307, guid: c64aa164cf7cf734ca131c3f3e8d2015, type: 3}
+      - {fileID: 6244618316468488937, guid: 2916559811a8c1e49b9d35bc2d6bbc86, type: 3}
+      - {fileID: 1437402441047551168, guid: 2b338b1f6e415764c88ebef5d26aae08, type: 3}
+      - {fileID: 773442581660769327, guid: 5212bad1c90ec2b428635562748a98b8, type: 3}
+      SpawnPosition: {fileID: 4673745063218019471, guid: d4d745a794f7371489d7fcf3caf04327, type: 3}
     - EnemyType: 2
       Health: 0
       Damage: 0
       AttackRange: 5
       AttackSpeed: 14
-      MoveSpeed: 0
+      MoveSpeed: 12
       ChaseSpeed: 0
+      TargetList:
+      - {fileID: 5998779934400247307, guid: c64aa164cf7cf734ca131c3f3e8d2015, type: 3}
+      - {fileID: 6244618316468488937, guid: 2916559811a8c1e49b9d35bc2d6bbc86, type: 3}
+      - {fileID: 1437402441047551168, guid: 2b338b1f6e415764c88ebef5d26aae08, type: 3}
+      - {fileID: 773442581660769327, guid: 5212bad1c90ec2b428635562748a98b8, type: 3}
+      SpawnPosition: {fileID: 4673745063218019471, guid: d4d745a794f7371489d7fcf3caf04327, type: 3}

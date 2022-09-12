@@ -16,3 +16,6 @@ MonoBehaviour:
   - WeaponType: 0
     Damage: 0
     AttackRate: 0
+  - WeaponType: 0
+    Damage: 0
+    AttackRate: 0

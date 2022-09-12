@@ -12,4 +12,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 462bfdf052ef4647a59f01c938dca516, type: 3}
   m_Name: CD_Level
   m_EditorClassIdentifier: 
-  LevelData: []
+  LevelData:
+  - BaseData:
+      BaseRoomData:
+        Rooms: []
+      MineBaseData:
+        MaxWorkerAmount: 0
+        CurrentWorkerAmount: 0
+        DiamondCapacity: 0
+        CurrentDiamondAmount: 0
+        MineCartCapacity: 0
+      MilitaryBaseData:
+        MaxSoldierAmount: 0
+        CandidateAmount: 0
+        CurrentSoldierAmount: 0
+        SoldierUpgradeTime: 0
+        SoldierSlotCost: 0
+        SlotAmount: 0
+        SlotTransform: {fileID: 0}
+        AttackTime: 0
+      BuyablesData:
+        MoneyWorkerCost: 0
+        MoneyWorkerPayedAmount: 0
+        AmmoWorkerCost: 0
+        AmmoWorkerPayedAmount: 0
+        BoughtMoneyWorkerAmount: 0
+        BoughtAmmoWorkerAmount: 0
+        UpgradeButtonLocked: 0
+        MoneyWorkerLevel: 0
+        AmmoWorkerLevel: 0
+    FrontYardData:
+      StageDataList: []
+      FrontYardItemsDataList: []
