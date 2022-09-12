@@ -19,9 +19,6 @@ namespace Managers
         
         [SerializeField]private List<GameObject> enemies = new List<GameObject>();
         
-      //  [SerializeField]private List<Transform> targetList = new List<Transform>();
-        
-
         #endregion
     
         #region Public Variables
@@ -46,11 +43,9 @@ namespace Managers
         private EnemyAIBrain _EnemyAIBrain;
         #endregion
         #endregion
-        
-
         private void InitEnemyPool()
         {
-            for (int i = 0; i < enemies.Count; i++)
+            for (var i = 0; i < enemies.Count; i++)
             {
                 ObjectPoolManager.Instance.AddObjectPool(()=>Instantiate(enemies[i]),TurnOnEnemyAI,TurnOffEnemyAI,((EnemyTypes)i).ToString(),50,true);
             }
@@ -126,10 +121,7 @@ namespace Managers
            }
             Vector3 point;
            if (!RandomPoint(SpawnPos.position, 20, out point)) return;
-           
            _EnemyAIBrain.NavMeshAgent.Warp(point);
-          // _EnemyAIBrain.Target = targetList[Random.Range(0,targetList.Count)];
-
         }
     }
 }

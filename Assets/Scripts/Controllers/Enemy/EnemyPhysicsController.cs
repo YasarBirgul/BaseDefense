@@ -22,11 +22,6 @@ namespace Controllers
                 _detectedPlayer = other.GetComponentInParent<PlayerManager>().transform;
                 _enemyAIBrain.Target = other.transform.parent.transform;
             }
-
-            /*if (other.GetComponent<Mine>())
-            {
-                _detectedMine = other.GetComponent<Mine>();
-            }*/
         }
 
         private void OnTriggerExit(Collider other)
@@ -34,7 +29,7 @@ namespace Controllers
             if (other.CompareTag("Player"))
             {
                 _detectedPlayer = null;
-                this.gameObject.GetComponentInParent<EnemyAIBrain>().Target = null;
+                gameObject.GetComponentInParent<EnemyAIBrain>().Target = null;
             }
 
             /*if (other.GetComponent<Mine>())
@@ -42,9 +37,7 @@ namespace Controllers
 
             }*/
         }
-
-
-       // public Vector3 GetNearestPosition(GameObject gO)
+        // public Vector3 GetNearestPosition(GameObject gO)
        // {
        //     return gO?.transform.position ?? Vector3.zero;
        // }
