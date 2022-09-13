@@ -18,12 +18,6 @@ namespace Controllers
         #region Serialized Variables
 
         [SerializeField] private PlayerManager playerManager;
-
-
-        [SerializeField] private Rig twohandHoldingState;
-        [SerializeField] private TwoBoneIKConstraint leftHandIK; 
-        [SerializeField] private TwoBoneIKConstraint rightHandIK;
-        [SerializeField] private GameObject pistolGun;
         
         #endregion
 
@@ -49,8 +43,6 @@ namespace Controllers
         private void Init()
         {
             _animator = GetComponent<Animator>();
-            leftHandIK.weight = 0;
-            rightHandIK.weight = 0;
             _animator.SetLayerWeight(1, 0);
         }
 
@@ -58,11 +50,7 @@ namespace Controllers
         {
             if (playerManager.CurrentGameState == GameStates.AttackField)
             {
-                pistolGun.SetActive(true);
                 _animator.SetLayerWeight(1, 1);
-                twohandHoldingState.weight = 1;
-                rightHandIK.weight = 1;
-                leftHandIK.weight = 1;
                 _animator.SetBool("IsBattleOn",true);
                 _velocityX = inputParams.MovementVector.x;
                 _velocityZ = inputParams.MovementVector.y;
@@ -95,22 +83,12 @@ namespace Controllers
                 {
                     _velocityX = 0.0f;
                 }
-
-                if (inputParams.MovementVector.sqrMagnitude == 0)
-                {
-                    twohandHoldingState.weight = 0;
-                    leftHandIK.weight = 0;
-                }
                 _animator.SetFloat("VelocityZ",_velocityZ);
                 _animator.SetFloat("VelocityX",_velocityX);
             }
             else
             {
-                pistolGun.SetActive(false);
                 _animator.SetLayerWeight(1, 0);
-                twohandHoldingState.weight = 0;
-                leftHandIK.weight = 0;
-                rightHandIK.weight = 0;
                 _animator.SetBool("IsBattleOn",false);
                 ChangeAnimations( inputParams.MovementVector.magnitude > 0
                     ? PlayerAnimationStates.Run
