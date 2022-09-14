@@ -52,6 +52,10 @@ namespace Controllers
             {
                 _animator.SetLayerWeight(1, 1);
                 _animator.SetBool("IsBattleOn",true);
+                if (_animator.GetBool("Aimed") == false)
+                {
+                    _animator.SetBool("Aimed",true);
+                }
                 _velocityX = inputParams.MovementVector.x;
                 _velocityZ = inputParams.MovementVector.y;
                 
@@ -83,14 +87,20 @@ namespace Controllers
                 {
                     _velocityX = 0.0f;
                 }
+                
+                if (inputParams.MovementVector.sqrMagnitude == 0)
+                {
+                    _animator.SetBool("Aimed",false);
+                }
                 _animator.SetFloat("VelocityZ",_velocityZ);
                 _animator.SetFloat("VelocityX",_velocityX);
             }
             else
             {
+                _animator.SetBool("Aimed",false);
                 _animator.SetLayerWeight(1, 0);
                 _animator.SetBool("IsBattleOn",false);
-                ChangeAnimations( inputParams.MovementVector.magnitude > 0
+                ChangeAnimations( inputParams.MovementVector.sqrMagnitude > 0
                     ? PlayerAnimationStates.Run
                     : PlayerAnimationStates.Idle);
             }

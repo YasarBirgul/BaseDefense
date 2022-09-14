@@ -5917,6 +5917,19 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 325830610342464229, guid: 4e68f0dd9bd350d4eaf4af2f89a274d1, type: 3}
+      propertyPath: m_UpdateMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 325830610342464229, guid: 4e68f0dd9bd350d4eaf4af2f89a274d1, type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'mixamorig:Spine1'\n\tTransform 'mixamorig:RightArm'\n\tTransform
+        'mixamorig:LeftArm'\n\tTransform 'mixamorig:RightHand'\n\tTransform 'mixamorig:LeftForeArm'\n\tTransform
+        'mixamorig:RightForeArm'\n\tTransform 'mixamorig:Spine'\n\tTransform 'mixamorig:LeftHand'\n\tTransform
+        'mixamorig:Spine1'\n\tTransform 'mixamorig:RightArm'\n\tand more ..."
+      objectReference: {fileID: 0}
     - target: {fileID: 3713571008269248073, guid: 4e68f0dd9bd350d4eaf4af2f89a274d1, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -6794,7 +6807,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1721888127
 MonoBehaviour:
   m_ObjectHideFlags: 0
