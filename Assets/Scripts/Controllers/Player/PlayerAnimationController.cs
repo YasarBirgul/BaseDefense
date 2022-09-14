@@ -18,7 +18,7 @@ namespace Controllers
         #region Serialized Variables
 
         [SerializeField] private PlayerManager playerManager;
-        
+        [SerializeField] private GameObject _gameObject;
         #endregion
 
         #region Private Variables
@@ -37,9 +37,7 @@ namespace Controllers
         private void Awake()
         {
             Init();
-            
         }
-
         private void Init()
         {
             _animator = GetComponent<Animator>();
@@ -50,15 +48,15 @@ namespace Controllers
         {
             if (playerManager.CurrentGameState == GameStates.AttackField)
             {
+                _gameObject.SetActive(true);
                 _animator.SetLayerWeight(1, 1);
-                _animator.SetBool("IsBattleOn",true);
+                _animator.SetBool("IsBattleOn", true);
                 if (_animator.GetBool("Aimed") == false)
                 {
                     _animator.SetBool("Aimed",true);
                 }
                 _velocityX = inputParams.MovementVector.x;
                 _velocityZ = inputParams.MovementVector.y;
-                
                 if (_velocityZ < 0.1f)
                 {
                     _velocityZ += Time.deltaTime * _acceleration;
@@ -87,7 +85,6 @@ namespace Controllers
                 {
                     _velocityX = 0.0f;
                 }
-                
                 if (inputParams.MovementVector.sqrMagnitude == 0)
                 {
                     _animator.SetBool("Aimed",false);
@@ -97,9 +94,10 @@ namespace Controllers
             }
             else
             {
+                _gameObject.SetActive(false);
                 _animator.SetBool("Aimed",false);
                 _animator.SetLayerWeight(1, 0);
-                _animator.SetBool("IsBattleOn",false);
+                _animator.SetBool("IsBattleOn",false); 
                 ChangeAnimations( inputParams.MovementVector.sqrMagnitude > 0
                     ? PlayerAnimationStates.Run
                     : PlayerAnimationStates.Idle);
