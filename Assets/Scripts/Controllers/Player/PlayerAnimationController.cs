@@ -1,9 +1,12 @@
-﻿using Enums.GameStates;
+﻿using System;
+using Enums;
+using Enums.GameStates;
 using Enums.Player;
 using Keys;
 using Managers;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using UnityEngine.PlayerLoop;
 
 namespace Controllers
 {
@@ -16,9 +19,10 @@ namespace Controllers
         #endregion
 
         #region Serialized Variables
-
+        
         [SerializeField] private PlayerManager playerManager;
         [SerializeField] private GameObject _gameObject;
+        [SerializeField] private GameObject _gameObjectRiffle;
         #endregion
 
         #region Private Variables
@@ -31,6 +35,8 @@ namespace Controllers
 
         private float _acceleration, _decelaration;
 
+        public WeaponTypes CurrentWeaponType;
+        
         #endregion
 
         #endregion
@@ -48,9 +54,23 @@ namespace Controllers
         {
             if (playerManager.CurrentGameState == GameStates.AttackField)
             {
-                _gameObject.SetActive(true);
                 _animator.SetLayerWeight(1, 1);
                 _animator.SetBool("IsBattleOn", true);
+
+                switch (CurrentWeaponType)
+                {
+                    case WeaponTypes.Pistol:
+                        _gameObject.SetActive(true);
+                        ChangeAnimations(PlayerAnimationStates.PistolHold);
+                        _gameObjectRiffle.SetActive(false);
+                        break;
+                    case WeaponTypes.Riffle:
+                        _gameObject.SetActive(false);
+                        ChangeAnimations(PlayerAnimationStates.AimRiffle);
+                        _gameObjectRiffle.SetActive(true);
+                        break;
+                }
+                
                 if (_animator.GetBool("Aimed") == false)
                 {
                     _animator.SetBool("Aimed",true);
@@ -98,6 +118,7 @@ namespace Controllers
                 _animator.SetBool("Aimed",false);
                 _animator.SetLayerWeight(1, 0);
                 _animator.SetBool("IsBattleOn",false); 
+                _gameObjectRiffle.SetActive(false);
                 ChangeAnimations( inputParams.MovementVector.sqrMagnitude > 0
                     ? PlayerAnimationStates.Run
                     : PlayerAnimationStates.Idle);
