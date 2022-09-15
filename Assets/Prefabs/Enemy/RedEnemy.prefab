@@ -435,7 +435,7 @@ GameObject:
   - component: {fileID: 1774349480228452301}
   - component: {fileID: 8054091563384044149}
   - component: {fileID: 2012006290375711584}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: EnemyPhysicsController
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -1331,6 +1331,7 @@ MonoBehaviour:
   MineTarget: {fileID: 0}
   NavMeshAgent: {fileID: 437255398008131030}
   Health: 0
+  EnemyType: 0
   enemyType: 0
   physicsController: {fileID: 2012006290375711584}
 --- !u!195 &437255398008131030

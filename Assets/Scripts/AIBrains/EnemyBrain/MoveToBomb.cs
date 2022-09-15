@@ -6,43 +6,35 @@ namespace AIBrains.EnemyBrain
 {
     public class MoveToBomb : IState
     {
-        #region Self Variables
-
-        #region Public Variables
-
-        public bool BombIsAlive;
-        
-        #endregion
-
-        #region Serialized Variables,
-
-        #endregion
-
-        #region Private Variables
-
+        private readonly EnemyAIBrain _enemyAIBrain;
         private readonly NavMeshAgent _navMeshAgent;
         private readonly Animator _animator;
-        
-        #endregion
-        
-        #endregion
-        public MoveToBomb(NavMeshAgent navMeshAgent,Animator animator)
+        private readonly float _attackRange;
+        private readonly float _chaseSpeed;
+        private bool _attackOnPlayer; 
+
+        public MoveToBomb(NavMeshAgent navmeshAgent, Animator animator,EnemyAIBrain enemyAIBrain,float attackRange,float chaseSpeed)
         {
-            
+            _animator = animator;
+            _attackRange = attackRange;
+            _chaseSpeed = chaseSpeed;
+            _enemyAIBrain = enemyAIBrain;
+            _navMeshAgent = navmeshAgent;
         }
         public void UpdateIState()
         {
-            throw new System.NotImplementedException();
+            if(_enemyAIBrain.MineTarget!=null){
+                _navMeshAgent.destination = _enemyAIBrain.MineTarget.transform.position;
+            }
         }
-
         public void OnEnter()
         {
-            throw new System.NotImplementedException();
+            _attackOnPlayer = false;
+            _navMeshAgent.speed = _chaseSpeed;
+            _navMeshAgent.SetDestination(_enemyAIBrain.MineTarget.transform.position);
         }
-
         public void OnExit()
         {
-            throw new System.NotImplementedException();
         }
     }
 }

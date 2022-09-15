@@ -26,10 +26,10 @@ MonoBehaviour:
       NavMeshRadius: 0.5
       NavMeshHeight: 2
     - EnemyType: 1
-      Health: 0
+      Health: 100
       Damage: 0
       AttackRange: 0
-      AttackSpeed: 0
+      AttackSpeed: 20
       ScaleSize: {x: 1, y: 1, z: 1}
       BodyColor: {r: 0.9433962, g: 0.83386356, b: 0, a: 0}
       ChaseSpeed: 8
@@ -37,7 +37,7 @@ MonoBehaviour:
       NavMeshRadius: 0.3
       NavMeshHeight: 2
     - EnemyType: 2
-      Health: 0
+      Health: 100
       Damage: 0
       AttackRange: 0
       AttackSpeed: 0
@@ -48,7 +48,7 @@ MonoBehaviour:
       NavMeshRadius: 0.7
       NavMeshHeight: 2.5
     - EnemyType: 3
-      Health: 0
+      Health: 100
       Damage: 0
       AttackRange: 0
       AttackSpeed: 0

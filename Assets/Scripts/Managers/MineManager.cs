@@ -11,11 +11,13 @@ namespace Managers
 
         #region Public Variables
 
-        public bool IspayedTotalAmount => (_payedGemAmount > _requiredGemAmount);
+        public bool IsPayedTotalAmount => (_payedGemAmount > _requiredGemAmount);
         public int GemAmount;
         public int LureTime;
         public int MineCountDownTime;
-
+        public int ExplosionDamage;
+        
+        
         #endregion
 
         #region Serialized Variables,
@@ -62,7 +64,7 @@ namespace Managers
         }
         public int GetDamage()
         {
-            throw new System.NotImplementedException();
+            return ExplosionDamage;
         }
     }
 }

@@ -27,6 +27,7 @@ namespace AIBrains.EnemyBrain
         
         public int Health;
         
+        public EnemyTypes EnemyType;
         #endregion
 
         #region Serialized Variables,
@@ -34,13 +35,11 @@ namespace AIBrains.EnemyBrain
         [SerializeField] private EnemyTypes enemyType;
         [SerializeField] private EnemyPhysicsController physicsController;
         
-
         #endregion
 
         #region Private Variables
 
         private int _levelID;
-        private EnemyTypes enemyTypes;
         private EnemyTypeData _data;
         private EnemyAIData _AIData;
         private int _damage;
@@ -92,15 +91,15 @@ namespace AIBrains.EnemyBrain
             var search = new Search(this, NavMeshAgent, _spawnPoint);
             var move = new Move(NavMeshAgent,_animator,this,_moveSpeed); 
             var attack = new Attack(NavMeshAgent,_animator,this,_attackRange);
-            var death = new Death(NavMeshAgent,_animator);
+            var death = new Death(NavMeshAgent,_animator,this);
             var chase = new Chase(NavMeshAgent,_animator,this,_attackRange,_chaseSpeed);
-            var moveToBomb = new MoveToBomb(NavMeshAgent,_animator);
+            var moveToBomb = new MoveToBomb(NavMeshAgent,_animator,this,_attackRange,_chaseSpeed);
             _stateMachine = new StateMachine();
           
             At(search,move,HasTurretTarget());
             At(move,chase,HasTarget());  
             At(chase,attack,AttackThePlayer()); 
-            At(attack,chase,()=>attack.IsPlayerAttackRange()==false);
+            At(attack,chase,()=>attack.InPlayerAttackRange()==false);
             At(chase,move,TargetNull());
             
             _stateMachine.AddAnyTransition(death,()=> physicsController.AmIdead());

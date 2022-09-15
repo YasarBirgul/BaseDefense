@@ -14,6 +14,16 @@ The following shader packages were used for promo materials:
 https://assetstore.unity.com/packages/vfx/shaders/toony-colors-free-3926
 https://assetstore.unity.com/packages/vfx/shaders/toony-colors-pro-2-8105
 
+This pack is a continuation and extension of this pack:
+https://assetstore.unity.com/packages/3d/props/weapons/hypercasual-action-props-pack-188456
+
+You can use the texture from the second volume for prefabs of both this and the first volume
+In the pack you will find a target prefab for shooting and a separate prefab for the target hit point.
+You can use it and use programming to place it at the hit point.
+For a machine gun, the barrel is made a separate object that you can rotate using your scripts.
+The pivot for the "ParachuteWithParcel" prefab is placed in the center of the parachute, so that the rotation during the fall is more casual.
+The "ChainSaw" prefab has no moving parts. This is one solid object.
+
 If you need support send an email to maxgorelikov@gmail.com
 
 -----------------------------------------------------------

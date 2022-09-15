@@ -41,11 +41,13 @@ namespace Controllers
             }
             if (other.CompareTag("MineExplosion"))
             {
+                Debug.Log(other.tag);
                 var damageAmount = other.transform.parent.GetComponentInParent<IDamagable>().GetDamage();
                 _enemyAIBrain.Health -= damageAmount;
                 if (_enemyAIBrain.Health <= 0)
                 {
                     _amAIDead = true;
+                    Debug.Log(_amAIDead);
                 }
             }
         }

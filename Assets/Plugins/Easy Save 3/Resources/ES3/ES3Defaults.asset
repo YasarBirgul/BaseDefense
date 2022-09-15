@@ -33,11 +33,11 @@ MonoBehaviour:
     - Assembly-CSharp
     - Cinemachine
     - ToonyColorsPro2.Demo
-    - ToonyColorsPro.Runtime
     - Sirenix.OdinInspector.CompatibilityLayer
+    - ToonyColorsPro.Runtime
+    - Sirenix.OdinInspector.CompatibilityLayer.Editor
     - ToonyColorsPro.Editor
     - ToonyColorsPro.Demo.Editor
-    - Sirenix.OdinInspector.CompatibilityLayer.Editor
     - Sirenix.OdinInspector.Modules.UnityMathematics
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0

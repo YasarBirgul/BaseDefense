@@ -39,18 +39,17 @@ namespace AIBrains.EnemyBrain
         }
         public void UpdateIState()
         {
-            var sqrDistance = (_enemyAIBrain.transform.position-_lastPosition).sqrMagnitude;
-            if (sqrDistance == 0f) 
-                TimeStuck += Time.deltaTime;
-            _lastPosition = _enemyAIBrain.transform.position;
+           // var sqrDistance = (_enemyAIBrain.transform.position-_lastPosition).sqrMagnitude;
+           // if (sqrDistance == 0f) 
+           //     TimeStuck += Time.deltaTime;
+           // _lastPosition = _enemyAIBrain.transform.position;
         }
         public void OnEnter()
         {
             _navMeshAgent.enabled = true;
             _navMeshAgent.speed = _moveSpeed;
-          // var randomTarget = Random.Range(0, _enemyAIBrain.TurretList.Count);
-          // _navMeshAgent.SetDestination(_enemyAIBrain.TurretList[randomTarget].position);
-           // _animator.SetFloat(Speed,1f);
+            _navMeshAgent.SetDestination(_enemyAIBrain._turretTarget.position);
+         //    _animator.SetFloat(Speed,1f);
         }
         public void OnExit()
         {

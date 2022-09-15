@@ -714,7 +714,7 @@ GameObject:
   - component: {fileID: 572016563916654751}
   - component: {fileID: 8118326437980128551}
   - component: {fileID: 325352589472048178}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: EnemyPhysicsController
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -746,7 +746,7 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 13
-  m_Height: 0
+  m_Height: 26
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &325352589472048178
@@ -1371,6 +1371,7 @@ MonoBehaviour:
   MineTarget: {fileID: 0}
   NavMeshAgent: {fileID: 1837053086526059140}
   Health: 0
+  EnemyType: 0
   enemyType: 3
   physicsController: {fileID: 325352589472048178}
 --- !u!195 &1837053086526059140

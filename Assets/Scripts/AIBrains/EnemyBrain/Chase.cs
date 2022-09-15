@@ -44,14 +44,14 @@ namespace AIBrains.EnemyBrain
         
         public void UpdateIState()
         {
-            _navMeshAgent.destination = _enemyAIBrain._turretTarget.transform.position;
+            _navMeshAgent.destination = _enemyAIBrain.PlayerTarget.transform.position;
             CheckDistanceChase();
         }
         public void OnEnter()
         {
             _inAttack = false;
             _navMeshAgent.speed = _chaseSpeed;
-            _navMeshAgent.SetDestination(_enemyAIBrain._turretTarget.transform.position);
+            _navMeshAgent.SetDestination(_enemyAIBrain.PlayerTarget.transform.position);
         } 
         public void OnExit()
         {
