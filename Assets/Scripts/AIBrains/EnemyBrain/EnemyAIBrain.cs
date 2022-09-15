@@ -9,14 +9,18 @@ using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 namespace AIBrains.EnemyBrain
-{
+{ 
     public class EnemyAIBrain : MonoBehaviour
     {
         #region Self Variables
 
         #region Public Variables
+
+        public Transform PlayerTarget;
+
+        public Transform _turretTarget;
         
-        public Transform Target;
+        public Transform MineTarget;
         
         public NavMeshAgent NavMeshAgent;
         
@@ -25,41 +29,56 @@ namespace AIBrains.EnemyBrain
         #region Serialized Variables,
 
         [SerializeField] private EnemyTypes enemyType;
-        
+
         #endregion
 
         #region Private Variables
 
+        private int _levelID;
+        private EnemyTypes enemyTypes;
         private EnemyTypeData _data;
+        private EnemyAIData _AIData;
         private int _health;
         private int _damage;
         private float _attackRange;
+        private float _attackSpeed;
         private float _moveSpeed;
+        private Color _enemyColor;
         private float _chaseSpeed;
+        private Vector3 _scaleSize;
+        private float _navMeshRadius;
+        private float _navMeshHeight;
         private Animator _animator;
         private StateMachine _stateMachine;
         private Transform _spawnPoint;
-        private Transform _turretTarget;
-
         #endregion
         
         #endregion
         private void Awake()
         {
-            _data = GetData();
+            _levelID = 0;
+            // _levelID = levelSignals.Instance.OnGetLevel();
+            _AIData = GetEnemyAIData();
+            _data = GetEnemyData();
             SetEnemyData();
             GetStatesReferences();
         }
-        private EnemyTypeData GetData() => Resources.Load<CD_AI>("Data/CD_AI").EnemyAIData.EnemyList[(int)enemyType];
+        private EnemyAIData GetEnemyAIData() => Resources.Load<CD_Enemy>("Data/CD_Enemy").EnemyAIData;
+        private EnemyTypeData GetEnemyData() => _AIData.EnemyList[(int)enemyType];
         private void SetEnemyData()
-        {
+        {  
             _health = _data.Health;
             _damage = _data.Damage;
             _attackRange = _data.AttackRange;
+            _attackSpeed = _data.AttackSpeed;
             _chaseSpeed = _data.ChaseSpeed;
             _moveSpeed = _data.MoveSpeed;
-            Target = _data.TargetList[Random.Range(0,_data.TargetList.Count)];
-            _spawnPoint = _data.SpawnPosition;
+            _enemyColor = _data.BodyColor;
+            _scaleSize = _data.ScaleSize;
+            _navMeshRadius = _data.NavMeshRadius;
+            _navMeshHeight = _data.NavMeshHeight;
+            _spawnPoint = _AIData.SpawnPositionList[_levelID];
+            _turretTarget = _AIData.SpawnPositionList[_levelID].GetChild(Random.Range(0, _AIData.SpawnPositionList[_levelID].childCount));
         }
         private void GetStatesReferences()
         {
@@ -85,11 +104,11 @@ namespace AIBrains.EnemyBrain
             _stateMachine.SetState(move);
             void At(IState to,IState from,Func<bool> condition) =>_stateMachine.AddTransition(to,from,condition);
 
-            Func<bool> HasInitTarget() => () => Target != null;
-            Func<bool> HasTarget() => () => Target != null;
-            Func<bool> AttackRange() => () => Target != null && chase.InPlayerAttackRange();
-            Func<bool> AttackOffRange() => () => Target != null && !attack.IsPlayerAttackRange();
-            Func<bool> TargetNull() => () => Target is null;
+            Func<bool> HasInitTarget() => () => _turretTarget != null;
+            Func<bool> HasTarget() => () => _turretTarget != null;
+            Func<bool> AttackRange() => () => PlayerTarget != null && chase.InPlayerAttackRange();
+            Func<bool> AttackOffRange() => () => PlayerTarget != null && !attack.IsPlayerAttackRange();
+            Func<bool> TargetNull() => () => _turretTarget is null;
         }
         private void Update() => _stateMachine.UpdateIState();
     }

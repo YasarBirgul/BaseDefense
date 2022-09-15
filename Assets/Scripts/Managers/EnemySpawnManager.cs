@@ -50,7 +50,6 @@ namespace Managers
                 ObjectPoolManager.Instance.AddObjectPool(()=>Instantiate(enemies[i]),TurnOnEnemyAI,TurnOffEnemyAI,((EnemyTypes)i).ToString(),50,true);
             }
         }
-
         private void Awake()
         {   
             InitEnemyPool();
@@ -87,10 +86,9 @@ namespace Managers
         }
         private void DoSpawnEnemy()
         {
-            
-            int randomType = Random.Range(0, Enum.GetNames(typeof(EnemyTypes)).Length);
+            int randomType = Random.Range(0, Enum.GetNames(typeof(EnemyTypes)).Length-1);
             int randomPercentage = Random.Range(0, 101);
-            if (randomType == (int)EnemyTypes.BossEnemy)
+            if (randomType == (int)EnemyTypes.LargeEnemy)
             {
                 if (randomPercentage<30)
                 {

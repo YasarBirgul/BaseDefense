@@ -1,21 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
+using Abstract;
 using Enums;
 using UnityEngine;
 
 namespace Data.ValueObject.AIData
 {
     [Serializable]
-    public class EnemyTypeData
+    public class EnemyTypeData : AEnemy
     {
-        public EnemyTypes EnemyType;
-        public int Health;
-        public int Damage;
-        public float AttackRange;
-        public float AttackSpeed;
-        public float MoveSpeed;
         public float ChaseSpeed;
-        public List<Transform> TargetList = new List<Transform>();
-        public Transform SpawnPosition;
+        public float MoveSpeed;
+        public float NavMeshRadius;
+        public float NavMeshHeight;
+        public EnemyTypeData(EnemyTypes enemyType,int health,int damage,float attackRange,float attackSpeed,Vector3 scaleSize,Color bodyColor) : base(enemyType, health, damage, attackRange, attackSpeed, scaleSize, bodyColor)
+        {
+            
+        }
     }
 }

@@ -40,14 +40,14 @@ namespace AIBrains.EnemyBrain
         public bool IsPlayerAttackRange() => _inAttack; 
         public void UpdateIState()
         {
-            _navMeshAgent.destination = _enemyAIBrain.Target.transform.position;
+            _navMeshAgent.destination = _enemyAIBrain._turretTarget.transform.position;
             CheckDistanceAttack();
         }
 
         public void OnEnter()
         {
             _inAttack = true;
-            _navMeshAgent.SetDestination(_enemyAIBrain.Target.transform.position);
+            _navMeshAgent.SetDestination(_enemyAIBrain._turretTarget.transform.position);
         }
 
         public void OnExit()

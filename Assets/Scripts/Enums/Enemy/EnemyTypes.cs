@@ -4,6 +4,7 @@
     {
         RedEnemy = 0,
         OrangeEnemy = 1,
-        BossEnemy =2
+        LargeEnemy = 2,
+        BossEnemy =3
     }
 }

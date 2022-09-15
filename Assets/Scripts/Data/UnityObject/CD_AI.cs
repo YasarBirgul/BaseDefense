@@ -10,6 +10,5 @@ namespace Data.UnityObject
         public MoneyWorkerAIData MoneyWorkerAIData;
         public MineWorkerAIData MineWorkerAIData;
         public SoldierAIData SoldierAIData;
-        public EnemyAIData EnemyAIData;
     }
 }
