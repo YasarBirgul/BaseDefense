@@ -1326,14 +1326,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fa1c994705b429fbd4c5feb4d67b407, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 0}
+  PlayerTarget: {fileID: 0}
+  _turretTarget: {fileID: 0}
+  MineTarget: {fileID: 0}
   NavMeshAgent: {fileID: 437255398008131030}
-  TurretList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  Health: 0
   enemyType: 0
+  physicsController: {fileID: 2012006290375711584}
 --- !u!195 &437255398008131030
 NavMeshAgent:
   m_ObjectHideFlags: 0

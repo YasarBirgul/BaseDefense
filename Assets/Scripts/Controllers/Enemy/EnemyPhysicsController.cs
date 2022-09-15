@@ -1,4 +1,5 @@
-﻿using AIBrains.EnemyBrain;
+﻿using Abstract;
+using AIBrains.EnemyBrain;
 using Managers;
 using UnityEngine;
 
@@ -9,11 +10,13 @@ namespace Controllers
         private Transform _detectedPlayer;
         private Transform _detectedMine;
         private EnemyAIBrain _enemyAIBrain;
+        private bool _amAIDead = false;
         public bool IsPlayerInRange() => _detectedPlayer != null;
         public bool IsBombInRange() => _detectedMine != null;
+        public bool AmIdead() => _amAIDead;
         private void Awake()
         {
-            _enemyAIBrain = this.gameObject.GetComponentInParent<EnemyAIBrain>();
+            _enemyAIBrain = gameObject.GetComponentInParent<EnemyAIBrain>();
         }
         private void OnTriggerEnter(Collider other)
         {
@@ -22,8 +25,30 @@ namespace Controllers
                 _detectedPlayer = other.GetComponentInParent<PlayerManager>().transform;
                 _enemyAIBrain.PlayerTarget = other.transform.parent.transform;
             }
+            if (other.CompareTag("MineLure"))
+            {
+                _detectedMine = other.transform;
+                _enemyAIBrain.MineTarget = _detectedMine;
+            }
+            if (other.CompareTag("Bullet"))
+            {
+                var damageAmount = other.GetComponent<IDamagable>().GetDamage();
+                _enemyAIBrain.Health -= damageAmount;
+                if (_enemyAIBrain.Health <= 0)
+                {
+                    _amAIDead = true;
+                }
+            }
+            if (other.CompareTag("MineExplosion"))
+            {
+                var damageAmount = other.transform.parent.GetComponentInParent<IDamagable>().GetDamage();
+                _enemyAIBrain.Health -= damageAmount;
+                if (_enemyAIBrain.Health <= 0)
+                {
+                    _amAIDead = true;
+                }
+            }
         }
-
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("Player"))
@@ -31,15 +56,12 @@ namespace Controllers
                 _detectedPlayer = null;
                 gameObject.GetComponentInParent<EnemyAIBrain>().PlayerTarget = null;
             }
-
-            /*if (other.GetComponent<Mine>())
+            if (other.CompareTag("MineLure"))
             {
-
-            }*/
+                _detectedMine = null;
+                _enemyAIBrain.MineTarget = _detectedMine;
+                _enemyAIBrain.MineTarget = null;
+            }
         }
-        // public Vector3 GetNearestPosition(GameObject gO)
-       // {
-       //     return gO?.transform.position ?? Vector3.zero;
-       // }
     }
 }

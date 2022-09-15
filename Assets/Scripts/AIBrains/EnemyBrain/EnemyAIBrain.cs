@@ -1,5 +1,6 @@
 ﻿using System;
 using Abstract;
+using Controllers;
 using Data.UnityObject;
 using Data.ValueObject.AIData;
 using Enums;
@@ -24,11 +25,15 @@ namespace AIBrains.EnemyBrain
         
         public NavMeshAgent NavMeshAgent;
         
+        public int Health;
+        
         #endregion
 
         #region Serialized Variables,
 
         [SerializeField] private EnemyTypes enemyType;
+        [SerializeField] private EnemyPhysicsController physicsController;
+        
 
         #endregion
 
@@ -38,7 +43,6 @@ namespace AIBrains.EnemyBrain
         private EnemyTypes enemyTypes;
         private EnemyTypeData _data;
         private EnemyAIData _AIData;
-        private int _health;
         private int _damage;
         private float _attackRange;
         private float _attackSpeed;
@@ -67,7 +71,7 @@ namespace AIBrains.EnemyBrain
         private EnemyTypeData GetEnemyData() => _AIData.EnemyList[(int)enemyType];
         private void SetEnemyData()
         {  
-            _health = _data.Health;
+            Health = _data.Health;
             _damage = _data.Damage;
             _attackRange = _data.AttackRange;
             _attackSpeed = _data.AttackSpeed;
@@ -93,22 +97,22 @@ namespace AIBrains.EnemyBrain
             var moveToBomb = new MoveToBomb(NavMeshAgent,_animator);
             _stateMachine = new StateMachine();
           
-            At(search,move,HasInitTarget());
+            At(search,move,HasTurretTarget());
             At(move,chase,HasTarget());  
-            At(chase,attack,AttackRange()); 
-            At(attack,chase,AttackOffRange());
+            At(chase,attack,AttackThePlayer()); 
+            At(attack,chase,()=>attack.IsPlayerAttackRange()==false);
             At(chase,move,TargetNull());
             
-            _stateMachine.AddAnyTransition(death,()=> death.IsDead);
-            At(moveToBomb, attack, () => moveToBomb.BombIsAlive);
-            _stateMachine.SetState(move);
+            _stateMachine.AddAnyTransition(death,()=> physicsController.AmIdead());
+            _stateMachine.AddAnyTransition(moveToBomb,()=> physicsController.IsBombInRange());
+           
+            _stateMachine.SetState(search);
             void At(IState to,IState from,Func<bool> condition) =>_stateMachine.AddTransition(to,from,condition);
 
-            Func<bool> HasInitTarget() => () => _turretTarget != null;
-            Func<bool> HasTarget() => () => _turretTarget != null;
-            Func<bool> AttackRange() => () => PlayerTarget != null && chase.InPlayerAttackRange();
-            Func<bool> AttackOffRange() => () => PlayerTarget != null && !attack.IsPlayerAttackRange();
-            Func<bool> TargetNull() => () => _turretTarget is null;
+            Func<bool> HasTurretTarget() => () => _turretTarget != null;
+            Func<bool> HasTarget() => () => PlayerTarget != null;
+            Func<bool> AttackThePlayer() => () => PlayerTarget != null && chase.InPlayerAttackRange();
+            Func<bool> TargetNull() => () => PlayerTarget is null;
         }
         private void Update() => _stateMachine.UpdateIState();
     }

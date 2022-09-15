@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Enemy
   - Gate
+  - Bullet
+  - MineLure
+  - MineExplosion
   layers:
   - Default
   - TransparentFX

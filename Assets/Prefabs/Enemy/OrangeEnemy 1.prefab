@@ -1122,7 +1122,9 @@ MonoBehaviour:
   _turretTarget: {fileID: 0}
   MineTarget: {fileID: 0}
   NavMeshAgent: {fileID: 1086255469645399492}
+  Health: 0
   enemyType: 2
+  physicsController: {fileID: 1364102368477418354}
 --- !u!195 &1086255469645399492
 NavMeshAgent:
   m_ObjectHideFlags: 0

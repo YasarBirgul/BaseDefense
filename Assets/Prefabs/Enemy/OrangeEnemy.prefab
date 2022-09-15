@@ -1118,9 +1118,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fa1c994705b429fbd4c5feb4d67b407, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 0}
+  PlayerTarget: {fileID: 0}
+  _turretTarget: {fileID: 0}
+  MineTarget: {fileID: 0}
   NavMeshAgent: {fileID: 1086255469645399492}
+  Health: 0
   enemyType: 1
+  physicsController: {fileID: 1364102368477418354}
 --- !u!195 &1086255469645399492
 NavMeshAgent:
   m_ObjectHideFlags: 0
