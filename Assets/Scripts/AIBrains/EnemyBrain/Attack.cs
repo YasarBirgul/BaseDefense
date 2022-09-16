@@ -22,29 +22,22 @@ namespace AIBrains.EnemyBrain
         }
         public void OnEnter()
         {
-            Debug.Log("PlayerAttacketed");
             if (_enemyAIBrain.PlayerTarget)
             {
                 _inAttack = true;
                // _animator.SetTrigger("Attack");
             }
-        }
-
+        } 
         public void OnExit()
         {
         }
-
         public void UpdateIState()
         {
             if (_enemyAIBrain.PlayerTarget)
             {
                 _navMeshAgent.destination =_enemyAIBrain.PlayerTarget.transform.position;
+                CheckDistanceAttack();
             }
-            else
-            {
-                _inAttack = false;
-            }
-            CheckDistanceAttack();
         }
         private void CheckDistanceAttack()
         {

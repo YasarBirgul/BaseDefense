@@ -54,6 +54,7 @@ namespace AIBrains.EnemyBrain
         private Animator _animator;
         private StateMachine _stateMachine;
         private Transform _spawnPoint;
+        private Chase chase;
         #endregion
         
         #endregion
@@ -92,7 +93,7 @@ namespace AIBrains.EnemyBrain
             var move = new Move(NavMeshAgent,_animator,this,_moveSpeed); 
             var attack = new Attack(NavMeshAgent,_animator,this,_attackRange);
             var death = new Death(NavMeshAgent,_animator,this);
-            var chase = new Chase(NavMeshAgent,_animator,this,_attackRange,_chaseSpeed);
+            chase = new Chase(NavMeshAgent,_animator,this,_attackRange,_chaseSpeed);
             var moveToBomb = new MoveToBomb(NavMeshAgent,_animator,this,_attackRange,_chaseSpeed);
             _stateMachine = new StateMachine();
           
@@ -113,6 +114,7 @@ namespace AIBrains.EnemyBrain
             Func<bool> AttackThePlayer() => () => PlayerTarget != null && chase.InPlayerAttackRange();
             Func<bool> TargetNull() => () => PlayerTarget is null;
         }
-        private void Update() => _stateMachine.UpdateIState();
+
+        private void Update() =>  _stateMachine.UpdateIState();
     }
 }

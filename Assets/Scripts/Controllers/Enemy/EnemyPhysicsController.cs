@@ -1,5 +1,6 @@
 ﻿using Abstract;
 using AIBrains.EnemyBrain;
+using Enums.LayerType;
 using Managers;
 using UnityEngine;
 
@@ -7,13 +8,32 @@ namespace Controllers
 {
     public class EnemyPhysicsController : MonoBehaviour
     {
+        #region Self Variables
+
+        #region Public Variables
+        
+        #endregion
+
+        #region Serialized Variables,
+
+        #endregion
+
+        #region Private Variables
+        
         private Transform _detectedPlayer;
         private Transform _detectedMine;
         private EnemyAIBrain _enemyAIBrain;
         private bool _amAIDead = false;
+        
+        #endregion
+        
+        #endregion
+        
         public bool IsPlayerInRange() => _detectedPlayer != null;
         public bool IsBombInRange() => _detectedMine != null;
         public bool AmIdead() => _amAIDead;
+
+        public LayerType LayerType;
         private void Awake()
         {
             _enemyAIBrain = gameObject.GetComponentInParent<EnemyAIBrain>();
@@ -52,7 +72,7 @@ namespace Controllers
             }
         }
         private void OnTriggerExit(Collider other)
-        {
+        { 
             if (other.CompareTag("Player"))
             {
                 _detectedPlayer = null;
