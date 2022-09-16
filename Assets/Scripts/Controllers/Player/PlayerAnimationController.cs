@@ -1,12 +1,9 @@
-﻿using System;
-using Enums;
+﻿using Enums;
 using Enums.GameStates;
 using Enums.Player;
 using Keys;
 using Managers;
 using UnityEngine;
-using UnityEngine.Animations.Rigging;
-using UnityEngine.PlayerLoop;
 
 namespace Controllers
 {

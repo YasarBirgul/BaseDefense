@@ -1,11 +1,8 @@
-﻿
-using Data.UnityObject;
+﻿using Data.UnityObject;
 using Data.ValueObject.InputData;
 using Keys;
 using Signals;
-
 using UnityEngine;
-
 
 namespace Managers
 { 
