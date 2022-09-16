@@ -127,7 +127,7 @@ namespace Controllers
         private void ChangeAnimations(PlayerAnimationStates animationStates)
         {
             if (animationStates == _currentAnimationState) return;
-            _animator.Play(animationStates.ToString());
+           // _animator.Play(animationStates.ToString());
             _currentAnimationState = animationStates;
         }
     }

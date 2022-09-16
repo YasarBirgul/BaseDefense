@@ -38,7 +38,7 @@ namespace Managers
         
         private void Awake()
         {
-            //Data= GetMineData();
+         
         }
         
         public void ShowGemAmountText()

@@ -35,7 +35,7 @@ namespace Controllers
             {
                 if (timer>payOffset)
                 {
-                    //Revize edecegim button modulunu yapinca
+                    // Module will be applied
                     mineManager.PayGemToMine();
                     timer = 0;
                 }

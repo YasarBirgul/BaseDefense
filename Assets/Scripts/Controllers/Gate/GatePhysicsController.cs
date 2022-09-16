@@ -1,5 +1,4 @@
-﻿using System;
-using Managers;
+﻿using Managers;
 using UnityEngine;
 
 namespace Controllers.Gate
@@ -30,7 +29,6 @@ namespace Controllers.Gate
                 manager.GateOpen(true);
             }
         }
-
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("Player"))

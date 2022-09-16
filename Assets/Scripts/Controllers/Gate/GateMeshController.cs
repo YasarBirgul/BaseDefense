@@ -1,12 +1,11 @@
-﻿using System.Diagnostics.Eventing.Reader;
-using DG.Tweening;
+﻿using DG.Tweening;
 using UnityEngine;
 
 namespace Controllers.Gate
 {
     public class GateMeshController : MonoBehaviour
     {
-        private float GateAngleZ = 0;
+        private float GateAngleZ;
         public void TurnGateOpen(bool GateOpen)
         {
             GateAngleZ = GateOpen ? 0 : 90;
