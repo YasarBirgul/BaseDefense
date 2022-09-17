@@ -4,5 +4,10 @@
     {
         Idle,
         Run,
+        Pistol,
+        Riffle,
+        ShotGun,
+        MiniGun
+        
     }
 }

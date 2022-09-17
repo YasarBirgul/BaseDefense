@@ -52,7 +52,6 @@ namespace Managers
             }
             if (!_hasTouched) return;
             {
-                if ((joystickInput.Direction - _inputValuesVector).sqrMagnitude == 0) return;
                 _inputValuesVector = new Vector2(joystickInput.Horizontal,joystickInput.Vertical);
                 InputSignals.Instance.onInputDragged?.Invoke(new HorizontalInputParams()
                 {

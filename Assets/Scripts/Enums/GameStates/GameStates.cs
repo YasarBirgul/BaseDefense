@@ -3,6 +3,6 @@
     public enum GameStates
     {
         BaseDefense,
-        AttackField
+        BattleOn
     }
 }

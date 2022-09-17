@@ -6,6 +6,5 @@
         Riffle,
         ShotGun,
         MiniGun,
-        
     }
 }
