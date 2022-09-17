@@ -3144,6 +3144,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 880970725214738984, guid: c60edd51c065ceb46b345849a03bc106, type: 3}
   m_PrefabInstance: {fileID: 759683176}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &774727057 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4360250655400319478, guid: 4e68f0dd9bd350d4eaf4af2f89a274d1, type: 3}
+  m_PrefabInstance: {fileID: 1502628563}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &785088064
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5131,7 +5136,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1379874623}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -5705,17 +5710,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 325830610342464229, guid: 4e68f0dd9bd350d4eaf4af2f89a274d1, type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'mixamorig:Spine1'\n\tTransform 'mixamorig:RightArm'\n\tTransform
-        'mixamorig:LeftArm'\n\tTransform 'mixamorig:RightHand'\n\tTransform 'mixamorig:LeftForeArm'\n\tTransform
-        'mixamorig:RightForeArm'\n\tTransform 'mixamorig:LeftHand'\n\tTransform 'mixamorig:Spine1'\n\tTransform
-        'mixamorig:RightArm'\n\tTransform 'mixamorig:LeftArm'\n\tand more ..."
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 702010006323261221, guid: 4e68f0dd9bd350d4eaf4af2f89a274d1, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.82300013
       objectReference: {fileID: 0}
+    - target: {fileID: 1429477786026016514, guid: 4e68f0dd9bd350d4eaf4af2f89a274d1, type: 3}
+      propertyPath: sideMeshRenderer
+      value: 
+      objectReference: {fileID: 1379874625}
+    - target: {fileID: 1429477786026016514, guid: 4e68f0dd9bd350d4eaf4af2f89a274d1, type: 3}
+      propertyPath: weaponMeshRenderer
+      value: 
+      objectReference: {fileID: 774727057}
     - target: {fileID: 1520260012926688250, guid: 4e68f0dd9bd350d4eaf4af2f89a274d1, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -5798,7 +5806,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4360250655400319478, guid: 4e68f0dd9bd350d4eaf4af2f89a274d1, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8495928147545377426, guid: 4e68f0dd9bd350d4eaf4af2f89a274d1, type: 3}
       propertyPath: WeaponType

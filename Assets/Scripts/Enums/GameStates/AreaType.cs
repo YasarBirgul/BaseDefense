@@ -1,6 +1,6 @@
 ﻿namespace Enums.GameStates
 {
-    public enum GameStates
+    public enum AreaType
     {
         BaseDefense,
         BattleOn

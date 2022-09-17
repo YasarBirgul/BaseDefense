@@ -1,9 +1,10 @@
-﻿using Managers;
+﻿using Abstract;
+using Managers;
 using UnityEngine;
 
 namespace Controllers.Gate
 {
-    public class GatePhysicsController : MonoBehaviour
+    public class GatePhysicsController : Interactable
     {
         #region Self Variables
 

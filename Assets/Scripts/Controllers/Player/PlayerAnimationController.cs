@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Data.ValueObject.WeaponData;
 using Enums;
 using Enums.GameStates;
 using Enums.Player;
@@ -59,7 +58,7 @@ namespace Controllers
         }
         public void PlayAnimation(HorizontalInputParams inputParams)
         { 
-            if (playerManager.CurrentGameState == GameStates.BattleOn)
+            if (playerManager.currentAreaType == AreaType.BattleOn)
             {
                 animator.SetLayerWeight(1,1);
                 animator.SetBool("IsBattleOn",true);

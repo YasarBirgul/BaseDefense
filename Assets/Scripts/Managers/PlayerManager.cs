@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Net.Configuration;
-using Controllers;
+﻿using Controllers;
 using Data.UnityObject;
 using Data.ValueObject.PlayerData;
 using Data.ValueObject.WeaponData;
@@ -19,7 +17,7 @@ namespace Managers
 
         #region Public Variables
 
-        public GameStates CurrentGameState = GameStates.BaseDefense;
+        [FormerlySerializedAs("CurrentGameState")] public AreaType currentAreaType = AreaType.BaseDefense;
         public WeaponTypes WeaponType;
         #endregion
 
@@ -39,7 +37,7 @@ namespace Managers
 
         private PlayerMovementController _movementController;
 
-        private GameStates _nextState = GameStates.BattleOn;
+        private AreaType _nextState = AreaType.BattleOn;
         
         #endregion
         
@@ -61,6 +59,7 @@ namespace Managers
         {
             _movementController.SetMovementData(_data.PlayerMovementData);
             weaponController.SetWeaponData(_weaponData);
+            meshController.SetWeaponData(_weaponData);
         }
         #region Event Subscription
         private void OnEnable()
@@ -87,9 +86,10 @@ namespace Managers
             meshController.LookRotation(inputParams);
             animationController.PlayAnimation(inputParams);
         }
-        public void BattleStatus(bool playerIsOnFrontYard)
+        public void CheckAreaStatus(AreaType AreaStatus)
         {
-            CurrentGameState = playerIsOnFrontYard ? GameStates.BattleOn : GameStates.BaseDefense;
+            currentAreaType = AreaStatus;
+            meshController.ChangeAreaStatus(AreaStatus);
         }
     }
 }

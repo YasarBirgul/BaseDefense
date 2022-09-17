@@ -1,4 +1,8 @@
-﻿using Managers;
+﻿using System.ComponentModel.Design;
+using Abstract;
+using Controllers.Gate;
+using Enums.GameStates;
+using Managers;
 using UnityEngine;
 
 namespace Controllers
@@ -24,20 +28,20 @@ namespace Controllers
         #endregion
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Gate"))
+            if (other.TryGetComponent(out GatePhysicsController physicsController))
             {
                 var playerIsGoingToFrontYard = other.transform.position.z > transform.position.z;
-                gameObject.layer= LayerMask.NameToLayer("Base");
-                playerManager.BattleStatus(playerIsGoingToFrontYard);
+                gameObject.layer =  LayerMask.NameToLayer("Base");
+                playerManager.CheckAreaStatus(playerIsGoingToFrontYard ? AreaType.BattleOn : AreaType.BaseDefense);
             }
         }
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag("Gate"))
+            if (other.TryGetComponent(out GatePhysicsController physicsController))
             {
                 var playerIsGoingToFrontYard = other.transform.position.z < transform.position.z;
-                gameObject.layer = LayerMask.NameToLayer(playerIsGoingToFrontYard ? "FrontYard" : "Base");
-                playerManager.BattleStatus(playerIsGoingToFrontYard);
+                gameObject.layer = LayerMask.NameToLayer(playerIsGoingToFrontYard? "FrontYard" : "Base");
+                playerManager.CheckAreaStatus(playerIsGoingToFrontYard ? AreaType.BattleOn : AreaType.BaseDefense);
             }
         }
     }
