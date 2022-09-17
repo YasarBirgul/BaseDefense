@@ -18,8 +18,6 @@ namespace Controllers
         #region Serialized Variables
         
         [SerializeField] private PlayerManager playerManager;
-        [SerializeField] private GameObject _gameObject;
-        [SerializeField] private GameObject _gameObjectRiffle;
         #endregion
 
         #region Private Variables
@@ -51,23 +49,6 @@ namespace Controllers
         {
             if (playerManager.CurrentGameState == GameStates.AttackField)
             {
-                _animator.SetLayerWeight(1, 1);
-                _animator.SetBool("IsBattleOn", true);
-
-                switch (CurrentWeaponType)
-                {
-                    case WeaponTypes.Pistol:
-                        _gameObject.SetActive(true);
-                        ChangeAnimations(PlayerAnimationStates.PistolHold);
-                        _gameObjectRiffle.SetActive(false);
-                        break;
-                    case WeaponTypes.Riffle:
-                        _gameObject.SetActive(false);
-                        ChangeAnimations(PlayerAnimationStates.AimRiffle);
-                        _gameObjectRiffle.SetActive(true);
-                        break;
-                }
-                
                 if (_animator.GetBool("Aimed") == false)
                 {
                     _animator.SetBool("Aimed",true);
@@ -102,20 +83,11 @@ namespace Controllers
                 {
                     _velocityX = 0.0f;
                 }
-                if (inputParams.MovementVector.sqrMagnitude == 0)
-                {
-                    _animator.SetBool("Aimed",false);
-                }
                 _animator.SetFloat("VelocityZ",_velocityZ);
                 _animator.SetFloat("VelocityX",_velocityX);
             }
             else
             {
-                _gameObject.SetActive(false);
-                _animator.SetBool("Aimed",false);
-                _animator.SetLayerWeight(1, 0);
-                _animator.SetBool("IsBattleOn",false); 
-                _gameObjectRiffle.SetActive(false);
                 ChangeAnimations( inputParams.MovementVector.sqrMagnitude > 0
                     ? PlayerAnimationStates.Run
                     : PlayerAnimationStates.Idle);
@@ -124,7 +96,7 @@ namespace Controllers
         private void ChangeAnimations(PlayerAnimationStates animationStates)
         {
             if (animationStates == _currentAnimationState) return;
-           // _animator.Play(animationStates.ToString());
+             _animator.Play(animationStates.ToString());
             _currentAnimationState = animationStates;
         }
     }

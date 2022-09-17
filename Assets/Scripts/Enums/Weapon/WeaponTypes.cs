@@ -4,5 +4,8 @@
     {
         Pistol,
         Riffle,
+        ShotGun,
+        MiniGun,
+        
     }
 }

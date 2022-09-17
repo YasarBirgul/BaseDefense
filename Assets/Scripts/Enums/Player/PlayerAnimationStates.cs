@@ -4,8 +4,5 @@
     {
         Idle,
         Run,
-        blendTree,
-        AimRiffle,
-        PistolHold,
     }
 }
