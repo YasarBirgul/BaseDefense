@@ -79,11 +79,9 @@ namespace Managers
             UnsubscribeEvents();
         }
         #endregion
-
         private void OnGetInputValues(HorizontalInputParams inputParams)
         {
             _movementController.UpdateInputValues(inputParams);
-            meshController.LookRotation(inputParams);
             animationController.PlayAnimation(inputParams);
         }
         public void CheckAreaStatus(AreaType AreaStatus)

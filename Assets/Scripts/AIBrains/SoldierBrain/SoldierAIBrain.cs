@@ -18,7 +18,9 @@ namespace AIBrains.SoldierBrain
         #region Public Variables
         
         public NavMeshAgent NavMeshAgent;
-        
+
+        public Vector3 SlotTransform;
+
         #endregion
 
         #region Serialized Variables
@@ -61,16 +63,29 @@ namespace AIBrains.SoldierBrain
         private void GetStateReferences()
         {
             NavMeshAgent = GetComponent<NavMeshAgent>();
-            var moveToSlotZone = new MoveToSlotZone();
             var idle = new Idle();
+            var moveToSlotZone = new MoveToSlotZone();
             var moveToFrontYard = new MoveToFrontYard();
             var patrol = new Patrol();
             var reachToTarget = new DetectTarget();
             var shootTarget = new ShootTarget();
-            
             _stateMachine = new StateMachine();
-            _stateMachine.SetState(moveToSlotZone);
             
+            At(idle,moveToSlotZone,hasSlotTransformList());
+            At(moveToFrontYard, idle, hasReachToSlot());
+            
+
+            _stateMachine.SetState(idle);
+            void At(IState to,IState from,Func<bool> condition) =>_stateMachine.AddTransition(to,from,condition);
+
+            Func<bool> hasSlotTransformList() => () => SlotTransform!= null;
+            Func<bool> hasReachToSlot() => () => SlotTransform != null;
         }
+
+        public void GetSlotTransform(Vector3 slotTransfrom)
+        {
+            SlotTransform = slotTransfrom;
+        }
+        private void Update() =>  _stateMachine.UpdateIState();
     }
 }

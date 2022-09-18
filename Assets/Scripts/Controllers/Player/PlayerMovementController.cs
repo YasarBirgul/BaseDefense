@@ -13,10 +13,8 @@ namespace Controllers
         
         #endregion
 
-        #region Serialized Variables,
-         
-        [SerializeField] private PlayerManager playerManager;
-        
+        #region Serialized Variables
+
         [SerializeField] private new Rigidbody rigidbody;
         
         #endregion
@@ -40,7 +38,17 @@ namespace Controllers
         {
             _inputVector = inputParams.MovementVector;
             EnableMovement(_inputVector.sqrMagnitude > 0);
+            RotatePlayer(inputParams);
         }
+
+        private void RotatePlayer(HorizontalInputParams inputParams)
+        {
+            Vector3 movementDirection = new Vector3(inputParams.MovementVector.x, 0, inputParams.MovementVector.y);
+            if (movementDirection == Vector3.zero) return;
+            Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 30);
+        }
+
         private void EnableMovement(bool movementStatus)
         {
             _isReadyToMove = movementStatus;

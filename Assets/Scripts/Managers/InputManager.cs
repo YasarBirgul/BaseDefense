@@ -24,7 +24,6 @@ namespace Managers
 
         private InputData _data;
         private bool _hasTouched;
-        private Vector3 _inputVector;
         #endregion
         
         #endregion
@@ -39,13 +38,12 @@ namespace Managers
                 _hasTouched = true;
             }
             if (!_hasTouched) return;
+            InputSignals.Instance.onInputDragged?.Invoke(new HorizontalInputParams()
             {
-                InputSignals.Instance.onInputDragged?.Invoke(new HorizontalInputParams()
-                {
-                    MovementVector = new Vector2(joystickInput.Horizontal, joystickInput.Vertical)
-                });
-                _hasTouched = joystickInput.Direction.sqrMagnitude > 0;
-            }
+                MovementVector = new Vector2(joystickInput.Horizontal, joystickInput.Vertical)
+            });
+            _hasTouched = joystickInput.Direction.sqrMagnitude > 0;
+            
         }
     }
 }

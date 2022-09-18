@@ -32,13 +32,7 @@ namespace Controllers
         {
             _data = weaponData;
         }
-        public void LookRotation(HorizontalInputParams inputParams)
-        {
-            var movementDirection = new Vector3(inputParams.MovementVector.x, 0, inputParams.MovementVector.y);
-            if (movementDirection == Vector3.zero) return;
-            Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
-            manager.rotation = Quaternion.RotateTowards( manager.rotation,toRotation,30);
-        }
+        
         public void ChangeAreaStatus(AreaType areaStatus)
         {
             if (areaStatus == AreaType.BaseDefense)

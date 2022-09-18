@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using AIBrains.SoldierBrain;
 using Data.UnityObject;
 using Data.ValueObject.AIData;
 using Data.ValueObject.LevelData;
@@ -23,14 +24,15 @@ namespace Managers
         #endregion
 
         #region Private Variables
-
+        
         private MilitaryBaseData _data;
         private SoldierAIData _soldierAIData;
         private bool _isBaseAvaliable;
         private bool _isTentAvaliable;
         private int _totalAmount;
         private int _soldierAmount;
-        private List<GameObject> SoldierList;
+        private List<GameObject> _soldierList;
+        private List<Vector3> _slotTransformList;
         private int _tentCapacity;
         #endregion
 
@@ -56,26 +58,31 @@ namespace Managers
             int gridX = (int) _data.SlotsGrid.x;
             int gridY = (int) _data.SlotsGrid.y;
             Vector3 slotOffSet = new Vector3(_data.SlotOffSet.x, 0, _data.SlotOffSet.y);
-            
             for (int i = 0; i < gridX; i++)
             {
                 for (int j = 0; j < gridY; j++)
                 {
-                    Instantiate(_data.SlotPrefab,slotZone.transform.localPosition + slotOffSet, Quaternion.identity,
-                        slotZone.transform);
+                    var slotPositions = slotZone.transform.localPosition + slotOffSet;
+                    Instantiate(_data.SlotPrefab,slotPositions, Quaternion.identity,slotZone.transform);
+                    _slotTransformList.Add(slotPositions);
                 }
             }
-        }
+        } 
         private void InitSoldierPool()
         {
-            Debug.Log("InitWorks");
-            ObjectPoolManager.Instance.AddObjectPool(SoldierFactoryMethod,TurnOnSoldierAI,TurnOffSoldierAI,_tentCapacity,true);
-        }
+            ObjectPoolManager.Instance.AddObjectPool(SoldierFactoryMethod,TurnOnSoldierAI,TurnOffSoldierAI,_soldierAIData.SoldierType.ToString(),_tentCapacity,true);
+        } 
         private GameObject SoldierFactoryMethod()
         {
             return Instantiate(_soldierAIData.SoldierPrefab,TentTransfrom.position,Quaternion.identity,TentTransfrom.transform);
         }
-        
+        private void GetObjectFromPool()
+        {
+            var soldierAIPrefab = ObjectPoolManager.Instance.GetObject<GameObject>(_soldierAIData.SoldierType.ToString());
+            var soldierBrain = soldierAIPrefab.GetComponent<SoldierAIBrain>();
+            soldierBrain.SlotTransform = _slotTransformList[0];
+            _slotTransformList.TrimExcess();
+        }
         private void TurnOnSoldierAI(GameObject soldierPrefab)
         {
            soldierPrefab.SetActive(true);

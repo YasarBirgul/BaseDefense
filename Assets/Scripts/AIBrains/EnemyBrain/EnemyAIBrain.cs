@@ -114,7 +114,6 @@ namespace AIBrains.EnemyBrain
             Func<bool> AttackThePlayer() => () => PlayerTarget != null && chase.InPlayerAttackRange();
             Func<bool> TargetNull() => () => PlayerTarget is null;
         }
-
         private void Update() =>  _stateMachine.UpdateIState();
     }
 }
