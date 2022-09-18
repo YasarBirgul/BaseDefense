@@ -21,13 +21,13 @@ namespace StateMachines.Mine.States
         public void OnEnter()
         {
             Debug.Log("Explode");
-            _mineBrain.MineManager.ExplosionColliderState(true);
+            _mineBrain.mineBombManager.ExplosionColliderState(true);
             isExplosionHappened=true;
         }
 
         public void OnExit()
         {
-            _mineBrain.MineManager.ExplosionColliderState(false);
+            _mineBrain.mineBombManager.ExplosionColliderState(false);
             isExplosionHappened=false;
         }
     }

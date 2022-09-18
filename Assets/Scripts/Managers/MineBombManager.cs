@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Managers
 {
-    public class MineManager : MonoBehaviour, IDamagable
+    public class MineBombManager : MonoBehaviour, IDamagable
     {
         #region Self Variables
 
@@ -35,7 +35,6 @@ namespace Managers
         #endregion
         
         #endregion
-        
         private void Awake()
         {
          
@@ -62,9 +61,13 @@ namespace Managers
             _payedGemAmount++;
 
         }
-        public int GetDamage()
+        public int TakeDamage()
         {
             return ExplosionDamage;
+        }
+        public Transform GetTransform()
+        {
+            throw new NotImplementedException();
         }
     }
 }

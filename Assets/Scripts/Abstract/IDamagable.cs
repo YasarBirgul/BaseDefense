@@ -1,7 +1,10 @@
-﻿namespace Abstract
+﻿using UnityEngine;
+
+namespace Abstract
 {
     public interface IDamagable
     {
-        public int GetDamage();
+        int TakeDamage();
+        Transform GetTransform();
     }
 }

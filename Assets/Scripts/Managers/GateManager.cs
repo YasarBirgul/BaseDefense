@@ -1,5 +1,4 @@
-﻿using System;
-using Controllers.Gate;
+﻿using Controllers.Gate;
 using UnityEngine;
 
 namespace Managers

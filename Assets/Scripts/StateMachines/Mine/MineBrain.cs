@@ -4,6 +4,7 @@ using Managers;
 using StateBehaviour;
 using StateMachines.Mine.States;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace StateMachines.Mine
 {
@@ -13,7 +14,7 @@ namespace StateMachines.Mine
 
         #region Public Variables
 
-        public MineManager MineManager;
+        [FormerlySerializedAs("MineManager")] public MineBombManager mineBombManager;
 
         #endregion
 
@@ -39,7 +40,7 @@ namespace StateMachines.Mine
             var _explosionState =new ExplosionState(this);
             var _mineCountDownState =new MineCountDownState(this);
             _stateMachine = new StateMachine();
-            At(_readyState,_lureState,()=>MineManager.IsPayedTotalAmount);
+            At(_readyState,_lureState,()=>mineBombManager.IsPayedTotalAmount);
             At(_lureState,_explosionState,()=>_lureState.IsTimerDone);
             At(_explosionState,_mineCountDownState,()=>_explosionState.IsExplosionHappened);
             At(_mineCountDownState,_readyState,()=>_mineCountDownState.IsTimerDone);

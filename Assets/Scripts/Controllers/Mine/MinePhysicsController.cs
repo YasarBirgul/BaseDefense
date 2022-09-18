@@ -1,5 +1,6 @@
 ﻿using Managers;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Controllers
 {
@@ -8,8 +9,8 @@ namespace Controllers
         #region Self Variables
 
         #region Serialized Variables
-            [SerializeField]
-            private MineManager mineManager;
+            [FormerlySerializedAs("mineManager")] [SerializeField]
+            private MineBombManager mineBombManager;
             [SerializeField]
             private SphereCollider lureCollider;
             [SerializeField]
@@ -36,7 +37,7 @@ namespace Controllers
                 if (timer>payOffset)
                 {
                     // Module will be applied
-                    mineManager.PayGemToMine();
+                    mineBombManager.PayGemToMine();
                     timer = 0;
                 }
                 else

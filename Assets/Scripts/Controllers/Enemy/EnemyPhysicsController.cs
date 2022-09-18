@@ -52,7 +52,7 @@ namespace Controllers
             }
             if (other.CompareTag("Bullet"))
             {
-                var damageAmount = other.GetComponent<IDamagable>().GetDamage();
+                var damageAmount = other.GetComponent<IDamagable>().TakeDamage();
                 _enemyAIBrain.Health -= damageAmount;
                 if (_enemyAIBrain.Health <= 0)
                 {
@@ -62,7 +62,7 @@ namespace Controllers
             if (other.CompareTag("MineExplosion"))
             {
                 Debug.Log(other.tag);
-                var damageAmount = other.transform.parent.GetComponentInParent<IDamagable>().GetDamage();
+                var damageAmount = other.transform.parent.GetComponentInParent<IDamagable>().TakeDamage();
                 _enemyAIBrain.Health -= damageAmount;
                 if (_enemyAIBrain.Health <= 0)
                 {

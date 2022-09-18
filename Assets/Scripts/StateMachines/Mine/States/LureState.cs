@@ -7,7 +7,7 @@ namespace StateMachines.Mine.States
     { 
         private MineBrain _mineBrain;
         private float timer=0;
-        public bool IsTimerDone => timer >=_mineBrain.MineManager.LureTime;
+        public bool IsTimerDone => timer >=_mineBrain.mineBombManager.LureTime;
         public LureState(MineBrain mineBrain)
         {
             _mineBrain = mineBrain;
@@ -19,12 +19,12 @@ namespace StateMachines.Mine.States
         public void OnEnter()
         {
             ResetTimer();
-            _mineBrain.MineManager.LureColliderState(true);
+            _mineBrain.mineBombManager.LureColliderState(true);
         }
         public void OnExit()
         {
             ResetTimer();
-            _mineBrain.MineManager.LureColliderState(false);
+            _mineBrain.mineBombManager.LureColliderState(false);
         } 
         private void ResetTimer()
         {

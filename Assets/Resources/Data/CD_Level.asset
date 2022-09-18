@@ -23,8 +23,12 @@ MonoBehaviour:
         CurrentDiamondAmount: 0
         MineCartCapacity: 0
       MilitaryBaseData:
-        MaxSoldierAmount: 0
-        CandidateAmount: 0
+        SlotsGrid: {x: 0, y: 0}
+        SlotOffSet: {x: 0, y: 0}
+        SlotPrefab: {fileID: 0}
+        BaseCapacity: 0
+        TotalAmount: 0
+        TentCapacity: 10
         CurrentSoldierAmount: 0
         SoldierUpgradeTime: 0
         SoldierSlotCost: 0

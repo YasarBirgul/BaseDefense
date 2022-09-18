@@ -23,43 +23,28 @@ namespace Managers
         #region Private Variables
 
         private InputData _data;
-        private Vector2 _inputValuesVector = Vector2.zero;
-        private float _inputPrecision;
         private bool _hasTouched;
-        
+        private Vector3 _inputVector;
         #endregion
         
         #endregion
-        private void Awake()
-        {
-            _data = GetInputData();
-            Init();
-        }
-        private InputData GetInputData() => Resources.Load<CD_Input>("Data/CD_Input").InputData;
-        private void Init()
-        {
-            _inputPrecision = _data.InputPrecision;
-        }
         private void Update()
         {
             JoystickInputUpdate();
         }
         private void JoystickInputUpdate()
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) && !_hasTouched)
             {
                 _hasTouched = true;
             }
             if (!_hasTouched) return;
             {
-                _inputValuesVector = new Vector2(joystickInput.Horizontal,joystickInput.Vertical);
                 InputSignals.Instance.onInputDragged?.Invoke(new HorizontalInputParams()
                 {
-                    MovementVector = _inputValuesVector
+                    MovementVector = new Vector2(joystickInput.Horizontal, joystickInput.Vertical)
                 });
-                if (_inputValuesVector.sqrMagnitude != 0) return;
-                _inputValuesVector = Vector2.zero;
-                _hasTouched = false;
+                _hasTouched = joystickInput.Direction.sqrMagnitude > 0;
             }
         }
     }

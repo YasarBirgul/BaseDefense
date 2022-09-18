@@ -8,7 +8,7 @@ namespace StateMachines.Mine.States
         #region Self Variables
 
         #region Public Variables
-        public bool IsTimerDone => (timer >= _mineBrain.MineManager.MineCountDownTime);
+        public bool IsTimerDone => (timer >= _mineBrain.mineBombManager.MineCountDownTime);
         #endregion
 
         #region Private Variables

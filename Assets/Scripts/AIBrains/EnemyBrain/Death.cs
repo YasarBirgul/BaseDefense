@@ -44,7 +44,7 @@ namespace AIBrains.EnemyBrain
         }
         public void OnExit()
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }
