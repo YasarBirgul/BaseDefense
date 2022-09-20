@@ -21,7 +21,7 @@ namespace AIBrains.EnemyBrain
             _enemyAIBrain = enemyAIBrain;
             _navMeshAgent = navmeshAgent;
         }
-        public void UpdateIState()
+        public void Tick()
         {
             if(_enemyAIBrain.MineTarget!=null){
                 _navMeshAgent.destination = _enemyAIBrain.MineTarget.transform.position;

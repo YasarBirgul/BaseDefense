@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AIBrains.SoldierBrain;
 using Data.UnityObject;
 using Data.ValueObject.AIData;
 using Data.ValueObject.LevelData;
 using Enums;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Managers
@@ -31,8 +33,8 @@ namespace Managers
         private bool _isTentAvaliable;
         private int _totalAmount;
         private int _soldierAmount;
-        private List<GameObject> _soldierList;
-        private List<Vector3> _slotTransformList;
+        private List<GameObject> _soldierList = new List<GameObject>();
+        [ShowInInspector] private List<Vector3> _slotTransformList = new List<Vector3>();
         private int _tentCapacity;
         #endregion
 
@@ -46,6 +48,10 @@ namespace Managers
             SetWaitSlotsGrid();
             InitSoldierPool();
         } 
+        private void Start()
+        {
+            GetObjectFromPool();
+        }
         private void Init()
         {
             _tentCapacity = _data.TentCapacity;
@@ -57,12 +63,14 @@ namespace Managers
         {
             int gridX = (int) _data.SlotsGrid.x;
             int gridY = (int) _data.SlotsGrid.y;
-            Vector3 slotOffSet = new Vector3(_data.SlotOffSet.x, 0, _data.SlotOffSet.y);
+            Vector3 slotPivot =
+                new Vector3(slotZone.transform.localScale.x / 2, 0, slotZone.transform.localScale.z / 2);
             for (int i = 0; i < gridX; i++)
             {
                 for (int j = 0; j < gridY; j++)
                 {
-                    var slotPositions = slotZone.transform.localPosition + slotOffSet;
+                    var SlotPosition = new Vector3(i*_data.SlotOffSet.x, 0, j*_data.SlotOffSet.y) + slotPivot;
+                    var slotPositions = slotZone.transform.localPosition + SlotPosition;
                     Instantiate(_data.SlotPrefab,slotPositions, Quaternion.identity,slotZone.transform);
                     _slotTransformList.Add(slotPositions);
                 }
@@ -80,7 +88,13 @@ namespace Managers
         {
             var soldierAIPrefab = ObjectPoolManager.Instance.GetObject<GameObject>(_soldierAIData.SoldierType.ToString());
             var soldierBrain = soldierAIPrefab.GetComponent<SoldierAIBrain>();
-            soldierBrain.SlotTransform = _slotTransformList[0];
+            SetSlotZoneTransformsToSoldiers(soldierBrain);
+        }
+        private void SetSlotZoneTransformsToSoldiers(SoldierAIBrain soldierBrain)
+        {
+            soldierBrain.GetSlotTransform(_slotTransformList[_slotTransformList.Count - 1]);
+            soldierBrain.TentPosition = TentTransfrom;
+            _slotTransformList.RemoveAt(_slotTransformList.Count-1);
             _slotTransformList.TrimExcess();
         }
         private void TurnOnSoldierAI(GameObject soldierPrefab)
@@ -113,15 +127,12 @@ namespace Managers
             if (_soldierAmount < _data.TentCapacity)
             {
                 _soldierAmount += Amount;
+               // GetObjectFromPool();
             }
             else
             {
                 _isTentAvaliable= false;
             }
-        }
-        private void SetSlotZoneTransformsToSoldiers()
-        {
-            
         }
     }
 }

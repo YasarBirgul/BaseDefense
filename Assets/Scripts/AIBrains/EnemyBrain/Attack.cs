@@ -1,4 +1,5 @@
-﻿using Abstract;
+﻿using System;
+using Abstract;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,25 +14,25 @@ namespace AIBrains.EnemyBrain
 
         private bool _inAttack;
         public bool InPlayerAttackRange() => _inAttack;
-        public Attack(NavMeshAgent navMeshAgent, Animator animator, EnemyAIBrain enemyAIBrain, float attackRange)
+        public Attack(NavMeshAgent navMeshAgent, Animator animator, EnemyAIBrain enemyAIBrain)
         {
             _navMeshAgent = navMeshAgent;
             _animator = animator;
             _enemyAIBrain = enemyAIBrain;
-            _attackRange = attackRange;
+            _attackRange = _navMeshAgent.stoppingDistance;
         }
         public void OnEnter()
         {
             if (_enemyAIBrain.PlayerTarget)
             {
                 _inAttack = true;
-               // _animator.SetTrigger("Attack");
+                // _animator.SetTrigger("Attack");
             }
         } 
         public void OnExit()
         {
         }
-        public void UpdateIState()
+        public void Tick()
         {
             if (_enemyAIBrain.PlayerTarget)
             {

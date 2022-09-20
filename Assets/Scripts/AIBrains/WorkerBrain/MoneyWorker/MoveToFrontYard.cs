@@ -4,7 +4,7 @@ namespace AIBrains.WorkerBrain.MoneyWorker
 {
     public class MoveToFrontYard : IState
     {
-        public void UpdateIState()
+        public void Tick()
         {
             throw new System.NotImplementedException();
         }

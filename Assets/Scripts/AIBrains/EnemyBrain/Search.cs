@@ -18,7 +18,7 @@ namespace AIBrains.EnemyBrain
             _navMeshAgent = navMeshAgent;
             _spawnPoint = spawnPoint;
         }
-        public void UpdateIState()
+        public void Tick()
         {
             
         }
@@ -51,6 +51,9 @@ namespace AIBrains.EnemyBrain
                 result = Vector3.zero;
                 return false;
             }
+            
+            if(!RandomPoint(_spawnPoint.position,20,out var point)) return;
+            _navMeshAgent.Warp(point);
         }
     }
 }

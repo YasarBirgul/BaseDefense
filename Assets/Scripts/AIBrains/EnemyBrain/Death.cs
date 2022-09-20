@@ -33,7 +33,7 @@ namespace AIBrains.EnemyBrain
             _animator = animator;
             _enemyAIBrain = enemyAIBrain;
         }
-        public void UpdateIState()
+        public void Tick()
         {
             
         }

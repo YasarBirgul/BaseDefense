@@ -4,7 +4,7 @@ namespace AIBrains.SoldierBrain
 {
     public class SoldierDeath  : IState
     {
-        public void UpdateIState()
+        public void Tick()
         {
             throw new System.NotImplementedException();
         }

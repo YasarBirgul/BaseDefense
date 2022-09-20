@@ -91,9 +91,9 @@ namespace AIBrains.EnemyBrain
 
             var search = new Search(this, NavMeshAgent, _spawnPoint);
             var move = new Move(NavMeshAgent,_animator,this,_moveSpeed); 
-            var attack = new Attack(NavMeshAgent,_animator,this,_attackRange);
+            var attack = new Attack(NavMeshAgent,_animator,this);
             var death = new Death(NavMeshAgent,_animator,this);
-            chase = new Chase(NavMeshAgent,_animator,this,_attackRange,_chaseSpeed);
+            chase = new Chase(NavMeshAgent,_animator,this,_chaseSpeed);
             var moveToBomb = new MoveToBomb(NavMeshAgent,_animator,this,_attackRange,_chaseSpeed);
             _stateMachine = new StateMachine();
           

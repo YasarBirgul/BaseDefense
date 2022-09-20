@@ -35,7 +35,7 @@ namespace StateBehaviour
             var transition = GetTransition();
             if (transition != null)
                 SetState(transition.To);
-            _currentState?.UpdateIState();
+            _currentState?.Tick();
         }
         public void SetState(IState state)
         {

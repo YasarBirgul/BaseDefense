@@ -1,6 +1,7 @@
 ﻿using System.Security.Cryptography;
 using Abstract;
 using Signals;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -32,18 +33,18 @@ namespace AIBrains.EnemyBrain
         #endregion
         
         #endregion
-        public Chase(NavMeshAgent navMeshAgent,Animator animator,EnemyAIBrain enemyAIBrain,float attackRange,float chaseSpeed)
+        public Chase(NavMeshAgent navMeshAgent,Animator animator,EnemyAIBrain enemyAIBrain,float chaseSpeed)
         {
             _navMeshAgent = navMeshAgent;
             _animator = animator;
             _enemyAIBrain = enemyAIBrain;
-            _attackRange = attackRange;
+            _attackRange = navMeshAgent.stoppingDistance;
             _chaseSpeed = chaseSpeed;
         }
 
         public bool InPlayerAttackRange() => _inAttack;
         
-        public void UpdateIState()
+        public void Tick()
         {
             _navMeshAgent.destination = _enemyAIBrain.PlayerTarget.transform.position;
             CheckDistanceChase();

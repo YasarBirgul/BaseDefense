@@ -14,7 +14,7 @@ namespace StateMachines.Mine.States
         {
             _mineBrain = mineBrain;
         }
-        public void UpdateIState()
+        public void Tick()
         {
         }
 

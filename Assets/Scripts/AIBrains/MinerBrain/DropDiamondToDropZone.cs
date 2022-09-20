@@ -4,7 +4,7 @@ namespace AIBrains.MinerBrain
 {
     public class DropDiamondToDropZoneState : IState
     {
-        public void UpdateIState()
+        public void Tick()
         {
             throw new System.NotImplementedException();
         }

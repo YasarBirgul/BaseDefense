@@ -2,7 +2,7 @@
 {
     public interface IState
     {
-        void UpdateIState();
+        void Tick();
 
         void OnEnter();
 

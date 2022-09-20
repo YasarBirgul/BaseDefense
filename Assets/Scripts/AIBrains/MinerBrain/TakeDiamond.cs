@@ -4,7 +4,7 @@ namespace AIBrains.MinerBrain
 {
     public class TakeDiamond : IState
     {
-        public void UpdateIState()
+        public void Tick()
         {
             throw new System.NotImplementedException();
         }

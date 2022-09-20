@@ -4,7 +4,7 @@ namespace AIBrains.WorkerBrain.AmmoWorker
 {
     public class DecideAvailableTurret : IState
     {
-        public void UpdateIState()
+        public void Tick()
         {
             throw new System.NotImplementedException();
         }

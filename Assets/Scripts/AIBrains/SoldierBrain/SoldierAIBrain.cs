@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using Abstract;
+using AIBrains.EnemyBrain;
 using Data.UnityObject;
 using Data.ValueObject.AIData;
 using Sirenix.OdinInspector;
 using StateBehaviour;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 namespace AIBrains.SoldierBrain
 {
@@ -17,10 +19,6 @@ namespace AIBrains.SoldierBrain
 
         #region Public Variables
         
-        public NavMeshAgent NavMeshAgent;
-
-        public Vector3 SlotTransform;
-
         #endregion
 
         #region Serialized Variables
@@ -30,9 +28,15 @@ namespace AIBrains.SoldierBrain
         #region Private Variables
 
         [ShowInInspector] private List<IDamagable> _damagablesList;
+        
+        private NavMeshAgent _navMeshAgent;
+       
+        private Animator _animator;
+
         [Header("Data")] 
         private SoldierAIData _data;
 
+        public Transform TentPosition;
         private int _damage;
         private float _soldierSpeed;
         private float _attackRadius;
@@ -41,12 +45,17 @@ namespace AIBrains.SoldierBrain
         private int _health;
         private Transform _spawnPoint;
         private StateMachine _stateMachine;
+        private Vector3 _slotTransform;
+        public bool hasReachedTarget;
         #endregion
         #endregion
         private void Awake()
         {
             _data = GetSoldierAIData();
             SetSoldierAIData();
+        }
+        private void Start()
+        {
             GetStateReferences();
         }
         private SoldierAIData GetSoldierAIData() => Resources.Load<CD_AI>("Data/CD_AI").SoldierAIData;
@@ -62,9 +71,11 @@ namespace AIBrains.SoldierBrain
         }
         private void GetStateReferences()
         {
-            NavMeshAgent = GetComponent<NavMeshAgent>();
-            var idle = new Idle();
-            var moveToSlotZone = new MoveToSlotZone();
+            _navMeshAgent = GetComponent<NavMeshAgent>();
+            _animator = GetComponent<Animator>(); 
+            var idle = new Idle(this,TentPosition,_navMeshAgent);
+            var moveToSlotZone = new MoveToSlotZone(this,_navMeshAgent,hasReachedTarget,_slotTransform);
+            var wait = new Wait();
             var moveToFrontYard = new MoveToFrontYard();
             var patrol = new Patrol();
             var reachToTarget = new DetectTarget();
@@ -72,20 +83,18 @@ namespace AIBrains.SoldierBrain
             _stateMachine = new StateMachine();
             
             At(idle,moveToSlotZone,hasSlotTransformList());
-            At(moveToFrontYard, idle, hasReachToSlot());
-            
-
+            At(moveToSlotZone, wait, hasReachToSlot());
+          
             _stateMachine.SetState(idle);
             void At(IState to,IState from,Func<bool> condition) =>_stateMachine.AddTransition(to,from,condition);
 
-            Func<bool> hasSlotTransformList() => () => SlotTransform!= null;
-            Func<bool> hasReachToSlot() => () => SlotTransform != null;
-        }
-
-        public void GetSlotTransform(Vector3 slotTransfrom)
-        {
-            SlotTransform = slotTransfrom;
+            Func<bool> hasSlotTransformList() => () => _slotTransform!= null;
+            Func<bool> hasReachToSlot() => () => _slotTransform != null && hasReachedTarget;
         }
         private void Update() =>  _stateMachine.UpdateIState();
+        public void GetSlotTransform(Vector3 slotTransfrom)
+        {
+            _slotTransform = slotTransfrom;
+        }
     }
 }

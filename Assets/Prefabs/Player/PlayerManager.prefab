@@ -976,9 +976,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f65ec191804244d09f80030ff2ccd247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentGameState: 0
+  currentAreaType: 0
+  WeaponType: 0
   meshController: {fileID: 1429477786026016514}
   animationController: {fileID: 3256136071381465238}
+  weaponController: {fileID: 0}
 --- !u!114 &421403684888451369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -991,7 +993,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e8fba9fc1914b079622cb2ce1b12c93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerManager: {fileID: 8495928147545377426}
   rigidbody: {fileID: 3066750386707274183}
 --- !u!54 &3066750386707274183
 Rigidbody:
@@ -1216,6 +1217,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 3713571008269248073}
+  weaponMeshRenderer: {fileID: 0}
+  sideMeshRenderer: {fileID: 0}
 --- !u!1 &4231892013577837143
 GameObject:
   m_ObjectHideFlags: 0
@@ -1564,9 +1567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerManager: {fileID: 8495928147545377426}
-  _gameObject: {fileID: 9082427703555657405}
-  _gameObjectRiffle: {fileID: 0}
-  CurrentWeaponType: 0
+  animator: {fileID: 0}
 --- !u!114 &932673370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1639,8 +1640,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_RigLayers:
   - m_Rig: {fileID: 1890459489}
-    m_Active: 1
-  - m_Rig: {fileID: 0}
     m_Active: 1
   - m_Rig: {fileID: 2094570839}
     m_Active: 1
@@ -2166,7 +2165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce704384b8fb4bbbad482a0104519dd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponType: 0
+  meshFilter: {fileID: 0}
+  sideMeshFilter: {fileID: 0}
 --- !u!23 &4360250655400319478
 MeshRenderer:
   m_ObjectHideFlags: 0

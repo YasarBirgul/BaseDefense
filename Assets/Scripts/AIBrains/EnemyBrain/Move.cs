@@ -37,7 +37,7 @@ namespace AIBrains.EnemyBrain
             _enemyAIBrain = enemyAIBrain;
             _moveSpeed = moveSpeed;
         }
-        public void UpdateIState()
+        public void Tick()
         {
            // var sqrDistance = (_enemyAIBrain.transform.position-_lastPosition).sqrMagnitude;
            // if (sqrDistance == 0f) 
