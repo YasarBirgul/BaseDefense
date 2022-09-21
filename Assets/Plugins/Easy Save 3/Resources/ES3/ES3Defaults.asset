@@ -30,12 +30,15 @@ MonoBehaviour:
     serializationDepthLimit: 64
     assemblyNames:
     - Assembly-CSharp-firstpass
+    - Assembly-CSharp
     - Cinemachine
     - ToonyColorsPro2.Demo
-    - Assembly-CSharp
+    - Sirenix.OdinInspector.CompatibilityLayer
     - ToonyColorsPro.Runtime
+    - Sirenix.OdinInspector.CompatibilityLayer.Editor
     - ToonyColorsPro.Editor
     - ToonyColorsPro.Demo.Editor
+    - Sirenix.OdinInspector.Modules.UnityMathematics
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1

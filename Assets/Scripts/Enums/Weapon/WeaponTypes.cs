@@ -1,8 +1,10 @@
-﻿namespace Enums.Weapon
+﻿namespace Enums
 {
     public enum WeaponTypes
     {
         Pistol,
-        ShotGun
+        Riffle,
+        ShotGun,
+        MiniGun,
     }
 }

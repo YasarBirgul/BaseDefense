@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbd903daaca84c68acc93a494e59390c, type: 3}
+  m_Name: CD_Enemy
+  m_EditorClassIdentifier: 
+  EnemyAIData:
+    EnemyList:
+    - EnemyType: 0
+      Health: 100
+      Damage: 0
+      AttackRange: 1.5
+      AttackSpeed: 15
+      ScaleSize: {x: 1, y: 1, z: 1}
+      BodyColor: {r: 1, g: 0, b: 0, a: 0}
+      ChaseSpeed: 12
+      MoveSpeed: 10
+      NavMeshRadius: 0.5
+      NavMeshHeight: 2
+    - EnemyType: 1
+      Health: 100
+      Damage: 0
+      AttackRange: 1.5
+      AttackSpeed: 20
+      ScaleSize: {x: 1, y: 1, z: 1}
+      BodyColor: {r: 0.9433962, g: 0.83386356, b: 0, a: 0}
+      ChaseSpeed: 8
+      MoveSpeed: 15
+      NavMeshRadius: 0.3
+      NavMeshHeight: 2
+    - EnemyType: 2
+      Health: 100
+      Damage: 0
+      AttackRange: 1.5
+      AttackSpeed: 10
+      ScaleSize: {x: 1, y: 1, z: 1}
+      BodyColor: {r: 0.6320754, g: 0, b: 0, a: 0}
+      ChaseSpeed: 5
+      MoveSpeed: 5
+      NavMeshRadius: 0.7
+      NavMeshHeight: 2.5
+    - EnemyType: 3
+      Health: 100
+      Damage: 0
+      AttackRange: 1.5
+      AttackSpeed: 10
+      ScaleSize: {x: 1, y: 1, z: 1}
+      BodyColor: {r: 0, g: 0, b: 0, a: 0}
+      ChaseSpeed: 0
+      MoveSpeed: 0
+      NavMeshRadius: 0
+      NavMeshHeight: 0
+    SpawnPositionList:
+    - {fileID: 4910343552913871144, guid: 4c5b732a9090c50409a5a662d3e09ff2, type: 3}

@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerData:
     PlayerHealth: 0
-    PlayerSpeed: 0
+    PlayerMovementData:
+      PlayerSpeed: 20
     AttackRange: 0

@@ -22,28 +22,11 @@ MonoBehaviour:
     Capacity: 0
     WorkerSpeed: 0
   SoldierAIData:
-    Damage: 0
-    SoldierWorkerSpeed: 0
-  EnemyAIData:
-    EnemyList:
-    - EnemyType: 0
-      Health: 0
-      Damage: 0
-      AttackRange: 0
-      AttackSpeed: 0
-      MoveSpeed: 0
-      ChaseSpeed: 0
-    - EnemyType: 1
-      Health: 0
-      Damage: 0
-      AttackRange: 0
-      AttackSpeed: 0
-      MoveSpeed: 0
-      ChaseSpeed: 0
-    - EnemyType: 2
-      Health: 0
-      Damage: 0
-      AttackRange: 0
-      AttackSpeed: 0
-      MoveSpeed: 0
-      ChaseSpeed: 0
+    SoldierType: 0
+    SoldierPrefab: {fileID: 345493145078521190, guid: 3f29f6d6d85a625499dc0059b4f14977, type: 3}
+    Damage: 10
+    SoldierSpeed: 10
+    AttackRadius: 10
+    AttackDelay: 2
+    Health: 100
+    SpawnPoint: {fileID: 0}

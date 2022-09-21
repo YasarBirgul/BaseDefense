@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Data.ValueObject.WeaponData;
+using Enums;
 using UnityEngine;
 
 namespace Data.UnityObject

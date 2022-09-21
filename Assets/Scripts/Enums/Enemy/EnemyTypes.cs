@@ -1,8 +1,10 @@
-﻿namespace Enums.Enemy
+﻿namespace Enums
 {
     public enum EnemyTypes
     {
-        RedEnemy,
-        OrangeEnemy
+        RedEnemy = 0,
+        OrangeEnemy = 1,
+        LargeEnemy = 2,
+        BossEnemy =3
     }
 }

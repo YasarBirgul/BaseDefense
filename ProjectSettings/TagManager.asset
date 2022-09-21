@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Gate
+  - Bullet
+  - MineLure
+  - MineExplosion
   layers:
   - Default
   - TransparentFX
@@ -14,10 +19,10 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - Base
+  - FrontYard
+  - EnemyAI
+  - LandMine
   - 
   - 
   - 
