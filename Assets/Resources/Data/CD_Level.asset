@@ -35,6 +35,7 @@ MonoBehaviour:
         SlotAmount: 0
         SlotTransform: {fileID: 0}
         AttackTime: 0
+        frontYardSoldierPosition: {fileID: 2715330470396905158, guid: 50235d298ad783e43898e2b3c36ea9cb, type: 3}
       BuyablesData:
         MoneyWorkerCost: 0
         MoneyWorkerPayedAmount: 0

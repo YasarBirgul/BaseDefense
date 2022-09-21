@@ -5,6 +5,7 @@ namespace AIBrains.SoldierBrain
 {
     public class Wait : IState
     {
+        
         public Wait()
         {
             
@@ -15,7 +16,7 @@ namespace AIBrains.SoldierBrain
         }
         public void OnEnter()
         {
-            Debug.Log("EnterWait");
+            // Animation Idle Will be played.
         }
 
         public void OnExit()

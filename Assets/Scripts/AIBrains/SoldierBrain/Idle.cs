@@ -23,13 +23,11 @@ namespace AIBrains.SoldierBrain
         }
         public void OnEnter()
         {
-            Debug.Log("IdleEnter");
             GetTentSpawnPosition();
             _navMeshAgent.enabled = true;
         }
         public void OnExit()
         {
-            Debug.Log("IdleExit");
         }
         private void GetTentSpawnPosition()
         {

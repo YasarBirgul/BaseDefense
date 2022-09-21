@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Configuration;
 using AIBrains.SoldierBrain;
 using Data.UnityObject;
 using Data.ValueObject.AIData;
@@ -94,6 +95,7 @@ namespace Managers
         {
             soldierBrain.GetSlotTransform(_slotTransformList[_slotTransformList.Count - 1]);
             soldierBrain.TentPosition = TentTransfrom;
+            soldierBrain.FrontYardStartPosition = _data.frontYardSoldierPosition;             
             _slotTransformList.RemoveAt(_slotTransformList.Count-1);
             _slotTransformList.TrimExcess();
         }

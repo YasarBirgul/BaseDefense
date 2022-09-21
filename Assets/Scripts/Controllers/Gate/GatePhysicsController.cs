@@ -25,14 +25,14 @@ namespace Controllers.Gate
         #endregion
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Player"))
+            if (other.TryGetComponent(out Interactable interactable))
             {
                 manager.GateOpen(true);
             }
         }
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag("Player"))
+            if (other.TryGetComponent(out Interactable interactable))
             {
                 manager.GateOpen(false);
             }

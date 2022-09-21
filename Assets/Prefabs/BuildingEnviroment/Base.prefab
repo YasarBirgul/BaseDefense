@@ -572,7 +572,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4087598242290920605
 Transform:
   m_ObjectHideFlags: 0
@@ -1259,7 +1259,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &213052817807521779
 Transform:
   m_ObjectHideFlags: 0
@@ -2948,7 +2948,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5914079105449231434
 Transform:
   m_ObjectHideFlags: 0
@@ -3372,7 +3372,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5153281069199879423}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4870,8 +4870,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.4686584, y: 3.4747214, z: 15.578613}
-  m_Center: {x: 0.068795085, y: 1.7341769, z: 8.055754}
+  m_Size: {x: 5.4686584, y: 3.4747214, z: 13.118469}
+  m_Center: {x: 0.068795204, y: 1.7341769, z: 6.8256817}
 --- !u!114 &5568650360042605247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5558,7 +5558,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: SandBagWall_04_v2 (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8207052071804847924, guid: d7585fa76540d6a4ab5dcfa4169de8b7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d7585fa76540d6a4ab5dcfa4169de8b7, type: 3}
 --- !u!4 &6196707287385188636 stripped
 Transform:
@@ -5682,7 +5683,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: SandBagWall_04_v2 (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8207052071804847924, guid: d7585fa76540d6a4ab5dcfa4169de8b7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d7585fa76540d6a4ab5dcfa4169de8b7, type: 3}
 --- !u!4 &2384229941484406498 stripped
 Transform:

@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Design;
-using Abstract;
+﻿using Abstract;
 using Controllers.Gate;
 using Enums.GameStates;
 using Managers;
@@ -7,7 +6,7 @@ using UnityEngine;
 
 namespace Controllers
 { 
-    public class PlayerPhysicsController : MonoBehaviour
+    public class PlayerPhysicsController : Interactable
     {
         #region Self Variables
 

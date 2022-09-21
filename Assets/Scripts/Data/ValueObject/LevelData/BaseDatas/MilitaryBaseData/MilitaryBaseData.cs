@@ -18,5 +18,6 @@ namespace Data.ValueObject.LevelData
         public int SlotAmount;
         public Transform SlotTransform;
         public int AttackTime;
+        public Transform frontYardSoldierPosition;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Abstract;
+using UnityEngine;
 
 namespace AIBrains.SoldierBrain
 {
@@ -8,12 +9,10 @@ namespace AIBrains.SoldierBrain
         {
             
         }
-
         public void OnEnter()
         {
             
         }
-
         public void OnExit()
         {
             
