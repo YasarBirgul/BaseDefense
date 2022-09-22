@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Controllers
 {
-    public class EnemyPhysicsController : MonoBehaviour
+    public class EnemyPhysicsController : MonoBehaviour, IDamagable
     {
         #region Self Variables
 
@@ -24,16 +24,11 @@ namespace Controllers
         private Transform _detectedMine;
         private EnemyAIBrain _enemyAIBrain;
         private bool _amAIDead = false;
-        
         #endregion
-        
         #endregion
-        
         public bool IsPlayerInRange() => _detectedPlayer != null;
         public bool IsBombInRange() => _detectedMine != null;
         public bool AmIdead() => _amAIDead;
-
-        public LayerType LayerType;
         private void Awake()
         {
             _enemyAIBrain = gameObject.GetComponentInParent<EnemyAIBrain>();
@@ -84,6 +79,16 @@ namespace Controllers
                 _enemyAIBrain.MineTarget = _detectedMine;
                 _enemyAIBrain.MineTarget = null;
             }
+        }
+
+        public int TakeDamage()
+        {
+            return 5;
+        }
+
+        public Transform GetTransform()
+        {
+            return transform;
         }
     }
 }

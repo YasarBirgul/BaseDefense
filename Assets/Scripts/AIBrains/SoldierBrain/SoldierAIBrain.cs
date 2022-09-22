@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Abstract;
+using Controllers.Soldier;
 using Data.UnityObject;
 using Data.ValueObject.AIData;
 using Signals;
@@ -18,15 +19,19 @@ namespace AIBrains.SoldierBrain
 
         #region Public Variables
         
-        public bool HasReachedTarget;
+        public bool HasReachedSlotTarget;
         public bool HasReachedFrontYard;
-        
+        public bool HasEnemyTarget = false;
+
         public Transform TentPosition; 
         public Transform FrontYardStartPosition;
-        
+        public List<IDamagable> enemyList = new List<IDamagable>();
+        public Transform EnemyTarget;
         #endregion
 
         #region Serialized Variables
+
+        [SerializeField] private SoldierPhysicsController physicsController;
         
         #endregion
 
@@ -37,7 +42,6 @@ namespace AIBrains.SoldierBrain
         private NavMeshAgent _navMeshAgent;
        
         private Animator _animator;
-
         [Header("Data")]
         private SoldierAIData _data;
         private int _damage;
@@ -49,7 +53,8 @@ namespace AIBrains.SoldierBrain
         private Transform _spawnPoint;
         private StateMachine _stateMachine;
         private Vector3 _slotTransform;
-        private bool HasSoldiersActivated;
+        private bool HasSoldiersActivated; 
+        // private bool dead { get; set; }
         
         #endregion
         #endregion
@@ -57,6 +62,7 @@ namespace AIBrains.SoldierBrain
         {
             _data = GetSoldierAIData();
             SetSoldierAIData();
+            Debug.Log(EnemyTarget);
         }
         private void Start()
         {
@@ -78,10 +84,12 @@ namespace AIBrains.SoldierBrain
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _animator = GetComponent<Animator>(); 
             var idle = new Idle(this,TentPosition,_navMeshAgent);
-            var moveToSlotZone = new MoveToSlotZone(this,_navMeshAgent,HasReachedTarget,_slotTransform);
+            var moveToSlotZone = new MoveToSlotZone(this,_navMeshAgent,HasReachedSlotTarget,_slotTransform);
             var wait = new Wait();
             var moveToFrontYard = new MoveToFrontYard(this,_navMeshAgent,FrontYardStartPosition);
-            var patrol = new Patrol();
+            var patrol = new Patrol(this,_navMeshAgent);
+            var attack = new Attack(this,_navMeshAgent);
+            var soldierDeath = new SoldierDeath();
             var reachToTarget = new DetectTarget();
             var shootTarget = new ShootTarget();
             _stateMachine = new StateMachine();
@@ -91,15 +99,18 @@ namespace AIBrains.SoldierBrain
             At(moveToSlotZone, wait, hasReachToSlot());
             At(wait,moveToFrontYard,hasSoldiersActivated());
             At(moveToFrontYard, patrol, hasReachedFrontYard());
+            At(patrol,attack,hasEnemyTarget());
+            At(attack,patrol, hasNoEnemyTarget());
 
             _stateMachine.SetState(idle);
             void At(IState to,IState from,Func<bool> condition) =>_stateMachine.AddTransition(to,from,condition);
 
-            Func<bool> hasSlotTransformList() => () => _slotTransform!= null;
-            Func<bool> hasReachToSlot() => () => _slotTransform != null && HasReachedTarget;
-            Func<bool> hasSoldiersActivated() => () => FrontYardStartPosition != null && HasSoldiersActivated;
-            Func<bool> hasReachedFrontYard() => () => FrontYardStartPosition != null && HasReachedFrontYard;
-
+            Func<bool> hasSlotTransformList()=> ()=> _slotTransform!= null;
+            Func<bool> hasReachToSlot()=> ()=> _slotTransform != null && HasReachedSlotTarget;
+            Func<bool> hasSoldiersActivated()=> ()=> FrontYardStartPosition != null && HasSoldiersActivated;
+            Func<bool> hasReachedFrontYard()=> ()=> FrontYardStartPosition != null && HasReachedFrontYard;
+            Func<bool> hasEnemyTarget() => () => HasEnemyTarget;
+            Func<bool> hasNoEnemyTarget() => () => !HasEnemyTarget;
         }
         private void Update() =>  _stateMachine.UpdateIState();
 
@@ -128,6 +139,12 @@ namespace AIBrains.SoldierBrain
         private void OnSoldierActivation()
         {
             HasSoldiersActivated = true;
+        }
+        public void SetEnemyTargetTransform()
+        {
+            EnemyTarget = enemyList[0].GetTransform();
+            HasEnemyTarget = true;
+            Debug.Log(EnemyTarget + " < Enemy Target");
         }
     }
 }

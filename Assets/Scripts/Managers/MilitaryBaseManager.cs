@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Configuration;
+﻿using System.Collections.Generic;
 using AIBrains.SoldierBrain;
 using Data.UnityObject;
 using Data.ValueObject.AIData;

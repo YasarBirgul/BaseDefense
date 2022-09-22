@@ -27,7 +27,7 @@ namespace AIBrains.SoldierBrain
             if ((_navMeshAgent.transform.position - _slotPosition).sqrMagnitude < _stoppingDistance)
             {
                 _hasReachToTarget = true;
-                _soldierAIBrain.HasReachedTarget = _hasReachToTarget;
+                _soldierAIBrain.HasReachedSlotTarget = _hasReachToTarget;
             }
         } 
         public void OnEnter()

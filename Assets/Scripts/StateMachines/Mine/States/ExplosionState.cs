@@ -16,15 +16,13 @@ namespace StateMachines.Mine.States
         }
         public void Tick()
         {
+            
         }
-
         public void OnEnter()
         {
-            Debug.Log("Explode");
             _mineBrain.mineBombManager.ExplosionColliderState(true);
             isExplosionHappened=true;
         }
-
         public void OnExit()
         {
             _mineBrain.mineBombManager.ExplosionColliderState(false);

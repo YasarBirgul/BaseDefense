@@ -61,7 +61,6 @@ namespace AIBrains.EnemyBrain
         private void Awake()
         {
             _levelID = 0;
-            // _levelID = levelSignals.Instance.OnGetLevel();
             _AIData = GetEnemyAIData();
             _data = GetEnemyData();
             SetEnemyData();
@@ -114,10 +113,6 @@ namespace AIBrains.EnemyBrain
             Func<bool> AttackThePlayer() => () => PlayerTarget != null && chase.InPlayerAttackRange();
             Func<bool> TargetNull() => () => PlayerTarget is null;
         }
-        
-        
-        
-        
         private void Update() =>  _stateMachine.UpdateIState();
     }
 }

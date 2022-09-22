@@ -16,9 +16,8 @@ namespace AIBrains.SoldierBrain
         }
         public void OnEnter()
         {
-            // Animation Idle Will be played.
+            
         }
-
         public void OnExit()
         {
             
