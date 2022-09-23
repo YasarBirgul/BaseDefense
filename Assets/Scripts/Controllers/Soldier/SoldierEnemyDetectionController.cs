@@ -1,6 +1,4 @@
-﻿using System;
-using Abstract;
-using AIBrains.EnemyBrain;
+﻿using Abstract;
 using AIBrains.SoldierBrain;
 using UnityEngine;
 
@@ -26,8 +24,7 @@ namespace Controllers.Soldier
         #endregion
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out IDamagable damagable)) 
-            
+            if (other.TryGetComponent(out IDamagable damagable))
             {
                 soldierAIBrain.enemyList.Add(damagable);
                 if (soldierAIBrain.EnemyTarget == null) 
@@ -40,16 +37,12 @@ namespace Controllers.Soldier
         {
             if (other.TryGetComponent(out IDamagable damagable))
             {
+                if (damagable == soldierAIBrain.enemyList[0])
+                {
+                    soldierAIBrain.EnemyTarget = null;
+                }
                 soldierAIBrain.enemyList.Remove(damagable);
                 soldierAIBrain.enemyList.TrimExcess();
-                if (soldierAIBrain.EnemyTarget == null)
-                {
-                    soldierAIBrain.HasEnemyTarget = false;
-                    if (soldierAIBrain.enemyList.Contains(damagable))
-                    {
-                        soldierAIBrain.SetEnemyTargetTransform();
-                    }
-                }
             }
             // 1.Enemies ontrigger exit yapıp tekrar enter tetikleyebilirler. Tekrar tetiklediklerinde listede iki
             // tane aynı objeden oluyor. Öldürdüğüm esnada da null bir obje oluyor. Bu sebeple listeden ontrigger exitte

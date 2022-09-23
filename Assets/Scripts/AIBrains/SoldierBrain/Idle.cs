@@ -9,13 +9,13 @@ namespace AIBrains.SoldierBrain
         private SoldierAIBrain _soldierAIBrain;
         private Transform _tentPosition;
         private NavMeshAgent _navMeshAgent;
-
-
-        public Idle(SoldierAIBrain soldierAIBrain,Transform tentPosition, NavMeshAgent navMeshAgent)
+        private Animator _animator;
+        public Idle(SoldierAIBrain soldierAIBrain,Transform tentPosition, NavMeshAgent navMeshAgent,Animator animator)
         {
             _soldierAIBrain = soldierAIBrain;
             _tentPosition= tentPosition;
             _navMeshAgent = navMeshAgent;
+            _animator = animator;
         }
         public void Tick()
         {
@@ -25,6 +25,7 @@ namespace AIBrains.SoldierBrain
         {
             GetTentSpawnPosition();
             _navMeshAgent.enabled = true;
+            
         }
         public void OnExit()
         {

@@ -39,7 +39,6 @@ namespace AIBrains.EnemyBrain
         }
         public void OnEnter()
         {
-            Debug.Log("OnEnter");
             ObjectPoolManager.Instance.ReturnObject(_enemyAIBrain.gameObject,_enemyAIBrain.EnemyType.ToString());
         }
         public void OnExit()

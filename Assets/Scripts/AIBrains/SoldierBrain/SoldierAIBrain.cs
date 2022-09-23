@@ -32,16 +32,14 @@ namespace AIBrains.SoldierBrain
         #region Serialized Variables
 
         [SerializeField] private SoldierPhysicsController physicsController;
-        
+        [SerializeField] private Animator _animator;
         #endregion
 
         #region Private Variables
-
-        [ShowInInspector] private List<IDamagable> _damagablesList;
         
         private NavMeshAgent _navMeshAgent;
        
-        private Animator _animator;
+        [ShowInInspector] private List<IDamagable> _damagablesList;
         [Header("Data")]
         private SoldierAIData _data;
         private int _damage;
@@ -62,7 +60,6 @@ namespace AIBrains.SoldierBrain
         {
             _data = GetSoldierAIData();
             SetSoldierAIData();
-            Debug.Log(EnemyTarget);
         }
         private void Start()
         {
@@ -82,13 +79,12 @@ namespace AIBrains.SoldierBrain
         private void GetStateReferences()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
-            _animator = GetComponent<Animator>(); 
-            var idle = new Idle(this,TentPosition,_navMeshAgent);
-            var moveToSlotZone = new MoveToSlotZone(this,_navMeshAgent,HasReachedSlotTarget,_slotTransform);
-            var wait = new Wait();
-            var moveToFrontYard = new MoveToFrontYard(this,_navMeshAgent,FrontYardStartPosition);
-            var patrol = new Patrol(this,_navMeshAgent);
-            var attack = new Attack(this,_navMeshAgent);
+            var idle = new Idle(this,TentPosition,_navMeshAgent,_animator);
+            var moveToSlotZone = new MoveToSlotZone(this,_navMeshAgent,HasReachedSlotTarget,_slotTransform,_animator);
+            var wait = new Wait(_animator);
+            var moveToFrontYard = new MoveToFrontYard(this,_navMeshAgent,FrontYardStartPosition,_animator);
+            var patrol = new Patrol(this,_navMeshAgent,_animator);
+            var attack = new Attack(this,_navMeshAgent,_animator);
             var soldierDeath = new SoldierDeath();
             var reachToTarget = new DetectTarget();
             var shootTarget = new ShootTarget();
@@ -142,9 +138,20 @@ namespace AIBrains.SoldierBrain
         }
         public void SetEnemyTargetTransform()
         {
-            EnemyTarget = enemyList[0].GetTransform();
+            EnemyTarget = enemyList[0].GetTransform(); 
             HasEnemyTarget = true;
-            Debug.Log(EnemyTarget + " < Enemy Target");
+        }
+
+        public void EnemyTargetStatus()
+        {
+            if (enemyList.Count != 0)
+            {
+                EnemyTarget = enemyList[0].GetTransform();
+            }
+            else
+            {
+                HasEnemyTarget = false;
+            }
         }
     }
 }

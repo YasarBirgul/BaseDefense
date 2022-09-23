@@ -65,6 +65,12 @@ namespace Managers
         {
             return ExplosionDamage;
         }
+
+        public int TakeDamage(int damage)
+        {
+            throw new NotImplementedException();
+        }
+
         public Transform GetTransform()
         {
             throw new NotImplementedException();

@@ -14,10 +14,12 @@ namespace AIBrains.SoldierBrain
         private float _turnSpeed = 30;
         private Vector3 lastPosition = Vector3.zero;
         private float _timeStack;
-        public Patrol(SoldierAIBrain soldierAIBrain,NavMeshAgent navMeshAgent)
+        private Animator _animator;
+        public Patrol(SoldierAIBrain soldierAIBrain,NavMeshAgent navMeshAgent, Animator animator)
         {
             _soldierAIBrain = soldierAIBrain;
             _navMeshAgent = navMeshAgent;
+            _animator = animator;
         }
         public void Tick()
         {
@@ -45,6 +47,7 @@ namespace AIBrains.SoldierBrain
         public void OnEnter()
         {
             _timeStack = 0;
+            Debug.Log("SoldierPatrolling");
         }
         
         public void OnExit()

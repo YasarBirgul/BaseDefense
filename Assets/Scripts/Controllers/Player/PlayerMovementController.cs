@@ -1,6 +1,5 @@
 ﻿using Data.ValueObject.PlayerData;
 using Keys;
-using Managers;
 using UnityEngine;
 
 namespace Controllers

@@ -10,15 +10,20 @@ namespace AIBrains.SoldierBrain
         private Transform _frontYardSoldierPosition;
         private float _stoppingDistance;
         private SoldierAIBrain _soldierAIBrain;
-        public MoveToFrontYard(SoldierAIBrain soldierAIBrain,NavMeshAgent navMeshAgent,Transform frontYardSoldierPosition)
+        private Animator _animator;
+        private static readonly int Speed = Animator.StringToHash("Speed");
+
+        public MoveToFrontYard(SoldierAIBrain soldierAIBrain,NavMeshAgent navMeshAgent,Transform frontYardSoldierPosition,Animator animator)
         {
             _navMeshAgent = navMeshAgent;
             _frontYardSoldierPosition = frontYardSoldierPosition;
             _stoppingDistance = navMeshAgent.stoppingDistance;
             _soldierAIBrain = soldierAIBrain;
+            _animator = animator;
         }
         public void Tick()
         {
+            _animator.SetFloat(Speed,_navMeshAgent.velocity.magnitude);
             if ((_navMeshAgent.transform.position - _frontYardSoldierPosition.position).sqrMagnitude < _stoppingDistance)
             {
                 _soldierAIBrain.HasReachedFrontYard = true;
@@ -28,6 +33,7 @@ namespace AIBrains.SoldierBrain
         {
             _navMeshAgent.enabled = true;
             _navMeshAgent.SetDestination(_frontYardSoldierPosition.position);
+            _navMeshAgent.speed = 5.273528f;
         }
         public void OnExit()
         {

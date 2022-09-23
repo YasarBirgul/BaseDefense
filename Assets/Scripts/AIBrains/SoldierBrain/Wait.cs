@@ -5,10 +5,10 @@ namespace AIBrains.SoldierBrain
 {
     public class Wait : IState
     {
-        
-        public Wait()
+        private Animator _animator;
+        public Wait(Animator animator)
         {
-            
+            _animator = animator;
         }
         public void Tick()
         {
@@ -16,7 +16,6 @@ namespace AIBrains.SoldierBrain
         }
         public void OnEnter()
         {
-            
         }
         public void OnExit()
         {

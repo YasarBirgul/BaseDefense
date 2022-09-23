@@ -1,6 +1,5 @@
 ﻿using Abstract;
 using AIBrains.EnemyBrain;
-using Enums.LayerType;
 using Managers;
 using UnityEngine;
 
@@ -47,7 +46,7 @@ namespace Controllers
             }
             if (other.CompareTag("Bullet"))
             {
-                var damageAmount = other.GetComponent<IDamagable>().TakeDamage();
+                var damageAmount = other.GetComponent<IDamagable>().TakeDamage(30);
                 _enemyAIBrain.Health -= damageAmount;
                 if (_enemyAIBrain.Health <= 0)
                 {
@@ -57,7 +56,7 @@ namespace Controllers
             if (other.CompareTag("MineExplosion"))
             {
                 Debug.Log(other.tag);
-                var damageAmount = other.transform.parent.GetComponentInParent<IDamagable>().TakeDamage();
+                var damageAmount = other.transform.parent.GetComponentInParent<IDamagable>().TakeDamage(100);
                 _enemyAIBrain.Health -= damageAmount;
                 if (_enemyAIBrain.Health <= 0)
                 {
@@ -80,12 +79,20 @@ namespace Controllers
                 _enemyAIBrain.MineTarget = null;
             }
         }
-
-        public int TakeDamage()
-        {
-            return 5;
+        public int TakeDamage(int damage)
+        { 
+            if (_enemyAIBrain.Health > 0)
+            {
+               _enemyAIBrain.Health =  _enemyAIBrain.Health - damage;
+               if (_enemyAIBrain.Health == 0)
+               {
+                   _amAIDead = true;
+                   return _enemyAIBrain.Health;
+               }
+               return _enemyAIBrain.Health;
+            }
+            return 0;
         }
-
         public Transform GetTransform()
         {
             return transform;
