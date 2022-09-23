@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Abstract;
+using Controllers.Bullet;
 using Controllers.Soldier;
 using Data.UnityObject;
 using Data.ValueObject.AIData;
+using Data.ValueObject.WeaponData;
+using Managers;
 using Signals;
 using Sirenix.OdinInspector;
 using StateBehaviour;
@@ -32,7 +35,8 @@ namespace AIBrains.SoldierBrain
         #region Serialized Variables
 
         [SerializeField] private SoldierPhysicsController physicsController;
-        [SerializeField] private Animator _animator;
+        [SerializeField] private Animator animator;
+        [SerializeField] private Transform weaponHolder;
         #endregion
 
         #region Private Variables
@@ -51,7 +55,8 @@ namespace AIBrains.SoldierBrain
         private Transform _spawnPoint;
         private StateMachine _stateMachine;
         private Vector3 _slotTransform;
-        private bool HasSoldiersActivated; 
+        private bool HasSoldiersActivated;
+        private List<WeaponData> _weaponDatas;
         // private bool dead { get; set; }
         
         #endregion
@@ -59,13 +64,15 @@ namespace AIBrains.SoldierBrain
         private void Awake()
         {
             _data = GetSoldierAIData();
+            _weaponDatas = WeaponData();
             SetSoldierAIData();
-        }
-        private void Start()
+            InitPool();
+        } private void Start()
         {
             GetStateReferences();
         }
         private SoldierAIData GetSoldierAIData() => Resources.Load<CD_AI>("Data/CD_AI").SoldierAIData;
+        private List<WeaponData> WeaponData() => Resources.Load<CD_Weapon>("Data/CD_Weapon").WeaponData;
         private void SetSoldierAIData()
         {
             _damage = _data.Damage;
@@ -76,15 +83,49 @@ namespace AIBrains.SoldierBrain
             _health = _data.Health;
             _spawnPoint = _data.SpawnPoint;
         }
+        private void InitPool()
+        {
+            ObjectPoolManager.Instance.AddObjectPool(BulletFactoryMethod,TurnOnBullet,TurnOffBullet,"Bullet",15,false);
+        }
+        private GameObject BulletFactoryMethod()
+        {
+            return Instantiate(_weaponDatas[0].Bullet,weaponHolder.position,Quaternion.identity,weaponHolder.transform);
+        }
+        private void TurnOnBullet(GameObject bulletPrefab)
+        {
+            bulletPrefab.SetActive(true);
+        }
+        private void TurnOffBullet(GameObject bulletPrefab)
+        {
+            bulletPrefab.SetActive(false);
+        } 
+        public void GetObjectFromPool()
+        {
+            var BulletPrefab = ObjectPoolManager.Instance.GetObject<GameObject>("Bullet");
+            Debug.Log(" BulletPrefab : " + BulletPrefab);
+            BulletPrefab.GetComponent<BulletPhysicsController>().soldierAIBrain = this;
+            Debug.Log(" Get :" + BulletPrefab.GetComponent<BulletPhysicsController>().soldierAIBrain);
+            var rigidBodyBullet = BulletPrefab.GetComponent<Rigidbody>();
+            FireBullet(rigidBodyBullet);
+        }
+        public void FireBullet(Rigidbody bullet)
+        {
+            bullet.AddRelativeForce(Vector3.forward*10);
+        }
+       // private void ReleaseSoldierObject(GameObject soldierPrefab,SoldierType soldierType)
+       // {
+       //     ObjectPoolManager.Instance.ReturnObject(soldierPrefab,soldierType.ToString());
+       // }
+        
         private void GetStateReferences()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
-            var idle = new Idle(this,TentPosition,_navMeshAgent,_animator);
-            var moveToSlotZone = new MoveToSlotZone(this,_navMeshAgent,HasReachedSlotTarget,_slotTransform,_animator);
-            var wait = new Wait(_animator,_navMeshAgent);
-            var moveToFrontYard = new MoveToFrontYard(this,_navMeshAgent,FrontYardStartPosition,_animator);
-            var patrol = new Patrol(this,_navMeshAgent,_animator);
-            var attack = new Attack(this,_navMeshAgent,_animator);
+            var idle = new Idle(this,TentPosition,_navMeshAgent,animator);
+            var moveToSlotZone = new MoveToSlotZone(this,_navMeshAgent,HasReachedSlotTarget,_slotTransform,animator);
+            var wait = new Wait(animator,_navMeshAgent);
+            var moveToFrontYard = new MoveToFrontYard(this,_navMeshAgent,FrontYardStartPosition,animator);
+            var patrol = new Patrol(this,_navMeshAgent,animator);
+            var attack = new Attack(this,_navMeshAgent,animator);
             var soldierDeath = new SoldierDeath();
             var reachToTarget = new DetectTarget();
             var shootTarget = new ShootTarget();
@@ -152,6 +193,13 @@ namespace AIBrains.SoldierBrain
             {
                 HasEnemyTarget = false;
             }
+        }
+        public void RemoveTarget()
+        {
+            enemyList.RemoveAt(0);
+            enemyList.TrimExcess();
+            EnemyTarget = null;
+            EnemyTargetStatus();
         }
     }
 }

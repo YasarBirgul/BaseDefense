@@ -1,8 +1,6 @@
 ﻿using Abstract;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Rendering;
 
 namespace AIBrains.SoldierBrain
 {
@@ -32,21 +30,7 @@ namespace AIBrains.SoldierBrain
             _timer -= Time.deltaTime*_attackTime;
             if (_timer <= 0 )
             {
-                if (_soldierAIBrain.EnemyTarget != null)
-                {
-                     var health = _soldierAIBrain.enemyList[0].TakeDamage(20);
-                     if (health <= 0)
-                     {
-                         _soldierAIBrain.enemyList.RemoveAt(0);
-                         _soldierAIBrain.enemyList.TrimExcess();
-                         _soldierAIBrain.EnemyTarget = null;
-                         _soldierAIBrain.EnemyTargetStatus();
-                     }
-                }
-                else
-                {
-                     _soldierAIBrain.EnemyTargetStatus();
-                }
+                _soldierAIBrain.GetObjectFromPool();
                 _timer = 1f;
             }
         }

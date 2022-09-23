@@ -16,6 +16,6 @@ namespace Data.ValueObject.WeaponData
         public int Damage;
         public float AttackRate;
         public int WeaponLevel=1;
-      
+        public GameObject Bullet;
     }
 }
