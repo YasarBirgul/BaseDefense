@@ -37,7 +37,7 @@ namespace AIBrains.SoldierBrain
         public void OnEnter()
         {
             _navMeshAgent.SetDestination(_slotPosition);
-            _navMeshAgent.speed = 5.2f;
+            _navMeshAgent.speed = 1.80f;
         }
         public void OnExit()
         {

@@ -14,6 +14,8 @@ namespace AIBrains.SoldierBrain
         private float _attackTime = 1.7f;
         private Animator _animator;
         private static readonly int Attacked = Animator.StringToHash("Attack");
+        private static readonly int Speed = Animator.StringToHash("Speed");
+        private static readonly int HasTarget = Animator.StringToHash("HasTarget");
 
         public Attack(SoldierAIBrain soldierAIBrain,NavMeshAgent navMeshAgent,Animator animator)
         {
@@ -40,27 +42,17 @@ namespace AIBrains.SoldierBrain
                          _soldierAIBrain.EnemyTarget = null;
                          _soldierAIBrain.EnemyTargetStatus();
                      }
-                     /*  _soldierAIBrain.EnemyTarget = null; */
-                } 
-                 // else if (_soldierAIBrain.enemyList.Count != 0) 
-                 // {
-                 //     Debug.Log("  timer out " );
-                 //     _soldierAIBrain.enemyList.RemoveAt(0);
-                 //     _soldierAIBrain.enemyList.TrimExcess();
-                 //     if (_soldierAIBrain.enemyList.Count != 0)
-                 //     {
-                 //         _soldierAIBrain.SetEnemyTargetTransform();
-                 //     }
-                 // }
-                 else
-                 {
+                }
+                else
+                {
                      _soldierAIBrain.EnemyTargetStatus();
-                 }
-                 _timer = 1f;
+                }
+                _timer = 1f;
             }
         }
         private void LookTarget()
         {
+            _animator.SetFloat(Speed,_navMeshAgent.velocity.magnitude);
             var enemyPosition = _soldierAIBrain.EnemyTarget.transform;
             
             var lookDirection = enemyPosition.position - _soldierAIBrain.transform.position;
@@ -74,13 +66,12 @@ namespace AIBrains.SoldierBrain
         }
         public void OnEnter()
         {
-            Debug.Log("AttackEnter");
-            _animator.speed = 0;
-            _animator.SetTrigger(Attacked);
+            _navMeshAgent.speed = 1.801268E-05f;
+            _animator.SetBool(HasTarget,true);
         }
         public void OnExit()
         {
-            _animator.ResetTrigger(Attacked);
+            _animator.SetBool(HasTarget,false);
         }
     }
 }

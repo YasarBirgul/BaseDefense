@@ -15,6 +15,8 @@ namespace AIBrains.SoldierBrain
         private Vector3 lastPosition = Vector3.zero;
         private float _timeStack;
         private Animator _animator;
+        private static readonly int Speed = Animator.StringToHash("Speed");
+
         public Patrol(SoldierAIBrain soldierAIBrain,NavMeshAgent navMeshAgent, Animator animator)
         {
             _soldierAIBrain = soldierAIBrain;
@@ -23,6 +25,7 @@ namespace AIBrains.SoldierBrain
         }
         public void Tick()
         {
+            _animator.SetFloat(Speed,_navMeshAgent.velocity.magnitude);
             if (_destination.HasValue != true || Vector3.Distance(_soldierAIBrain.transform.position,
                 _destination.Value) <= _navMeshAgent.stoppingDistance)
             {
@@ -43,13 +46,12 @@ namespace AIBrains.SoldierBrain
                 }
             }
             lastPosition = _soldierAIBrain.transform.position;
-        }
+        } 
         public void OnEnter()
         {
+            _navMeshAgent.speed = 1.80f;
             _timeStack = 0;
-            Debug.Log("SoldierPatrolling");
-        }
-        
+        } 
         public void OnExit()
         {
             

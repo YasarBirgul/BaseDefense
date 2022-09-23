@@ -81,7 +81,7 @@ namespace AIBrains.SoldierBrain
             _navMeshAgent = GetComponent<NavMeshAgent>();
             var idle = new Idle(this,TentPosition,_navMeshAgent,_animator);
             var moveToSlotZone = new MoveToSlotZone(this,_navMeshAgent,HasReachedSlotTarget,_slotTransform,_animator);
-            var wait = new Wait(_animator);
+            var wait = new Wait(_animator,_navMeshAgent);
             var moveToFrontYard = new MoveToFrontYard(this,_navMeshAgent,FrontYardStartPosition,_animator);
             var patrol = new Patrol(this,_navMeshAgent,_animator);
             var attack = new Attack(this,_navMeshAgent,_animator);

@@ -1,30 +1,48 @@
 ﻿using System;
+using Cinemachine;
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Art.Scenes.DemoStackScript
 {
     public class DemoStack : MonoBehaviour
     {
-
-        private float numberOfDiamonds;
-        private float x;
-    //  private float y;
-        private float z;
+        private int OrderOfTheItem=0;
+        [SerializeField] private int xGridSize;
+        [SerializeField] private int yGridSize; 
+        [SerializeField] private int maxNumberOfStack;
         [SerializeField] private GameObject _cube;
+        public float offSet;
 
-
-        private void Stack()
+        private bool GridIsFull = false;
+        public void OnClick()
         {
-            var divide = numberOfDiamonds/x;
-            var mod = numberOfDiamonds%x ;
+            Stack2();
+        }
+        private void Stack2()
+        {
+            if (GridIsFull) return; 
 
-            for (int i = 0; i < x; i++)
+            var modx = OrderOfTheItem % xGridSize ;
+            
+            var dividey =  OrderOfTheItem / xGridSize;
+           
+            var mody = dividey % yGridSize; 
+           
+            var divideXY = OrderOfTheItem / (xGridSize * yGridSize);
+           
+            var vector3A = new Vector3(modx*offSet,divideXY*offSet,mody*offSet);
+
+            Instantiate(_cube,  vector3A, quaternion.identity, transform);
+               
+            if (OrderOfTheItem == maxNumberOfStack - 1) 
             {
-                if (divide != i) 
-                    return;
-                {
-                    
-                }
+               GridIsFull = true;
+            }
+            else
+            {
+               OrderOfTheItem += 1;
             }
         }
     }
