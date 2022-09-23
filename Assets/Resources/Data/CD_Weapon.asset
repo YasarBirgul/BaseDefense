@@ -20,7 +20,7 @@ MonoBehaviour:
     Damage: 0
     AttackRate: 0
     WeaponLevel: 1
-    Bullet: {fileID: 1898963805810283683, guid: ea02405f19c14634789eb031386f1c5a, type: 3}
+    Bullet: {fileID: 6615868362324500810, guid: 978a0a48f2bc45f4fa0545de9df074d4, type: 3}
   - WeaponType: 1
     WeaponMesh: {fileID: 1659898151575521214, guid: 579a45d28287c05408dae28f02a4dfd4, type: 3}
     HasSideMesh: 0

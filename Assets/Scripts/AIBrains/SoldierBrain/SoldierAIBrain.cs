@@ -25,7 +25,7 @@ namespace AIBrains.SoldierBrain
         public bool HasReachedSlotTarget;
         public bool HasReachedFrontYard;
         public bool HasEnemyTarget = false;
-
+        
         public Transform TentPosition; 
         public Transform FrontYardStartPosition;
         public List<IDamagable> enemyList = new List<IDamagable>();
@@ -105,18 +105,18 @@ namespace AIBrains.SoldierBrain
             Debug.Log(" BulletPrefab : " + BulletPrefab);
             BulletPrefab.GetComponent<BulletPhysicsController>().soldierAIBrain = this;
             Debug.Log(" Get :" + BulletPrefab.GetComponent<BulletPhysicsController>().soldierAIBrain);
-            var rigidBodyBullet = BulletPrefab.GetComponent<Rigidbody>();
-            FireBullet(rigidBodyBullet);
+            FireBullet(BulletPrefab);
         }
-        public void FireBullet(Rigidbody bullet)
+        public void FireBullet(GameObject BulletPrefab)
         {
-            bullet.AddRelativeForce(Vector3.forward*10);
+            BulletPrefab.transform.rotation = _navMeshAgent.transform.rotation;
+            var AgentTransform = _navMeshAgent.transform;
+            // bullet.AddRelativeForce(Vector3.forward*10);
+           var rigidBodyBullet = BulletPrefab.GetComponent<Rigidbody>();
+           rigidBodyBullet.AddForce(AgentTransform.forward*70,ForceMode.VelocityChange);
+           
+           
         }
-       // private void ReleaseSoldierObject(GameObject soldierPrefab,SoldierType soldierType)
-       // {
-       //     ObjectPoolManager.Instance.ReturnObject(soldierPrefab,soldierType.ToString());
-       // }
-        
         private void GetStateReferences()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();

@@ -9,7 +9,7 @@ namespace AIBrains.SoldierBrain
         private SoldierAIBrain _soldierAIBrain;
         private NavMeshAgent _navMeshAgent;
         private float _timer=1f;
-        private float _attackTime = 1.7f;
+        private float _attackTime = 0.65f;
         private Animator _animator;
         private static readonly int Attacked = Animator.StringToHash("Attack");
         private static readonly int Speed = Animator.StringToHash("Speed");
