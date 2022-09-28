@@ -1,8 +1,4 @@
-﻿using System;
-using Cinemachine;
-using Unity.Mathematics;
-using UnityEngine;
-using UnityEngine.Serialization;
+﻿using UnityEngine;
 
 namespace Art.Scenes.DemoStackScript
 {
@@ -22,6 +18,10 @@ namespace Art.Scenes.DemoStackScript
         }
         private void Stack2()
         {
+            var vector2a = new Vector3(10, 2, 1);
+            Debug.Log("Mag  "+ vector2a.magnitude);
+            Debug.Log("sqrMag  "+vector2a.sqrMagnitude);
+            Debug.Log("  double sqr" +vector2a.sqrMagnitude*vector2a.sqrMagnitude);
             if (GridIsFull) return; 
 
             var modx = OrderOfTheItem % xGridSize ;
@@ -31,11 +31,13 @@ namespace Art.Scenes.DemoStackScript
             var mody = dividey % yGridSize; 
            
             var divideXY = OrderOfTheItem / (xGridSize * yGridSize);
-           
-            var vector3A = new Vector3(modx*offSet,divideXY*offSet,mody*offSet);
 
-            Instantiate(_cube,  vector3A, quaternion.identity, transform);
-               
+            var RotationVector = new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z);
+
+            var vector3A = new Vector3(modx * offSet , divideXY * offSet, mody * offSet);
+
+            Instantiate(_cube, transform.localPosition + vector3A, Quaternion.identity,transform);
+
             if (OrderOfTheItem == maxNumberOfStack - 1) 
             {
                GridIsFull = true;
