@@ -102,9 +102,7 @@ namespace AIBrains.SoldierBrain
         public void GetObjectFromPool()
         {
             var BulletPrefab = ObjectPoolManager.Instance.GetObject<GameObject>("Bullet");
-            Debug.Log(" BulletPrefab : " + BulletPrefab);
             BulletPrefab.GetComponent<BulletPhysicsController>().soldierAIBrain = this;
-            Debug.Log(" Get :" + BulletPrefab.GetComponent<BulletPhysicsController>().soldierAIBrain);
             FireBullet(BulletPrefab);
         }
         public void FireBullet(GameObject BulletPrefab)
