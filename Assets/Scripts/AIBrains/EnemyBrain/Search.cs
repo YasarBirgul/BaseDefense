@@ -24,9 +24,8 @@ namespace AIBrains.EnemyBrain
         }
         public void OnEnter()
         {
-
-            GetRandomPointBakedSurface();
             _enemyAIBrain.enabled = true;
+            GetRandomPointBakedSurface();
         }
         public void OnExit()
         {
@@ -51,7 +50,6 @@ namespace AIBrains.EnemyBrain
                 result = Vector3.zero;
                 return false;
             }
-            
             if(!RandomPoint(_spawnPoint.position,20,out var point)) return;
             _navMeshAgent.Warp(point);
         }

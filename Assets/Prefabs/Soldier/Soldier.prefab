@@ -237,7 +237,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7743554230451147456
 Transform:
   m_ObjectHideFlags: 0
@@ -1179,8 +1179,8 @@ GameObject:
   - component: {fileID: 122885328128861229}
   - component: {fileID: 5656139921145801693}
   - component: {fileID: 6803494708768052290}
-  m_Layer: 13
-  m_Name: SoldierPhysicsController
+  m_Layer: 16
+  m_Name: SoldierEnemyDetectionController
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1210,10 +1210,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 13
-  m_Height: 0
+  m_Radius: 19.739079
+  m_Height: 39.478157
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: 1.2321892}
 --- !u!54 &5656139921145801693
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1703,7 +1703,7 @@ GameObject:
   - component: {fileID: 7912871537693382472}
   - component: {fileID: 7820662336288677291}
   - component: {fileID: 7073478314082187542}
-  m_Layer: 9
+  m_Layer: 13
   m_Name: SoldierPhysicController
   m_TagString: Untagged
   m_Icon: {fileID: 0}

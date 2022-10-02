@@ -37,7 +37,7 @@ namespace Controllers.Soldier
         {
             if (other.TryGetComponent(out IDamagable damagable))
             {
-                if (damagable == soldierAIBrain.enemyList[0])
+                if (soldierAIBrain.enemyList.Count == 0)
                 {
                     soldierAIBrain.EnemyTarget = null;
                 }

@@ -4,6 +4,8 @@ using Controllers;
 using Data.UnityObject;
 using Data.ValueObject.AIData;
 using Enums;
+using Interfaces;
+using Managers;
 using StateBehaviour;
 using UnityEngine;
 using UnityEngine.AI;
@@ -11,7 +13,7 @@ using Random = UnityEngine.Random;
 
 namespace AIBrains.EnemyBrain
 { 
-    public class EnemyAIBrain : MonoBehaviour
+    public class EnemyAIBrain : MonoBehaviour,IReleasePoolObject
     {
         #region Self Variables
 
@@ -33,7 +35,7 @@ namespace AIBrains.EnemyBrain
         #region Serialized Variables,
 
         [SerializeField] private EnemyTypes enemyType;
-        [SerializeField] private EnemyPhysicsController physicsController;
+        [SerializeField] private EnemyPhysicsDetectionController physicsDetectionController;
         
         #endregion
 
@@ -102,8 +104,8 @@ namespace AIBrains.EnemyBrain
             At(attack,chase,()=>attack.InPlayerAttackRange()==false);
             At(chase,move,TargetNull());
             
-            _stateMachine.AddAnyTransition(death,()=> physicsController.AmIdead());
-            _stateMachine.AddAnyTransition(moveToBomb,()=> physicsController.IsBombInRange());
+            _stateMachine.AddAnyTransition(death,()=> physicsDetectionController.AmIdead());
+            _stateMachine.AddAnyTransition(moveToBomb,()=> physicsDetectionController.IsBombInRange());
            
             _stateMachine.SetState(search);
             void At(IState to,IState from,Func<bool> condition) =>_stateMachine.AddTransition(to,from,condition);
@@ -113,6 +115,15 @@ namespace AIBrains.EnemyBrain
             Func<bool> AttackThePlayer() => () => PlayerTarget != null && chase.InPlayerAttackRange();
             Func<bool> TargetNull() => () => PlayerTarget is null;
         }
-        private void Update() =>  _stateMachine.UpdateIState();
+        private void Update() =>  _stateMachine.UpdateIState(); 
+        public void EnemyDead()
+        {
+            ReleaseObject(gameObject,_data.EnemyType.ToString());
+            gameObject.transform.position = _spawnPoint.position;
+        }
+        public void ReleaseObject(GameObject obj, string poolName)
+        {
+            ObjectPoolManager.Instance.ReturnObject(obj,poolName);
+        }
     }
 }

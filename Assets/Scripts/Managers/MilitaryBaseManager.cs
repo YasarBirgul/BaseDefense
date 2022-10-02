@@ -4,13 +4,14 @@ using Data.UnityObject;
 using Data.ValueObject.AIData;
 using Data.ValueObject.LevelData;
 using Enums;
+using Interfaces;
 using Sirenix.OdinInspector;
 using Unity.Mathematics;
 using UnityEngine;
 
 namespace Managers
 {
-    public class MilitaryBaseManager : MonoBehaviour
+    public class MilitaryBaseManager : MonoBehaviour,IGetPoolObject,IReleasePoolObject
     {
         #region Self Variables
 
@@ -20,7 +21,7 @@ namespace Managers
 
         #region Serialized Variables
 
-        [SerializeField] private Transform TentTransfrom;
+        [SerializeField] private Transform tentTransfrom;
         [SerializeField] private Transform slotTransform;
         
         #endregion
@@ -44,54 +45,32 @@ namespace Managers
         {
             _data = GetBaseData();
             _soldierAIData = GetSoldierAIData();
-            Init();
-           // SetWaitSlotsGrid();
-            InitSoldierPool();
         } 
         private void Start()
         {
-            GetObjectFromPool();
-        }
-        private void Init()
-        {
-            _tentCapacity = _data.TentCapacity;
+            GetObject(PoolType.SoldierAI.ToString());
         }
         private MilitaryBaseData GetBaseData() =>
             Resources.Load<CD_Level>("Data/CD_Level").LevelData[0].BaseData.MilitaryBaseData;
         private SoldierAIData GetSoldierAIData() => Resources.Load<CD_AI>("Data/CD_AI").SoldierAIData;
-        private void InitSoldierPool()
+        public GameObject GetObject(string poolName)
         {
-            ObjectPoolManager.Instance.AddObjectPool(SoldierFactoryMethod,TurnOnSoldierAI,TurnOffSoldierAI,_soldierAIData.SoldierType.ToString(),_tentCapacity,true);
-        } 
-        private GameObject SoldierFactoryMethod()
-        {
-            return Instantiate(_soldierAIData.SoldierPrefab,TentTransfrom.position,Quaternion.identity,TentTransfrom.transform);
-        }
-        private void GetObjectFromPool()
-        {
-            var soldierAIPrefab = ObjectPoolManager.Instance.GetObject<GameObject>(_soldierAIData.SoldierType.ToString());
+            var soldierAIPrefab = ObjectPoolManager.Instance.GetObject<GameObject>(poolName);
             var soldierBrain = soldierAIPrefab.GetComponent<SoldierAIBrain>();
             SetSlotZoneTransformsToSoldiers(soldierBrain);
+            return soldierAIPrefab;
         }
         private void SetSlotZoneTransformsToSoldiers(SoldierAIBrain soldierBrain)
         {
             soldierBrain.GetSlotTransform(_slotTransformList[_slotTransformList.Count - 1]);
-            soldierBrain.TentPosition = TentTransfrom;
+            soldierBrain.TentPosition = tentTransfrom;
             soldierBrain.FrontYardStartPosition = _data.frontYardSoldierPosition;             
             _slotTransformList.RemoveAt(_slotTransformList.Count-1);
             _slotTransformList.TrimExcess();
         }
-        private void TurnOnSoldierAI(GameObject soldierPrefab)
+        public void ReleaseObject(GameObject obj, string poolName)
         {
-           soldierPrefab.SetActive(true);
-        }
-        private void TurnOffSoldierAI(GameObject soldierPrefab)
-        {
-            soldierPrefab.SetActive(false);
-        }
-        private void ReleaseSoldierObject(GameObject soldierPrefab,SoldierType soldierType)
-        {
-            ObjectPoolManager.Instance.ReturnObject(soldierPrefab,soldierType.ToString());
+            ObjectPoolManager.Instance.ReturnObject(obj,poolName);
         }
         public void UpdateTotalAmount(int Amount)
         {
@@ -126,5 +105,6 @@ namespace Managers
               var obj=  Instantiate(_data.SlotPrefab,gridPositionData[i],quaternion.identity,slotTransform);
             }
         }
+        
     }
 }

@@ -1,17 +1,18 @@
-﻿using System;
-using Abstract;
+﻿using Abstract;
 using AIBrains.SoldierBrain;
-using Cinemachine;
+using Enums;
+using Interfaces;
+using Managers;
 using UnityEngine;
 
 namespace Controllers.Bullet
 {
-    public class BulletPhysicsController : MonoBehaviour
+    public class BulletPhysicsController : MonoBehaviour,IReleasePoolObject
     {
         private int bulletDamage = 20;
         public SoldierAIBrain soldierAIBrain;
         
-        public float AutoDestroyTime = 5f;
+        public float AutoDestroyTime = 2f;
         public float MoveSpeed = 2f;
         public int Damage = 5;
         public Rigidbody Rigidbody;
@@ -51,8 +52,7 @@ namespace Controllers.Bullet
             {
                 TrailConfig.SetupTrail(Trail);
             }
-        }
-        
+        } 
         private void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent(out IDamagable damagable))
@@ -66,9 +66,12 @@ namespace Controllers.Bullet
                 {
                     soldierAIBrain.EnemyTargetStatus();
                 }
-                
                 Disable();
             }
+        }
+        public void ReleaseObject(GameObject obj, string poolName)
+        {
+            ObjectPoolManager.Instance.ReturnObject(obj,poolName);
         }
         
         protected void Disable()
@@ -80,8 +83,6 @@ namespace Controllers.Bullet
             {
                 Renderer.enabled = false;
             }
-
-
             if (Trail != null && TrailConfig != null)
             {
                 IsDisabling = true;
@@ -90,17 +91,16 @@ namespace Controllers.Bullet
             else
             {
                 DoDisable();
-            }
+            } 
+            ReleaseObject(gameObject,PoolType.PistolBullet.ToString());
+            gameObject.transform.position = Vector3.zero;
         }
-
         protected void DoDisable()
         {
             if (Trail != null && TrailConfig != null)
             {
                 Trail.Clear();
             }
-
-            gameObject.SetActive(false);
         }
     }
 }

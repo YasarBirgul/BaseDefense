@@ -37,7 +37,7 @@ namespace AIBrains.SoldierBrain
                 _timeStack += Time.deltaTime;
                 if (_timeStack > 1f)
                 {
-                    _soldierAIBrain.transform.rotation = Quaternion.Slerp(_soldierAIBrain.transform.rotation, _lookRotation,Time.deltaTime * _turnSpeed);
+                    _soldierAIBrain.transform.rotation = Quaternion.Lerp(_soldierAIBrain.transform.rotation, _lookRotation,0.2f);
                     _timeStack = 0;
                 }
                 else

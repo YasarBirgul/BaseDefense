@@ -2873,7 +2873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24054dbfec464ca6b47192e34d6d7688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TentTransfrom: {fileID: 795829037}
+  tentTransfrom: {fileID: 1179055542}
   slotTransform: {fileID: 3537539740090007901}
 --- !u!114 &678051420
 MonoBehaviour:
@@ -3390,11 +3390,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 880970725214738984, guid: c60edd51c065ceb46b345849a03bc106, type: 3}
   m_PrefabInstance: {fileID: 790164450}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &795829037 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 795829037, guid: eea1e8b40b0f0d94895165158be1ede8, type: 3}
-  m_PrefabInstance: {fileID: 7168960651713923607}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &825449930
 PrefabInstance:
@@ -5486,13 +5481,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 581002d958f34fe0b2ed1941b658b234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies:
-  - {fileID: 7690461770082632510, guid: 9071905ce0dbcf04daf6b354f576dc0e, type: 3}
-  - {fileID: 7185586475072801580, guid: 64b191780528bbe40b845ac726874583, type: 3}
-  - {fileID: 7185586475072801580, guid: c0d8c28e3cf066a4b93986426843c2fe, type: 3}
-  NumberOfEnemiesToSpawn: 40
+  NumberOfEnemiesToSpawn: 50
   SpawnDelay: 2
-  SpawnPos: {fileID: 1332303478}
 --- !u!1 &1423876788
 GameObject:
   m_ObjectHideFlags: 0
@@ -6329,6 +6319,49 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7328877076470337423, guid: de618174e2a53634e82609e9553bd42a, type: 3}
   m_PrefabInstance: {fileID: 1623049720}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1653330242
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1653330243}
+  - component: {fileID: 1653330244}
+  m_Layer: 0
+  m_Name: PoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1653330243
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653330242}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2010040476}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1653330244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653330242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51f8e67cff2a04469a6a50411d4ea7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1670332127
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7544,6 +7577,7 @@ Transform:
   - {fileID: 1855301031}
   - {fileID: 1198535619}
   - {fileID: 1378063724}
+  - {fileID: 1653330243}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

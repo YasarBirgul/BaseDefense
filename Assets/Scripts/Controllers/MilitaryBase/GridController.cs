@@ -114,7 +114,6 @@ namespace Controllers.MilitaryBase
                         modZ * _gridData.Offset.z+ position.z);
                 }
                 gridPositionsData.Add(_gridPositions);
-                Debug.Log(gridPositionsData.Count);
             }
         }
         public override void SendGridDataToStacker()

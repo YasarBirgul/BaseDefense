@@ -1,4 +1,5 @@
 ﻿using Abstract;
+using Enums;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,8 +9,8 @@ namespace AIBrains.SoldierBrain
     {
         private SoldierAIBrain _soldierAIBrain;
         private NavMeshAgent _navMeshAgent;
-        private float _timer=1f;
-        private float _attackTime = 0.65f;
+        private float _timer=0.2f;
+        private float _attackTime = 0.5f;
         private Animator _animator;
         private static readonly int Attacked = Animator.StringToHash("Attack");
         private static readonly int Speed = Animator.StringToHash("Speed");
@@ -30,8 +31,8 @@ namespace AIBrains.SoldierBrain
             _timer -= Time.deltaTime*_attackTime;
             if (_timer <= 0 )
             {
-                _soldierAIBrain.GetObjectFromPool();
-                _timer = 1f;
+                _soldierAIBrain.GetObject(PoolType.PistolBullet.ToString());
+                _timer = 0.2f;
             }
         }
         private void LookTarget()
@@ -43,7 +44,7 @@ namespace AIBrains.SoldierBrain
 
             Quaternion lookRotation = Quaternion.LookRotation(lookDirection, Vector3.up);
 
-            var slerpRotation = Quaternion.Slerp(_soldierAIBrain.transform.rotation, lookRotation, 0.2f);
+            var slerpRotation = Quaternion.Slerp(_soldierAIBrain.transform.rotation, lookRotation,3f*Time.deltaTime);
 
             _soldierAIBrain.transform.rotation = slerpRotation;
             

@@ -21,12 +21,12 @@ TagManager:
   - 
   - Base
   - FrontYard
-  - EnemyAI
+  - EnemyBody
   - LandMine
-  - SoldierAI
+  - SoldierBody
   - SoldierBullets
-  - 
-  - 
+  - EnemyDetection
+  - SoldierDetection
   - 
   - 
   - 

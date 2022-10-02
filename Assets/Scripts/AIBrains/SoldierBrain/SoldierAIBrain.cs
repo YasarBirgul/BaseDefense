@@ -6,6 +6,8 @@ using Controllers.Soldier;
 using Data.UnityObject;
 using Data.ValueObject.AIData;
 using Data.ValueObject.WeaponData;
+using Enums;
+using Interfaces;
 using Managers;
 using Signals;
 using Sirenix.OdinInspector;
@@ -16,7 +18,7 @@ using UnityEngine.AI;
 namespace AIBrains.SoldierBrain
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    public class SoldierAIBrain : MonoBehaviour
+    public class SoldierAIBrain : MonoBehaviour, IGetPoolObject
     {
         #region Self Variables
 
@@ -66,7 +68,7 @@ namespace AIBrains.SoldierBrain
             _data = GetSoldierAIData();
             _weaponDatas = WeaponData();
             SetSoldierAIData();
-            InitPool();
+          
         } private void Start()
         {
             GetStateReferences();
@@ -82,38 +84,20 @@ namespace AIBrains.SoldierBrain
             _attackDelay = _data.AttackDelay;
             _health = _data.Health;
             _spawnPoint = _data.SpawnPoint;
-        }
-        private void InitPool()
-        {
-            ObjectPoolManager.Instance.AddObjectPool(BulletFactoryMethod,TurnOnBullet,TurnOffBullet,"Bullet",15,false);
-        }
-        private GameObject BulletFactoryMethod()
-        {
-            return Instantiate(_weaponDatas[0].Bullet,weaponHolder.position,Quaternion.identity,weaponHolder.transform);
-        }
-        private void TurnOnBullet(GameObject bulletPrefab)
-        {
-            bulletPrefab.SetActive(true);
-        }
-        private void TurnOffBullet(GameObject bulletPrefab)
-        {
-            bulletPrefab.SetActive(false);
         } 
-        public void GetObjectFromPool()
+        public GameObject GetObject(string poolName)
         {
-            var BulletPrefab = ObjectPoolManager.Instance.GetObject<GameObject>("Bullet");
-            BulletPrefab.GetComponent<BulletPhysicsController>().soldierAIBrain = this;
-            FireBullet(BulletPrefab);
+            var bulletPrefab = ObjectPoolManager.Instance.GetObject<GameObject>(poolName);
+            bulletPrefab.transform.position = weaponHolder.position;
+            bulletPrefab.GetComponent<BulletPhysicsController>().soldierAIBrain = this;
+            FireBullet(bulletPrefab);
+            return bulletPrefab;
         }
-        public void FireBullet(GameObject BulletPrefab)
+        private void FireBullet(GameObject bulletPrefab)
         {
-            BulletPrefab.transform.rotation = _navMeshAgent.transform.rotation;
-            var AgentTransform = _navMeshAgent.transform;
-            // bullet.AddRelativeForce(Vector3.forward*10);
-           var rigidBodyBullet = BulletPrefab.GetComponent<Rigidbody>();
-           rigidBodyBullet.AddForce(AgentTransform.forward*70,ForceMode.VelocityChange);
-           
-           
+            bulletPrefab.transform.rotation = _navMeshAgent.transform.rotation;
+            var rigidBodyBullet = bulletPrefab.GetComponent<Rigidbody>();
+            rigidBodyBullet.AddForce(_navMeshAgent.transform.forward*40,ForceMode.VelocityChange);
         }
         private void GetStateReferences()
         {
@@ -124,9 +108,6 @@ namespace AIBrains.SoldierBrain
             var moveToFrontYard = new MoveToFrontYard(this,_navMeshAgent,FrontYardStartPosition,animator);
             var patrol = new Patrol(this,_navMeshAgent,animator);
             var attack = new Attack(this,_navMeshAgent,animator);
-            var soldierDeath = new SoldierDeath();
-            var reachToTarget = new DetectTarget();
-            var shootTarget = new ShootTarget();
             _stateMachine = new StateMachine();
             
             At(idle,moveToSlotZone,hasSlotTransformList());

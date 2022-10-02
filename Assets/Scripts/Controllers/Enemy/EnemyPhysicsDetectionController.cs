@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Controllers
 {
-    public class EnemyPhysicsController : MonoBehaviour
+    public class EnemyPhysicsDetectionController : MonoBehaviour
     {
         #region Self Variables
 
