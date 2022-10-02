@@ -6,6 +6,7 @@ using Data.ValueObject.AIData;
 using Enums;
 using Interfaces;
 using Managers;
+using Signals;
 using StateBehaviour;
 using UnityEngine;
 using UnityEngine.AI;
@@ -118,12 +119,13 @@ namespace AIBrains.EnemyBrain
         private void Update() =>  _stateMachine.UpdateIState(); 
         public void EnemyDead()
         {
-            ReleaseObject(gameObject,_data.EnemyType.ToString());
+            var poolType = (PoolType) Enum.Parse(typeof(PoolType), enemyType.ToString());
+            ReleaseObject(gameObject,poolType);
             gameObject.transform.position = _spawnPoint.position;
         }
-        public void ReleaseObject(GameObject obj, string poolName)
+        public void ReleaseObject(GameObject obj, PoolType poolName)
         {
-            ObjectPoolManager.Instance.ReturnObject(obj,poolName);
+            PoolSignals.Instance.onReleaseObjectFromPool?.Invoke(poolName,obj);
         }
     }
 }

@@ -66,6 +66,9 @@ namespace Managers
             return ExplosionDamage;
         }
 
+        public bool IsTaken { get; set; }
+        public bool IsDead { get; set; }
+
         public int TakeDamage(int damage)
         {
             throw new NotImplementedException();

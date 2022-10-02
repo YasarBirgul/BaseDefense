@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using AIBrains.EnemyBrain;
 using Enums;
 using Interfaces;
+using Signals;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -67,11 +68,13 @@ namespace Managers
                     randomType = (int)EnemyTypes.RedEnemy;
                 }
             }
-            GetObject(((EnemyTypes)randomType).ToString());
+
+            var poolType = (PoolType) Enum.Parse(typeof(PoolType), ((EnemyTypes) randomType).ToString());
+            GetObject(poolType);
         }
-        public GameObject GetObject(string poolName)
+        public GameObject GetObject(PoolType poolName)
         {
-            _EnemyAIObj = ObjectPoolManager.Instance.GetObject<GameObject>(poolName);
+            _EnemyAIObj = PoolSignals.Instance.onGetObjectFromPool?.Invoke(poolName);
             return _EnemyAIObj;
         }
     }

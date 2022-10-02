@@ -15,10 +15,10 @@ namespace Data.ValueObject.StackData
 
         [HideIf("isDynamic")]
         public StackAreaType StackAreaType;
-
-        [MinValue(1)]
+        
         [Tooltip("Row, Column and Depth Settings")]
-        public Vector3 GridSize;
+        [MinValue(1)]
+        public Vector3Int GridSize;
 
         [Tooltip("Distance between two objects")]
         public Vector3 Offset; 

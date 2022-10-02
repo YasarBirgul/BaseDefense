@@ -5,6 +5,7 @@ using Data.ValueObject.AIData;
 using Data.ValueObject.LevelData;
 using Enums;
 using Interfaces;
+using Signals;
 using Sirenix.OdinInspector;
 using Unity.Mathematics;
 using UnityEngine;
@@ -31,7 +32,7 @@ namespace Managers
         private MilitaryBaseData _data;
         private SoldierAIData _soldierAIData;
         private bool _isBaseAvaliable;
-        private bool _isTentAvaliable;
+        private bool _isTentAvaliable=true;
         private int _totalAmount;
         private int _soldierAmount;
         private List<GameObject> _soldierList = new List<GameObject>();
@@ -46,32 +47,50 @@ namespace Managers
             _data = GetBaseData();
             _soldierAIData = GetSoldierAIData();
         } 
-        private void Start()
+        
+        #region Event Subscription
+        private void OnEnable()
         {
-            GetObject(PoolType.SoldierAI.ToString());
+            SubscribeEvents();
         }
+        private void SubscribeEvents()
+        {
+            AISignals.Instance.onSoldierActivation += OnSoldierActivation;
+        }
+        private void UnsubscribeEvents()
+        {
+            AISignals.Instance.onSoldierActivation -= OnSoldierActivation;
+        }
+        private void OnDisable()
+        {
+            UnsubscribeEvents();
+        }
+        #endregion
         private MilitaryBaseData GetBaseData() =>
             Resources.Load<CD_Level>("Data/CD_Level").LevelData[0].BaseData.MilitaryBaseData;
         private SoldierAIData GetSoldierAIData() => Resources.Load<CD_AI>("Data/CD_AI").SoldierAIData;
-        public GameObject GetObject(string poolName)
+        private void OnSoldierActivation()
         {
-            var soldierAIPrefab = ObjectPoolManager.Instance.GetObject<GameObject>(poolName);
+            _isTentAvaliable = true;
+        }
+        public GameObject GetObject(PoolType poolName)
+        {
+            var soldierAIPrefab = PoolSignals.Instance.onGetObjectFromPool?.Invoke(poolName);
             var soldierBrain = soldierAIPrefab.GetComponent<SoldierAIBrain>();
             SetSlotZoneTransformsToSoldiers(soldierBrain);
             return soldierAIPrefab;
         }
         private void SetSlotZoneTransformsToSoldiers(SoldierAIBrain soldierBrain)
         {
-            soldierBrain.GetSlotTransform(_slotTransformList[_slotTransformList.Count - 1]);
+            soldierBrain.GetSlotTransform(_slotTransformList[_soldierAmount]);
             soldierBrain.TentPosition = tentTransfrom;
-            soldierBrain.FrontYardStartPosition = _data.frontYardSoldierPosition;             
-            _slotTransformList.RemoveAt(_slotTransformList.Count-1);
-            _slotTransformList.TrimExcess();
+            soldierBrain.FrontYardStartPosition = _data.frontYardSoldierPosition;
         }
-        public void ReleaseObject(GameObject obj, string poolName)
+        public void ReleaseObject(GameObject obj, PoolType poolName)
         {
-            ObjectPoolManager.Instance.ReturnObject(obj,poolName);
+            PoolSignals.Instance.onReleaseObjectFromPool?.Invoke(poolName,obj);
         }
+        
         public void UpdateTotalAmount(int Amount)
         {
             if(!_isBaseAvaliable) return;
@@ -84,17 +103,20 @@ namespace Managers
                 _isBaseAvaliable = false;
             }
         }
-        public void UpdateSoldierAmount(int Amount)
+        
+        [Button]
+        public void UpdateSoldierAmount()
         {
             if(!_isTentAvaliable) return;
             if (_soldierAmount < _data.TentCapacity)
             {
-                _soldierAmount += Amount;
-               // GetObjectFromPool();
+                GetObject(PoolType.SoldierAI);
+                _soldierAmount += 1;
             }
             else
             {
                 _isTentAvaliable= false;
+                _soldierAmount = 0;
             }
         }
         public void GetStackPositions(List<Vector3> gridPositionData)
@@ -105,6 +127,5 @@ namespace Managers
               var obj=  Instantiate(_data.SlotPrefab,gridPositionData[i],quaternion.identity,slotTransform);
             }
         }
-        
     }
 }

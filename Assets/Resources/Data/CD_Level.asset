@@ -39,7 +39,7 @@ MonoBehaviour:
         SlotPrefab: {fileID: 8684800469567210669, guid: 116a924e2f62b7141ad5ff3cbde43a73, type: 3}
         BaseCapacity: 0
         TotalAmount: 0
-        TentCapacity: 0
+        TentCapacity: 5
         CurrentSoldierAmount: 0
         SoldierUpgradeTime: 0
         SoldierSlotCost: 0

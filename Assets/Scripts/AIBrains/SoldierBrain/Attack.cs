@@ -31,7 +31,7 @@ namespace AIBrains.SoldierBrain
             _timer -= Time.deltaTime*_attackTime;
             if (_timer <= 0 )
             {
-                _soldierAIBrain.GetObject(PoolType.PistolBullet.ToString());
+                _soldierAIBrain.GetObject(PoolType.PistolBullet);
                 _timer = 0.2f;
             }
         }

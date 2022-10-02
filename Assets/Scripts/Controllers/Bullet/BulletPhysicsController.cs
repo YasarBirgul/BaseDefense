@@ -3,6 +3,7 @@ using AIBrains.SoldierBrain;
 using Enums;
 using Interfaces;
 using Managers;
+using Signals;
 using UnityEngine;
 
 namespace Controllers.Bullet
@@ -12,7 +13,7 @@ namespace Controllers.Bullet
         private int bulletDamage = 20;
         public SoldierAIBrain soldierAIBrain;
         
-        public float AutoDestroyTime = 2f;
+        public float AutoDestroyTime = 0.1f;
         public float MoveSpeed = 2f;
         public int Damage = 5;
         public Rigidbody Rigidbody;
@@ -57,23 +58,26 @@ namespace Controllers.Bullet
         {
             if (other.TryGetComponent(out IDamagable damagable))
             {
+                
+                if(damagable.IsDead)
+                    return;
                 var health = damagable.TakeDamage(bulletDamage);
                 if (health <= 0)
                 {
+                    damagable.IsDead = true;
                     soldierAIBrain.RemoveTarget();
+                    Disable();
                 }
                 else
                 {
                     soldierAIBrain.EnemyTargetStatus();
                 }
-                Disable();
             }
-        }
-        public void ReleaseObject(GameObject obj, string poolName)
+        } 
+        public void ReleaseObject(GameObject obj, PoolType poolName)
         {
-            ObjectPoolManager.Instance.ReturnObject(obj,poolName);
+            PoolSignals.Instance.onReleaseObjectFromPool?.Invoke(poolName,obj);
         }
-        
         protected void Disable()
         {
             CancelInvoke(DISABLE_METHOD_NAME);
@@ -92,7 +96,7 @@ namespace Controllers.Bullet
             {
                 DoDisable();
             } 
-            ReleaseObject(gameObject,PoolType.PistolBullet.ToString());
+            ReleaseObject(gameObject,PoolType.PistolBullet);
             gameObject.transform.position = Vector3.zero;
         }
         protected void DoDisable()

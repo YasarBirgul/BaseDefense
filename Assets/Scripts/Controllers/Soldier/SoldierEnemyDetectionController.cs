@@ -26,9 +26,11 @@ namespace Controllers.Soldier
         {
             if (other.TryGetComponent(out IDamagable damagable))
             {
+                if(damagable.IsTaken) return;
                 soldierAIBrain.enemyList.Add(damagable);
-                if (soldierAIBrain.EnemyTarget == null) 
+                if (soldierAIBrain.EnemyTarget == null)
                 {
+                    damagable.IsTaken = true;
                     soldierAIBrain.SetEnemyTargetTransform();
                 }
             }
@@ -41,6 +43,7 @@ namespace Controllers.Soldier
                 {
                     soldierAIBrain.EnemyTarget = null;
                 }
+                damagable.IsTaken = false;
                 soldierAIBrain.enemyList.Remove(damagable);
                 soldierAIBrain.enemyList.TrimExcess();
             }

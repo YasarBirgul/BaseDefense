@@ -4,7 +4,6 @@ namespace Abstract
 {
     public abstract class AStack : MonoBehaviour,IStack
     {
-        
         public virtual void SetStackHolder(GameObject gameObject)
         {
             

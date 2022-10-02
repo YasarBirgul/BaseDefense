@@ -85,9 +85,9 @@ namespace AIBrains.SoldierBrain
             _health = _data.Health;
             _spawnPoint = _data.SpawnPoint;
         } 
-        public GameObject GetObject(string poolName)
+        public GameObject GetObject(PoolType poolName)
         {
-            var bulletPrefab = ObjectPoolManager.Instance.GetObject<GameObject>(poolName);
+            var bulletPrefab = PoolSignals.Instance.onGetObjectFromPool?.Invoke(poolName);
             bulletPrefab.transform.position = weaponHolder.position;
             bulletPrefab.GetComponent<BulletPhysicsController>().soldierAIBrain = this;
             FireBullet(bulletPrefab);
@@ -175,6 +175,7 @@ namespace AIBrains.SoldierBrain
         }
         public void RemoveTarget()
         {
+            if (enemyList.Count == 0) return;
             enemyList.RemoveAt(0);
             enemyList.TrimExcess();
             EnemyTarget = null;
