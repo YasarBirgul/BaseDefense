@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Controllers
 {
-    public class EnemyPhysicsController : MonoBehaviour, IDamagable
+    public class EnemyPhysicsController : MonoBehaviour
     {
         #region Self Variables
 
@@ -44,15 +44,6 @@ namespace Controllers
                 _detectedMine = other.transform;
                 _enemyAIBrain.MineTarget = _detectedMine;
             }
-            if (other.CompareTag("Bullet"))
-            {
-                var damageAmount = other.GetComponent<IDamagable>().TakeDamage(30);
-                _enemyAIBrain.Health -= damageAmount;
-                if (_enemyAIBrain.Health <= 0)
-                {
-                    _amAIDead = true;
-                }
-            }
             if (other.CompareTag("MineExplosion"))
             {
                 Debug.Log(other.tag);
@@ -78,24 +69,6 @@ namespace Controllers
                 _enemyAIBrain.MineTarget = _detectedMine;
                 _enemyAIBrain.MineTarget = null;
             }
-        }
-        public int TakeDamage(int damage)
-        { 
-            if (_enemyAIBrain.Health > 0)
-            {
-               _enemyAIBrain.Health =  _enemyAIBrain.Health - damage;
-               if (_enemyAIBrain.Health == 0)
-               {
-                   _amAIDead = true;
-                   return _enemyAIBrain.Health;
-               }
-               return _enemyAIBrain.Health;
-            }
-            return 0;
-        }
-        public Transform GetTransform()
-        {
-            return transform;
         }
     }
 }
