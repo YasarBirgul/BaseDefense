@@ -2,6 +2,7 @@ using UnityEngine;
 using Data.UnityObject;
 using Data.ValueObject;
 using Enums;
+using Signals;
 using UnityEngine.Rendering;
 using Sirenix.OdinInspector;
 
@@ -32,6 +33,41 @@ namespace Managers
             InitializePools();
         }
 
+        #region EventSubscription
+        private void OnEnable()
+        {
+            SubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
+            PoolSignals.Instance.onGetObjectFromPool += OnGetObjectFromPoolType;
+            PoolSignals.Instance.onReleaseObjectFromPool += OnReleaseObjectFromPool;
+
+        }
+        private void UnsubscribeEvents()
+        {
+            PoolSignals.Instance.onGetObjectFromPool -= OnGetObjectFromPoolType;
+            PoolSignals.Instance.onReleaseObjectFromPool -= OnReleaseObjectFromPool;
+        }
+
+        private void OnDisable()
+        {
+            UnsubscribeEvents();
+        }
+
+        #endregion
+        private GameObject OnGetObjectFromPoolType(PoolType poolType)
+        {
+            _listCountCache = (int) poolType;
+            return ObjectPoolManager.Instance.GetObject<GameObject>(poolType.ToString());
+        }
+
+        private void OnReleaseObjectFromPool(PoolType poolType,GameObject obj)
+        {
+            _listCountCache = (int) poolType;
+            ObjectPoolManager.Instance.ReturnObject<GameObject>(obj, poolType.ToString());
+        }
         private SerializedDictionary<PoolType, PoolData> GetData()
         {
             return Resources.Load<CD_Pool>("Data/CD_Pool").PoolDataDic;
