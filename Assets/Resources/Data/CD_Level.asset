@@ -15,7 +15,18 @@ MonoBehaviour:
   LevelData:
   - BaseData:
       BaseRoomData:
-        Rooms: []
+        RoomDatasDictionary:
+          m_Keys: 00000000
+          m_Values:
+          - TurretData:
+              TurretDamage: 0
+              TurretCapacity: 0
+              HasSoldier: 0
+              SoldierCost: 0
+              SoldierPayedAmount: 0
+              IsActive: 0
+            RoomCost: 100
+            RoomPayedAmount: 0
       MineBaseData:
         MaxWorkerAmount: 0
         CurrentWorkerAmount: 0
@@ -23,19 +34,19 @@ MonoBehaviour:
         CurrentDiamondAmount: 0
         MineCartCapacity: 0
       MilitaryBaseData:
-        SlotsGrid: {x: 5, y: 1}
-        SlotOffSet: {x: 2, y: 2}
+        SlotsGrid: {x: 1, y: 5}
+        SlotOffSet: {x: 0, y: 0}
         SlotPrefab: {fileID: 8684800469567210669, guid: 116a924e2f62b7141ad5ff3cbde43a73, type: 3}
-        BaseCapacity: 10
+        BaseCapacity: 0
         TotalAmount: 0
-        TentCapacity: 5
+        TentCapacity: 0
         CurrentSoldierAmount: 0
-        SoldierUpgradeTime: 10
+        SoldierUpgradeTime: 0
         SoldierSlotCost: 0
         SlotAmount: 0
         SlotTransform: {fileID: 0}
         AttackTime: 0
-        frontYardSoldierPosition: {fileID: 2715330470396905158, guid: 50235d298ad783e43898e2b3c36ea9cb, type: 3}
+        frontYardSoldierPosition: {fileID: 6818357691092351474, guid: da7415325a5fdd944811c6a9a8fb763c, type: 3}
       BuyablesData:
         MoneyWorkerCost: 0
         MoneyWorkerPayedAmount: 0

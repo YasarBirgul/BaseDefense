@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Buyablezone.ConditionHandlers
 {
-    public class InitialTimerHandler : ConditionHandler
+    public class InitialTimerHandler:ConditionHandler
     {
         public override void ProcessRequest(PurchaseParam purchase)
             {

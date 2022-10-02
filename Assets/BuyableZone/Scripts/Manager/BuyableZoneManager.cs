@@ -36,6 +36,7 @@ namespace Managers
         private float InitialOffset;
 
         [Header("References")]
+        
         [SerializeField] private BuyableZoneMeshController buyableZoneMeshController;
         public IBuyable IBuyable { get; private set; }
 
@@ -43,10 +44,10 @@ namespace Managers
         #endregion
 
         #region Handlers
-            private InitialTimerHandler InitialTimerHandler = new InitialTimerHandler();
-            private CheckPayOffsetHandler CheckPayOffsetHandler = new CheckPayOffsetHandler();
-            private CheckCanBuyHandler CheckCanBuyHandler = new CheckCanBuyHandler();
-            private CheckCanIncreaseAmountHandler CheckCanIncreaseAmountHandler = new CheckCanIncreaseAmountHandler();
+            InitialTimerHandler InitialTimerHandler = new InitialTimerHandler();
+            CheckPayOffsetHandler CheckPayOffsetHandler = new CheckPayOffsetHandler();
+            CheckCanBuyHandler CheckCanBuyHandler = new CheckCanBuyHandler();
+            CheckCanIncreaseAmountHandler CheckCanIncreaseAmountHandler = new CheckCanIncreaseAmountHandler();
             private BuyableZoneData _buyableZoneData;
             public PurchaseParam Purchase;
         #endregion
@@ -147,6 +148,7 @@ namespace Managers
                 {
                     if (hasInitialTime&&!Purchase.alreadyBuyed)
                     {
+                
                         InitialTimerHandler.ProcessRequest(Purchase);
                     }
                     else if(!hasInitialTime&&!Purchase.alreadyBuyed)
@@ -154,6 +156,8 @@ namespace Managers
                         CheckPayOffsetHandler.ProcessRequest(Purchase);
                     }
                 }
+
+
         }
         public void TextBounceEffectActive(bool isActive)=>buyableZoneMeshController.TextBounceEffectActive(isActive);
         public void UpdateDropzoneText(int Textvalue)=>buyableZoneMeshController.UpdateDropzoneText(Textvalue);
@@ -177,6 +181,7 @@ namespace Managers
             
             Purchase.isCoolDownCompleted = true;
         }
+
         public void StartCoolDownCount()
         {
             StartCoroutine("CoolDownCount");
@@ -231,5 +236,7 @@ namespace Managers
         {
             buyableZoneMeshController.StartPaymentFailedAnimation();
         }
+       
     }
-}
+
+ }

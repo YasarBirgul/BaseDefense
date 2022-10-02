@@ -1,4 +1,5 @@
 using Buyablezone.PurchaseParams;
+using Data.ValueObject.LevelData;
 
 namespace Buyablezone.Interfaces
 {

@@ -12,9 +12,6 @@ GameObject:
   - component: {fileID: 33661084512494400}
   - component: {fileID: 23239228556151812}
   - component: {fileID: 95971122707565976}
-  - component: {fileID: 753189430206925210}
-  - component: {fileID: 7010122852730231022}
-  - component: {fileID: 8273880810982907486}
   m_Layer: 0
   m_Name: SM_Env_Mine_Entrance_01
   m_TagString: Untagged
@@ -104,42 +101,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &753189430206925210
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1492215441866212}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.62155163, y: 3.2399476, z: 0.99180144}
-  m_Center: {x: -1.5912199, y: 1.5007343, z: -0.1614586}
---- !u!65 &7010122852730231022
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1492215441866212}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.5681095, y: 3.2399476, z: 0.99180144}
-  m_Center: {x: 1.5377816, y: 1.5007343, z: -0.1614586}
---- !u!65 &8273880810982907486
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1492215441866212}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4.0377135, y: 0.6423046, z: 0.99180144}
-  m_Center: {x: 0.008625793, y: 2.7995603, z: -0.1614586}

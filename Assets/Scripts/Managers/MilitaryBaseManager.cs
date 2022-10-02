@@ -5,6 +5,7 @@ using Data.ValueObject.AIData;
 using Data.ValueObject.LevelData;
 using Enums;
 using Sirenix.OdinInspector;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Managers
@@ -19,8 +20,8 @@ namespace Managers
 
         #region Serialized Variables
 
-        [SerializeField] Transform slotZone;
         [SerializeField] private Transform TentTransfrom;
+        [SerializeField] private Transform slotTransform;
         
         #endregion
 
@@ -44,7 +45,7 @@ namespace Managers
             _data = GetBaseData();
             _soldierAIData = GetSoldierAIData();
             Init();
-            SetWaitSlotsGrid();
+           // SetWaitSlotsGrid();
             InitSoldierPool();
         } 
         private void Start()
@@ -58,23 +59,6 @@ namespace Managers
         private MilitaryBaseData GetBaseData() =>
             Resources.Load<CD_Level>("Data/CD_Level").LevelData[0].BaseData.MilitaryBaseData;
         private SoldierAIData GetSoldierAIData() => Resources.Load<CD_AI>("Data/CD_AI").SoldierAIData;
-        private void SetWaitSlotsGrid()
-        {
-            int gridX = (int) _data.SlotsGrid.x;
-            int gridY = (int) _data.SlotsGrid.y;
-            Vector3 slotPivot =
-                new Vector3(slotZone.transform.localScale.x / 2, 0, slotZone.transform.localScale.z / 2);
-            for (int i = 0; i < gridX; i++)
-            {
-                for (int j = 0; j < gridY; j++)
-                {
-                    var SlotPosition = new Vector3(i*_data.SlotOffSet.x, 0, j*_data.SlotOffSet.y) + slotPivot;
-                    var slotPositions = slotZone.transform.localPosition + SlotPosition;
-                    Instantiate(_data.SlotPrefab,slotPositions, Quaternion.identity,slotZone.transform);
-                    _slotTransformList.Add(slotPositions);
-                }
-            }
-        } 
         private void InitSoldierPool()
         {
             ObjectPoolManager.Instance.AddObjectPool(SoldierFactoryMethod,TurnOnSoldierAI,TurnOffSoldierAI,_soldierAIData.SoldierType.ToString(),_tentCapacity,true);
@@ -132,6 +116,14 @@ namespace Managers
             else
             {
                 _isTentAvaliable= false;
+            }
+        }
+        public void GetStackPositions(List<Vector3> gridPositionData)
+        {
+            for (int i = 0; i < gridPositionData.Count; i++)
+            {
+               _slotTransformList.Add(gridPositionData[i]);
+              var obj=  Instantiate(_data.SlotPrefab,gridPositionData[i],quaternion.identity,slotTransform);
             }
         }
     }
