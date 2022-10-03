@@ -1,5 +1,4 @@
-﻿using Abstract;
-using AIBrains.EnemyBrain;
+﻿using AIBrains.EnemyBrain;
 using Managers;
 using UnityEngine;
 
@@ -27,48 +26,46 @@ namespace Controllers
         #endregion
         public bool IsPlayerInRange() => _detectedPlayer != null;
         public bool IsBombInRange() => _detectedMine != null;
-        public bool AmIdead() => _amAIDead;
         private void Awake()
         {
             _enemyAIBrain = gameObject.GetComponentInParent<EnemyAIBrain>();
         }
         private void OnTriggerEnter(Collider other)
-        {
+        { 
             if (other.CompareTag("Player"))
             {
                 _detectedPlayer = other.GetComponentInParent<PlayerManager>().transform;
                 _enemyAIBrain.PlayerTarget = other.transform.parent.transform;
             }
-            if (other.CompareTag("MineLure"))
-            {
-                _detectedMine = other.transform;
-                _enemyAIBrain.MineTarget = _detectedMine;
-            }
-            if (other.CompareTag("MineExplosion"))
-            {
-                Debug.Log(other.tag);
-                var damageAmount = other.transform.parent.GetComponentInParent<IDamagable>().TakeDamage(100);
-                _enemyAIBrain.Health -= damageAmount;
-                if (_enemyAIBrain.Health <= 0)
-                {
-                    _amAIDead = true;
-                    Debug.Log(_amAIDead);
-                }
-            }
+          // if (other.CompareTag("MineLure"))
+          // {
+          //     _detectedMine = other.transform;
+          //     _enemyAIBrain.MineTarget = _detectedMine;
+          // }
+          // if (other.CompareTag("MineExplosion"))
+          // {
+          //     Debug.Log(other.tag);
+          //     var damageAmount = other.transform.parent.GetComponentInParent<IDamagable>().TakeDamage(999);
+          //     _enemyAIBrain.Health -= damageAmount;
+          //     if (_enemyAIBrain.Health <= 0)
+          //     {
+          //         _amAIDead = true;
+          //     }
+          // }
         }
         private void OnTriggerExit(Collider other)
         { 
             if (other.CompareTag("Player"))
             {
                 _detectedPlayer = null;
-                gameObject.GetComponentInParent<EnemyAIBrain>().PlayerTarget = null;
+                _enemyAIBrain.PlayerTarget = null;
             }
-            if (other.CompareTag("MineLure"))
-            {
-                _detectedMine = null;
-                _enemyAIBrain.MineTarget = _detectedMine;
-                _enemyAIBrain.MineTarget = null;
-            }
+         //   if (other.CompareTag("MineLure"))
+         //   {
+         //       _detectedMine = null;
+         //       _enemyAIBrain.MineTarget = _detectedMine;
+         //       _enemyAIBrain.MineTarget = null;
+         //   }
         }
     }
 }

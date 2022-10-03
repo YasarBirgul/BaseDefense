@@ -31,6 +31,8 @@ namespace AIBrains.SoldierBrain
         public Transform FrontYardStartPosition;
         public List<IDamagable> enemyList = new List<IDamagable>();
         public Transform EnemyTarget;
+        public IDamagable DamagableEnemy;
+        
         #endregion
 
         #region Serialized Variables
@@ -155,7 +157,8 @@ namespace AIBrains.SoldierBrain
         }
         public void SetEnemyTargetTransform()
         {
-            EnemyTarget = enemyList[0].GetTransform(); 
+            EnemyTarget = enemyList[0].GetTransform();
+            DamagableEnemy = enemyList[0];
             HasEnemyTarget = true;
         }
 
@@ -164,6 +167,7 @@ namespace AIBrains.SoldierBrain
             if (enemyList.Count != 0)
             {
                 EnemyTarget = enemyList[0].GetTransform();
+                DamagableEnemy = enemyList[0];
             }
             else
             {

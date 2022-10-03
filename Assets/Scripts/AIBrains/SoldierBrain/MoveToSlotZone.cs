@@ -1,5 +1,4 @@
-﻿using System.Net.Configuration;
-using Abstract;
+﻿using Abstract;
 using UnityEngine;
 using UnityEngine.AI;
 

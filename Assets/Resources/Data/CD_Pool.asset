@@ -46,13 +46,13 @@ MonoBehaviour:
       initalAmount: 0
       isDynamic: 0
     - ObjectType: {fileID: 7185586475072801580, guid: c0d8c28e3cf066a4b93986426843c2fe, type: 3}
-      initalAmount: 2
+      initalAmount: 30
       isDynamic: 0
     - ObjectType: {fileID: 7690461770082632510, guid: 9071905ce0dbcf04daf6b354f576dc0e, type: 3}
-      initalAmount: 10
+      initalAmount: 30
       isDynamic: 1
     - ObjectType: {fileID: 7185586475072801580, guid: 64b191780528bbe40b845ac726874583, type: 3}
-      initalAmount: 2
+      initalAmount: 30
       isDynamic: 0
     - ObjectType: {fileID: 8490962330420608108, guid: 849b5aa4b7ebb2b49bb622edfda42829, type: 3}
       initalAmount: 1

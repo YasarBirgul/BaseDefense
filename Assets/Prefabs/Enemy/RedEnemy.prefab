@@ -109,7 +109,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: a5abdb3a3675e0f4b8f2b912953e1ca8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -1394,6 +1394,7 @@ MonoBehaviour:
   EnemyType: 0
   enemyType: 0
   physicsDetectionController: {fileID: 2012006290375711584}
+  animator: {fileID: 6520766812888997660}
 --- !u!195 &437255398008131030
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1404,7 +1405,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 5.273528
   m_Acceleration: 35
   avoidancePriority: 50
   m_AngularSpeed: 360

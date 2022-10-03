@@ -73,7 +73,6 @@ namespace Managers
         {
             throw new NotImplementedException();
         }
-
         public Transform GetTransform()
         {
             throw new NotImplementedException();

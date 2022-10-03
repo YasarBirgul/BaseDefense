@@ -6,9 +6,8 @@ namespace Controllers
 {
     public class EnemyPhysicsController : MonoBehaviour, IDamagable
     {
-        [SerializeField] private EnemyAIBrain enemyAIBrain;
-        private bool _amAIDead = false;
-       
+        [SerializeField] 
+        private EnemyAIBrain enemyAIBrain;
         public bool IsTaken { get; set; }
         public bool IsDead { get; set; }
 
@@ -19,8 +18,7 @@ namespace Controllers
                 enemyAIBrain.Health =  enemyAIBrain.Health - damage;
                 if (enemyAIBrain.Health == 0)
                 {
-                    _amAIDead = true;
-                    enemyAIBrain.EnemyDead();
+                    IsDead = true;
                     return enemyAIBrain.Health;
                 }
                 return enemyAIBrain.Health;

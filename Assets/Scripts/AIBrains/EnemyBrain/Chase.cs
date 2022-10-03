@@ -30,6 +30,8 @@ namespace AIBrains.EnemyBrain
         private readonly float _chaseSpeed;
 
         private bool _inAttack = false;
+        private static readonly int Speed = Animator.StringToHash("Speed");
+
         #endregion
         
         #endregion
@@ -47,13 +49,15 @@ namespace AIBrains.EnemyBrain
         public void Tick()
         {
             _navMeshAgent.destination = _enemyAIBrain.PlayerTarget.transform.position;
+            _animator.SetFloat(Speed,_navMeshAgent.velocity.magnitude);
             CheckDistanceChase();
         }
         public void OnEnter()
         {
-            _inAttack = false;
-            _navMeshAgent.speed = _chaseSpeed;
             _navMeshAgent.SetDestination(_enemyAIBrain.PlayerTarget.transform.position);
+            _animator.SetTrigger("Run");
+            _inAttack = false;
+            _navMeshAgent.speed = 5.273528f;
         } 
         public void OnExit()
         {

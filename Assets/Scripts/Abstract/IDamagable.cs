@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using AIBrains.EnemyBrain;
+using AIBrains.SoldierBrain;
+using UnityEngine;
 
 namespace Abstract
 {

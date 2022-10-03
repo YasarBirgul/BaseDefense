@@ -24,12 +24,18 @@ namespace AIBrains.SoldierBrain
         } 
         public void Tick()
         {
+            if (_soldierAIBrain.DamagableEnemy.IsDead)
+            {
+                Debug.Log(" Isdead " +_soldierAIBrain.DamagableEnemy.IsDead);
+              _soldierAIBrain.RemoveTarget();  
+                
+            }
             if (_soldierAIBrain.EnemyTarget != null)
             {
                 LookTarget();
             }
             _timer -= Time.deltaTime*_attackTime;
-            if (_timer <= 0 )
+            if (_timer <= 0)
             {
                 _soldierAIBrain.GetObject(PoolType.PistolBullet);
                 _timer = 0.2f;

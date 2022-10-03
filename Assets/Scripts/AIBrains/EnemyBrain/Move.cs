@@ -26,6 +26,7 @@ namespace AIBrains.EnemyBrain
         private static readonly int Speed = Animator.StringToHash("Speed");
         private Vector3 _lastPosition = Vector3.zero;
         private readonly float _moveSpeed;
+        private static readonly int Run = Animator.StringToHash("Run");
 
         #endregion
         
@@ -39,22 +40,24 @@ namespace AIBrains.EnemyBrain
         }
         public void Tick()
         {
-           // var sqrDistance = (_enemyAIBrain.transform.position-_lastPosition).sqrMagnitude;
-           // if (sqrDistance == 0f) 
-           //     TimeStuck += Time.deltaTime;
-           // _lastPosition = _enemyAIBrain.transform.position;
+            if (Vector3.Distance(_enemyAIBrain.transform.position, _lastPosition) <= 0f)
+            {
+                TimeStuck += Time.deltaTime;
+
+                _lastPosition = _enemyAIBrain.transform.position;
+                _animator.SetFloat(Speed,_navMeshAgent.velocity.magnitude);
+            }
         }
         public void OnEnter()
         {
             _navMeshAgent.enabled = true;
-            _navMeshAgent.speed = _moveSpeed;
             _navMeshAgent.SetDestination(_enemyAIBrain._turretTarget.position);
-         //    _animator.SetFloat(Speed,1f);
+            _navMeshAgent.speed = 1.529528f;
+            _animator.SetTrigger(Run);
         }
         public void OnExit()
         {
-            //_navMeshAgent.enabled = true;
-            //_animator.SetFloat(,1f);
+           
         }
     }
 }

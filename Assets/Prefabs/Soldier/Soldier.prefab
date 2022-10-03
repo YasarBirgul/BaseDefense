@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3414026346241949250}
   m_Layer: 0
-  m_Name: BulletPool
+  m_Name: Aim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -276,7 +276,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 0
+  m_ObstacleAvoidanceType: 2
 --- !u!114 &3675097192823064913
 MonoBehaviour:
   m_ObjectHideFlags: 0

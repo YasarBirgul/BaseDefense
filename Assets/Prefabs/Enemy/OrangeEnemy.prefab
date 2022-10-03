@@ -230,7 +230,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: a5abdb3a3675e0f4b8f2b912953e1ca8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -1183,9 +1183,10 @@ MonoBehaviour:
   MineTarget: {fileID: 0}
   NavMeshAgent: {fileID: 1086255469645399492}
   Health: 0
-  EnemyType: 0
+  EnemyType: 1
   enemyType: 1
   physicsDetectionController: {fileID: 1364102368477418354}
+  animator: {fileID: 6015749386641348366}
 --- !u!195 &1086255469645399492
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1196,7 +1197,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 5.273528
   m_Acceleration: 35
   avoidancePriority: 50
   m_AngularSpeed: 360

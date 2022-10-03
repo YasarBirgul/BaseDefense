@@ -40,13 +40,11 @@ namespace Controllers.Bullet
             {
                 Renderer.enabled = true;
             }
-        
-         //   IsDisabling = false;
+            //   IsDisabling = false;
             CancelInvoke(DISABLE_METHOD_NAME);
             ConfigureTrail();
             Invoke(DISABLE_METHOD_NAME, AutoDestroyTime);
         }
-
         private void ConfigureTrail()
         {
             if (Trail != null && TrailConfig != null)
@@ -58,13 +56,11 @@ namespace Controllers.Bullet
         {
             if (other.TryGetComponent(out IDamagable damagable))
             {
-                
                 if(damagable.IsDead)
                     return;
                 var health = damagable.TakeDamage(bulletDamage);
                 if (health <= 0)
                 {
-                    damagable.IsDead = true;
                     soldierAIBrain.RemoveTarget();
                     Disable();
                 }

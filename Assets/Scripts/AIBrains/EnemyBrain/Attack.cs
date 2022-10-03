@@ -26,7 +26,7 @@ namespace AIBrains.EnemyBrain
             if (_enemyAIBrain.PlayerTarget)
             {
                 _inAttack = true;
-                // _animator.SetTrigger("Attack");
+                _animator.SetTrigger("Attack");
             }
         } 
         public void OnExit()
