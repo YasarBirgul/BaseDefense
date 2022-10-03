@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3854513426724619148}
   - component: {fileID: 1738752383088493727}
   - component: {fileID: 6386560525675601678}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Money (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,6 +87,10 @@ PrefabInstance:
     - target: {fileID: 4649272200978385041, guid: 806ef5c7c5338b944b1c7b0952dbf1a2, type: 3}
       propertyPath: m_Name
       value: Money
+      objectReference: {fileID: 0}
+    - target: {fileID: 4649272200978385041, guid: 806ef5c7c5338b944b1c7b0952dbf1a2, type: 3}
+      propertyPath: m_Layer
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 7487004775613352963, guid: 806ef5c7c5338b944b1c7b0952dbf1a2, type: 3}
       propertyPath: m_RootOrder

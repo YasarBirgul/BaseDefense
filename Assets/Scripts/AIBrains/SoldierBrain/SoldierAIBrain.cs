@@ -8,7 +8,6 @@ using Data.ValueObject.AIData;
 using Data.ValueObject.WeaponData;
 using Enums;
 using Interfaces;
-using Managers;
 using Signals;
 using Sirenix.OdinInspector;
 using StateBehaviour;
@@ -51,7 +50,6 @@ namespace AIBrains.SoldierBrain
         private int _damage;
         private float _soldierSpeed;
         private float _attackRadius;
-        private Coroutine _attackCoroutine;
         private float _attackDelay;
         private int _health;
         private Transform _spawnPoint;
@@ -80,7 +78,6 @@ namespace AIBrains.SoldierBrain
             _damage = _data.Damage;
             _soldierSpeed = _data.SoldierSpeed;
             _attackRadius = _data.AttackRadius;
-            _attackCoroutine = _data.AttackCoroutine;
             _attackDelay = _data.AttackDelay;
             _health = _data.Health;
             _spawnPoint = _data.SpawnPoint;

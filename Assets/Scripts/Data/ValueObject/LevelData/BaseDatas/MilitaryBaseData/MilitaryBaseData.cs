@@ -6,8 +6,6 @@ namespace Data.ValueObject.LevelData
     [Serializable]
     public class MilitaryBaseData
     {
-        public Vector2 SlotsGrid;
-        public Vector2 SlotOffSet;
         public GameObject SlotPrefab;
         public int BaseCapacity;
         public int TotalAmount;

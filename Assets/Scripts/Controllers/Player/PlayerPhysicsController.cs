@@ -1,8 +1,6 @@
 ﻿using Abstract;
 using Controllers.Gate;
-using Controllers.Player;
 using Enums.GameStates;
-using Interfaces;
 using Managers;
 using UnityEngine;
 
@@ -19,8 +17,6 @@ namespace Controllers
         #region Serialized Variables,
         
         [SerializeField] private PlayerManager playerManager;
-        [SerializeField] private MoneyStackerController moneyStackerController;
-        [SerializeField] private Collider capsuleCollider;
         #endregion
 
         #region Private Variables
@@ -33,18 +29,8 @@ namespace Controllers
             if (other.TryGetComponent(out GatePhysicsController physicsController))
             {
                 var playerIsGoingToFrontYard = other.transform.position.z > transform.position.z;
-                gameObject.layer =  LayerMask.NameToLayer("Base");
+                gameObject.layer =  LayerMask.NameToLayer("PlayerBase");
                 playerManager.CheckAreaStatus(playerIsGoingToFrontYard ? AreaType.BattleOn : AreaType.BaseDefense);
-            }
-            if (other.TryGetComponent<IStackable>(out IStackable stackable))
-            {
-                moneyStackerController.SetStackHolder(stackable.SendToStack().transform);
-                moneyStackerController.GetStack(stackable.SendToStack());
-            }
-            else if (other.TryGetComponent<Interactable>(out Interactable interactable))
-            {
-                moneyStackerController.OnRemoveAllStack();
-               // capsuleCollider.enabled = false;
             }
         }
         private void OnTriggerExit(Collider other)
@@ -52,7 +38,7 @@ namespace Controllers
             if (other.TryGetComponent(out GatePhysicsController physicsController))
             {
                 var playerIsGoingToFrontYard = other.transform.position.z < transform.position.z;
-                gameObject.layer = LayerMask.NameToLayer(playerIsGoingToFrontYard? "FrontYard" : "Base");
+                gameObject.layer = LayerMask.NameToLayer(playerIsGoingToFrontYard? "PlayerFrontYard" : "PlayerBase");
                 playerManager.CheckAreaStatus(playerIsGoingToFrontYard ? AreaType.BattleOn : AreaType.BaseDefense);
             }
         }

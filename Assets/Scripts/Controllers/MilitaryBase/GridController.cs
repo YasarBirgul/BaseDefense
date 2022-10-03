@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Abstract;
 using Data.UnityObject;
 using Data.ValueObject.StackData;
@@ -33,6 +32,7 @@ namespace Controllers.MilitaryBase
         
         
         [ShowIf("stackingSystem",Enums.StackingSystem.Dynamic)]
+        [ReadOnly]
         [SerializeField] private GridData stackerGridData;
 
         [SerializeField] private MilitaryBaseManager militaryBaseManager;

@@ -21,7 +21,7 @@ namespace AIBrains.SoldierBrain
         }
         public void OnEnter()
         {
-            Debug.Log("WaitEntered");
+            
             _navMeshAgent.speed = 1.801268E-05f;
             _animator.SetFloat(Speed,_navMeshAgent.velocity.magnitude);
         }

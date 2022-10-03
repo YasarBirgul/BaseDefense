@@ -35,7 +35,6 @@ namespace Managers
         private bool _isTentAvaliable=true;
         private int _totalAmount;
         private int _soldierAmount;
-        private List<GameObject> _soldierList = new List<GameObject>();
         [ShowInInspector] private List<Vector3> _slotTransformList = new List<Vector3>();
         private int _tentCapacity;
         #endregion
@@ -45,7 +44,6 @@ namespace Managers
         private void Awake()
         {
             _data = GetBaseData();
-            _soldierAIData = GetSoldierAIData();
         } 
         
         #region Event Subscription
@@ -68,7 +66,6 @@ namespace Managers
         #endregion
         private MilitaryBaseData GetBaseData() =>
             Resources.Load<CD_Level>("Data/CD_Level").LevelData[0].BaseData.MilitaryBaseData;
-        private SoldierAIData GetSoldierAIData() => Resources.Load<CD_AI>("Data/CD_AI").SoldierAIData;
         private void OnSoldierActivation()
         {
             _isTentAvaliable = true;

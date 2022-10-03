@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Controllers.Soldier
 {
-    public class SoldierEnemyDetectionController : MonoBehaviour 
+    public class SoldierDetectionController : MonoBehaviour 
     {
         #region Self Variables
 

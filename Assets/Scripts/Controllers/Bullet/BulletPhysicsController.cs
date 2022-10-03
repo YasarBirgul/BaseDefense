@@ -23,7 +23,7 @@ namespace Controllers.Bullet
         [SerializeField]
         private Renderer Renderer;
 
-        private bool IsDisabling = false;
+        // private bool IsDisabling = false;
 
         protected const string DISABLE_METHOD_NAME = "Disable";
         protected const string DO_DISABLE_METHOD_NAME = "DoDisable";
@@ -41,7 +41,7 @@ namespace Controllers.Bullet
                 Renderer.enabled = true;
             }
         
-            IsDisabling = false;
+         //   IsDisabling = false;
             CancelInvoke(DISABLE_METHOD_NAME);
             ConfigureTrail();
             Invoke(DISABLE_METHOD_NAME, AutoDestroyTime);
@@ -89,7 +89,7 @@ namespace Controllers.Bullet
             }
             if (Trail != null && TrailConfig != null)
             {
-                IsDisabling = true;
+                // IsDisabling = true;
                 Invoke(DO_DISABLE_METHOD_NAME, TrailConfig.Time);
             }
             else

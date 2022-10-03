@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3651574142246203851}
   m_Layer: 0
-  m_Name: EnemyMesh
+  m_Name: SoldierMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1180,7 +1180,7 @@ GameObject:
   - component: {fileID: 5656139921145801693}
   - component: {fileID: 6803494708768052290}
   m_Layer: 16
-  m_Name: SoldierEnemyDetectionController
+  m_Name: SoldierDetectionController
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1226,9 +1226,9 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 116
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &6803494708768052290
 MonoBehaviour:
