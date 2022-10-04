@@ -2,7 +2,6 @@
 using AIBrains.SoldierBrain;
 using Enums;
 using Interfaces;
-using Managers;
 using Signals;
 using UnityEngine;
 
