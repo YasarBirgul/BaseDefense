@@ -28,6 +28,8 @@ namespace Controllers
         #endregion
 
         #endregion
+        
+        
         public void SetWeaponData(WeaponData weaponData)
         {
             _data = weaponData;

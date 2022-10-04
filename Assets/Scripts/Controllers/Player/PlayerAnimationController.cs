@@ -98,7 +98,7 @@ namespace Controllers
                 animator.SetFloat("VelocityX",_velocityX);
                 if (inputParams.MovementVector.sqrMagnitude == 0)
                 {
-                    animator.SetBool("Aimed",false);
+                    AimTarget(playerManager.EnemyTarget);
                 }
             }
             else
@@ -116,6 +116,10 @@ namespace Controllers
             if (animationStates == _currentAnimationState) return;
              animator.Play(animationStates.ToString());
             _currentAnimationState = animationStates;
+        } 
+        public void AimTarget(bool hasTarget)
+        {
+            animator.SetBool("Aimed",hasTarget);
         }
     }
 }

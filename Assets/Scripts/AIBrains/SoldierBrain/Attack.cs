@@ -26,9 +26,7 @@ namespace AIBrains.SoldierBrain
         {
             if (_soldierAIBrain.DamagableEnemy.IsDead)
             {
-                Debug.Log(" Isdead " +_soldierAIBrain.DamagableEnemy.IsDead);
-              _soldierAIBrain.RemoveTarget();  
-                
+                _soldierAIBrain.RemoveTarget();
             }
             if (_soldierAIBrain.EnemyTarget != null)
             {

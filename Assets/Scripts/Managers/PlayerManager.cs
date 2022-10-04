@@ -1,4 +1,8 @@
-﻿using Controllers;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Abstract;
+using Controllers;
 using Data.UnityObject;
 using Data.ValueObject.PlayerData;
 using Data.ValueObject.WeaponData;
@@ -7,7 +11,6 @@ using Enums.GameStates;
 using Keys;
 using Signals;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Managers
 {
@@ -17,8 +20,15 @@ namespace Managers
 
         #region Public Variables
 
-        [FormerlySerializedAs("CurrentGameState")] public AreaType currentAreaType = AreaType.BaseDefense;
+        public AreaType currentAreaType = AreaType.BaseDefense;
         public WeaponTypes WeaponType;
+        
+        public List<IDamagable> EnemyList = new List<IDamagable>();
+        public Transform EnemyTarget;
+        public bool HasEnemyTarget = false;
+
+        public IDamagable DamagableEnemy;
+        
         #endregion
 
         #region Serialized Variables
@@ -26,6 +36,7 @@ namespace Managers
         [SerializeField] private PlayerMeshController meshController;
         [SerializeField] private PlayerAnimationController animationController;
         [SerializeField] private PlayerWeaponController weaponController;
+        [SerializeField] private PlayerShootingController shootingController;
 
         #endregion
 
@@ -83,11 +94,27 @@ namespace Managers
         {
             _movementController.UpdateInputValues(inputParams);
             animationController.PlayAnimation(inputParams);
+            if (!HasEnemyTarget) return;
+            AimEnemy();
         }
         public void CheckAreaStatus(AreaType AreaStatus)
         {
             currentAreaType = AreaStatus;
             meshController.ChangeAreaStatus(AreaStatus);
+        }
+        public void SetEnemyTarget()
+        {
+            shootingController.SetEnemyTargetTransform();
+            animationController.AimTarget(true);
+            AimEnemy();
+        }
+        private void AimEnemy()
+        { 
+            if (EnemyList.Count != 0)
+            {
+                var transformEnemy = EnemyList[0].GetTransform();
+                _movementController.RotateThePlayer(transformEnemy);
+            }
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Controllers.Bullet
 {
     public class BulletPhysicsController : MonoBehaviour,IReleasePoolObject
     {
-        private int bulletDamage = 20;
+        private int _bulletDamage = 20;
         public SoldierAIBrain soldierAIBrain;
         
         public float AutoDestroyTime = 0.1f;
@@ -57,7 +57,7 @@ namespace Controllers.Bullet
             {
                 if(damagable.IsDead)
                     return;
-                var health = damagable.TakeDamage(bulletDamage);
+                var health = damagable.TakeDamage(_bulletDamage);
                 if (health <= 0)
                 {
                     soldierAIBrain.RemoveTarget();
@@ -84,7 +84,6 @@ namespace Controllers.Bullet
             }
             if (Trail != null && TrailConfig != null)
             {
-                // IsDisabling = true;
                 Invoke(DO_DISABLE_METHOD_NAME, TrailConfig.Time);
             }
             else

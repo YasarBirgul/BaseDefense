@@ -1,5 +1,6 @@
 ﻿using Data.ValueObject.PlayerData;
 using Keys;
+using Managers;
 using UnityEngine;
 
 namespace Controllers
@@ -15,7 +16,7 @@ namespace Controllers
         #region Serialized Variables
 
         [SerializeField] private new Rigidbody rigidbody;
-        
+        [SerializeField] private PlayerManager manager;
         #endregion
 
         #region Private Variables
@@ -37,17 +38,22 @@ namespace Controllers
         {
             _inputVector = inputParams.MovementVector;
             EnableMovement(_inputVector.sqrMagnitude > 0);
-            RotatePlayer(inputParams);
+            if (!manager.HasEnemyTarget)
+            {
+                RotatePlayer(inputParams);
+            }
         }
-
         private void RotatePlayer(HorizontalInputParams inputParams)
         {
             Vector3 movementDirection = new Vector3(inputParams.MovementVector.x, 0, inputParams.MovementVector.y);
             if (movementDirection == Vector3.zero) return;
             Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 30);
+        } 
+        public void RotateThePlayer(Transform enemyTransform)
+        {
+            transform.LookAt(enemyTransform, Vector3.up*3f);
         }
-
         private void EnableMovement(bool movementStatus)
         {
             _isReadyToMove = movementStatus;
