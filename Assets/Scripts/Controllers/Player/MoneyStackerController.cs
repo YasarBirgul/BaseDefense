@@ -2,7 +2,9 @@
 using System.Threading.Tasks;
 using Abstract;
 using DG.Tweening;
+using Enums;
 using Interfaces;
+using Signals;
 using UnityEngine;
 
 namespace Controllers.Player
@@ -102,8 +104,8 @@ namespace Controllers.Player
                 StackList.Remove(removedStack);
                 removedStack.transform.DOLocalMove(transform.localPosition, .1f).OnComplete(() =>
                 {
-                    removedStack.transform.SetParent(null);
-                    removedStack.SetActive(false);
+                    PoolSignals.Instance.onReleaseObjectFromPool?.Invoke(PoolType.Money,removedStack);
+                    Debug.Log(removedStack.name);
                 });
             });
         }
