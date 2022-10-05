@@ -10,5 +10,6 @@ namespace Interfaces
         void EmitParticle();
         void PlayAnimation();
         GameObject SendToStack();
+        void SendPosition(Transform MoneyPosition);
     }
 }

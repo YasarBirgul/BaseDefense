@@ -33,8 +33,8 @@ MonoBehaviour:
     - ObjectType: {fileID: 0}
       initalAmount: 0
       isDynamic: 0
-    - ObjectType: {fileID: 0}
-      initalAmount: 0
+    - ObjectType: {fileID: 5455066261541432749, guid: 184f26222370a5b40917157ffb84d45c, type: 3}
+      initalAmount: 3
       isDynamic: 0
     - ObjectType: {fileID: 0}
       initalAmount: 0

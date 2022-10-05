@@ -38,10 +38,9 @@ namespace Controllers
         {
             _inputVector = inputParams.MovementVector;
             EnableMovement(_inputVector.sqrMagnitude > 0);
-            if (!manager.HasEnemyTarget)
-            {
-                RotatePlayer(inputParams);
-            }
+            if (manager.HasEnemyTarget) return;
+            RotatePlayer(inputParams);
+           
         }
         private void RotatePlayer(HorizontalInputParams inputParams)
         {

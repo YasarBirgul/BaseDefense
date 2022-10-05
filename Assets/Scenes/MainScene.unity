@@ -2890,8 +2890,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24054dbfec464ca6b47192e34d6d7688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotZone: {fileID: 3537539740090007901}
-  TentTransfrom: {fileID: 795829037}
+  tentTransfrom: {fileID: 1179055542}
+  slotTransform: {fileID: 0}
 --- !u!1001 &693097755
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3376,11 +3376,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 880970725214738984, guid: c60edd51c065ceb46b345849a03bc106, type: 3}
   m_PrefabInstance: {fileID: 790164450}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &795829037 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 795829037, guid: eea1e8b40b0f0d94895165158be1ede8, type: 3}
-  m_PrefabInstance: {fileID: 7168960651713923607}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &825449930
 PrefabInstance:
@@ -5653,13 +5648,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 581002d958f34fe0b2ed1941b658b234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies:
-  - {fileID: 7690461770082632510, guid: 9071905ce0dbcf04daf6b354f576dc0e, type: 3}
-  - {fileID: 7185586475072801580, guid: 64b191780528bbe40b845ac726874583, type: 3}
-  - {fileID: 7185586475072801580, guid: c0d8c28e3cf066a4b93986426843c2fe, type: 3}
   NumberOfEnemiesToSpawn: 10
   SpawnDelay: 2
-  SpawnPos: {fileID: 1332303478}
 --- !u!1 &1423876788
 GameObject:
   m_ObjectHideFlags: 0
@@ -6922,7 +6912,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.6666667
+  m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: fa5746372e95df946b2cfed920f73a40, type: 2}
   m_BuildHeightMesh: 0

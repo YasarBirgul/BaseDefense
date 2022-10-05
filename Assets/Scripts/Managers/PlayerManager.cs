@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Abstract;
 using Controllers;
 using Data.UnityObject;
@@ -37,7 +35,7 @@ namespace Managers
         [SerializeField] private PlayerAnimationController animationController;
         [SerializeField] private PlayerWeaponController weaponController;
         [SerializeField] private PlayerShootingController shootingController;
-
+        [SerializeField] private PlayerMovementController movementController;
         #endregion
 
         #region Private Variables
@@ -45,8 +43,6 @@ namespace Managers
         private PlayerData _data;
 
         private WeaponData _weaponData;
-
-        private PlayerMovementController _movementController;
 
         private AreaType _nextState = AreaType.BattleOn;
         
@@ -63,12 +59,11 @@ namespace Managers
         private WeaponData GetWeaponData() => Resources.Load<CD_Weapon>("Data/CD_Weapon").WeaponData[(int)WeaponType];
         private void Init()
         {
-            _movementController = GetComponent<PlayerMovementController>();
             SetDataToControllers();
         }
         private void SetDataToControllers()
         {
-            _movementController.SetMovementData(_data.PlayerMovementData);
+            movementController.SetMovementData(_data.PlayerMovementData);
             weaponController.SetWeaponData(_weaponData);
             meshController.SetWeaponData(_weaponData);
         }
@@ -92,7 +87,7 @@ namespace Managers
         #endregion
         private void OnGetInputValues(HorizontalInputParams inputParams)
         {
-            _movementController.UpdateInputValues(inputParams);
+            movementController.UpdateInputValues(inputParams);
             animationController.PlayAnimation(inputParams);
             if (!HasEnemyTarget) return;
             AimEnemy();
@@ -113,7 +108,7 @@ namespace Managers
             if (EnemyList.Count != 0)
             {
                 var transformEnemy = EnemyList[0].GetTransform();
-                _movementController.RotateThePlayer(transformEnemy);
+                movementController.RotateThePlayer(transformEnemy);
             }
         }
     }

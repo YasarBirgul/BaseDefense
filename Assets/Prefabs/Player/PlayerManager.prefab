@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 8495928147545377426}
-  weaponHolder: {fileID: 1013446145}
+  weaponHolder: {fileID: 1853677453558678612}
 --- !u!1 &869373653
 GameObject:
   m_ObjectHideFlags: 0
@@ -1217,13 +1217,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAreaType: 0
-  WeaponType: 1
+  WeaponType: 2
   EnemyTarget: {fileID: 0}
   HasEnemyTarget: 0
   meshController: {fileID: 1429477786026016514}
   animationController: {fileID: 3256136071381465238}
   weaponController: {fileID: 1868632370789283655}
   shootingController: {fileID: 708541006}
+  movementController: {fileID: 421403684888451369}
 --- !u!114 &421403684888451369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1237,7 +1238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 3066750386707274183}
-  manager: {fileID: 0}
+  manager: {fileID: 8495928147545377426}
 --- !u!54 &3066750386707274183
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2455,7 +2456,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 10
+  m_Radius: 17.758469
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &557817562
 MonoBehaviour:

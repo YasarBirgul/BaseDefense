@@ -1,4 +1,5 @@
-﻿using Abstract;
+﻿using System;
+using Abstract;
 using UnityEngine;
 
 namespace Concrete
@@ -7,7 +8,10 @@ namespace Concrete
     {
         [SerializeField] private Rigidbody rigidbody;
         [SerializeField] private BoxCollider collider;
-
+        private void OnEnable()
+        {
+            SendPosition(transform);
+        }
         public override void SetInit(Transform initTransform, Vector3 position)
         {
             base.SetInit(initTransform, position);
@@ -39,6 +43,10 @@ namespace Concrete
             rigidbody.isKinematic = true;
             collider.enabled = false;
             return transform.gameObject;
+        }
+        public override void SendPosition(Transform MoneyPosition)
+        {
+            base.SendPosition(MoneyPosition);
         }
     }
 }

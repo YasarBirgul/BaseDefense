@@ -44,8 +44,7 @@ namespace Managers
         private void Awake()
         {
             _data = GetBaseData();
-        } 
-        
+        }
         #region Event Subscription
         private void OnEnable()
         {

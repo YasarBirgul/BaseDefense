@@ -1,5 +1,6 @@
 ﻿using Abstract;
 using Controllers.Gate;
+using Controllers.Player;
 using Enums.GameStates;
 using Managers;
 using UnityEngine;
@@ -17,6 +18,7 @@ namespace Controllers
         #region Serialized Variables,
         
         [SerializeField] private PlayerManager playerManager;
+        
         #endregion
 
         #region Private Variables
@@ -28,19 +30,32 @@ namespace Controllers
         {
             if (other.TryGetComponent(out GatePhysicsController physicsController))
             {
-                var playerIsGoingToFrontYard = other.transform.position.z > transform.position.z;
-                gameObject.layer =  LayerMask.NameToLayer("PlayerBase");
-                playerManager.CheckAreaStatus(playerIsGoingToFrontYard ? AreaType.BattleOn : AreaType.BaseDefense);
+                GateEnter(other);
             }
         }
         private void OnTriggerExit(Collider other)
         {
             if (other.TryGetComponent(out GatePhysicsController physicsController))
             {
-                var playerIsGoingToFrontYard = other.transform.position.z < transform.position.z;
-                gameObject.layer = LayerMask.NameToLayer(playerIsGoingToFrontYard? "PlayerFrontYard" : "PlayerBase");
-                playerManager.CheckAreaStatus(playerIsGoingToFrontYard ? AreaType.BattleOn : AreaType.BaseDefense);
+                GateExit(other);
             }
+        }
+        private void GateEnter(Collider other)
+        {
+            var playerIsGoingToFrontYard = other.transform.position.z > transform.position.z;
+            gameObject.layer = LayerMask.NameToLayer("PlayerBase");
+            playerManager.CheckAreaStatus(playerIsGoingToFrontYard ? AreaType.BattleOn : AreaType.BaseDefense);
+        }
+        private void GateExit(Collider other)
+        {
+            var playerIsGoingToFrontYard = other.transform.position.z < transform.position.z;
+            gameObject.layer = LayerMask.NameToLayer(playerIsGoingToFrontYard ? "PlayerFrontYard" : "PlayerBase");
+            playerManager.CheckAreaStatus(playerIsGoingToFrontYard ? AreaType.BattleOn : AreaType.BaseDefense);
+            if(!playerIsGoingToFrontYard) return;
+            Debug.Log("OnTriggerExit");
+            playerManager.DamagableEnemy = null;
+            playerManager.HasEnemyTarget = false;
+            playerManager.EnemyList.Clear();
         }
     }
 }
