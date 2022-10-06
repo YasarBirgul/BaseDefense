@@ -105,7 +105,6 @@ namespace Controllers.Player
                 removedStack.transform.DOLocalMove(transform.localPosition, .1f).OnComplete(() =>
                 {
                     PoolSignals.Instance.onReleaseObjectFromPool?.Invoke(PoolType.Money,removedStack);
-                    Debug.Log(removedStack.name);
                 });
             });
         }

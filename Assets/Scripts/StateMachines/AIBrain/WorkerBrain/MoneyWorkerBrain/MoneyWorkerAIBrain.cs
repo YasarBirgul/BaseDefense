@@ -72,6 +72,11 @@ namespace StateMachines.AIBrain.Workers
             GetReferenceStates();
         }
 
+       // private void Start()
+       // {
+       //     GetReferenceStates();
+       // }
+
         /*#region Event Subscriptions
 
         private void OnEnable()

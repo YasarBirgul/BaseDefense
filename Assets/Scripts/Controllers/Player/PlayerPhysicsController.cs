@@ -52,7 +52,6 @@ namespace Controllers
             gameObject.layer = LayerMask.NameToLayer(playerIsGoingToFrontYard ? "PlayerFrontYard" : "PlayerBase");
             playerManager.CheckAreaStatus(playerIsGoingToFrontYard ? AreaType.BattleOn : AreaType.BaseDefense);
             if(!playerIsGoingToFrontYard) return;
-            Debug.Log("OnTriggerExit");
             playerManager.DamagableEnemy = null;
             playerManager.HasEnemyTarget = false;
             playerManager.EnemyList.Clear();
