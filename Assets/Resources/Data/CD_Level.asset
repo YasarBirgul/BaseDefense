@@ -12,21 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 462bfdf052ef4647a59f01c938dca516, type: 3}
   m_Name: CD_Level
   m_EditorClassIdentifier: 
-  LevelData:
+  LevelDatas:
   - BaseData:
       BaseRoomData:
-        RoomDatasDictionary:
-          m_Keys: 00000000
-          m_Values:
-          - TurretData:
-              TurretDamage: 0
-              TurretCapacity: 0
-              HasSoldier: 0
-              SoldierCost: 0
-              SoldierPayedAmount: 0
-              IsActive: 0
-            RoomCost: 100
-            RoomPayedAmount: 0
+        RoomDatas:
+        - TurretLocationType: 0
+          TurretData:
+            AvailabilityType: 1
+            HasTurretSoldier: 0
+            TurretDamage: 0
+            TurretCapacity: 0
+            HasSoldier: 0
+            SoldierCost: 0
+            SoldierPayedAmount: 0
+            IsActive: 0
+          RoomCost: 100
+          RoomPayedAmount: 0
       MineBaseData:
         MaxWorkerAmount: 0
         CurrentWorkerAmount: 0
@@ -34,19 +35,17 @@ MonoBehaviour:
         CurrentDiamondAmount: 0
         MineCartCapacity: 0
       MilitaryBaseData:
-        SlotsGrid: {x: 1, y: 5}
-        SlotOffSet: {x: 0, y: 0}
-        SlotPrefab: {fileID: 8684800469567210669, guid: 116a924e2f62b7141ad5ff3cbde43a73, type: 3}
+        SlotPrefab: {fileID: 0}
         BaseCapacity: 0
         TotalAmount: 0
-        TentCapacity: 5
+        TentCapacity: 0
         CurrentSoldierAmount: 0
         SoldierUpgradeTime: 0
         SoldierSlotCost: 0
         SlotAmount: 0
         SlotTransform: {fileID: 0}
         AttackTime: 0
-        frontYardSoldierPosition: {fileID: 6818357691092351474, guid: da7415325a5fdd944811c6a9a8fb763c, type: 3}
+        frontYardSoldierPosition: {fileID: 0}
       BuyablesData:
         MoneyWorkerCost: 0
         MoneyWorkerPayedAmount: 0
@@ -60,3 +59,5 @@ MonoBehaviour:
     FrontYardData:
       StageDataList: []
       FrontYardItemsDataList: []
+  LevelId: 0
+  Key: LevelData

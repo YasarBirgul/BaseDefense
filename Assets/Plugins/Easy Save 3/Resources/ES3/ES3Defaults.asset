@@ -44,5 +44,5 @@ MonoBehaviour:
   autoUpdateReferences: 1
   addAllPrefabsToManager: 1
   logDebugInfo: 0
-  logWarnings: 1
+  logWarnings: 0
   logErrors: 1

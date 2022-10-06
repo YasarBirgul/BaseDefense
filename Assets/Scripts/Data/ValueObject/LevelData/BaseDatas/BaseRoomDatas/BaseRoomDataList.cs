@@ -8,6 +8,6 @@ namespace Data.ValueObject.LevelData
     [Serializable]
     public class BaseRoomData
     {
-        public SerializedDictionary<BaseRoomIDs, RoomData> RoomDatasDictionary;
+        public List<RoomData> RoomDatas=new List<RoomData>();
     }
 }

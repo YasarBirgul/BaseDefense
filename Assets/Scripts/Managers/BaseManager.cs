@@ -34,7 +34,7 @@ namespace Managers
         {
             _levelData = GetLevelData();
         }
-        private LevelData GetLevelData() => Resources.Load<CD_Level>("BaseDefense/CD_Level").LevelData[0];
+        private LevelData GetLevelData() => Resources.Load<CD_Level>("BaseDefense/CD_Level").LevelDatas[0];
 
         private void OnEnable()
         {
