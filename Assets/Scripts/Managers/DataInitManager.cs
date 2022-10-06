@@ -93,6 +93,12 @@ namespace Managers
             DataInitSignals.Instance.onSaveMineBaseData += SyncMineBaseDatas;
             DataInitSignals.Instance.onSaveMilitaryBaseData += SyncMilitaryBaseData;
             DataInitSignals.Instance.onSaveBuyablesData += SyncBuyablesData;
+
+            DataInitSignals.Instance.onLoadMilitaryBaseData += OnLoadMilitaryBaseData;
+            DataInitSignals.Instance.onLoadBaseRoomData += OnLoadBaseRoomData;
+            DataInitSignals.Instance.onLoadBuyablesData += OnLoadBuyablesData;
+            DataInitSignals.Instance.onLoadMineBaseData += OnLoadMineBaseData;
+            CoreGameSignals.Instance.onApplicationQuit += OnApplicationQuit;
         }
 
         private void UnsubscribeEvents()
@@ -103,6 +109,12 @@ namespace Managers
             DataInitSignals.Instance.onSaveMineBaseData -= SyncMineBaseDatas;
             DataInitSignals.Instance.onSaveMilitaryBaseData -= SyncMilitaryBaseData;
             DataInitSignals.Instance.onSaveBuyablesData -= SyncBuyablesData;
+            
+            DataInitSignals.Instance.onLoadMilitaryBaseData -= OnLoadMilitaryBaseData;
+            DataInitSignals.Instance.onLoadBaseRoomData -= OnLoadBaseRoomData;
+            DataInitSignals.Instance.onLoadBuyablesData -= OnLoadBuyablesData;
+            DataInitSignals.Instance.onLoadMineBaseData -= OnLoadMineBaseData;
+            CoreGameSignals.Instance.onApplicationQuit -= OnApplicationQuit;
         }
         private void OnDisable()
         {
@@ -111,14 +123,29 @@ namespace Managers
 
         #endregion
 
+        #region ManagersData
         private void SendDataManagers()
         {   
             DataInitSignals.Instance.onLoadLevelID?.Invoke(_levelID);
-            DataInitSignals.Instance.onLoadBaseRoomData?.Invoke(_baseRoomData);
-            DataInitSignals.Instance.onLoadMineBaseData?.Invoke(_mineBaseData);
-            DataInitSignals.Instance.onLoadMilitaryBaseData?.Invoke(_militaryBaseData);
-            DataInitSignals.Instance.onLoadBuyablesData?.Invoke(_buyablesData);
         }
+        private MilitaryBaseData OnLoadMilitaryBaseData()
+        {
+            return _militaryBaseData;
+        }
+        private BaseRoomData OnLoadBaseRoomData()
+        {
+            return _baseRoomData;
+        }
+        private MineBaseData OnLoadMineBaseData()
+        {
+            return _mineBaseData;
+        }
+        private BuyablesData OnLoadBuyablesData()
+        {
+            return _buyablesData;
+        }
+        #endregion
+        
         #region Level Save - Load 
 
         public void Save(int uniqueId)
@@ -169,5 +196,15 @@ namespace Managers
             cdLevel.LevelDatas[_levelID].BaseData.BuyablesData = buyablesData;
         }
         #endregion
+
+        [Button]
+        private void OnSave()
+        {
+            Save(_uniqueID);
+        }
+        private void OnApplicationQuit()
+        {
+            Save(_uniqueID);
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Data.ValueObject.LevelData;
+﻿using System;
+using Data.ValueObject.LevelData;
 using Extentions;
 using UnityEngine.Events;
 
@@ -13,10 +14,12 @@ namespace Signals
         public UnityAction<BuyablesData> onSaveBuyablesData = delegate(BuyablesData arg0) {  };
         public UnityAction<int> onSaveLevelID = delegate(int arg0) {  };
         
-        public UnityAction<BaseRoomData> onLoadBaseRoomData= delegate {  };
-        public UnityAction<MineBaseData> onLoadMineBaseData = delegate {  };
-        public UnityAction<MilitaryBaseData> onLoadMilitaryBaseData = delegate{  };
-        public UnityAction<BuyablesData> onLoadBuyablesData = delegate {  };
         public UnityAction<int> onLoadLevelID = delegate(int arg0) {  };
+        
+        public Func<MilitaryBaseData> onLoadMilitaryBaseData = delegate { return null; };
+        public Func<BaseRoomData> onLoadBaseRoomData = delegate { return null; };
+        public Func<BuyablesData> onLoadBuyablesData = delegate { return null; };
+        public Func<MineBaseData> onLoadMineBaseData = delegate { return null;};
+        
     }
 }

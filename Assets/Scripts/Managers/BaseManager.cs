@@ -1,5 +1,4 @@
-﻿using Controllers.Base;
-using Data.UnityObject;
+﻿using Data.UnityObject;
 using Data.ValueObject.LevelData;
 using Enums;
 using Signals;
@@ -12,8 +11,6 @@ namespace Managers
         #region Self Variables
 
         #region Serialized Variables
-       
-        [SerializeField] private BaseRoomExtentionController extentionController;
         
         #endregion
     
@@ -59,7 +56,7 @@ namespace Managers
         }
         private void ChangeVisibility(BaseRoomTypes baseRoomType)
         {
-            extentionController.ChangeExtentionVisibility(baseRoomType);
+           // extentionController.ChangeExtentionVisibility(baseRoomType);
         }
     }
 }
