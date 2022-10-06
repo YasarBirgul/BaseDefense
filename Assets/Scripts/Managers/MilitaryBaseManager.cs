@@ -109,6 +109,7 @@ namespace Managers
         private void OnSoldierActivation()
         {
             _isTentAvaliable = true;
+            _data.CurrentSoldierAmount = 0;
         }
         public GameObject GetObject(PoolType poolName)
         {
