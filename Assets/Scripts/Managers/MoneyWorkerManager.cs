@@ -1,13 +1,12 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Signals;
 using System.Linq;
+using AIBrains.WorkerBrain.MoneyWorker;
 using Data.ValueObject.AIDatas;
 using Data.UnityObject;
 using Enums;
 using Sirenix.OdinInspector;
-using StateMachines.AIBrain.Workers;
 using Interfaces;
 
 namespace Managers

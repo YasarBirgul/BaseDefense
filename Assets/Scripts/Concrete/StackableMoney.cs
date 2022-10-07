@@ -1,5 +1,4 @@
-﻿using System;
-using Abstract;
+﻿using Abstract;
 using UnityEngine;
 
 namespace Concrete

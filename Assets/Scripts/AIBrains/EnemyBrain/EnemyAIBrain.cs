@@ -1,11 +1,11 @@
 ﻿using System;
 using Abstract;
+using AIBrains.EnemyBrain.States;
 using Controllers;
 using Data.UnityObject;
 using Data.ValueObject.AIData;
 using Enums;
 using Interfaces;
-using Managers;
 using Signals;
 using StateBehaviour;
 using UnityEngine;

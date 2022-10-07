@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AI.MinerAI;
+using AIBrains.MinerBrain;
 using Enum;
 using Enums;
 using Interfaces;

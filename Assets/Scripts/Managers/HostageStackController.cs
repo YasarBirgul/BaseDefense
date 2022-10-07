@@ -4,6 +4,7 @@ using Controllers;
 using DG.Tweening;
 using Enum;
 using Enums;
+using Enums.AI.Miner;
 using Signals;
 using UnityEngine;
 

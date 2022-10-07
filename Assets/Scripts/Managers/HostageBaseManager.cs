@@ -4,6 +4,7 @@ using Data.ValueObject;
 using Data.ValueObject.LevelData;
 using Enum;
 using Enums;
+using Enums.AI.Miner;
 using Interfaces;
 using Signals;
 using UnityEngine;

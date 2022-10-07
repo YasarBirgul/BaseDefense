@@ -1,16 +1,30 @@
 ﻿using Abstract;
 using AIBrains.EnemyBrain;
+using Interfaces;
 using UnityEngine;
 
 namespace Controllers
 {
-    public class EnemyPhysicsController : MonoBehaviour, IDamagable
+    public class EnemyPhysicsController : MonoBehaviour,IDamagable
     {
         [SerializeField] 
         private EnemyAIBrain enemyAIBrain;
         public bool IsTaken { get; set; }
         public bool IsDead { get; set; }
 
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.TryGetComponent(out IDamager IDamager))
+            {
+                if (enemyAIBrain.Health <= 0) return;
+                var damage = IDamager.Damage();
+                enemyAIBrain.Health -= damage;
+                if (enemyAIBrain.Health == 0)
+                {
+                    IsDead = true;
+                }
+            }
+        }
         public int TakeDamage(int damage)
         {
             if (enemyAIBrain.Health > 0)

@@ -35,13 +35,14 @@ namespace AIBrains.SoldierBrain
             _timer -= Time.deltaTime*_attackTime;
             if (_timer <= 0)
             {
-                _soldierAIBrain.GetObject(PoolType.PistolBullet);
+                _soldierAIBrain.GetObject(PoolType.Pistol);
                 _timer = 0.2f;
             }
         }
         private void LookTarget()
         {
             _animator.SetFloat(Speed,_navMeshAgent.velocity.magnitude);
+            
             var enemyPosition = _soldierAIBrain.EnemyTarget.transform;
             
             var lookDirection = enemyPosition.position - _soldierAIBrain.transform.position;

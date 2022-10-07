@@ -53,7 +53,7 @@ namespace Controllers
             }
             else
             {
-                GetObject(PoolType.RifleBullet);
+                GetObject(PoolType.Riffle);
                 await Task.Delay(400);
                 Shoot();
             }

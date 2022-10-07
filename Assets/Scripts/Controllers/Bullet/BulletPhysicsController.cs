@@ -90,7 +90,7 @@ namespace Controllers.Bullet
             {
                 DoDisable();
             } 
-            ReleaseObject(gameObject,PoolType.PistolBullet);
+            ReleaseObject(gameObject,PoolType.Pistol);
             gameObject.transform.position = Vector3.zero;
         }
         protected void DoDisable()

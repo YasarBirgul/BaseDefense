@@ -1,5 +1,6 @@
-using AI.MinerAI;
+using AIBrains.MinerBrain;
 using Enum;
+using Enums.AI.Miner;
 using Signals;
 using UnityEngine;
 
