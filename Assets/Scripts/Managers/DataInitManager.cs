@@ -79,12 +79,10 @@ namespace Managers
         #endregion
 
         #region Event Subscriptions
-
         private void OnEnable()
         {
             SubscribeEvents();
         }
-
         private void SubscribeEvents()
         {
             DataInitSignals.Instance.onSaveLevelID += OnSyncLevelID;

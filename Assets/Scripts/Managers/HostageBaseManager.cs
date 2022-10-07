@@ -1,38 +1,42 @@
-using System;
 using System.Collections.Generic;
-using AI.MinerAI;
-using Data.UnityObjects;
-using Data.ValueObjects;
-using Data.ValueObjects.LevelData;
-using DG.Tweening;
+using Data.UnityObject;
+using Data.ValueObject;
+using Data.ValueObject.LevelData;
 using Enum;
 using Enums;
-using FrameworkGoat;
+using Interfaces;
 using Signals;
 using UnityEngine;
 
 namespace Managers
 {
-    public class HostageBaseManager : MonoBehaviour
+    public class HostageBaseManager : MonoBehaviour, IGetPoolObject
     {
         public List<MinerManager> StackedHostageList=new List<MinerManager>();
+        
         private MinerAnimationStates _currentAnimType=MinerAnimationStates.Idle;
-        [SerializeField] private GameObject hostageInstance;
-        [SerializeField] private HostageStackController hostageStackController;
+        
+        [SerializeField]
+        private GameObject hostageInstance;
+        
+        [SerializeField]
+        private HostageStackController hostageStackController;
+        
         private HostageData _data;
+        
         private int _maxHostileCount;
+        
         private MineBaseData _mineBaseData;
+        
         private List<Transform> _hostagePositionList;
         
-
         [SerializeField]
-        //private HostageStackManager hostageStackManager;
+      //  private HostageStackManager hostageStackManager;
         private void Awake()
         {
             _data = GetHostageData();
             _mineBaseData=GetMineBaseData();
             ChangeHostageAnimation(MinerAnimationStates.Crouch);
-
         }
 
         #region EventSubscription
@@ -45,7 +49,7 @@ namespace Managers
         private void SubscribeEvents()
         {
             HostageSignals.Instance.onClearHostageStack += OnClearHostageStack;
-            InputSignals.Instance.onInputTakenActive += OnInputTaken;
+           // InputSignals.Instance.onInputTakenActive += OnInputTaken;
             HostageSignals.Instance.onAddHostageStack += OnAddHostageStack;
         }
         private void OnDisable()
@@ -55,7 +59,7 @@ namespace Managers
 
         private void UnSubscribeEvents()
         {
-            InputSignals.Instance.onInputTakenActive -= OnInputTaken;
+           // InputSignals.Instance.onInputTakenActive -= OnInputTaken;
             HostageSignals.Instance.onClearHostageStack -= OnClearHostageStack;
             HostageSignals.Instance.onAddHostageStack -= OnAddHostageStack;
         }
@@ -78,7 +82,7 @@ namespace Managers
         }
 
         #endregion
-        private HostageData GetHostageData()=>Resources.Load<CD_Level>("Data/CD_Level").LevelDatas[0/*Take from levelManager*/].FrontyardData.HostageData;
+        private HostageData GetHostageData()=>Resources.Load<CD_Level>("Data/CD_Level").LevelDatas[0/*Take from levelManager*/].FrontYardData.HostageData;
         private MineBaseData GetMineBaseData()=>Resources.Load<CD_Level>("Data/CD_Level").LevelDatas[0/*Take from levelManager*/].BaseData.MineBaseData;
         private void Start()
         {
@@ -87,18 +91,18 @@ namespace Managers
         }
         private void InstantiateHostage()
         {
-            int _remainingHostageAmount=_mineBaseData.MaxWorkerAmount - _mineBaseData.CurrentWorkerAmount;
-            for (int index = 0; index <_remainingHostageAmount ; index++)
-            {
-                //GameObject hostage=ObjectPoolManager.Instance.GetObject<GameObject>(PoolObjectType.MinerAI.ToString());
-                Instantiate(hostageInstance);
-                hostageInstance.transform.position = _hostagePositionList[index].position;
+             int _remainingHostageAmount=_mineBaseData.MaxWorkerAmount - _mineBaseData.CurrentWorkerAmount;
+             for (int index = 0; index <_remainingHostageAmount ; index++)
+             { 
+                 GameObject hostage = GetObject(PoolType.Hostage);
+                 Instantiate(hostageInstance);
+                 hostageInstance.transform.position = _hostagePositionList[index].position;
                
             }
         }
         private void AssignHostileValuesToDictionary()
         {
-            _hostagePositionList=_data.HostagePlaces;
+           _hostagePositionList=_data.HostagePlaces;
         }
 
         private void OnClearHostageStack(Vector3 centerOfGatePos)
@@ -117,16 +121,18 @@ namespace Managers
                 {
                     stackedHostage.ChangeAnimation(hostageAnimationType);
                 }
-                
             }
-          
         }
-
         public void AddHostageToList(MinerManager hostage)
         {
             StackedHostageList.Add(hostage);
             _currentAnimType = MinerAnimationStates.Crouch;
             ChangeHostageAnimation(MinerAnimationStates.Walk);
+        }
+
+        public GameObject GetObject(PoolType poolName)
+        {
+            return PoolSignals.Instance.onGetObjectFromPool.Invoke(poolName);
         }
     }
 }

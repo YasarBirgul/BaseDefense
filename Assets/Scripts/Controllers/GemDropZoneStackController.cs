@@ -1,14 +1,14 @@
 using System.Collections.Generic;
-using Data;
-using Data.UnityObjects;
-using Data.ValueObjects.GridData;
-using Enum;
+using Abstract;
+using Data.UnityObject;
+using Data.ValueObject.StackData;
+using Enums;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Controllers
 {
-    public class GemDropZoneStackController : StackBase
+    public class GemDropZoneStackController : AStack
     {
         #region Self Variables
 

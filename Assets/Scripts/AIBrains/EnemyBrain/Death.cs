@@ -1,9 +1,7 @@
-﻿using System;
-using Abstract;
+﻿using Abstract;
 using DG.Tweening;
 using Enums;
 using Interfaces;
-using Managers;
 using Signals;
 using UnityEngine;
 using UnityEngine.AI;
@@ -61,7 +59,7 @@ namespace AIBrains.EnemyBrain
         }
         public void EnemyDead()
         {
-            var poolType = (PoolType)Enum.Parse(typeof(PoolType), _enemyType.ToString());
+            var poolType = (PoolType)System.Enum.Parse(typeof(PoolType), _enemyType.ToString());
             DOVirtual.DelayedCall(1f, () =>
             {
                 _enemyAIBrain.transform.DOMoveY(-3f,1f).OnComplete(()=> ReleaseObject(_enemyAIBrain.gameObject,poolType));

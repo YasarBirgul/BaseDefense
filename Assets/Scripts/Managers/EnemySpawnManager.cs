@@ -59,7 +59,7 @@ namespace Managers
         }
         private void DoSpawnEnemy()
         {
-            int randomType = Random.Range(0, Enum.GetNames(typeof(EnemyTypes)).Length-1);
+            int randomType = Random.Range(0,System.Enum.GetNames(typeof(EnemyTypes)).Length-1);
             int randomPercentage = Random.Range(0, 101);
             if (randomType == (int)EnemyTypes.LargeEnemy)
             {
@@ -69,7 +69,7 @@ namespace Managers
                 }
             }
 
-            var poolType = (PoolType) Enum.Parse(typeof(PoolType), ((EnemyTypes) randomType).ToString());
+            var poolType = (PoolType) System.Enum.Parse(typeof(PoolType), ((EnemyTypes) randomType).ToString());
             GetObject(poolType);
         }
         public GameObject GetObject(PoolType poolName)

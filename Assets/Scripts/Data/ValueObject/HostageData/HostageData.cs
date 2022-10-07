@@ -1,7 +1,14 @@
-﻿namespace Data.ValueObject.HostageData
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace Data.ValueObject
 {
-    public class HostageData
-    {
-        
-    }
+    
+   [Serializable]
+   public class HostageData
+   {
+       public List<Transform> HostagePlaces;
+   }
+    
 }

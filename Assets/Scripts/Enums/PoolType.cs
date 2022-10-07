@@ -16,5 +16,6 @@ namespace Enums
         RedEnemy,
         OrangeEnemy,
         BossEnemy,
+        MinerWorker,
     } 
 }

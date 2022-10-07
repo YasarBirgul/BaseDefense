@@ -17,5 +17,6 @@ namespace Signals
 
         public Func<Transform, Transform> onGetTransformMoney = delegate { return null; };
         public Func<Transform, Transform, Transform> OnMyMoneyTaken = delegate { return null; };
+        
     }
 }

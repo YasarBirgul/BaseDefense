@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Abstract;
 using AI.States;
 using Commands;
 using Controllers;
 using Enum;
 using Managers;
 using Signals;
+using StateBehaviour;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -106,6 +108,6 @@ namespace AI.MinerAI
             Func<bool> IsDropZoneNotFull() => () => isDropZoneFull==false;
         }
 
-        private void Update() => _stateMachine.Tick();
+        private void Update() => _stateMachine.UpdateIState();
     }
 }

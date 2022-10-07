@@ -1,9 +1,8 @@
+using Abstract;
 using AI.MinerAI;
 using Enum;
-using FrameworkGoat;
 using Managers;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace AI.States
 {

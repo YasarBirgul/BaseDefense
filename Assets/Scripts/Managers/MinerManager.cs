@@ -1,8 +1,4 @@
-using System;
 using AI.MinerAI;
-using Controllers;
-using Data.UnityObjects;
-using Data.ValueObjects;
 using Enum;
 using Signals;
 using UnityEngine;

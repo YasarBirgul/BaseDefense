@@ -1,5 +1,4 @@
-using Abstracts;
-using Interfaces;
+using Abstract;
 using UnityEngine;
 
 namespace Concreate

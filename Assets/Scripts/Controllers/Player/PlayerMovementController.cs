@@ -40,7 +40,6 @@ namespace Controllers
             EnableMovement(_inputVector.sqrMagnitude > 0);
             if (manager.HasEnemyTarget) return;
             RotatePlayer(inputParams);
-           
         }
         private void RotatePlayer(HorizontalInputParams inputParams)
         {
@@ -71,7 +70,7 @@ namespace Controllers
             }
             else if(rigidbody.velocity != Vector3.zero)
             {
-                rigidbody.velocity = Vector3.zero;
+                rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, 0);
             }
         }
     }

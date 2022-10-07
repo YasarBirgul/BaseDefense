@@ -41,16 +41,14 @@ MonoBehaviour:
           RoomCost: 150
           RoomPayedAmount: 0
       MineBaseData:
-        MaxWorkerAmount: 0
-        CurrentWorkerAmount: 0
-        DiamondCapacity: 0
-        CurrentDiamondAmount: 0
-        MineCartCapacity: 0
+        MaxWorkerAmount: 12
+        CurrentWorkerAmount: 5
+        GemCollectionOffset: 5
       MilitaryBaseData:
         BaseCapacity: 0
         TotalAmount: 0
         TentCapacity: 5
-        CurrentSoldierAmount: 3
+        CurrentSoldierAmount: 0
         SoldierUpgradeTime: 0
         SoldierSlotCost: 0
         SlotAmount: 0

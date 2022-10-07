@@ -54,7 +54,6 @@ namespace Managers
         private void Awake()
         {
             _data = GetBaseData();
-            
         }
 
         public MilitaryBaseData GetBaseData()
@@ -64,6 +63,8 @@ namespace Managers
 
         public IEnumerator Start()
         {
+            if (_data.CurrentSoldierAmount == 0)
+                yield break;
             yield return new WaitForSeconds(1f);
             StartCoroutine(soldierEnumerator());
             yield return new WaitForSeconds(3f);
@@ -76,14 +77,11 @@ namespace Managers
         }
         private void OnSoldiersInit(int soldierCount)
         {
-            Debug.Log(soldierCount);
             for (int i = 0; i < soldierCount; i++)
             {
                 GetObject(PoolType.SoldierAI);
             }
         }
-        
-        
         #region Event Subscription
         private void OnEnable()
         {
