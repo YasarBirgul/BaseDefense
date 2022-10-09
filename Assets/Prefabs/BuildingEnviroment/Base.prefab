@@ -1022,6 +1022,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ee82cbb89c4e3094ea346c627af5e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CustomerIsOnPayment: 0
   roomType: 1
   roomPaymentPhysicsController: {fileID: 872224026740070071}
   roomPaymentTextController: {fileID: 7512410417784371075}
@@ -2031,6 +2032,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ee82cbb89c4e3094ea346c627af5e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CustomerIsOnPayment: 0
   roomType: 2
   roomPaymentPhysicsController: {fileID: 6710805596755444144}
   roomPaymentTextController: {fileID: 3496293720111478305}
@@ -3266,6 +3268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 510b05ac8a6e46f79c6fa8274c138785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomManager: {fileID: 7080672553395062165}
 --- !u!65 &1277060516569368017
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3980,6 +3983,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 510b05ac8a6e46f79c6fa8274c138785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomManager: {fileID: 6974499946638036526}
 --- !u!65 &3748033345202859752
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4428,6 +4432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ee82cbb89c4e3094ea346c627af5e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CustomerIsOnPayment: 0
   roomType: 3
   roomPaymentPhysicsController: {fileID: 4311660410101306498}
   roomPaymentTextController: {fileID: 2505507405696541187}
@@ -4909,18 +4914,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseExtentionController: {fileID: 5039966533848287923}
-  Data:
-    MainRoomData:
-      TurretLocationType: 0
-      TurretData:
-        AvailabilityType: 0
-        HasTurretSoldier: 0
-        SoldierCost: 0
-        SoldierPayedAmount: 0
-        TurretDamage: 0
-        TurretCapacity: 0
-        IsActive: 0
-    RoomDatas: []
 --- !u!114 &5039966533848287923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4992,6 +4985,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 510b05ac8a6e46f79c6fa8274c138785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomManager: {fileID: 3052056794064482131}
 --- !u!65 &6306820271109870224
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5161,6 +5155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ee82cbb89c4e3094ea346c627af5e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CustomerIsOnPayment: 0
   roomType: 0
   roomPaymentPhysicsController: {fileID: 8256643913782912316}
   roomPaymentTextController: {fileID: 3689002827023251731}
@@ -5843,6 +5838,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 510b05ac8a6e46f79c6fa8274c138785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomManager: {fileID: 593636755670182986}
 --- !u!65 &361609184826206075
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5851,7 +5847,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6162946266983523556}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 3.0347586, y: 1, z: 2.8634129}

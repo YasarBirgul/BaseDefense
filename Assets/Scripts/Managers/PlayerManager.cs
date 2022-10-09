@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 using Abstract;
 using Controllers;
 using Data.UnityObject;
@@ -25,8 +24,8 @@ namespace Managers
         public List<IDamagable> EnemyList = new List<IDamagable>();
         public Transform EnemyTarget;
         public bool HasEnemyTarget = false;
-
         public IDamagable DamagableEnemy;
+        public int CurrentMoneyScore = 100;
         
         #endregion
 

@@ -12,8 +12,8 @@ namespace Managers
         #region Serializefield Variables
         
         [SerializeField] private UIPanelController uiPanelController;
-        [SerializeField] private TextMeshPro moneyText;
-        [SerializeField] private TextMeshPro gemText;
+        [SerializeField] private TextMeshProUGUI moneyText;
+        [SerializeField] private TextMeshProUGUI gemText;
 
         #endregion
 
@@ -35,6 +35,7 @@ namespace Managers
         } 
         private void SubscribeEvents()
         {
+          //  CoreGameSignals.Instance.onGameOpen += OnGameOpen;
             UISignals.Instance.onOpenPanel += OnOpenPanel;
             UISignals.Instance.onClosePanel += OnClosePanel;
             UISignals.Instance.onSetGemScoreText += OnSetGemScoreText;
@@ -42,6 +43,7 @@ namespace Managers
         } 
         private void UnsubscribeEvents()
         {
+         //   CoreGameSignals.Instance.onGameOpen += OnGameOpen;
             UISignals.Instance.onOpenPanel -= OnOpenPanel;
             UISignals.Instance.onClosePanel -= OnClosePanel;
             UISignals.Instance.onSetGemScoreText -= OnSetGemScoreText;
@@ -56,5 +58,10 @@ namespace Managers
         private void OnClosePanel(UIPanels panel) => uiPanelController.ClosePanel(panel);
         private void OnSetGemScoreText(int gemScore) =>   gemText.text = gemScore.ToString();
         private void OnSetMoneyScoreText(int moneyScore) =>moneyText.text = moneyScore.ToString();
+        public void PlayButton()
+        {
+            uiPanelController.OpenPanel(UIPanels.levelPanel);
+            uiPanelController.ClosePanel(UIPanels.PlayPanel);
+        }
     }
 }

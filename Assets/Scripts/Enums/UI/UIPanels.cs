@@ -1,6 +1,6 @@
 ﻿public enum UIPanels
 {
-    StartPanel,
-    MoneyScore,
-    GemScore,
+    levelPanel,
+    PlayPanel,
+    NextLevelPanel,
 }

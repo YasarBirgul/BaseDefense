@@ -26,7 +26,6 @@ namespace Controllers.Bullet
         private void OnEnable()
         {
             rigidbody.AddForce(transform.forward,ForceMode.VelocityChange);
-            Debug.Log("TransformForward" + transform.forward);
         }
         private void OnDisable()
         {

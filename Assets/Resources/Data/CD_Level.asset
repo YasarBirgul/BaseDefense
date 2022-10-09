@@ -26,11 +26,24 @@ MonoBehaviour:
             TurretCapacity: 0
             IsActive: 0
         RoomDatas:
-        - AvailabilityType: 1
+        - AvailabilityType: 0
           BaseRoomType: 0
-          TurretLocationType: 2
+          TurretLocationType: 0
           TurretData:
-            AvailabilityType: 1
+            AvailabilityType: 0
+            HasTurretSoldier: 0
+            SoldierCost: 0
+            SoldierPayedAmount: 0
+            TurretDamage: 0
+            TurretCapacity: 0
+            IsActive: 0
+          RoomCost: 200
+          RoomPayedAmount: 0
+        - AvailabilityType: 0
+          BaseRoomType: 1
+          TurretLocationType: 0
+          TurretData:
+            AvailabilityType: 0
             HasTurretSoldier: 0
             SoldierCost: 0
             SoldierPayedAmount: 0
@@ -39,9 +52,22 @@ MonoBehaviour:
             IsActive: 0
           RoomCost: 100
           RoomPayedAmount: 0
-        - AvailabilityType: 1
-          BaseRoomType: 1
-          TurretLocationType: 1
+        - AvailabilityType: 0
+          BaseRoomType: 2
+          TurretLocationType: 0
+          TurretData:
+            AvailabilityType: 0
+            HasTurretSoldier: 0
+            SoldierCost: 0
+            SoldierPayedAmount: 0
+            TurretDamage: 0
+            TurretCapacity: 0
+            IsActive: 0
+          RoomCost: 300
+          RoomPayedAmount: 0
+        - AvailabilityType: 0
+          BaseRoomType: 3
+          TurretLocationType: 0
           TurretData:
             AvailabilityType: 0
             HasTurretSoldier: 0
@@ -51,32 +77,6 @@ MonoBehaviour:
             TurretCapacity: 0
             IsActive: 0
           RoomCost: 150
-          RoomPayedAmount: 0
-        - AvailabilityType: 0
-          BaseRoomType: 2
-          TurretLocationType: 4
-          TurretData:
-            AvailabilityType: 0
-            HasTurretSoldier: 0
-            SoldierCost: 0
-            SoldierPayedAmount: 0
-            TurretDamage: 0
-            TurretCapacity: 0
-            IsActive: 0
-          RoomCost: 0
-          RoomPayedAmount: 0
-        - AvailabilityType: 0
-          BaseRoomType: 3
-          TurretLocationType: 3
-          TurretData:
-            AvailabilityType: 0
-            HasTurretSoldier: 0
-            SoldierCost: 0
-            SoldierPayedAmount: 0
-            TurretDamage: 0
-            TurretCapacity: 0
-            IsActive: 0
-          RoomCost: 0
           RoomPayedAmount: 0
       MineBaseData:
         MaxWorkerAmount: 12
@@ -106,5 +106,8 @@ MonoBehaviour:
       FrontYardItemsDataList: []
       HostageData:
         HostagePlaces: []
+    ScoreData:
+      MoneyScore: 0
+      DiamondScore: 0
   LevelId: 0
   Key: LevelData

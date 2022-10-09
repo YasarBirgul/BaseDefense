@@ -22,10 +22,10 @@ namespace Managers
         
         [SerializeField] 
         private List<LevelData> levelDatas = new List<LevelData>();
-        
+
         [ShowInInspector] 
         private CD_Level cdLevel;
-        
+
         // [SerializeField] private CD_Enemy cdEnemy;
 
         #endregion
@@ -40,7 +40,7 @@ namespace Managers
         private MineBaseData _mineBaseData;
         private MilitaryBaseData _militaryBaseData;
         private  BuyablesData _buyablesData;
-
+        
         #endregion
         
         #endregion
@@ -48,6 +48,8 @@ namespace Managers
         private void Awake()
         {
             cdLevel=GetLevelDatas();
+            _levelID = cdLevel.LevelId;
+            levelDatas=cdLevel.LevelDatas;
         }
 
         private CD_Level GetLevelDatas() => Resources.Load<CD_Level>("Data/CD_Level");
@@ -58,19 +60,15 @@ namespace Managers
         }
         #region InitData
         private void InitData()
-        {   
-            cdLevel = GetLevelDatas();
-            _levelID = cdLevel.LevelId;
-            levelDatas=cdLevel.LevelDatas;
+        {
             if (!ES3.FileExists($"LevelData{_uniqueID}.es3"))
             {
                 if (!ES3.KeyExists("LevelData"))
                 {
                     cdLevel = GetLevelDatas();
-                    _levelID = cdLevel.LevelId;
+                   _levelID = cdLevel.LevelId;
                     levelDatas=cdLevel.LevelDatas;
                     Save(_uniqueID);
-                    Debug.Log(_uniqueID);
                 }
             }
             Load(_uniqueID);
@@ -172,29 +170,29 @@ namespace Managers
 
         private void OnSyncLevelID(int levelID)
         {
-            cdLevel.LevelId = levelID;
+            _levelID = levelID;
         }
         private void SyncBaseRoomDatas(BaseRoomData baseRoomData)
         {
-            cdLevel.LevelDatas[_levelID].BaseData.BaseRoomData = baseRoomData;
+           _baseRoomData = baseRoomData;
         }
 
         private void SyncMineBaseDatas(MineBaseData mineBaseData)
         {
-            cdLevel.LevelDatas[_levelID].BaseData.MineBaseData = mineBaseData;
+            _mineBaseData = mineBaseData;
         }
 
         private void SyncMilitaryBaseData(MilitaryBaseData militaryBaseData)
         {
-            cdLevel.LevelDatas[_levelID].BaseData.MilitaryBaseData = militaryBaseData;
+            _militaryBaseData = militaryBaseData;
         }
         
         private void SyncBuyablesData(BuyablesData buyablesData)
         {
-            cdLevel.LevelDatas[_levelID].BaseData.BuyablesData = buyablesData;
+            _buyablesData = buyablesData;
         }
         #endregion
-
+        
         [Button]
         private void OnSave()
         {

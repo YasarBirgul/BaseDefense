@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using Controllers;
+﻿using Controllers;
 using Data.ValueObject.LevelData;
 using Enums;
 using Enums.Turret;
 using Signals;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Managers
@@ -16,13 +16,12 @@ namespace Managers
 
         [SerializeField] 
         private BaseExtentionController baseExtentionController;
-        [SerializeField]
         
         #endregion
     
         #region Public Variables
         
-        public BaseRoomData Data;
+        private BaseRoomData _data=new BaseRoomData();
 
         #endregion
 
@@ -31,17 +30,28 @@ namespace Managers
         #endregion
         
         #endregion
-
-        #region Event Subscription
         private void Awake()
         {
-            Data = GetData();
+            _data = GetData();
             SetUpExistingRooms();
         }
         private BaseRoomData GetData()
         {
             return DataInitSignals.Instance.onLoadBaseRoomData.Invoke();
         }
+        
+        private void SetUpExistingRooms()
+        {
+            foreach (var roomdata in _data.RoomDatas)
+            {
+                if (roomdata.AvailabilityType == AvailabilityType.Unlocked)
+                {
+                    ChangeVisibility(roomdata.BaseRoomType);
+                }
+            }
+        }
+        
+        #region Event Subscription
         private void OnEnable()
         {
             SubscribeEvents();
@@ -49,10 +59,14 @@ namespace Managers
         private void SubscribeEvents()
         {
             BaseSignals.Instance.onChangeExtentionVisibility += OnChangeVisibility;
+            BaseSignals.Instance.onInformBaseRoom += OnGetRoomData;
+            BaseSignals.Instance.onGetRoomData += OnSetRoomData;
         }
         private void UnsubscribeEvents()
         {
             BaseSignals.Instance.onChangeExtentionVisibility -= OnChangeVisibility;
+            BaseSignals.Instance.onInformBaseRoom += OnGetRoomData;
+            BaseSignals.Instance.onGetRoomData += OnSetRoomData;
         }
         private void OnDisable()
         {
@@ -63,24 +77,22 @@ namespace Managers
         {
             ChangeVisibility(baseRoomType);
         }
+        private void OnGetRoomData(BaseRoomTypes baseRoomType,RoomData roomData)
+        { 
+            _data.RoomDatas[(int)baseRoomType] = roomData;
+            if (roomData.AvailabilityType == AvailabilityType.Locked)
+                return;
+            ChangeVisibility(baseRoomType);
+        } 
+        private RoomData OnSetRoomData(BaseRoomTypes baseRoomType) => _data.RoomDatas[(int) baseRoomType];
         private void ChangeVisibility(BaseRoomTypes baseRoomType)
         {
             baseExtentionController.ChangeExtentionVisibility(baseRoomType);
         }
-        private void SetUpExistingRooms()
+        [Button]
+        private void SaveData()
         {
-            for (int i = 0; i < Data.RoomDatas.Count ; i++)
-            {
-                if (Data.RoomDatas[i].AvailabilityType == AvailabilityType.Unlocked)
-                {
-                    Debug.Log(Data.RoomDatas[i].BaseRoomType);
-                    ChangeVisibility(Data.RoomDatas[i].BaseRoomType);
-                } 
-            }
-        }
-        private void ChangeRoomStatus(BaseRoomTypes roomTypes)
-        {
-            
+            DataInitSignals.Instance.onSaveBaseRoomData.Invoke(_data);
         }
     }
 }

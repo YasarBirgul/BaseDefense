@@ -1,13 +1,12 @@
 ﻿using Abstract;
 using Controllers.Gate;
-using Controllers.Player;
 using Enums.GameStates;
 using Managers;
 using UnityEngine;
 
 namespace Controllers
 {
-    public class PlayerPhysicsController : Interactable 
+    public class PlayerPhysicsController : Interactable
     {
         #region Self Variables
 
@@ -17,7 +16,8 @@ namespace Controllers
 
         #region Serialized Variables,
         
-        [SerializeField] private PlayerManager playerManager;
+        [SerializeField] 
+        private PlayerManager playerManager;
         
         #endregion
 

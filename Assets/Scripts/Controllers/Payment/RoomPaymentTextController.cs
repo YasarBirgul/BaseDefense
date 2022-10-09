@@ -1,5 +1,4 @@
-﻿using Enums;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 namespace Controllers.Payment
@@ -8,15 +7,6 @@ namespace Controllers.Payment
     {
         [SerializeField]
         private TextMeshPro remainingCostText;
-
-        public void SetInitText(BaseRoomTypes roomType)
-        {
-            
-        }
-        
-        public void ChangeText(int leftCost)
-        {
-            remainingCostText.text = leftCost.ToString();
-        }
+        public void SetAndUpdateText(int roomCost) => remainingCostText.text = roomCost.ToString();
     }
 }
