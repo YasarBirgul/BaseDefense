@@ -1022,9 +1022,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ee82cbb89c4e3094ea346c627af5e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CustomerIsOnPayment: 0
+  RoomBought: 0
   roomType: 1
-  roomPaymentPhysicsController: {fileID: 872224026740070071}
   roomPaymentTextController: {fileID: 7512410417784371075}
 --- !u!1 &792337784666100014
 GameObject:
@@ -1193,16 +1192,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1132958927638167633}
-  m_LocalRotation: {x: 0.2800998, y: -0.64926386, z: 0.28009993, w: 0.6492647}
+  m_LocalRotation: {x: 0.47970185, y: -0.51950514, z: 0.4797022, w: 0.51950586}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3487208592479965165}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 46.672, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 85.438, y: -89.999, z: 0.001}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.66}
+  m_AnchoredPosition: {x: 0.003975868, y: 0.06}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &3272079386218616156
@@ -2032,9 +2031,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ee82cbb89c4e3094ea346c627af5e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CustomerIsOnPayment: 0
+  RoomBought: 0
   roomType: 2
-  roomPaymentPhysicsController: {fileID: 6710805596755444144}
   roomPaymentTextController: {fileID: 3496293720111478305}
 --- !u!1 &2434781737582125500
 GameObject:
@@ -4432,9 +4430,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ee82cbb89c4e3094ea346c627af5e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CustomerIsOnPayment: 0
+  RoomBought: 0
   roomType: 3
-  roomPaymentPhysicsController: {fileID: 4311660410101306498}
   roomPaymentTextController: {fileID: 2505507405696541187}
 --- !u!1 &4814946841580008685
 GameObject:
@@ -5155,9 +5152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ee82cbb89c4e3094ea346c627af5e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CustomerIsOnPayment: 0
+  RoomBought: 0
   roomType: 0
-  roomPaymentPhysicsController: {fileID: 8256643913782912316}
   roomPaymentTextController: {fileID: 3689002827023251731}
 --- !u!1 &5618904340525489275
 GameObject:
@@ -5850,8 +5846,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.0347586, y: 1, z: 2.8634129}
-  m_Center: {x: -0.035758495, y: 0, z: -0.1011982}
+  m_Size: {x: 1.4423637, y: 1, z: 2.9637947}
+  m_Center: {x: -0.058177948, y: 0, z: -0.0064172745}
 --- !u!1 &6276422308631315210
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,9 +25,13 @@ namespace Managers
 
         #region Serialized Variables
 
-        [Space][SerializeField] private GameObject levelHolder;
-        [SerializeField] private LevelLoaderCommand levelLoaderCommand;
-        [SerializeField] private ClearActiveLevelCommand clearActiveLevelCommand;
+        [Space]
+        [SerializeField]
+        private GameObject levelHolder;
+        [SerializeField] 
+        private LevelLoaderCommand levelLoaderCommand;
+        [SerializeField] 
+        private ClearActiveLevelCommand clearActiveLevelCommand;
 
         #endregion
 

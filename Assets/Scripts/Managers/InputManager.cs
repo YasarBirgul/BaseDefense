@@ -16,7 +16,8 @@ namespace Managers
 
         #region Serialized Variables
         
-        [SerializeField] private FloatingJoystick joystickInput;
+        [SerializeField] 
+        private FloatingJoystick joystickInput;
         
         #endregion
 
@@ -24,6 +25,7 @@ namespace Managers
 
         private InputData _data;
         private bool _hasTouched;
+        
         #endregion
         
         #endregion
