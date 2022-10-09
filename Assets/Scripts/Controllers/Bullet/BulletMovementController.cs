@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Controllers.Bullet
 {
@@ -24,10 +23,14 @@ namespace Controllers.Bullet
         #endregion
 
         #endregion
-
         private void OnEnable()
         {
-            rigidbody.AddForce(transform.forward*40,ForceMode.VelocityChange);
+            rigidbody.AddForce(transform.forward,ForceMode.VelocityChange);
+            Debug.Log("TransformForward" + transform.forward);
+        }
+        private void OnDisable()
+        {
+            rigidbody.velocity = Vector3.zero;
         }
     }
 }

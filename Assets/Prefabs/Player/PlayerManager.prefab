@@ -1217,7 +1217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAreaType: 0
-  WeaponType: 2
+  WeaponType: 0
   EnemyTarget: {fileID: 0}
   HasEnemyTarget: 0
   meshController: {fileID: 1429477786026016514}

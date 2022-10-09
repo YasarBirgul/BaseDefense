@@ -2,11 +2,10 @@
 {
     public enum TurretLocationType
     {
+        Center,
         FirstRightTurret,
         FirstLeftTurret,
         SecondRightTurret,
         SecondLeftTurret,
-        ThirdRightTurret,
-        ThirdLeftTurret
     }
 }

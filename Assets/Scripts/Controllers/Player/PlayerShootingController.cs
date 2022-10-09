@@ -1,21 +1,25 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Controllers.Bullet;
-using Enums;
-using Interfaces;
 using Managers;
-using Signals;
 using UnityEngine;
 
 namespace Controllers
 {
-    public class PlayerShootingController : MonoBehaviour, IGetPoolObject
+    public class PlayerShootingController : MonoBehaviour
     {
         [SerializeField] 
         private PlayerManager manager;
 
         [SerializeField]
         private Transform weaponHolder;
+
+        private BulletFireController fireController;
+
+        private int Speed = 30;
+        private void Awake()
+        {
+            fireController = new BulletFireController(manager.WeaponType,Speed);
+        }
         public void SetEnemyTargetTransform()
         {
             manager.EnemyTarget = manager.EnemyList[0].GetTransform();
@@ -53,25 +57,10 @@ namespace Controllers
             }
             else
             {
-                GetObject(PoolType.Riffle);
+                fireController.FireBullets(weaponHolder);
                 await Task.Delay(400);
                 Shoot();
             }
-        }
-
-        public GameObject GetObject(PoolType poolName)
-        {
-            var bulletPrefab = PoolSignals.Instance.onGetObjectFromPool?.Invoke(poolName);
-            bulletPrefab.transform.position = weaponHolder.position;
-            bulletPrefab.GetComponent<PlayerBulletPhysicsController>().Controller = this;
-            FireBullet(bulletPrefab);
-            return bulletPrefab;
-        }
-        private void FireBullet(GameObject bulletPrefab)
-        {
-            bulletPrefab.transform.rotation = manager.transform.rotation;
-            var rigidBodyBullet = bulletPrefab.GetComponent<Rigidbody>();
-            rigidBodyBullet.AddForce(manager.transform.forward*40,ForceMode.VelocityChange);
         }
     }
 }

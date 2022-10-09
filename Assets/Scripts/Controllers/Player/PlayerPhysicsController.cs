@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Controllers
 {
-    public class PlayerPhysicsController : Interactable
+    public class PlayerPhysicsController : Interactable 
     {
         #region Self Variables
 

@@ -8,11 +8,10 @@ namespace Data.ValueObject.LevelData
     {
         public AvailabilityType AvailabilityType;
         public bool HasTurretSoldier;
-        public int TurretDamage;
-        public int TurretCapacity;
-        public bool HasSoldier;
         public int SoldierCost;
         public int SoldierPayedAmount;
+        public int TurretDamage;
+        public int TurretCapacity;
         public bool IsActive;
     }
 }

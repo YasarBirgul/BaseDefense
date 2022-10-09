@@ -13,11 +13,8 @@ MonoBehaviour:
   m_Name: CD_Pool
   m_EditorClassIdentifier: 
   PoolDataDic:
-    m_Keys: 030000000000000001000000020000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e000000
+    m_Keys: 0000000001000000020000000c0000000d0000000300000006000000050000000f0000000700000008000000090000000a0000000b0000000e00000004000000
     m_Values:
-    - ObjectType: {fileID: 1898963805810283683, guid: ea02405f19c14634789eb031386f1c5a, type: 3}
-      initalAmount: 50
-      isDynamic: 1
     - ObjectType: {fileID: 6542216981385537143, guid: 7f023f5e768a7884489caa268ca043ac, type: 3}
       initalAmount: 50
       isDynamic: 1
@@ -27,12 +24,12 @@ MonoBehaviour:
     - ObjectType: {fileID: 181632249035223776, guid: 6fc88ddfb7858af47af6d62288171b8a, type: 3}
       initalAmount: 100
       isDynamic: 1
-    - ObjectType: {fileID: 3753186581087429961, guid: b450d12f808df164584557322164b62a, type: 3}
-      initalAmount: 20
+    - ObjectType: {fileID: 5141339768904831981, guid: 498894d4d8d4a574e8d9435cfe9443fa, type: 3}
+      initalAmount: 100
       isDynamic: 1
-    - ObjectType: {fileID: 0}
-      initalAmount: 0
-      isDynamic: 0
+    - ObjectType: {fileID: 259296487506223718, guid: fa5ae409fd504d4418c04056fc9fedbb, type: 3}
+      initalAmount: 50
+      isDynamic: 1
     - ObjectType: {fileID: 5455066261541432749, guid: 184f26222370a5b40917157ffb84d45c, type: 3}
       initalAmount: 3
       isDynamic: 0
@@ -42,9 +39,9 @@ MonoBehaviour:
     - ObjectType: {fileID: 345493145078521190, guid: 3f29f6d6d85a625499dc0059b4f14977, type: 3}
       initalAmount: 5
       isDynamic: 1
-    - ObjectType: {fileID: 0}
+    - ObjectType: {fileID: 373294581055109571, guid: 8a6675d16b2141446ad920144073a0de, type: 3}
       initalAmount: 0
-      isDynamic: 0
+      isDynamic: 1
     - ObjectType: {fileID: 7185586475072801580, guid: c0d8c28e3cf066a4b93986426843c2fe, type: 3}
       initalAmount: 30
       isDynamic: 0
@@ -59,4 +56,10 @@ MonoBehaviour:
       isDynamic: 0
     - ObjectType: {fileID: 5825511027792451468, guid: 3bd9b5b145062f24098a8550fa33bfaf, type: 3}
       initalAmount: 12
+      isDynamic: 0
+    - ObjectType: {fileID: 3545470273353383339, guid: 9eb874b14a1566d41a684c13c5ebfa52, type: 3}
+      initalAmount: 0
+      isDynamic: 1
+    - ObjectType: {fileID: 0}
+      initalAmount: 0
       isDynamic: 0

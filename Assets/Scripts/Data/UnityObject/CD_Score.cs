@@ -1,5 +1,4 @@
-﻿using Data.ValueObject.ScoreData;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Data.UnityObject
 {

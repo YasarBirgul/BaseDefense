@@ -1,6 +1,8 @@
-﻿using Data.UnityObject;
+﻿using System.Collections.Generic;
+using Controllers;
 using Data.ValueObject.LevelData;
 using Enums;
+using Enums.Turret;
 using Signals;
 using UnityEngine;
 
@@ -11,28 +13,35 @@ namespace Managers
         #region Self Variables
 
         #region Serialized Variables
+
+        [SerializeField] 
+        private BaseExtentionController baseExtentionController;
+        [SerializeField]
         
         #endregion
     
         #region Public Variables
+        
+        public BaseRoomData Data;
 
         #endregion
 
         #region Private Variables
 
-        private LevelData _levelData;
-        
         #endregion
         
         #endregion
-        
+
         #region Event Subscription
         private void Awake()
         {
-            _levelData = GetLevelData();
+            Data = GetData();
+            SetUpExistingRooms();
         }
-        private LevelData GetLevelData() => Resources.Load<CD_Level>("BaseDefense/CD_Level").LevelDatas[0];
-
+        private BaseRoomData GetData()
+        {
+            return DataInitSignals.Instance.onLoadBaseRoomData.Invoke();
+        }
         private void OnEnable()
         {
             SubscribeEvents();
@@ -56,7 +65,22 @@ namespace Managers
         }
         private void ChangeVisibility(BaseRoomTypes baseRoomType)
         {
-           // extentionController.ChangeExtentionVisibility(baseRoomType);
+            baseExtentionController.ChangeExtentionVisibility(baseRoomType);
+        }
+        private void SetUpExistingRooms()
+        {
+            for (int i = 0; i < Data.RoomDatas.Count ; i++)
+            {
+                if (Data.RoomDatas[i].AvailabilityType == AvailabilityType.Unlocked)
+                {
+                    Debug.Log(Data.RoomDatas[i].BaseRoomType);
+                    ChangeVisibility(Data.RoomDatas[i].BaseRoomType);
+                } 
+            }
+        }
+        private void ChangeRoomStatus(BaseRoomTypes roomTypes)
+        {
+            
         }
     }
 }
