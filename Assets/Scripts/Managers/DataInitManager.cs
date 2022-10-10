@@ -168,8 +168,7 @@ namespace Managers
         }
         private void SyncBaseRoomDatas(BaseRoomData baseRoomData)
         {
-            Debug.Log("Base Room Data");
-           _baseRoomData = baseRoomData;
+            _baseRoomData = baseRoomData;
         }
 
         private void SyncMineBaseDatas(MineBaseData mineBaseData)

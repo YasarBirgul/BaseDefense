@@ -58,7 +58,7 @@ namespace Controllers
         }
         public void PlayAnimation(HorizontalInputParams inputParams)
         { 
-            if (playerManager.currentAreaType == AreaType.BattleOn)
+            if (playerManager.CurrentAreaType == AreaType.BattleOn)
             {
                 animator.SetLayerWeight(1,1);
                 animator.SetBool("IsBattleOn",true);

@@ -18,7 +18,7 @@ namespace Managers
 
         #region Public Variables
 
-        public AreaType currentAreaType = AreaType.BaseDefense;
+        public AreaType CurrentAreaType = AreaType.BaseDefense;
         
         public WeaponTypes WeaponType;
         
@@ -65,7 +65,7 @@ namespace Managers
         private WeaponData GetWeaponData() => Resources.Load<CD_Weapon>("Data/CD_Weapon").WeaponData[(int)WeaponType];
         private void Init()
         {
-            currentAreaType = AreaType.BaseDefense;
+            CurrentAreaType = AreaType.BaseDefense;
             SetDataToControllers();
         }
         private void SetDataToControllers()
@@ -101,7 +101,7 @@ namespace Managers
         }
         public void CheckAreaStatus(AreaType AreaStatus)
         {
-            currentAreaType = AreaStatus;
+            CurrentAreaType = AreaStatus;
             meshController.ChangeAreaStatus(AreaStatus);
         }
         public void SetEnemyTarget()
@@ -116,7 +116,6 @@ namespace Managers
             if (EnemyList.Count != 0)
             {
                 var transformEnemy = EnemyList[0].GetTransform();
-                movementController.RotateThePlayer(transformEnemy);
             }
         }
     }

@@ -7,11 +7,13 @@ namespace Controllers.Player
 {
     public class PlayerDetectionController : MonoBehaviour
     {
-        [SerializeField] private PlayerManager manager;
+        [SerializeField] 
+        private PlayerManager manager;
+        
         private bool _detectionEnabled=false;
         private void OnTriggerEnter(Collider other)
         {
-            if (manager.currentAreaType == AreaType.BaseDefense) return;
+            if (manager.CurrentAreaType == AreaType.BaseDefense) return;
             if (other.TryGetComponent(out IDamageble damagable))
             {
                 if(damagable.IsTaken) return;

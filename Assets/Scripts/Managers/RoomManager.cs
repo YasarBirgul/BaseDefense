@@ -53,7 +53,6 @@ namespace Managers
             if(!CustomerOnBuyZone || !customer.HasMoney) return;
             
             await Task.Delay(100);
-            
             if (_roomData.RoomCost > 0) 
             {
                 _roomData.RoomCost -= payedAmount;

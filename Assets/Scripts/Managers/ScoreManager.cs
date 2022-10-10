@@ -44,7 +44,7 @@ namespace Managers
         private void UpdateGemScoreText(int diamondScore) => UISignals.Instance.onSetGemScoreText?.Invoke(diamondScore);
         private void UpdateMoneyScoreText(int moneyScore) => UISignals.Instance.onSetMoneyScoreText?.Invoke(moneyScore);
         private void OnMoneyScoreUpdate(int moneyScore) => UpdateMoneyScoreText(_scoreData.MoneyScore += moneyScore);
-        private void OnDiamondScoreUpdate(int diamondScore) => UpdateGemScoreText(_scoreData.DiamondScore += diamondScore);
+        private void OnDiamondScoreUpdate(int gemScore) => UpdateGemScoreText(_scoreData.DiamondScore += gemScore);
         private bool OnHasEnoughMoney() =>_scoreData.MoneyScore != 0;
         private void UpdateGameScoreData() => DataInitSignals.Instance.onSaveScoreData.Invoke(_scoreData);
         private void OnApplicationQuit() => UpdateGameScoreData();
