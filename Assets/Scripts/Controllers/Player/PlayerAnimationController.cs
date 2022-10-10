@@ -66,19 +66,20 @@ namespace Controllers
                 animator.SetBool("Aimed",true);
                 _velocityX = inputParams.MovementVector.x;
                 _velocityZ = inputParams.MovementVector.y;
-                if (_velocityZ < 0.1f)
+                
+                if (_velocityZ < 0.1f)                                           // Yukarı İvme
                 {
                     _velocityZ += Time.deltaTime * _acceleration;
                 }
-                if (_velocityX > -0.1f && Mathf.Abs(_velocityZ) <= 0.2f)
+                if (_velocityX > -0.1f && Mathf.Abs(_velocityZ) <= 0.2f)         // Sağ z neyse
                 {
                     _velocityX -= Time.deltaTime * _acceleration;
                 }
-                if (_velocityX < 0.1f && Mathf.Abs(_velocityZ) <= 0.2f)
+                if (_velocityX < 0.1f && Mathf.Abs(_velocityZ) <= 0.2f)        // Sol z neyse
                 {
                     _velocityX += Time.deltaTime * _acceleration;
                 }
-                if (_velocityZ > 0.0f)
+                if (_velocityZ > 0.0f)                                          // Yukarı
                 {
                     _velocityZ -= Time.deltaTime * _decelaration;
                 }
@@ -94,8 +95,10 @@ namespace Controllers
                 {
                     _velocityX = 0.0f;
                 }
-                animator.SetFloat("VelocityZ",_velocityZ);
+                
                 animator.SetFloat("VelocityX",_velocityX);
+                animator.SetFloat("VelocityZ",_velocityZ);
+
                 if (inputParams.MovementVector.sqrMagnitude == 0)
                 {
                     AimTarget(playerManager.EnemyTarget);
@@ -120,6 +123,20 @@ namespace Controllers
         public void AimTarget(bool hasTarget)
         {
             animator.SetBool("Aimed",hasTarget);
+        }
+
+        private bool PlayerAwayFromEnemy(Transform enemyTransform)
+        {
+            Vector3 enemyDistance = enemyTransform.position - playerManager.transform.position;
+          //  Debug.Log(enemyDistance.magnitude);
+            if (enemyDistance.magnitude > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

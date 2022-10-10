@@ -106,7 +106,6 @@ namespace Managers
         }
         public void SetEnemyTarget()
         {
-            Debug.Log(EnemyList.Count);
             shootingController.SetEnemyTargetTransform();
             animationController.AimTarget(true);
             AimEnemy();
@@ -116,6 +115,8 @@ namespace Managers
             if (EnemyList.Count != 0)
             {
                 var transformEnemy = EnemyList[0].GetTransform();
+                movementController.RotatePlayerToTarget(transformEnemy);
+                
             }
         }
     }

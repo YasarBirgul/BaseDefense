@@ -39,6 +39,12 @@ namespace Controllers
             _inputVector = inputParams.MovementVector;
             EnableMovement(_inputVector.sqrMagnitude > 0);
         }
+
+        public void RotatePlayerToTarget(Transform enemyTarget)
+        {
+            transform.LookAt(enemyTarget, Vector3.up*3f);
+        }
+        
         private void EnableMovement(bool movementStatus)
         {
             _isReadyToMove = movementStatus;
@@ -54,7 +60,10 @@ namespace Controllers
                 var velocity = rigidbody.velocity; 
                 velocity = new Vector3(_inputVector.x,velocity.y, _inputVector.y)*_data.PlayerSpeed;
                 rigidbody.velocity = velocity;
-                RotatePlayer();
+                if (!manager.HasEnemyTarget)
+                {
+                    RotatePlayer();
+                }
             }
             else if(rigidbody.velocity != Vector3.zero)
             {
