@@ -1,9 +1,10 @@
 ﻿using Abstract;
+using Interfaces;
 using UnityEngine;
 
 namespace Controllers.Soldier
 { 
-    public class SoldierPhysicsController : Interactable
+    public class SoldierPhysicsController : IInteractable
     {
         
     }

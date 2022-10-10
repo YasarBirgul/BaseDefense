@@ -3,11 +3,13 @@ using Controllers.Bullet;
 using Data.UnityObject;
 using Data.ValueObject.WeaponData;
 using Enums;
+using Interfaces;
+using Signals;
 using UnityEngine;
 
 namespace Managers
 {
-    public class BulletManager: MonoBehaviour
+    public class BulletManager: MonoBehaviour, IReleasePoolObject
     {
         #region Self Variables
 
@@ -38,6 +40,15 @@ namespace Managers
         private void SetDataToControllers()
         {
             physicsController.GetData(_data);
+        }
+        public void ReleaseObject(GameObject obj, PoolType poolName)
+        {
+            PoolSignals.Instance.onReleaseObjectFromPool.Invoke(poolName,obj);
+        }
+        public void SetBulletToPool()
+        {
+            var poolName = (PoolType)System.Enum.Parse(typeof(PoolType),weaponType.ToString());
+            ReleaseObject(gameObject,poolName);
         }
     }
 }

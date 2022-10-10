@@ -1,8 +1,8 @@
-using Abstract;
+using Interfaces;
 
 namespace Concrete
 {
-    public class PlayerInteractable:Interactable
+    public class PlayerInteractable:IInteractable
     {
         
     }

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7010033428340386841}
   - component: {fileID: 8883290336501723813}
   - component: {fileID: 7829491643606824651}
-  - component: {fileID: 4991310389390313544}
   - component: {fileID: 9213348634609187878}
   m_Layer: 14
   m_Name: BulletHolder
@@ -65,25 +64,6 @@ CapsuleCollider:
   m_Height: 0.18773545
   m_Direction: 2
   m_Center: {x: 0, y: -0.00011155009, z: 0.09019501}
---- !u!114 &4991310389390313544
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1898963805810283683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ff8e1e69f1e4224a1028050ef7474bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  soldierAIBrain: {fileID: 0}
-  AutoDestroyTime: 5
-  MoveSpeed: 2
-  Damage: 5
-  Rigidbody: {fileID: 8883290336501723813}
-  TrailConfig: {fileID: 11400000, guid: 6d10b837734031544a69fc513f72cdeb, type: 2}
-  Renderer: {fileID: 0}
 --- !u!96 &9213348634609187878
 TrailRenderer:
   serializedVersion: 2

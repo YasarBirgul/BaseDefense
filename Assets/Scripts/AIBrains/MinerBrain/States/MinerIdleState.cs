@@ -1,5 +1,6 @@
 using Abstract;
 using Enums.AI.Miner;
+using Interfaces;
 using Managers;
 
 namespace AIBrains.MinerBrain.States

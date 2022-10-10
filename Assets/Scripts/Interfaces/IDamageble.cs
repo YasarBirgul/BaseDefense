@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Abstract
 {
-    public interface IDamagable
+    public interface IDamageble
     {
         public bool IsTaken { get; set; }
         public bool IsDead { get; set; }

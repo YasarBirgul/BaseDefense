@@ -1,12 +1,13 @@
 ﻿using Abstract;
+using Interfaces;
 
 namespace AIBrains.SoldierBrain
 {
-    public class SoldierDeath  : IState
+    public class DetectTarget : IState
     {
         public void Tick()
         {
-           
+            
         }
 
         public void OnEnter()

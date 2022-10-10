@@ -5,6 +5,7 @@ using AIBrains.WorkerBrain.MoneyWorker.States;
 using Controllers.AI.MoneyWorker;
 using Data.ValueObject.AIDatas;
 using Enums;
+using Interfaces;
 using Signals;
 using Sirenix.OdinInspector;
 using StateBehaviour;

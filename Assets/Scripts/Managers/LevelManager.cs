@@ -12,9 +12,7 @@ namespace Managers
         #region Self Variables
 
         #region Public Variables
-
-        [Header("Data")] public LevelData Data;
-
+        
         #endregion
 
         #region Private Variables
@@ -30,8 +28,7 @@ namespace Managers
         private GameObject levelHolder;
         [SerializeField] 
         private LevelLoaderCommand levelLoaderCommand;
-        [SerializeField] 
-        private ClearActiveLevelCommand clearActiveLevelCommand;
+        [SerializeField] private ClearActiveLevelCommand clearActiveLevelCommand;
 
         #endregion
 

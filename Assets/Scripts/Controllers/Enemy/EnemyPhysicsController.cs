@@ -3,9 +3,9 @@ using AIBrains.EnemyBrain;
 using Interfaces;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.Enemy
 {
-    public class EnemyPhysicsController : MonoBehaviour,IDamagable
+    public class EnemyPhysicsController : MonoBehaviour,IDamageble
     {
         [SerializeField] 
         private EnemyAIBrain enemyAIBrain;

@@ -7,8 +7,7 @@ namespace Managers
 {
     public class ObjectPoolManager
     {
-         private static ObjectPoolManager _instance;
-        
+        private static ObjectPoolManager _instance;
         public static ObjectPoolManager Instance
         {
             get

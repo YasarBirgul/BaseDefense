@@ -47,6 +47,7 @@ namespace Managers
         private int _soldierAmount;
         [ShowInInspector] private List<Vector3> _slotTransformList = new List<Vector3>();
         private int _tentCapacity;
+        
         #endregion
 
         #endregion

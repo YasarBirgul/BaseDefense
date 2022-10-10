@@ -1,4 +1,4 @@
-﻿namespace Abstract
+﻿namespace Interfaces
 {
     public interface IState
     {

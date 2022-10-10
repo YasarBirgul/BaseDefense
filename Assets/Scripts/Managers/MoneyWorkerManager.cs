@@ -59,7 +59,7 @@ namespace Managers
         {
             return Resources.Load<CD_WorkerAI>("Data/CD_WorkerAI").WorkerAIData.WorkerAITypes[(int)type];
         }
-
+        
         private void OnAddMoneyPositionToList(Transform pos)
         {
             _targetList.Add(pos);

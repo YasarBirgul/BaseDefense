@@ -1,5 +1,7 @@
-﻿using Data.ValueObject.WeaponData;
+﻿using Abstract;
+using Data.ValueObject.WeaponData;
 using Interfaces;
+using Managers;
 using UnityEngine;
 
 namespace Controllers.Bullet
@@ -13,6 +15,9 @@ namespace Controllers.Bullet
         #endregion
 
         #region Serialized Variables
+
+        [SerializeField] 
+        private BulletManager bulletManager;
 
         #endregion
 
@@ -31,6 +36,13 @@ namespace Controllers.Bullet
         public int Damage()
         {
             return _damage;
+        }
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.TryGetComponent(out IDamageble idDamagable))
+            {
+                bulletManager.SetBulletToPool();
+            }
         }
     }
 }

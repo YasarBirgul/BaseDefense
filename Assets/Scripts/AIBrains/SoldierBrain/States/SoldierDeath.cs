@@ -1,22 +1,23 @@
 ﻿using Abstract;
+using Interfaces;
 
-namespace StateMachines.Mine.States
+namespace AIBrains.SoldierBrain
 {
-    public class ReadyState : IState
+    public class SoldierDeath  : IState
     {
         public void Tick()
         {
-            
+           
         }
 
         public void OnEnter()
         {
-           
+            
         }
 
         public void OnExit()
         {
-           
+            
         }
     }
 }

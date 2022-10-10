@@ -18,12 +18,12 @@ namespace Controllers
         private int Speed = 30;
         private void Awake()
         {
-            fireController = new BulletFireController(manager.WeaponType,Speed);
+            fireController = new BulletFireController(manager.WeaponType);
         }
         public void SetEnemyTargetTransform()
         {
             manager.EnemyTarget = manager.EnemyList[0].GetTransform();
-            manager.DamagableEnemy = manager.EnemyList[0];
+          //  manager.DamagebleEnemy = manager.EnemyList[0];
             manager.HasEnemyTarget = true;
             Shoot();
         }
@@ -31,8 +31,7 @@ namespace Controllers
         {
             if (manager.EnemyList.Count != 0)
             {
-                manager.EnemyTarget = manager.EnemyList[0].GetTransform();
-                manager.DamagableEnemy = manager.EnemyList[0];
+                SetEnemyTargetTransform();
             }
             else
             {
@@ -51,14 +50,14 @@ namespace Controllers
         {
             if(!manager.EnemyTarget) 
                 return;
-            if (manager.DamagableEnemy.IsDead)
+            if (manager.EnemyList[0].IsDead)
             {
                 RemoveTarget();
             }
             else
             {
-                fireController.FireBullets(weaponHolder);
                 await Task.Delay(400);
+                fireController.FireBullets(weaponHolder);
                 Shoot();
             }
         }

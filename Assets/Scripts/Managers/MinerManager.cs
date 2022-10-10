@@ -12,21 +12,23 @@ namespace Managers
 
         #region Public Variables
 
-        public MinerAIBrain minerAIBrain;
+        public MinerAIBrain minerAIBrain { get; private set; }
         
         #endregion
 
         #region Serialized Variables
         
-        public HostageType CurrentType=HostageType.HostageWaiting; 
-        [SerializeField] private Animator animator;
+        
+        [SerializeField]
+        private Animator animator;
 
 
         #endregion
 
         #region Private Variables
 
-        private int _currentLevel; //LevelManager uzerinden cekilecek
+        public HostageType _currentType=HostageType.HostageWaiting; 
+        private int _currentLevel; 
         private Transform _currentMinePlace;
 
 
@@ -74,7 +76,7 @@ namespace Managers
 
         public void AddToHostageStack()
         {
-            CurrentType = HostageType.Hostage;
+            _currentType = HostageType.Hostage;
             HostageSignals.Instance.onAddHostageStack?.Invoke(this);
         }
     }

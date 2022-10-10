@@ -24,14 +24,15 @@ namespace Controllers.Payment
         }
         private void TakePayment(ICustomer customer)
         {
-            if (!customer.CanPay) return;
+            if (!customer.HasMoney) return;
             customer.MakePayment();
+            roomManager.CustomerOnBuyZone = true;
             roomManager.RoomCostUpdate(1, customer);
         }
         private void ExitPayment(ICustomer customer)
         {
             customer.StopPayment();
-            roomManager.RoomBought = false;
+            roomManager.CustomerOnBuyZone = false;
             roomManager.InformBaseManager();
         }
     }

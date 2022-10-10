@@ -1,12 +1,13 @@
 ﻿using Abstract;
 using Controllers.Gate;
 using Enums.GameStates;
+using Interfaces;
 using Managers;
 using UnityEngine;
 
 namespace Controllers
 {
-    public class PlayerPhysicsController : Interactable
+    public class PlayerPhysicsController : IInteractable
     {
         #region Self Variables
 
@@ -52,7 +53,7 @@ namespace Controllers
             gameObject.layer = LayerMask.NameToLayer(playerIsGoingToFrontYard ? "PlayerFrontYard" : "PlayerBase");
             playerManager.CheckAreaStatus(playerIsGoingToFrontYard ? AreaType.BattleOn : AreaType.BaseDefense);
             if(!playerIsGoingToFrontYard) return;
-            playerManager.DamagableEnemy = null;
+         //   playerManager.DamagebleEnemy = null;
             playerManager.HasEnemyTarget = false;
             playerManager.EnemyList.Clear();
         }

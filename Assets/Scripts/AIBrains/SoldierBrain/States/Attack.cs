@@ -1,5 +1,6 @@
 ﻿using Abstract;
 using Enums;
+using Interfaces;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -24,7 +25,7 @@ namespace AIBrains.SoldierBrain
         } 
         public void Tick()
         {
-            if (_soldierAIBrain.DamagableEnemy.IsDead)
+            if (_soldierAIBrain.DamagebleEnemy.IsDead)
             {
                 _soldierAIBrain.RemoveTarget();
             }

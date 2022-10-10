@@ -12,7 +12,7 @@ namespace Controllers
         private void OnTriggerEnter(Collider other)
         {
 
-            if (other.CompareTag("Player") && minerManager.CurrentType == HostageType.HostageWaiting)
+            if (other.CompareTag("Player") && minerManager._currentType == HostageType.HostageWaiting)
             {
                 
                 minerManager.AddToHostageStack();

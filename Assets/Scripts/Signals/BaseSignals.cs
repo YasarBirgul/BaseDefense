@@ -9,7 +9,7 @@ namespace Signals
     public class BaseSignals : MonoSingleton<BaseSignals>
     {
         public UnityAction<BaseRoomTypes> onChangeExtentionVisibility = delegate{  };
-        public UnityAction<BaseRoomTypes,RoomData> onInformBaseRoom=delegate {  };
+        public UnityAction<BaseRoomTypes,RoomData> onInformBaseManager=delegate {  };
         public Func<BaseRoomTypes, RoomData> onGetRoomData= delegate { return default;};
     }
 }

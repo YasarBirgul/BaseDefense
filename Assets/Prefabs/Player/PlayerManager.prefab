@@ -1220,7 +1220,6 @@ MonoBehaviour:
   WeaponType: 0
   EnemyTarget: {fileID: 0}
   HasEnemyTarget: 0
-  CurrentMoneyScore: 10000
   meshController: {fileID: 1429477786026016514}
   animationController: {fileID: 3256136071381465238}
   weaponController: {fileID: 1868632370789283655}
@@ -1662,7 +1661,7 @@ GameObject:
   - component: {fileID: 4498633671592508039}
   - component: {fileID: 7593014632168649672}
   m_Layer: 18
-  m_Name: PlayerCollector
+  m_Name: PlayerAccountCollector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

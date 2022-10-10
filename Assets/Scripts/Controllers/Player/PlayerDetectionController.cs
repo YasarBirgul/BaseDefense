@@ -12,11 +12,11 @@ namespace Controllers.Player
         private void OnTriggerEnter(Collider other)
         {
             if (manager.currentAreaType == AreaType.BaseDefense) return;
-            if (other.TryGetComponent(out IDamagable damagable))
+            if (other.TryGetComponent(out IDamageble damagable))
             {
                 if(damagable.IsTaken) return;
                   manager.EnemyList.Add(damagable);
-                  if (manager.EnemyTarget == null)
+                  if ( manager.EnemyTarget == null)
                   {
                       damagable.IsTaken = true;
                       manager.SetEnemyTarget();
@@ -25,7 +25,7 @@ namespace Controllers.Player
         }
         private void OnTriggerExit(Collider other)
         {
-            if (other.TryGetComponent(out IDamagable damagable))
+            if (other.TryGetComponent(out IDamageble damagable))
             {
                 damagable.IsTaken = false;
                 manager.EnemyList.Remove(damagable);
@@ -34,7 +34,6 @@ namespace Controllers.Player
                 {
                     manager.EnemyTarget = null;
                     manager.HasEnemyTarget = false;
-                    manager.DamagableEnemy = null;
                 }
             }
         }

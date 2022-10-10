@@ -8,7 +8,6 @@ using Sirenix.OdinInspector;
 
 namespace Managers
 {
-
     public class PoolManager : MonoBehaviour
     {
 
@@ -22,18 +21,33 @@ namespace Managers
         #endregion
 
         #region Private Variables
+        
         [ShowInInspector]
         private SerializedDictionary<PoolType, PoolData> _data;
         private int _listCountCache;
-        #endregion
         
+        #endregion
         private void Awake()
         {
             _data = GetData();
             InitializePools();
         }
+        
+        private SerializedDictionary<PoolType, PoolData> GetData()
+        {
+            return Resources.Load<CD_Pool>("Data/CD_Pool").poolDataDictionary;
+        }
 
-        #region EventSubscription
+        private void InitializePools()
+        {
+            for (int index = 0; index < _data.Count; index++)
+            {
+                _listCountCache = index;
+                InitPool(((PoolType)index), _data[((PoolType)index)].initalAmount, _data[((PoolType)index)].isDynamic);
+            }
+        }
+        
+        #region Event Subscription
         private void OnEnable()
         {
             SubscribeEvents();
@@ -69,40 +83,23 @@ namespace Managers
             obj.transform.parent = this.transform;
             ObjectPoolManager.Instance.ReturnObject<GameObject>(obj, poolType.ToString());
         }
-        private SerializedDictionary<PoolType, PoolData> GetData()
-        {
-            return Resources.Load<CD_Pool>("Data/CD_Pool").PoolDataDic;
-        }
 
-        private void InitializePools()
-        {
-            for (int index = 0; index < _data.Count; index++)
-            {
-                _listCountCache = index;
-                InitPool(((PoolType)index), _data[((PoolType)index)].initalAmount, _data[((PoolType)index)].isDynamic);
-            }
-
-        }
-
-        public void InitPool(PoolType poolType, int initalAmount, bool isDynamic)
+        private void InitPool(PoolType poolType, int initalAmount, bool isDynamic)
         {
             ObjectPoolManager.Instance.AddObjectPool<GameObject>(FactoryMethod, TurnOnObject, TurnOffObject, poolType.ToString(), initalAmount, isDynamic);
         }
-
-
-        public void TurnOnObject(GameObject obj)
+        private void TurnOnObject(GameObject obj)
         {
             if (obj != null)
             {
                 obj.SetActive(true);
             }
         }
-        public void TurnOffObject(GameObject obj)
+        private void TurnOffObject(GameObject obj)
         {
             obj.SetActive(false);
         }
-
-        public GameObject FactoryMethod()
+        private GameObject FactoryMethod()
         {
             var go = Instantiate(_data[((PoolType)_listCountCache)].ObjectType,transform);
             return go;

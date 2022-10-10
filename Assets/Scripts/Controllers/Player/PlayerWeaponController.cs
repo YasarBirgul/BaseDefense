@@ -7,16 +7,19 @@ namespace Managers
     {
          #region Self Variables
         
-         #region Public Variabl
+         #region Public Variables
+         
          #endregion
      
          #region Serialized Variables
          
-         [SerializeField] private MeshFilter meshFilter;
-         [SerializeField] private MeshFilter sideMeshFilter;
+         [SerializeField] 
+         private MeshFilter meshFilter;
+         [SerializeField] 
+         private MeshFilter sideMeshFilter;
          #endregion
      
-         #region Private Variabl
+         #region Private Variables
          private WeaponData _weaponData;
          private bool _hasSideMesh;
          private int _damage;
@@ -24,7 +27,6 @@ namespace Managers
          private int _weaponLevel;
          #endregion
          #endregion
-
          public void SetWeaponData(WeaponData weaponData)
          {
              _weaponData = weaponData;

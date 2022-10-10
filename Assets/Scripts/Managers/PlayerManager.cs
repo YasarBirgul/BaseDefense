@@ -19,23 +19,29 @@ namespace Managers
         #region Public Variables
 
         public AreaType currentAreaType = AreaType.BaseDefense;
+        
         public WeaponTypes WeaponType;
         
-        public List<IDamagable> EnemyList = new List<IDamagable>();
-        public Transform EnemyTarget;
-        public bool HasEnemyTarget = false;
-        public IDamagable DamagableEnemy;
-        public int CurrentMoneyScore = 100;
+        public List<IDamageble> EnemyList = new List<IDamageble>();
         
+        public Transform EnemyTarget;
+        
+        public bool HasEnemyTarget = false;
+
         #endregion
 
         #region Serialized Variables
 
-        [SerializeField] private PlayerMeshController meshController;
-        [SerializeField] private PlayerAnimationController animationController;
-        [SerializeField] private PlayerWeaponController weaponController;
-        [SerializeField] private PlayerShootingController shootingController;
-        [SerializeField] private PlayerMovementController movementController;
+        [SerializeField] 
+        private PlayerMeshController meshController;
+        [SerializeField] 
+        private PlayerAnimationController animationController;
+        [SerializeField] 
+        private PlayerWeaponController weaponController;
+        [SerializeField] 
+        private PlayerShootingController shootingController;
+        [SerializeField]
+        private PlayerMovementController movementController;
         #endregion
 
         #region Private Variables
@@ -59,6 +65,7 @@ namespace Managers
         private WeaponData GetWeaponData() => Resources.Load<CD_Weapon>("Data/CD_Weapon").WeaponData[(int)WeaponType];
         private void Init()
         {
+            currentAreaType = AreaType.BaseDefense;
             SetDataToControllers();
         }
         private void SetDataToControllers()
@@ -99,6 +106,7 @@ namespace Managers
         }
         public void SetEnemyTarget()
         {
+            Debug.Log(EnemyList.Count);
             shootingController.SetEnemyTargetTransform();
             animationController.AimTarget(true);
             AimEnemy();

@@ -19,5 +19,10 @@ namespace Signals
         public UnityAction onRestartLevel = delegate { };
         public UnityAction onReset = delegate { };
         public Func<int> onGetLevelID = delegate { return 0; };
+        
+         public UnityAction<int> onMoneyScoreUpdate = delegate{  };
+         public UnityAction<int> onDiamondScoreUpdate = delegate {  };
+        public Func<bool> onHasEnoughMoney= delegate { return default;}; 
+        public Func<int> onGetDiamondAmount= delegate { return default;}; 
     }
 }

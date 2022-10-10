@@ -10,16 +10,18 @@ namespace Data.UnityObject
     {
         public List<LevelData> LevelDatas=new List<LevelData>();
         public int LevelId;
+        public ScoreData ScoreData;
         public string Key ="LevelData";
         public CD_Level()
         {
             
             
         } 
-        public CD_Level(int levelId,List<LevelData> levelDatas)
+        public CD_Level(int levelId,List<LevelData> levelDatas, ScoreData scoreData)
         {
             LevelId = levelId;
             LevelDatas = levelDatas;
+            ScoreData = scoreData;
 
         }
         public string GetKey()

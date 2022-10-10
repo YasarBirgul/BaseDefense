@@ -1,4 +1,5 @@
 ﻿using Data.ValueObject.PlayerData;
+using DG.Tweening;
 using Keys;
 using Managers;
 using UnityEngine;
@@ -41,13 +42,6 @@ namespace Controllers
             if (manager.HasEnemyTarget) return;
             RotatePlayer(inputParams);
         }
-        private void RotatePlayer(HorizontalInputParams inputParams)
-        {
-            Vector3 movementDirection = new Vector3(inputParams.MovementVector.x, 0, inputParams.MovementVector.y);
-            if (movementDirection == Vector3.zero) return;
-            Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 30);
-        } 
         public void RotateThePlayer(Transform enemyTransform)
         {
             transform.LookAt(enemyTransform, Vector3.up*3f);
@@ -72,6 +66,13 @@ namespace Controllers
             {
                 rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, 0);
             }
+        }
+        private void RotatePlayer(HorizontalInputParams inputParams)
+        {
+            Vector3 movementDirection = new Vector3(inputParams.MovementVector.x, 0, inputParams.MovementVector.y);
+            if (movementDirection == Vector3.zero) return;
+            Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 30);
         }
     }
 }

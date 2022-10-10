@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: CD_Score
   m_EditorClassIdentifier: 
   ScoreData:
-    MoneyScore: 0
-    DiamondScore: 0
+    MoneyScore: 20
+    DiamondScore: 20

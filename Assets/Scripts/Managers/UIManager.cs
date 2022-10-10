@@ -11,9 +11,12 @@ namespace Managers
         #endregion
         #region Serializefield Variables
         
-        [SerializeField] private UIPanelController uiPanelController;
-        [SerializeField] private TextMeshProUGUI moneyText;
-        [SerializeField] private TextMeshProUGUI gemText;
+        [SerializeField] 
+        private UIPanelController uiPanelController;
+        [SerializeField] 
+        private TextMeshProUGUI moneyText;
+        [SerializeField]
+        private TextMeshProUGUI gemText;
 
         #endregion
 

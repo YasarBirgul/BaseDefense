@@ -1022,7 +1022,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ee82cbb89c4e3094ea346c627af5e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoomBought: 0
+  CustomerOnBuyZone: 0
   roomType: 1
   roomPaymentTextController: {fileID: 7512410417784371075}
 --- !u!1 &792337784666100014
@@ -2031,7 +2031,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ee82cbb89c4e3094ea346c627af5e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoomBought: 0
+  CustomerOnBuyZone: 0
   roomType: 2
   roomPaymentTextController: {fileID: 3496293720111478305}
 --- !u!1 &2434781737582125500
@@ -2712,16 +2712,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3072574880232991553}
-  m_LocalRotation: {x: 0.348874, y: 0.6150506, z: -0.34885988, w: 0.6150582}
-  m_LocalPosition: {x: 0, y: 0, z: -0.17178535}
+  m_LocalRotation: {x: 0.5000045, y: 0.4999956, z: -0.4999956, w: 0.5000045}
+  m_LocalPosition: {x: 0, y: 0, z: -0.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7657490446814435729}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 120.875, y: -90, z: -179.999}
+  m_LocalEulerAnglesHint: {x: 90, y: -89.95599, z: -179.955}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.3030376, y: 0.37448558}
+  m_AnchoredPosition: {x: -2.04, y: 0.19}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &2288933590062060835
@@ -4211,16 +4211,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4591438125776315400}
-  m_LocalRotation: {x: 0.2653884, y: -0.6554151, z: 0.2653884, w: 0.6554152}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: 0, y: 0, z: 0.17000008}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2367072463495322665}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 44.088, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: -90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.77, y: -0.38}
+  m_AnchoredPosition: {x: 1.78, y: 0.16}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &4630335485648750940
@@ -4317,7 +4317,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -4430,7 +4430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ee82cbb89c4e3094ea346c627af5e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoomBought: 0
+  CustomerOnBuyZone: 0
   roomType: 3
   roomPaymentTextController: {fileID: 2505507405696541187}
 --- !u!1 &4814946841580008685
@@ -5152,7 +5152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ee82cbb89c4e3094ea346c627af5e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoomBought: 0
+  CustomerOnBuyZone: 0
   roomType: 0
   roomPaymentTextController: {fileID: 3689002827023251731}
 --- !u!1 &5618904340525489275
@@ -5551,16 +5551,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6094088151884036713}
-  m_LocalRotation: {x: 0.348874, y: 0.6150506, z: -0.34885988, w: 0.6150582}
-  m_LocalPosition: {x: 0, y: 0, z: -0.17178535}
+  m_LocalRotation: {x: 0.5000044, y: 0.49999562, z: -0.49999562, w: 0.5000044}
+  m_LocalPosition: {x: 0, y: 0, z: -0.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7147590918597755161}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 120.875, y: -90, z: -179.999}
+  m_LocalEulerAnglesHint: {x: 90, y: -90, z: -179.999}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.3030376, y: 0.37448558}
+  m_AnchoredPosition: {x: -2, y: 0.174}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &3399123923543826188

@@ -2,7 +2,7 @@
 {
     public interface ICustomer
     {
-        public bool CanPay { get; set; }
+        public bool HasMoney { get; set; }
         void MakePayment();
 
         void StopPayment();

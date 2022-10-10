@@ -1,27 +1,38 @@
 ﻿using System.Threading.Tasks;
-using Abstract;
 using Interfaces;
+using Signals;
 using UnityEngine;
 
 namespace Controllers.Player
 {
     public class PlayerAccountController : MonoBehaviour,ICustomer
     {
+        #region Self Variables
 
+        #region Public Variables
+        
+        #endregion
+
+        #region Serialized Variables
+        
         [SerializeField] 
         private MoneyStackerController moneyStackerController;
         
-        private bool canPay;
+        #endregion
 
-        private int _moneyScore = 10;
-        private int _gemAmount;
+        #region Private Variables
+        
+        #endregion
+
+        #endregion
         private void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent<IStackable>(out IStackable stackable))
             {
                 CollectMoney(stackable);
+                CoreGameSignals.Instance.onMoneyScoreUpdate.Invoke(+1);
             }
-            else if (other.TryGetComponent<Interactable>(out Interactable interactable))
+            else if (other.TryGetComponent<IInteractable>(out IInteractable interactable))
             {
                 moneyStackerController.OnRemoveAllStack();
             }
@@ -33,15 +44,14 @@ namespace Controllers.Player
         }
         
         #region Paying Interaction
-        public bool CanPay { get => _moneyScore != 0; set { } }
+        public bool HasMoney { get => CoreGameSignals.Instance.onHasEnoughMoney.Invoke(); set { } }
         public async void MakePayment()
         {
             while (true)
-            { 
-                _moneyScore -= 1;
-                Debug.Log(_moneyScore);
+            {
+                CoreGameSignals.Instance.onMoneyScoreUpdate.Invoke(-1);
                 await Task.Delay(100);
-                if (CanPay)
+                if (HasMoney)
                 {
                     continue;
                 }
@@ -50,7 +60,7 @@ namespace Controllers.Player
         }
         public void StopPayment()
         {
-            canPay = false;
+            HasMoney = false;
         }
         #endregion
     }

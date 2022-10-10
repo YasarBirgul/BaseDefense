@@ -1,4 +1,5 @@
-﻿using Controllers;
+﻿using System.Linq;
+using Controllers;
 using Data.ValueObject.LevelData;
 using Enums;
 using Enums.Turret;
@@ -39,15 +40,11 @@ namespace Managers
         {
             return DataInitSignals.Instance.onLoadBaseRoomData.Invoke();
         }
-        
         private void SetUpExistingRooms()
         {
-            foreach (var roomdata in _data.RoomDatas)
+            foreach (var room in _data.RoomDatas.Where(roomdata => roomdata.AvailabilityType == AvailabilityType.Unlocked))
             {
-                if (roomdata.AvailabilityType == AvailabilityType.Unlocked)
-                {
-                    ChangeVisibility(roomdata.BaseRoomType);
-                }
+                ChangeVisibility(room.BaseRoomType);
             }
         }
         
@@ -59,14 +56,14 @@ namespace Managers
         private void SubscribeEvents()
         {
             BaseSignals.Instance.onChangeExtentionVisibility += OnChangeVisibility;
-            BaseSignals.Instance.onInformBaseRoom += OnGetRoomData;
+            BaseSignals.Instance.onInformBaseManager += OnUpdateRoomData;
             BaseSignals.Instance.onGetRoomData += OnSetRoomData;
         }
         private void UnsubscribeEvents()
         {
             BaseSignals.Instance.onChangeExtentionVisibility -= OnChangeVisibility;
-            BaseSignals.Instance.onInformBaseRoom += OnGetRoomData;
-            BaseSignals.Instance.onGetRoomData += OnSetRoomData;
+            BaseSignals.Instance.onInformBaseManager -= OnUpdateRoomData;
+            BaseSignals.Instance.onGetRoomData -= OnSetRoomData;
         }
         private void OnDisable()
         {
@@ -77,7 +74,7 @@ namespace Managers
         {
             ChangeVisibility(baseRoomType);
         }
-        private void OnGetRoomData(BaseRoomTypes baseRoomType,RoomData roomData)
+        private void OnUpdateRoomData(BaseRoomTypes baseRoomType,RoomData roomData)
         { 
             _data.RoomDatas[(int)baseRoomType] = roomData;
             if (roomData.AvailabilityType == AvailabilityType.Locked)

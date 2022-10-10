@@ -9,6 +9,6 @@ namespace Data.UnityObject
         order = 0)]
     public class CD_Pool : ScriptableObject
     {
-        public SerializedDictionary<PoolType,PoolData> PoolDataDic = new SerializedDictionary<PoolType,PoolData>();
+        public SerializedDictionary<PoolType,PoolData> poolDataDictionary = new SerializedDictionary<PoolType,PoolData>();
     }
 }

@@ -12,9 +12,24 @@ namespace Controllers.Player
     [RequireComponent(typeof(StackController))]
     public class MoneyStackerController : AStacker
     {
-        [SerializeField] private List<Vector3> positionList;
+        #region Self Variables
 
-        [SerializeField] private float radiusAround;
+        #region Public Variables
+        
+        #endregion
+
+        #region Serialized Variables
+
+        [SerializeField] 
+        private List<Vector3> positionList;
+
+        [SerializeField] 
+        private float radiusAround;
+        
+        #endregion
+
+        #region Private Variables
+
         
         private float stackDelay = 0.5f;
 
@@ -25,6 +40,11 @@ namespace Controllers.Player
         private int stackListConstCount;
 
         private bool canRemove = true;
+
+        
+        #endregion
+
+        #endregion
         
         private void Awake()
         {

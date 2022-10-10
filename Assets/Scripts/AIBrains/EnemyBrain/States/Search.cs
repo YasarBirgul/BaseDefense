@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Abstract;
+using Interfaces;
 using UnityEngine;
 using UnityEngine.AI;
 

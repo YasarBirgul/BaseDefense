@@ -1,4 +1,5 @@
 using Abstract;
+using Interfaces;
 
 namespace AIBrains.WorkerBrain.MoneyWorker.States
 {

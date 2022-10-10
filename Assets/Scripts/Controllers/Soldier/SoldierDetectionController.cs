@@ -24,7 +24,7 @@ namespace Controllers.Soldier
         #endregion
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out IDamagable damagable))
+            if (other.TryGetComponent(out IDamageble damagable))
             {
                 if(damagable.IsTaken) return;
                 soldierAIBrain.enemyList.Add(damagable);
@@ -37,7 +37,7 @@ namespace Controllers.Soldier
         }
         private void OnTriggerExit(Collider other)
         {
-            if (other.TryGetComponent(out IDamagable damagable))
+            if (other.TryGetComponent(out IDamageble damagable))
             {
                 if (soldierAIBrain.enemyList.Count == 0)
                 {
