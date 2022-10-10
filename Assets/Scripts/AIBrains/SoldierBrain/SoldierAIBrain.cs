@@ -17,7 +17,7 @@ using UnityEngine.AI;
 namespace AIBrains.SoldierBrain
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    public class SoldierAIBrain : MonoBehaviour, IGetPoolObject
+    public class SoldierAIBrain : MonoBehaviour
     {
         #region Self Variables
 
@@ -32,14 +32,13 @@ namespace AIBrains.SoldierBrain
         public List<IDamageble> enemyList = new List<IDamageble>();
         public Transform EnemyTarget;
         public IDamageble DamagebleEnemy;
-        
+        public Transform WeaponHolder;
         #endregion
 
         #region Serialized Variables
 
         [SerializeField] private SoldierPhysicsController physicsController;
         [SerializeField] private Animator animator;
-        [SerializeField] private Transform weaponHolder;
         #endregion
 
         #region Private Variables
@@ -58,46 +57,18 @@ namespace AIBrains.SoldierBrain
         private StateMachine _stateMachine;
         private Vector3 _slotTransform;
         private bool HasSoldiersActivated;
-        private List<WeaponData> _weaponDatas;
-        // private bool dead { get; set; }
-        
+
+
         #endregion
         #endregion
         private void Awake()
         {
             _data = GetSoldierAIData();
-            _weaponDatas = WeaponData();
-            SetSoldierAIData();
-          
         } private void Start()
         {
             GetStateReferences();
         }
         private SoldierAIData GetSoldierAIData() => Resources.Load<CD_AI>("Data/CD_AI").SoldierAIData;
-        private List<WeaponData> WeaponData() => Resources.Load<CD_Weapon>("Data/CD_Weapon").WeaponData;
-        private void SetSoldierAIData()
-        {
-            _damage = _data.Damage;
-            _soldierSpeed = _data.SoldierSpeed;
-            _attackRadius = _data.AttackRadius;
-            _attackDelay = _data.AttackDelay;
-            _health = _data.Health;
-            _spawnPoint = _data.SpawnPoint;
-        } 
-        public GameObject GetObject(PoolType poolName)
-        {
-            var bulletPrefab = PoolSignals.Instance.onGetObjectFromPool?.Invoke(poolName);
-            bulletPrefab.transform.position = weaponHolder.position;
-            bulletPrefab.GetComponent<BulletPhysicsController>().soldierAIBrain = this;
-            FireBullet(bulletPrefab);
-            return bulletPrefab;
-        }
-        private void FireBullet(GameObject bulletPrefab)
-        {
-            bulletPrefab.transform.rotation = weaponHolder.transform.rotation;
-            var rigidBodyBullet = bulletPrefab.GetComponent<Rigidbody>();
-            rigidBodyBullet.AddForce(weaponHolder.transform.forward*40,ForceMode.VelocityChange);
-        }
         private void GetStateReferences()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
@@ -161,13 +132,11 @@ namespace AIBrains.SoldierBrain
             DamagebleEnemy = enemyList[0];
             HasEnemyTarget = true;
         }
-
         public void EnemyTargetStatus()
         {
             if (enemyList.Count != 0)
             {
-                EnemyTarget = enemyList[0].GetTransform();
-                DamagebleEnemy = enemyList[0];
+               SetEnemyTargetTransform();
             }
             else
             {

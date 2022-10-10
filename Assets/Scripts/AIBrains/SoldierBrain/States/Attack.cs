@@ -1,12 +1,14 @@
 ﻿using Abstract;
+using Controllers.Bullet;
 using Enums;
 using Interfaces;
+using Signals;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace AIBrains.SoldierBrain
 {
-    public class Attack : IState
+    public class Attack : IState,IGetPoolObject
     {
         private SoldierAIBrain _soldierAIBrain;
         private NavMeshAgent _navMeshAgent;
@@ -16,6 +18,7 @@ namespace AIBrains.SoldierBrain
         private static readonly int Attacked = Animator.StringToHash("Attack");
         private static readonly int Speed = Animator.StringToHash("Speed");
         private static readonly int HasTarget = Animator.StringToHash("HasTarget");
+        private BulletFireController bulletFireController;
 
         public Attack(SoldierAIBrain soldierAIBrain,NavMeshAgent navMeshAgent,Animator animator)
         {
@@ -36,7 +39,7 @@ namespace AIBrains.SoldierBrain
             _timer -= Time.deltaTime*_attackTime;
             if (_timer <= 0)
             {
-                _soldierAIBrain.GetObject(PoolType.Pistol);
+                FireBullets();
                 _timer = 0.2f;
             }
         }
@@ -57,12 +60,24 @@ namespace AIBrains.SoldierBrain
         }
         public void OnEnter()
         {
+             bulletFireController = new BulletFireController(WeaponTypes.Pistol);
             _navMeshAgent.speed = 1.801268E-05f;
             _animator.SetBool(HasTarget,true);
         }
         public void OnExit()
         {
             _animator.SetBool(HasTarget,false);
+        }
+
+        public GameObject GetObject(PoolType poolName)
+        {
+            return PoolSignals.Instance.onGetObjectFromPool.Invoke(poolName);
+        }
+
+        private void FireBullets()
+        {
+            GetObject(PoolType.Pistol);
+            bulletFireController.FireBullets(_soldierAIBrain.WeaponHolder);
         }
     }
 }

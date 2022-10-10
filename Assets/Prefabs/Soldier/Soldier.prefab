@@ -295,9 +295,9 @@ MonoBehaviour:
   TentPosition: {fileID: 0}
   FrontYardStartPosition: {fileID: 0}
   EnemyTarget: {fileID: 0}
+  WeaponHolder: {fileID: 3414026346241949250}
   physicsController: {fileID: 7073478314082187542}
   animator: {fileID: 3751244273130144068}
-  weaponHolder: {fileID: 3414026346241949250}
 --- !u!1 &465225024773077089
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,7 +23,6 @@ namespace Controllers
         public void SetEnemyTargetTransform()
         {
             manager.EnemyTarget = manager.EnemyList[0].GetTransform();
-          //  manager.DamagebleEnemy = manager.EnemyList[0];
             manager.HasEnemyTarget = true;
             Shoot();
         }

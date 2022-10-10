@@ -8,7 +8,6 @@ namespace Controllers
     {
         [SerializeField]
         private GemStackerController gemStackerController;
-        [SerializeField] private Collider collider;
         private void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent<IStackable>(out IStackable stackable))

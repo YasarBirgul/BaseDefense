@@ -15,8 +15,8 @@ namespace Controllers.Bullet
         
         #region Serialized Variables
 
-        [SerializeField] 
-        private Rigidbody rigidbody;
+        [SerializeField]
+        private new Rigidbody rigidbody;
 
         private bool bulletHasFired=false;
         #endregion

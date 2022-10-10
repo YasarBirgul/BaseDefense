@@ -105,7 +105,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gemStackerController: {fileID: 450938523811442068}
-  collider: {fileID: 2259638259233074470}
 --- !u!1 &5992348807837175650
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,7 +293,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 10.24, y: 10.24}
+  m_Size: {x: 1.13, y: 0.59}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

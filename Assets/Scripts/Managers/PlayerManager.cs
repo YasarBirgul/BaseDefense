@@ -116,7 +116,6 @@ namespace Managers
             {
                 var transformEnemy = EnemyList[0].GetTransform();
                 movementController.RotatePlayerToTarget(transformEnemy);
-                
             }
         }
     }

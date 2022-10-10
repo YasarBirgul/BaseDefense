@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Threading.Tasks;
 using Controllers.Bullet;
 using Data.UnityObject;
 using Data.ValueObject.WeaponData;
@@ -35,15 +35,15 @@ namespace Managers
         {
             _data = GetBulletData();
             SetDataToControllers();
-        } 
-        private WeaponData GetBulletData() => Resources.Load<CD_Weapon>("Data/CD_Weapon").WeaponData[(int)weaponType];
-        private void SetDataToControllers()
-        {
-            physicsController.GetData(_data);
+            SetBackToPool();
         }
-        public void ReleaseObject(GameObject obj, PoolType poolName)
+        private WeaponData GetBulletData() => Resources.Load<CD_Weapon>("Data/CD_Weapon").WeaponData[(int)weaponType];
+        private void SetDataToControllers() => physicsController.GetData(_data);
+        public void ReleaseObject(GameObject obj, PoolType poolName)=>PoolSignals.Instance.onReleaseObjectFromPool.Invoke(poolName,obj);
+        private async void SetBackToPool()
         {
-            PoolSignals.Instance.onReleaseObjectFromPool.Invoke(poolName,obj);
+            await Task.Delay(1000);
+            SetBulletToPool();
         }
         public void SetBulletToPool()
         {
