@@ -5,6 +5,6 @@
         public bool HasMoney { get; set; }
         void MakePayment();
 
-        void StopPayment();
+       void StopPayment();
     }
 }

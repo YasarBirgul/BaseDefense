@@ -21,6 +21,8 @@ namespace Controllers.Player
         #endregion
 
         #region Private Variables
+
+        private bool canPay=true;
         
         #endregion
 
@@ -50,17 +52,19 @@ namespace Controllers.Player
             while (true)
             {
                 CoreGameSignals.Instance.onMoneyScoreUpdate.Invoke(-1);
-                await Task.Delay(100);
-                if (HasMoney)
+                if (HasMoney && canPay)
                 {
+                    await Task.Delay(100);
                     continue;
                 }
                 break;
             }
         }
-        public void StopPayment()
+        public async void StopPayment()
         {
-            HasMoney = false;
+            canPay = false;
+            await Task.Delay(200);
+            canPay = true;
         }
         #endregion
     }

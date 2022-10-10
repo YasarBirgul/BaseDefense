@@ -51,17 +51,17 @@ namespace Managers
         public async void RoomCostUpdate(int payedAmount, ICustomer customer)
         {
             if(!CustomerOnBuyZone || !customer.HasMoney) return;
-            
-            await Task.Delay(100);
             if (_roomData.RoomCost > 0) 
             {
                 _roomData.RoomCost -= payedAmount;
+                await Task.Delay(100);
                 RoomCostUpdate(payedAmount,customer);
             }
             else
             {
                 _roomData.AvailabilityType = AvailabilityType.Unlocked;
                 CustomerOnBuyZone = false;
+                customer.StopPayment();
                 InformBaseManager();
             }
             SetUpRoomText(_roomData.RoomCost);
