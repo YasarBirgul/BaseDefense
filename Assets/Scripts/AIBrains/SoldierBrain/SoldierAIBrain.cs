@@ -27,9 +27,9 @@ namespace AIBrains.SoldierBrain
         
         public Transform TentPosition; 
         public Transform FrontYardStartPosition;
-        public List<IDamageble> enemyList = new List<IDamageble>();
+        public List<IDamageable> enemyList = new List<IDamageable>();
         public Transform EnemyTarget;
-        public IDamageble DamagebleEnemy;
+        public IDamageable DamageableEnemy;
         public Transform WeaponHolder;
         #endregion
 
@@ -43,7 +43,7 @@ namespace AIBrains.SoldierBrain
         
         private NavMeshAgent _navMeshAgent;
        
-        [ShowInInspector] private List<IDamageble> _damagablesList;
+        [ShowInInspector] private List<IDamageable> _damagablesList;
         [Header("Data")]
         private SoldierAIData _data;
         private int _damage;
@@ -127,7 +127,7 @@ namespace AIBrains.SoldierBrain
         public void SetEnemyTargetTransform()
         {
             EnemyTarget = enemyList[0].GetTransform();
-            DamagebleEnemy = enemyList[0];
+            DamageableEnemy = enemyList[0];
             HasEnemyTarget = true;
         }
         public void EnemyTargetStatus()

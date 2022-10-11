@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Managers
 {
-    public class MineBombManager : MonoBehaviour, IDamageble
+    public class MineBombManager : MonoBehaviour, IDamageable
     {
         #region Self Variables
 

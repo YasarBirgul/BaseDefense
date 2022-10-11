@@ -10,7 +10,7 @@ using UnityEngine;
 namespace Controllers.Player
 {
     [RequireComponent(typeof(StackController))]
-    public class MoneyStackerController : AStacker
+    public class MoneyStackerController : AStacker,IReleasePoolObject
     {
         #region Self Variables
 
@@ -123,7 +123,7 @@ namespace Controllers.Player
                 StackList.Remove(removedStack);
                 removedStack.transform.DOLocalMove(transform.localPosition, .1f).OnComplete(() =>
                 {
-                    PoolSignals.Instance.onReleaseObjectFromPool?.Invoke(PoolType.Money,removedStack);
+                    ReleaseObject(removedStack,PoolType.Money);
                 });
             });
         }
@@ -157,6 +157,10 @@ namespace Controllers.Player
             var randomRotationY = Random.Range(-90, 90);
             var randomRotationZ = Random.Range(-90, 90);
             return new Vector3(randomRotationX,randomRotationY,randomRotationZ);
+        }
+        public void ReleaseObject(GameObject obj, PoolType poolName)
+        { 
+            PoolSignals.Instance.onReleaseObjectFromPool.Invoke(poolName,obj);
         }
     }
 }

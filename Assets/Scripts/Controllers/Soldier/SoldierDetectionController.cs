@@ -24,20 +24,20 @@ namespace Controllers.Soldier
         #endregion
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out IDamageble damagable))
+            if (other.TryGetComponent(out IDamageable damagable))
             {
                 if(damagable.IsTaken) return;
+                damagable.IsTaken = true;
                 soldierAIBrain.enemyList.Add(damagable);
                 if (soldierAIBrain.EnemyTarget == null)
                 {
-                    damagable.IsTaken = true;
                     soldierAIBrain.SetEnemyTargetTransform();
                 }
             }
         }
         private void OnTriggerExit(Collider other)
         {
-            if (other.TryGetComponent(out IDamageble damagable))
+            if (other.TryGetComponent(out IDamageable damagable))
             {
                 if (soldierAIBrain.enemyList.Count == 0)
                 {

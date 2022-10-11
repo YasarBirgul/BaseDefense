@@ -1,5 +1,4 @@
-﻿using Abstract;
-using Interfaces;
+﻿using Interfaces;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,44 +6,33 @@ namespace AIBrains.EnemyBrain.States
 {
     public class Attack : IState
     {
-        private readonly EnemyAIBrain _enemyAIBrain;
         private readonly NavMeshAgent _navMeshAgent;
         private readonly Animator _animator;
-        private readonly float _attackRange;
+        private readonly EnemyAIBrain _enemyAIBrain;
+        private static readonly int Attack1 = Animator.StringToHash("Attack");
+        private static readonly int Run = Animator.StringToHash("Run");
 
-        private bool _inAttack;
-        public bool InPlayerAttackRange() => _inAttack;
-        public Attack(NavMeshAgent navMeshAgent, Animator animator, EnemyAIBrain enemyAIBrain)
+        private float _attackTimer = 1f;
+
+        public Attack(NavMeshAgent agent,Animator animator)
         {
-            _navMeshAgent = navMeshAgent;
+            _navMeshAgent = agent;
             _animator = animator;
-            _enemyAIBrain = enemyAIBrain;
-            _attackRange = _navMeshAgent.stoppingDistance;
-        }
-        public void OnEnter()
-        {
-            if (_enemyAIBrain.PlayerTarget)
-            {
-                _inAttack = true;
-                _animator.SetTrigger("Attack");
-            }
-        } 
-        public void OnExit()
-        {
-            
         }
         public void Tick()
         {
-            if (_enemyAIBrain.PlayerTarget)
-            {
-                _navMeshAgent.destination =_enemyAIBrain.PlayerTarget.transform.position;
-                CheckDistanceAttack();
-            }
+            _attackTimer -= Time.deltaTime;
+            if (!(_attackTimer <= 0)) return;
+            _animator.SetTrigger(Attack1);
+            _attackTimer = 1f;
         }
-        private void CheckDistanceAttack()
+        public void OnEnter()
         {
-            if (_navMeshAgent.remainingDistance > _attackRange)
-                _inAttack = false;
+        }
+
+        public void OnExit()
+        {
+            _animator.SetTrigger(Run);
         }
     }
 }

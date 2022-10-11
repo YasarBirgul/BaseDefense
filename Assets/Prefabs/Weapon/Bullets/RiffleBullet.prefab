@@ -277,7 +277,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2027311627929833781}
   - component: {fileID: 555821506523576393}
-  - component: {fileID: 4011085098259238714}
+  - component: {fileID: 2811316017684161650}
   m_Layer: 0
   m_Name: PhysicsController
   m_TagString: Untagged
@@ -312,8 +312,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletManager: {fileID: 5644052822692266098}
---- !u!65 &4011085098259238714
-BoxCollider:
+--- !u!136 &2811316017684161650
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -322,6 +322,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.06749875
+  m_Height: 0.3400861
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0.060524642}

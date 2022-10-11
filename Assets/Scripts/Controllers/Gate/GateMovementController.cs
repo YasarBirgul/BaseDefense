@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Controllers.Gate
 {
-    public class GateMeshController : MonoBehaviour
+    public class GateMovementController : MonoBehaviour
     {
         private float _gateAngleZ;
         public void TurnGateOpen(bool GateOpen)

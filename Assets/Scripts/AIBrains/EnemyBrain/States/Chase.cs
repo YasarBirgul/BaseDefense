@@ -1,73 +1,37 @@
-﻿using Abstract;
-using Interfaces;
+﻿using Interfaces;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace AIBrains.EnemyBrain.States
+namespace AIBrains.EnemyBrain
 {
-    public class Chase: IState
+    public class Chase : IState
     {
-        #region Self Variables
-
-        #region Public Variables
-
-        public bool IsPlayerInRange;
-        
-        #endregion
-
-        #region Serialized Variables,
-
-        #endregion
-
-        #region Private Variables
-
         private readonly NavMeshAgent _navMeshAgent;
         private readonly Animator _animator;
         private readonly EnemyAIBrain _enemyAIBrain;
-        private readonly float _attackRange;
-        private readonly float _chaseSpeed;
-
-        private bool _inAttack = false;
         private static readonly int Speed = Animator.StringToHash("Speed");
+        private static readonly int Run = Animator.StringToHash("Run");
 
-        #endregion
-        
-        #endregion
-        public Chase(NavMeshAgent navMeshAgent,Animator animator,EnemyAIBrain enemyAIBrain,float chaseSpeed)
+        public Chase(EnemyAIBrain enemyAIBrain,NavMeshAgent agent,Animator animator)
         {
-            _navMeshAgent = navMeshAgent;
-            _animator = animator;
             _enemyAIBrain = enemyAIBrain;
-            _attackRange = navMeshAgent.stoppingDistance;
-            _chaseSpeed = chaseSpeed;
+            _navMeshAgent = agent;
+            _animator = animator;
         }
-
-        public bool InPlayerAttackRange() => _inAttack;
-        
         public void Tick()
         {
-            _navMeshAgent.destination = _enemyAIBrain.PlayerTarget.transform.position;
+            _navMeshAgent.destination = _enemyAIBrain.CurrentTarget.position;
             _animator.SetFloat(Speed,_navMeshAgent.velocity.magnitude);
-            CheckDistanceChase();
         }
         public void OnEnter()
         {
-            _navMeshAgent.SetDestination(_enemyAIBrain.PlayerTarget.transform.position);
-            _animator.SetTrigger("Run");
-            _inAttack = false;
-            _navMeshAgent.speed = 5.273528f;
-        } 
+
+            _navMeshAgent.SetDestination(_enemyAIBrain.CurrentTarget.position);
+            _animator.SetTrigger(Run);
+            _navMeshAgent.speed = 6.256048f;
+        }
         public void OnExit()
         {
-            
         }
-        private void CheckDistanceChase()
-        {
-            if (_navMeshAgent.remainingDistance <= _attackRange)
-            {
-                _inAttack = true;
-            }
-        }
-        
     }
 }

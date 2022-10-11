@@ -14,20 +14,20 @@ namespace Controllers.Player
         private void OnTriggerEnter(Collider other)
         {
             if (manager.CurrentAreaType == AreaType.BaseDefense) return;
-            if (other.TryGetComponent(out IDamageble damagable))
+            if (other.TryGetComponent(out IDamageable damagable))
             {
                 if(damagable.IsTaken) return;
                   manager.EnemyList.Add(damagable);
+                  damagable.IsTaken = true;
                   if ( manager.EnemyTarget == null)
                   {
-                      damagable.IsTaken = true;
                       manager.SetEnemyTarget();
                   }
             }
         }
         private void OnTriggerExit(Collider other)
         {
-            if (other.TryGetComponent(out IDamageble damagable))
+            if (other.TryGetComponent(out IDamageable damagable))
             {
                 damagable.IsTaken = false;
                 manager.EnemyList.Remove(damagable);

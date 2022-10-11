@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Controllers.Enemy
 {
-    public class EnemyPhysicsController : MonoBehaviour,IDamageble
+    public class EnemyPhysicsController : MonoBehaviour,IDamageable
     {
         [SerializeField] 
         private EnemyAIBrain enemyAIBrain;

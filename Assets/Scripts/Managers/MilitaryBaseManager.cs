@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using AIBrains.SoldierBrain;
-using Data.UnityObject;
 using Data.ValueObject.AIData;
 using Data.ValueObject.LevelData;
 using Enums;
@@ -81,6 +79,7 @@ namespace Managers
                 GetSoldier();
             }
         }
+        
         #region Event Subscription
         private void OnEnable()
         {
@@ -90,18 +89,17 @@ namespace Managers
         {
             AISignals.Instance.onSoldierActivation += OnSoldierActivation;
             CoreGameSignals.Instance.onApplicationQuit += OnApplicationQuit;
-            //  DataInitSignals.Instance.onLoadMilitaryBaseData += OnLoadData;
         }
         private void UnsubscribeEvents()
         {
             AISignals.Instance.onSoldierActivation -= OnSoldierActivation;
             CoreGameSignals.Instance.onApplicationQuit -= OnApplicationQuit;
-          //  DataInitSignals.Instance.onLoadMilitaryBaseData -= OnLoadData;
         }
         private void OnDisable()
         {
             UnsubscribeEvents();
         }
+        
         #endregion
         private void OnSoldierActivation()
         {
@@ -137,7 +135,6 @@ namespace Managers
         [Button]
         public void UpdateSoldierAmount()
         {
-            Debug.Log(_tentCapacity);
             if(!_isTentAvaliable) return;
             if (_data.CurrentSoldierAmount < _data.TentCapacity)
             {
@@ -148,7 +145,6 @@ namespace Managers
             {
                 _isTentAvaliable= false;
                 _data.CurrentSoldierAmount = 0;
-                Debug.Log(_data.CurrentSoldierAmount);
             }
         }
         public void GetStackPositions(List<Vector3> gridPositionData)

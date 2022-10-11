@@ -17,6 +17,12 @@ namespace Managers
 
         #region Serialized Variables
 
+        [SerializeField]
+        private List<Transform> randomTargetTransform;
+
+        [SerializeField]
+        private Transform spawnTransform;
+        
         #endregion
     
         #region Public Variables
@@ -43,6 +49,39 @@ namespace Managers
         private void Awake()
         {
             StartCoroutine(SpawnEnemies());
+        }
+
+        #region Event Subscription
+        private void OnEnable()
+        {
+            SubscribeEvents();
+        }
+        private void SubscribeEvents()
+        {
+            AISignals.Instance.getSpawnTransform += SetSpawnTransform;
+            AISignals.Instance.getRandomTransform += SetRandomTransform;
+        }
+
+        private void UnsubscribeEvents()
+        {
+            AISignals.Instance.getSpawnTransform -= SetSpawnTransform;
+            AISignals.Instance.getRandomTransform -= SetRandomTransform;
+        }
+
+        private void OnDisable()
+        {
+            UnsubscribeEvents();
+        }
+
+        #endregion
+        private Transform SetSpawnTransform()
+        {
+            return spawnTransform;
+        }
+
+        private Transform SetRandomTransform()
+        {
+            return randomTargetTransform[Random.Range(0,randomTargetTransform.Count)];
         }
         private IEnumerator SpawnEnemies()
         {

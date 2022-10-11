@@ -1,5 +1,4 @@
-﻿using Abstract;
-using Controllers.Gate;
+﻿using Controllers.Gate;
 using Enums.GameStates;
 using Interfaces;
 using Managers;
@@ -53,7 +52,6 @@ namespace Controllers
             gameObject.layer = LayerMask.NameToLayer(playerIsGoingToFrontYard ? "PlayerFrontYard" : "PlayerBase");
             playerManager.CheckAreaStatus(playerIsGoingToFrontYard ? AreaType.BattleOn : AreaType.BaseDefense);
             if(!playerIsGoingToFrontYard) return;
-         //   playerManager.DamagebleEnemy = null;
             playerManager.HasEnemyTarget = false;
             playerManager.EnemyList.Clear();
         }

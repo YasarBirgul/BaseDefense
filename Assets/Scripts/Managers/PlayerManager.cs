@@ -22,7 +22,7 @@ namespace Managers
         
         public WeaponTypes WeaponType;
         
-        public List<IDamageble> EnemyList = new List<IDamageble>();
+        public List<IDamageable> EnemyList = new List<IDamageable>();
         
         public Transform EnemyTarget;
         

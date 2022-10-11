@@ -15,8 +15,11 @@ namespace Controllers
 
         #region Serialized Variables
 
-        [SerializeField] private new Rigidbody rigidbody;
-        [SerializeField] private PlayerManager manager;
+        [SerializeField]
+        private new Rigidbody rigidbody;
+        [SerializeField]
+        private PlayerManager manager;
+        
         #endregion
 
         #region Private Variables

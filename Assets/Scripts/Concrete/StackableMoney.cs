@@ -5,11 +5,15 @@ namespace Concrete
 {
     public class StackableMoney : AStackable
     {
-        [SerializeField] private Rigidbody rigidbody;
-        [SerializeField] private BoxCollider collider;
+        [SerializeField] 
+        private Rigidbody rigidbody;
+        [SerializeField]
+        private BoxCollider collider;
         private void OnEnable()
         {
             SendPosition(transform);
+            collider.enabled = true;
+            rigidbody.useGravity = true;
         }
         public override void SetInit(Transform initTransform, Vector3 position)
         {

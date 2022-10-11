@@ -12,7 +12,11 @@ namespace Controllers.Bullet
         {
             _weaponType = weaponType;
         }
-        public GameObject GetObject(PoolType poolName) => PoolSignals.Instance.onGetObjectFromPool.Invoke(poolName);
+        public GameObject GetObject(PoolType poolName)
+        {
+            var obj =  PoolSignals.Instance.onGetObjectFromPool.Invoke(poolName);
+            return obj;
+        }
         public void FireBullets(Transform holderTransform)
         {
             var poolType = (PoolType)System.Enum.Parse(typeof(PoolType),_weaponType.ToString());

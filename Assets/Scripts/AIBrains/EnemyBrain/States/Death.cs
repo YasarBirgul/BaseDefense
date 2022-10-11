@@ -1,5 +1,4 @@
-﻿using Abstract;
-using DG.Tweening;
+﻿using DG.Tweening;
 using Enums;
 using Interfaces;
 using Signals;
@@ -52,12 +51,12 @@ namespace AIBrains.EnemyBrain.States
                 var createObj = GetObject(PoolType.Money);
                 createObj.transform.position = _enemyAIBrain.transform.position + new Vector3(0,3,0);
             }
-        }
+        } 
         public void OnExit()
         {
             
         }
-        public void EnemyDead()
+        private void EnemyDead()
         {
             var poolType = (PoolType)System.Enum.Parse(typeof(PoolType), _enemyType.ToString());
             DOVirtual.DelayedCall(1f, () =>
