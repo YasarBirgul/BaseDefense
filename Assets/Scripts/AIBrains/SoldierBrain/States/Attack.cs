@@ -1,12 +1,11 @@
-﻿using Abstract;
-using Controllers.Bullet;
+﻿using Controllers.Bullet;
 using Enums;
 using Interfaces;
 using Signals;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace AIBrains.SoldierBrain
+namespace AIBrains.SoldierBrain.States
 {
     public class Attack : IState,IGetPoolObject
     {

@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Abstract;
-using Controllers.Bullet;
+using AIBrains.SoldierBrain.States;
 using Controllers.Soldier;
 using Data.UnityObject;
 using Data.ValueObject.AIData;
-using Data.ValueObject.WeaponData;
-using Enums;
 using Interfaces;
 using Signals;
 using Sirenix.OdinInspector;
