@@ -1,9 +1,12 @@
 ﻿using System;
 using Abstract;
+using AIBrains.EnemyBrain.States;
 using Controllers;
 using Data.UnityObject;
 using Data.ValueObject.AIData;
 using Enums;
+using Interfaces;
+using Signals;
 using StateBehaviour;
 using UnityEngine;
 using UnityEngine.AI;
@@ -11,7 +14,7 @@ using Random = UnityEngine.Random;
 
 namespace AIBrains.EnemyBrain
 { 
-    public class EnemyAIBrain : MonoBehaviour
+    public class EnemyAIBrain : MonoBehaviour,IReleasePoolObject
     {
         #region Self Variables
 
@@ -33,8 +36,8 @@ namespace AIBrains.EnemyBrain
         #region Serialized Variables,
 
         [SerializeField] private EnemyTypes enemyType;
-        [SerializeField] private EnemyPhysicsController physicsController;
-        
+        [SerializeField] private EnemyPhysicsDetectionController physicsDetectionController;
+        [SerializeField] private Animator animator;
         #endregion
 
         #region Private Variables
@@ -51,7 +54,6 @@ namespace AIBrains.EnemyBrain
         private Vector3 _scaleSize;
         private float _navMeshRadius;
         private float _navMeshHeight;
-        private Animator _animator;
         private StateMachine _stateMachine;
         private Transform _spawnPoint;
         private Chase chase;
@@ -61,7 +63,6 @@ namespace AIBrains.EnemyBrain
         private void Awake()
         {
             _levelID = 0;
-            // _levelID = levelSignals.Instance.OnGetLevel();
             _AIData = GetEnemyAIData();
             _data = GetEnemyData();
             SetEnemyData();
@@ -86,15 +87,14 @@ namespace AIBrains.EnemyBrain
         }
         private void GetStatesReferences()
         {
-            NavMeshAgent = GetComponent<NavMeshAgent>(); 
-            _animator = GetComponent<Animator>();
+            NavMeshAgent = GetComponent<NavMeshAgent>();
 
             var search = new Search(this, NavMeshAgent, _spawnPoint);
-            var move = new Move(NavMeshAgent,_animator,this,_moveSpeed); 
-            var attack = new Attack(NavMeshAgent,_animator,this);
-            var death = new Death(NavMeshAgent,_animator,this);
-            chase = new Chase(NavMeshAgent,_animator,this,_chaseSpeed);
-            var moveToBomb = new MoveToBomb(NavMeshAgent,_animator,this,_attackRange,_chaseSpeed);
+            var move = new Move(NavMeshAgent,animator,this,_moveSpeed); 
+            var attack = new Attack(NavMeshAgent,animator,this);
+            var death = new Death(NavMeshAgent,animator,this,enemyType);
+            chase = new Chase(NavMeshAgent,animator,this,_chaseSpeed);
+            var moveToBomb = new MoveToBomb(NavMeshAgent,animator,this,_attackRange,_chaseSpeed);
             _stateMachine = new StateMachine();
           
             At(search,move,HasTurretTarget());
@@ -103,8 +103,8 @@ namespace AIBrains.EnemyBrain
             At(attack,chase,()=>attack.InPlayerAttackRange()==false);
             At(chase,move,TargetNull());
             
-            _stateMachine.AddAnyTransition(death,()=> physicsController.AmIdead());
-            _stateMachine.AddAnyTransition(moveToBomb,()=> physicsController.IsBombInRange());
+            _stateMachine.AddAnyTransition(death,AmIdead());
+            _stateMachine.AddAnyTransition(moveToBomb,()=> physicsDetectionController.IsBombInRange());
            
             _stateMachine.SetState(search);
             void At(IState to,IState from,Func<bool> condition) =>_stateMachine.AddTransition(to,from,condition);
@@ -113,11 +113,12 @@ namespace AIBrains.EnemyBrain
             Func<bool> HasTarget() => () => PlayerTarget != null;
             Func<bool> AttackThePlayer() => () => PlayerTarget != null && chase.InPlayerAttackRange();
             Func<bool> TargetNull() => () => PlayerTarget is null;
+            Func<bool> AmIdead() => () => Health <= 0 ;
         }
-        
-        
-        
-        
         private void Update() =>  _stateMachine.UpdateIState();
+        public void ReleaseObject(GameObject obj, PoolType poolName)
+        {
+            PoolSignals.Instance.onReleaseObjectFromPool?.Invoke(poolName,obj);
+        }
     }
 }

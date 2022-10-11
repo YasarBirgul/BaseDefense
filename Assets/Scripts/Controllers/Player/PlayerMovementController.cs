@@ -16,7 +16,7 @@ namespace Controllers
         #region Serialized Variables
 
         [SerializeField] private new Rigidbody rigidbody;
-        
+        [SerializeField] private PlayerManager manager;
         #endregion
 
         #region Private Variables
@@ -38,17 +38,13 @@ namespace Controllers
         {
             _inputVector = inputParams.MovementVector;
             EnableMovement(_inputVector.sqrMagnitude > 0);
-            RotatePlayer(inputParams);
         }
 
-        private void RotatePlayer(HorizontalInputParams inputParams)
+        public void RotatePlayerToTarget(Transform enemyTarget)
         {
-            Vector3 movementDirection = new Vector3(inputParams.MovementVector.x, 0, inputParams.MovementVector.y);
-            if (movementDirection == Vector3.zero) return;
-            Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 30);
+            transform.LookAt(enemyTarget, Vector3.up*3f);
         }
-
+        
         private void EnableMovement(bool movementStatus)
         {
             _isReadyToMove = movementStatus;
@@ -64,11 +60,22 @@ namespace Controllers
                 var velocity = rigidbody.velocity; 
                 velocity = new Vector3(_inputVector.x,velocity.y, _inputVector.y)*_data.PlayerSpeed;
                 rigidbody.velocity = velocity;
+                if (!manager.HasEnemyTarget)
+                {
+                    RotatePlayer();
+                }
             }
             else if(rigidbody.velocity != Vector3.zero)
             {
-                rigidbody.velocity = Vector3.zero;
+                rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, 0);
             }
+        }
+        private void RotatePlayer()
+        {
+            Vector3 movementDirection = new Vector3(_inputVector.x, 0, _inputVector.y);
+            if (movementDirection == Vector3.zero) return;
+            Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
+            rigidbody.rotation = Quaternion.RotateTowards(rigidbody.rotation, toRotation,30);
         }
     }
 }

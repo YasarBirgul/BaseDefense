@@ -232,7 +232,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: a5abdb3a3675e0f4b8f2b912953e1ca8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -714,8 +714,8 @@ GameObject:
   - component: {fileID: 572016563916654751}
   - component: {fileID: 8118326437980128551}
   - component: {fileID: 325352589472048178}
-  m_Layer: 11
-  m_Name: EnemyPhysicsController
+  m_Layer: 15
+  m_Name: EnemyDetectionController
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -761,7 +761,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c72ce7263b084033a69912250fdeea4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LayerType: 0
 --- !u!1 &4478408940813656031
 GameObject:
   m_ObjectHideFlags: 0
@@ -1290,6 +1289,65 @@ Transform:
   m_Father: {fileID: 5941717303503884681}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8263372101389714412
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5269063881621546271}
+  - component: {fileID: 1007493845978415840}
+  - component: {fileID: 7350379848600129099}
+  m_Layer: 11
+  m_Name: EnemyPhysicsController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5269063881621546271
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8263372101389714412}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1902811405783806922}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1007493845978415840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8263372101389714412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eae927f8868f493b98f3841313606ac6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyAIBrain: {fileID: 3800624922266403044}
+--- !u!136 &7350379848600129099
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8263372101389714412}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 3.890425
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.9049822, z: 0}
 --- !u!1 &8303601494991986363
 GameObject:
   m_ObjectHideFlags: 0
@@ -1352,6 +1410,7 @@ Transform:
   m_Children:
   - {fileID: 4878095736372957377}
   - {fileID: 572016563916654751}
+  - {fileID: 5269063881621546271}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1372,9 +1431,10 @@ MonoBehaviour:
   MineTarget: {fileID: 0}
   NavMeshAgent: {fileID: 1837053086526059140}
   Health: 0
-  EnemyType: 0
+  EnemyType: 3
   enemyType: 3
-  physicsController: {fileID: 325352589472048178}
+  physicsDetectionController: {fileID: 325352589472048178}
+  animator: {fileID: 4976932396909305934}
 --- !u!195 &1837053086526059140
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1385,7 +1445,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 5.273528
   m_Acceleration: 35
   avoidancePriority: 50
   m_AngularSpeed: 360
@@ -1396,7 +1456,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 2
 --- !u!1 &8604772355647281515
 GameObject:
   m_ObjectHideFlags: 0

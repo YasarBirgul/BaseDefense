@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Managers
 {
-    public class MineBombManager : MonoBehaviour, IDamagable
+    public class MineBombManager : MonoBehaviour, IDamageble
     {
         #region Self Variables
 
@@ -64,6 +64,14 @@ namespace Managers
         public int TakeDamage()
         {
             return ExplosionDamage;
+        }
+
+        public bool IsTaken { get; set; }
+        public bool IsDead { get; set; }
+
+        public int TakeDamage(int damage)
+        {
+            throw new NotImplementedException();
         }
         public Transform GetTransform()
         {

@@ -1,89 +1,47 @@
 ﻿using Abstract;
 using AIBrains.EnemyBrain;
-using Enums.LayerType;
-using Managers;
+using Interfaces;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.Enemy
 {
-    public class EnemyPhysicsController : MonoBehaviour
+    public class EnemyPhysicsController : MonoBehaviour,IDamageble
     {
-        #region Self Variables
+        [SerializeField] 
+        private EnemyAIBrain enemyAIBrain;
+        public bool IsTaken { get; set; }
+        public bool IsDead { get; set; }
 
-        #region Public Variables
-        
-        #endregion
-
-        #region Serialized Variables,
-
-        #endregion
-
-        #region Private Variables
-        
-        private Transform _detectedPlayer;
-        private Transform _detectedMine;
-        private EnemyAIBrain _enemyAIBrain;
-        private bool _amAIDead = false;
-        
-        #endregion
-        
-        #endregion
-        
-        public bool IsPlayerInRange() => _detectedPlayer != null;
-        public bool IsBombInRange() => _detectedMine != null;
-        public bool AmIdead() => _amAIDead;
-
-        public LayerType LayerType;
-        private void Awake()
-        {
-            _enemyAIBrain = gameObject.GetComponentInParent<EnemyAIBrain>();
-        }
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Player"))
+            if (other.TryGetComponent(out IDamager IDamager))
             {
-                _detectedPlayer = other.GetComponentInParent<PlayerManager>().transform;
-                _enemyAIBrain.PlayerTarget = other.transform.parent.transform;
-            }
-            if (other.CompareTag("MineLure"))
-            {
-                _detectedMine = other.transform;
-                _enemyAIBrain.MineTarget = _detectedMine;
-            }
-            if (other.CompareTag("Bullet"))
-            {
-                var damageAmount = other.GetComponent<IDamagable>().TakeDamage();
-                _enemyAIBrain.Health -= damageAmount;
-                if (_enemyAIBrain.Health <= 0)
+                if (enemyAIBrain.Health <= 0) return;
+                var damage = IDamager.Damage();
+                enemyAIBrain.Health -= damage;
+                if (enemyAIBrain.Health == 0)
                 {
-                    _amAIDead = true;
-                }
-            }
-            if (other.CompareTag("MineExplosion"))
-            {
-                Debug.Log(other.tag);
-                var damageAmount = other.transform.parent.GetComponentInParent<IDamagable>().TakeDamage();
-                _enemyAIBrain.Health -= damageAmount;
-                if (_enemyAIBrain.Health <= 0)
-                {
-                    _amAIDead = true;
-                    Debug.Log(_amAIDead);
+                    IsDead = true;
                 }
             }
         }
-        private void OnTriggerExit(Collider other)
-        { 
-            if (other.CompareTag("Player"))
+        public int TakeDamage(int damage)
+        {
+            if (enemyAIBrain.Health > 0)
             {
-                _detectedPlayer = null;
-                gameObject.GetComponentInParent<EnemyAIBrain>().PlayerTarget = null;
+                enemyAIBrain.Health =  enemyAIBrain.Health - damage;
+                if (enemyAIBrain.Health == 0)
+                {
+                    IsDead = true;
+                    return enemyAIBrain.Health;
+                }
+                return enemyAIBrain.Health;
             }
-            if (other.CompareTag("MineLure"))
-            {
-                _detectedMine = null;
-                _enemyAIBrain.MineTarget = _detectedMine;
-                _enemyAIBrain.MineTarget = null;
-            }
+            return 0;
+        }
+        public Transform GetTransform()
+        {
+            return transform;
         }
     }
 }

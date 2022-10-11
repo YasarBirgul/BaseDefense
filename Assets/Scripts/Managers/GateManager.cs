@@ -12,9 +12,11 @@ namespace Managers
         #endregion
 
         #region Serialized Variables
-
-        [SerializeField] private GateMeshController meshController;
-        [SerializeField] private GatePhysicsController physicsController;
+        
+        [SerializeField]
+        private GateMeshController meshController;
+        [SerializeField] 
+        private GatePhysicsController physicsController;
 
         #endregion
 

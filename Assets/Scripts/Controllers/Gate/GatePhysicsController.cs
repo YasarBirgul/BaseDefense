@@ -1,10 +1,11 @@
 ﻿using Abstract;
+using Interfaces;
 using Managers;
 using UnityEngine;
 
 namespace Controllers.Gate
 {
-    public class GatePhysicsController : Interactable
+    public class GatePhysicsController : IInteractable
     {
         #region Self Variables
 
@@ -25,14 +26,14 @@ namespace Controllers.Gate
         #endregion
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out Interactable interactable))
+            if (other.TryGetComponent(out IInteractable interactable))
             {
                 manager.GateOpen(true);
             }
         }
         private void OnTriggerExit(Collider other)
         {
-            if (other.TryGetComponent(out Interactable interactable))
+            if (other.TryGetComponent(out IInteractable interactable))
             {
                 manager.GateOpen(false);
             }

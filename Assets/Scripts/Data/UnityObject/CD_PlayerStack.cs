@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Data.ValueObject.PlayerStackData;
+using Data.ValueObject.PlayerData;
 using UnityEngine;
 
 namespace Data.UnityObject

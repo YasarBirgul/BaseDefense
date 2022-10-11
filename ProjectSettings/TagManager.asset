@@ -19,18 +19,18 @@ TagManager:
   - 
   - 
   - 
-  - Base
-  - FrontYard
-  - EnemyAI
+  - PlayerBase
+  - PlayerFrontYard
+  - EnemyBody
   - LandMine
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - SoldierBody
+  - Bullets
+  - EnemyDetection
+  - SoldierDetection
+  - Collectable
+  - PlayerCollector
+  - PlayerDetection
+  - Gate
   - 
   - 
   - 

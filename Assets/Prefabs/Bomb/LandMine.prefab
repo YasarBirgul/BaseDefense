@@ -86,7 +86,6 @@ GameObject:
   - component: {fileID: 5600792590317791322}
   - component: {fileID: 5600792590317791321}
   - component: {fileID: 5600792590317791320}
-  - component: {fileID: 5600792590317791323}
   m_Layer: 0
   m_Name: Physics
   m_TagString: Untagged
@@ -139,22 +138,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5600792590317791323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5600792590317791301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a13183685d3d4bb0b3f91c4a5ba0da07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mineManager: {fileID: 5600792591150420079}
-  lureCollider: {fileID: 5600792591019002178}
-  marketCollider: {fileID: 5600792590911794691}
-  explosionCollider: {fileID: 5600792590214796179}
 --- !u!1 &5600792590911794690
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,8 +235,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5600792591150420077}
-  - component: {fileID: 5600792591150420076}
-  - component: {fileID: 5600792591150420079}
   m_Layer: 0
   m_Name: LandMine
   m_TagString: Untagged
@@ -278,37 +259,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5600792591150420076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5600792591150420078}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e419a1cb675d430e845a720ca58d3d2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MineManager: {fileID: 5600792591150420079}
---- !u!114 &5600792591150420079
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5600792591150420078}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d159af346cf44d56a6ceba384d97f411, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GemAmount: 10
-  LureTime: 15
-  MineCountDownTime: 30
-  ExplosionDamage: 999
-  minePhysicsController: {fileID: 5600792590317791323}
-  requiredGemAmount: 100
 --- !u!1001 &5600792590782677489
 PrefabInstance:
   m_ObjectHideFlags: 0

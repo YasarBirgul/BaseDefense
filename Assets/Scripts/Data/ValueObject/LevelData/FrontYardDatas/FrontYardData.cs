@@ -8,5 +8,6 @@ namespace Data.ValueObject.LevelData
     {
         public List<StageData> StageDataList;
         public List<FrontYardItemsData> FrontYardItemsDataList;
+        public HostageData HostageData;
     }
 }

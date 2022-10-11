@@ -4324,7 +4324,6 @@ GameObject:
   - component: {fileID: 1145189680}
   - component: {fileID: 1145189683}
   - component: {fileID: 1145189682}
-  - component: {fileID: 1145189681}
   m_Layer: 0
   m_Name: Physics
   m_TagString: Untagged
@@ -4348,22 +4347,6 @@ Transform:
   m_Father: {fileID: 2061700359}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1145189681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1145189679}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a13183685d3d4bb0b3f91c4a5ba0da07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mineManager: {fileID: 2061700357}
-  lureCollider: {fileID: 1922683944}
-  marketCollider: {fileID: 1797649257}
-  explosionCollider: {fileID: 1118736121}
 --- !u!54 &1145189682
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5502,13 +5485,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 581002d958f34fe0b2ed1941b658b234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies:
-  - {fileID: 7690461770082632510, guid: 9071905ce0dbcf04daf6b354f576dc0e, type: 3}
-  - {fileID: 7185586475072801580, guid: 64b191780528bbe40b845ac726874583, type: 3}
-  - {fileID: 7185586475072801580, guid: c0d8c28e3cf066a4b93986426843c2fe, type: 3}
   NumberOfEnemiesToSpawn: 50
   SpawnDelay: 2
-  SpawnPos: {fileID: 1332303478}
 --- !u!1 &1407949025
 GameObject:
   m_ObjectHideFlags: 0
@@ -8311,8 +8289,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2061700359}
-  - component: {fileID: 2061700358}
-  - component: {fileID: 2061700357}
   m_Layer: 0
   m_Name: LandMine
   m_TagString: Untagged
@@ -8320,37 +8296,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2061700357
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2061700356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d159af346cf44d56a6ceba384d97f411, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GemAmount: 10
-  LureTime: 15
-  MineCountDownTime: 30
-  ExplosionDamage: 999
-  minePhysicsController: {fileID: 1145189681}
-  requiredGemAmount: 100
---- !u!114 &2061700358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2061700356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e419a1cb675d430e845a720ca58d3d2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MineManager: {fileID: 2061700357}
 --- !u!4 &2061700359
 Transform:
   m_ObjectHideFlags: 0

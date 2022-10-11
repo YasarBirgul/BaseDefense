@@ -7,8 +7,6 @@ namespace Data.ValueObject.LevelData
     {
         public int MaxWorkerAmount;
         public int CurrentWorkerAmount;
-        public int DiamondCapacity;
-        public int CurrentDiamondAmount;
-        public int MineCartCapacity;
+        public int GemCollectionOffset;
     }
 }

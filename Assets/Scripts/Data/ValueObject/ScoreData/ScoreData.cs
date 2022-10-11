@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace Data.ValueObject.ScoreData
+namespace Data
 {
     [Serializable]
-    public class ScoreData
+    public struct ScoreData
     {
         public int MoneyScore;
         public int DiamondScore;

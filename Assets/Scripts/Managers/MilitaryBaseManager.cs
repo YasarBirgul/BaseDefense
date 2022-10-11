@@ -1,17 +1,20 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Net.Configuration;
 using AIBrains.SoldierBrain;
 using Data.UnityObject;
 using Data.ValueObject.AIData;
 using Data.ValueObject.LevelData;
 using Enums;
+using Interfaces;
+using Signals;
 using Sirenix.OdinInspector;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Managers
 {
-    public class MilitaryBaseManager : MonoBehaviour
+    public class MilitaryBaseManager : MonoBehaviour,IGetPoolObject
     {
         #region Self Variables
 
@@ -21,9 +24,17 @@ namespace Managers
 
         #region Serialized Variables
 
-        [SerializeField] Transform slotZone;
-        [SerializeField] private Transform TentTransfrom;
+        [SerializeField] 
+        private Transform tentTransfrom;
         
+        [SerializeField] 
+        private Transform slotTransform;
+
+        [SerializeField]
+        private Transform frontYardPosition;
+        
+        [SerializeField]
+        private GameObject slotZonePrefab;
         #endregion
 
         #region Private Variables
@@ -31,12 +42,12 @@ namespace Managers
         private MilitaryBaseData _data;
         private SoldierAIData _soldierAIData;
         private bool _isBaseAvaliable;
-        private bool _isTentAvaliable;
+        private bool _isTentAvaliable=true;
         private int _totalAmount;
         private int _soldierAmount;
-        private List<GameObject> _soldierList = new List<GameObject>();
         [ShowInInspector] private List<Vector3> _slotTransformList = new List<Vector3>();
         private int _tentCapacity;
+        
         #endregion
 
         #endregion
@@ -44,72 +55,71 @@ namespace Managers
         private void Awake()
         {
             _data = GetBaseData();
-            _soldierAIData = GetSoldierAIData();
-            Init();
-            SetWaitSlotsGrid();
-            InitSoldierPool();
-        } 
-        private void Start()
-        {
-            GetObjectFromPool();
         }
-        private void Init()
+        private MilitaryBaseData GetBaseData()
         {
-            _tentCapacity = _data.TentCapacity;
+          return DataInitSignals.Instance.onLoadMilitaryBaseData.Invoke();
         }
-        private MilitaryBaseData GetBaseData() =>
-            Resources.Load<CD_Level>("Data/CD_Level").LevelData[0].BaseData.MilitaryBaseData;
-        private SoldierAIData GetSoldierAIData() => Resources.Load<CD_AI>("Data/CD_AI").SoldierAIData;
-        private void SetWaitSlotsGrid()
+        public IEnumerator Start()
         {
-            int gridX = (int) _data.SlotsGrid.x;
-            int gridY = (int) _data.SlotsGrid.y;
-            Vector3 slotPivot =
-                new Vector3(slotZone.transform.localScale.x / 2, 0, slotZone.transform.localScale.z / 2);
-            for (int i = 0; i < gridX; i++)
+            if (_data.CurrentSoldierAmount == 0)
+                yield break;
+            yield return new WaitForSeconds(1f);
+            StartCoroutine(soldierEnumerator());
+            yield return new WaitForSeconds(3f);
+            StopCoroutine(soldierEnumerator());
+        }
+        private IEnumerator soldierEnumerator()
+        {
+            OnSoldiersInit(_data.CurrentSoldierAmount);
+            yield return null;
+        }
+        private void OnSoldiersInit(int soldierCount)
+        {
+            for (var i = 0; i < soldierCount; i++)
             {
-                for (int j = 0; j < gridY; j++)
-                {
-                    var SlotPosition = new Vector3(i*_data.SlotOffSet.x, 0, j*_data.SlotOffSet.y) + slotPivot;
-                    var slotPositions = slotZone.transform.localPosition + SlotPosition;
-                    Instantiate(_data.SlotPrefab,slotPositions, Quaternion.identity,slotZone.transform);
-                    _slotTransformList.Add(slotPositions);
-                }
+                GetSoldier();
             }
-        } 
-        private void InitSoldierPool()
-        {
-            ObjectPoolManager.Instance.AddObjectPool(SoldierFactoryMethod,TurnOnSoldierAI,TurnOffSoldierAI,_soldierAIData.SoldierType.ToString(),_tentCapacity,true);
-        } 
-        private GameObject SoldierFactoryMethod()
-        {
-            return Instantiate(_soldierAIData.SoldierPrefab,TentTransfrom.position,Quaternion.identity,TentTransfrom.transform);
         }
-        private void GetObjectFromPool()
+        #region Event Subscription
+        private void OnEnable()
         {
-            var soldierAIPrefab = ObjectPoolManager.Instance.GetObject<GameObject>(_soldierAIData.SoldierType.ToString());
+            SubscribeEvents();
+        }
+        private void SubscribeEvents()
+        {
+            AISignals.Instance.onSoldierActivation += OnSoldierActivation;
+            CoreGameSignals.Instance.onApplicationQuit += OnApplicationQuit;
+            //  DataInitSignals.Instance.onLoadMilitaryBaseData += OnLoadData;
+        }
+        private void UnsubscribeEvents()
+        {
+            AISignals.Instance.onSoldierActivation -= OnSoldierActivation;
+            CoreGameSignals.Instance.onApplicationQuit -= OnApplicationQuit;
+          //  DataInitSignals.Instance.onLoadMilitaryBaseData -= OnLoadData;
+        }
+        private void OnDisable()
+        {
+            UnsubscribeEvents();
+        }
+        #endregion
+        private void OnSoldierActivation()
+        {
+            _isTentAvaliable = true;
+            _data.CurrentSoldierAmount = 0;
+        }
+        private void GetSoldier()
+        {
+            var soldierAIPrefab = GetObject(PoolType.SoldierAI);
             var soldierBrain = soldierAIPrefab.GetComponent<SoldierAIBrain>();
             SetSlotZoneTransformsToSoldiers(soldierBrain);
         }
+        
         private void SetSlotZoneTransformsToSoldiers(SoldierAIBrain soldierBrain)
         {
-            soldierBrain.GetSlotTransform(_slotTransformList[_slotTransformList.Count - 1]);
-            soldierBrain.TentPosition = TentTransfrom;
-            soldierBrain.FrontYardStartPosition = _data.frontYardSoldierPosition;             
-            _slotTransformList.RemoveAt(_slotTransformList.Count-1);
-            _slotTransformList.TrimExcess();
-        }
-        private void TurnOnSoldierAI(GameObject soldierPrefab)
-        {
-           soldierPrefab.SetActive(true);
-        }
-        private void TurnOffSoldierAI(GameObject soldierPrefab)
-        {
-            soldierPrefab.SetActive(false);
-        }
-        private void ReleaseSoldierObject(GameObject soldierPrefab,SoldierType soldierType)
-        {
-            ObjectPoolManager.Instance.ReturnObject(soldierPrefab,soldierType.ToString());
+            soldierBrain.GetSlotTransform(_slotTransformList[_data.CurrentSoldierAmount]);
+            soldierBrain.TentPosition = tentTransfrom;
+            soldierBrain.FrontYardStartPosition = frontYardPosition;
         }
         public void UpdateTotalAmount(int Amount)
         {
@@ -123,18 +133,52 @@ namespace Managers
                 _isBaseAvaliable = false;
             }
         }
-        public void UpdateSoldierAmount(int Amount)
+        
+        [Button]
+        public void UpdateSoldierAmount()
         {
+            Debug.Log(_tentCapacity);
             if(!_isTentAvaliable) return;
-            if (_soldierAmount < _data.TentCapacity)
+            if (_data.CurrentSoldierAmount < _data.TentCapacity)
             {
-                _soldierAmount += Amount;
-               // GetObjectFromPool();
+                GetSoldier();
+                _data.CurrentSoldierAmount += 1;
             }
             else
             {
                 _isTentAvaliable= false;
+                _data.CurrentSoldierAmount = 0;
+                Debug.Log(_data.CurrentSoldierAmount);
             }
         }
+        public void GetStackPositions(List<Vector3> gridPositionData)
+        {
+            for (int i = 0; i < gridPositionData.Count; i++)
+            {
+               _slotTransformList.Add(gridPositionData[i]);
+              var obj=  Instantiate(slotZonePrefab,gridPositionData[i],quaternion.identity,slotTransform);
+            }
+        }
+
+        #region Pool Signals
+       
+        public GameObject GetObject(PoolType poolName)
+        {
+            return PoolSignals.Instance.onGetObjectFromPool?.Invoke(poolName);
+        }
+        #endregion
+        
+        #region SaveSignals
+        
+        [Button]
+        private void SaveData()
+        {
+            DataInitSignals.Instance.onSaveMilitaryBaseData.Invoke(_data);
+        }
+        private void OnApplicationQuit()
+        {
+            DataInitSignals.Instance.onSaveMilitaryBaseData.Invoke(_data);
+        }
+        #endregion
     }
 }

@@ -1,4 +1,6 @@
-﻿using Controllers;
+﻿using System.Collections.Generic;
+using Abstract;
+using Controllers;
 using Data.UnityObject;
 using Data.ValueObject.PlayerData;
 using Data.ValueObject.WeaponData;
@@ -7,7 +9,6 @@ using Enums.GameStates;
 using Keys;
 using Signals;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Managers
 {
@@ -17,16 +18,30 @@ namespace Managers
 
         #region Public Variables
 
-        [FormerlySerializedAs("CurrentGameState")] public AreaType currentAreaType = AreaType.BaseDefense;
+        public AreaType CurrentAreaType = AreaType.BaseDefense;
+        
         public WeaponTypes WeaponType;
+        
+        public List<IDamageble> EnemyList = new List<IDamageble>();
+        
+        public Transform EnemyTarget;
+        
+        public bool HasEnemyTarget = false;
+
         #endregion
 
         #region Serialized Variables
 
-        [SerializeField] private PlayerMeshController meshController;
-        [SerializeField] private PlayerAnimationController animationController;
-        [SerializeField] private PlayerWeaponController weaponController;
-
+        [SerializeField] 
+        private PlayerMeshController meshController;
+        [SerializeField] 
+        private PlayerAnimationController animationController;
+        [SerializeField] 
+        private PlayerWeaponController weaponController;
+        [SerializeField] 
+        private PlayerShootingController shootingController;
+        [SerializeField]
+        private PlayerMovementController movementController;
         #endregion
 
         #region Private Variables
@@ -34,8 +49,6 @@ namespace Managers
         private PlayerData _data;
 
         private WeaponData _weaponData;
-
-        private PlayerMovementController _movementController;
 
         private AreaType _nextState = AreaType.BattleOn;
         
@@ -52,12 +65,12 @@ namespace Managers
         private WeaponData GetWeaponData() => Resources.Load<CD_Weapon>("Data/CD_Weapon").WeaponData[(int)WeaponType];
         private void Init()
         {
-            _movementController = GetComponent<PlayerMovementController>();
+            CurrentAreaType = AreaType.BaseDefense;
             SetDataToControllers();
         }
         private void SetDataToControllers()
         {
-            _movementController.SetMovementData(_data.PlayerMovementData);
+            movementController.SetMovementData(_data.PlayerMovementData);
             weaponController.SetWeaponData(_weaponData);
             meshController.SetWeaponData(_weaponData);
         }
@@ -81,13 +94,29 @@ namespace Managers
         #endregion
         private void OnGetInputValues(HorizontalInputParams inputParams)
         {
-            _movementController.UpdateInputValues(inputParams);
+            movementController.UpdateInputValues(inputParams);
             animationController.PlayAnimation(inputParams);
+            if (!HasEnemyTarget) return;
+            AimEnemy();
         }
         public void CheckAreaStatus(AreaType AreaStatus)
         {
-            currentAreaType = AreaStatus;
+            CurrentAreaType = AreaStatus;
             meshController.ChangeAreaStatus(AreaStatus);
+        }
+        public void SetEnemyTarget()
+        {
+            shootingController.SetEnemyTargetTransform();
+            animationController.AimTarget(true);
+            AimEnemy();
+        }
+        private void AimEnemy()
+        { 
+            if (EnemyList.Count != 0)
+            {
+                var transformEnemy = EnemyList[0].GetTransform();
+                movementController.RotatePlayerToTarget(transformEnemy);
+            }
         }
     }
 }
