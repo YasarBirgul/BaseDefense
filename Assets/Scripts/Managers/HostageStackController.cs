@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Controllers;
+using Controllers.Player;
 using DG.Tweening;
 using Enum;
 using Enums;

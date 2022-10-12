@@ -1,4 +1,5 @@
 ﻿using AIBrains.EnemyBrain;
+using Controllers.Player;
 using UnityEngine;
 
 namespace Controllers.AI.Enemy

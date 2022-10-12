@@ -6,7 +6,7 @@ using Keys;
 using Managers;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.Player
 {
     public class PlayerAnimationController : MonoBehaviour
     {
@@ -18,9 +18,11 @@ namespace Controllers
 
         #region Serialized Variables
 
-        [SerializeField] private PlayerManager playerManager;
+        [SerializeField] 
+        private PlayerManager playerManager;
         
-        [SerializeField] private Animator animator;
+        [SerializeField] 
+        private Animator animator;
         
         #endregion
 
@@ -73,19 +75,19 @@ namespace Controllers
                 _velocityX = inputParams.MovementVector.x;
                 _velocityZ = inputParams.MovementVector.y;
                 
-                if (_velocityZ < 0.1f)                                           // Yukarı İvme
+                if (_velocityZ < 0.1f)                                        
                 {
                     _velocityZ += Time.deltaTime * _acceleration;
                 }
-                if (_velocityX > -0.1f && Mathf.Abs(_velocityZ) <= 0.2f)         // Sağ z neyse
+                if (_velocityX > -0.1f && Mathf.Abs(_velocityZ) <= 0.2f)      
                 {
                     _velocityX -= Time.deltaTime * _acceleration;
                 }
-                if (_velocityX < 0.1f && Mathf.Abs(_velocityZ) <= 0.2f)        // Sol z neyse
+                if (_velocityX < 0.1f && Mathf.Abs(_velocityZ) <= 0.2f)        
                 {
                     _velocityX += Time.deltaTime * _acceleration;
                 }
-                if (_velocityZ > 0.0f)                                          // Yukarı
+                if (_velocityZ > 0.0f)                                         
                 {
                     _velocityZ -= Time.deltaTime * _decelaration;
                 }

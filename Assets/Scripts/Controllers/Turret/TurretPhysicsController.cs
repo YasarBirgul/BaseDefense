@@ -4,14 +4,16 @@ using Managers;
 using Signals;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.Turret
 {
     public class TurretPhysicsController : MonoBehaviour
     {
-        [SerializeField] private TurretLocationType turretLocationType;
-        [SerializeField] private new BoxCollider collider;
-        [SerializeField] private TurretShootController turretShootController;
-
+        [SerializeField] 
+        private TurretLocationType turretLocationType;
+        [SerializeField] 
+        private new BoxCollider collider;
+        [SerializeField]
+        private TurretShootController turretShootController;
         private void OnTriggerEnter(Collider other)
         {
             if (!other.TryGetComponent(typeof(PlayerManager), out var playerManager)) return;

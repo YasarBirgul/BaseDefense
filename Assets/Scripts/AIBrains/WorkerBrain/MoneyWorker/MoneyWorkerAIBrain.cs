@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using Abstract;
 using AIBrains.WorkerBrain.MoneyWorker.States;
 using Controllers.AI.MoneyWorker;
 using Data.ValueObject.AIDatas;
@@ -72,40 +71,6 @@ namespace AIBrains.WorkerBrain.MoneyWorker
             InitWorker();
             GetReferenceStates();
         }
-
-       // private void Start()
-       // {
-       //     GetReferenceStates();
-       // }
-
-        /*#region Event Subscriptions
-
-        private void OnEnable()
-        {
-            SubscribeEvents();
-        }
-
-        private void SubscribeEvents()
-        {
-            EnemySignals.Instance.onEnemyDead += OnGetEnemyPositon;
-        }
-        private void UnsubscribeEvents()
-        {
-            EnemySignals.Instance.onEnemyDead -= OnGetEnemyPositon;
-        }
-
-        private void OnDisable()
-        {
-            UnsubscribeEvents();
-        }
-        private void OnGetEnemyPositon(Transform pos)
-        {
-            moneyTargetList.Add(pos);
-        }
-
-        #endregion*/
-
-
         #region Data Jobs
 
         private WorkerAITypeData GetWorkerType()
@@ -203,8 +168,7 @@ namespace AIBrains.WorkerBrain.MoneyWorker
                 else
                     _currentStock = 0;
             }
-
-            //remove all stack
+            
         }
 
         #endregion

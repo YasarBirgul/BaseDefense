@@ -1,9 +1,8 @@
-﻿using Abstract;
-using Interfaces;
+﻿using Interfaces;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace AIBrains.EnemyBrain
+namespace AIBrains.EnemyBrain.States
 {
     public class Move : IState
     {
@@ -12,10 +11,10 @@ namespace AIBrains.EnemyBrain
         private readonly Animator _animator;
         private Vector3 _lastPosition = Vector3.zero;
 
-        private float timeStuck;
-        private static readonly int Speed = Animator.StringToHash("Speed");
-        private static readonly int Run = Animator.StringToHash("Run");
-
+        private float _timeStuck;
+        private static readonly int _speed = Animator.StringToHash("Speed");
+        private static readonly int _run = Animator.StringToHash("Run");
+        private const float _chaseSpeed=1.53f;
         public Move(EnemyAIBrain enemyAIBrain,NavMeshAgent agent,Animator animator)
         {
             _enemyAIBrain = enemyAIBrain;
@@ -25,23 +24,20 @@ namespace AIBrains.EnemyBrain
         public void Tick()
         {
             if (Vector3.Distance(_enemyAIBrain.transform.position, _lastPosition) <= 0f)
-                timeStuck += Time.deltaTime;
-
+                _timeStuck += Time.deltaTime;
             _lastPosition = _enemyAIBrain.transform.position;
-            _animator.SetFloat(Speed,_navMeshAgent.velocity.magnitude);
-
+            _animator.SetFloat(_speed,_navMeshAgent.velocity.magnitude);
         }
-
         public void OnEnter()
         {
             _navMeshAgent.enabled = true;
             _navMeshAgent.SetDestination(_enemyAIBrain.TurretTarget.position);
-            _animator.SetTrigger(Run);
-            _navMeshAgent.speed = 1.53f;
+            _animator.SetTrigger(_run);
+            _navMeshAgent.speed = _chaseSpeed;
         }
-
         public void OnExit()
         {
+            
         }
     }
 }

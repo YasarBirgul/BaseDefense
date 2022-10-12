@@ -1,12 +1,13 @@
 ﻿using Controllers.Gate;
+using Controllers.Turret;
 using Enums.GameStates;
 using Interfaces;
 using Managers;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.Player
 {
-    public class PlayerPhysicsController : IInteractable
+    public class PlayerPhysicsController : AInteractable
     {
         #region Self Variables
 

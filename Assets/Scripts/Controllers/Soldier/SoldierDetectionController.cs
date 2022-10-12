@@ -14,7 +14,8 @@ namespace Controllers.Soldier
 
         #region Serialized Variables
         
-        [SerializeField] private SoldierAIBrain soldierAIBrain;
+        [SerializeField] 
+        private SoldierAIBrain soldierAIBrain;
 
         #endregion
 

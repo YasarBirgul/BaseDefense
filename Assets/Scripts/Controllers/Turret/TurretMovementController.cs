@@ -2,17 +2,16 @@
 using Keys;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.Turret
 {
     public class TurretMovementController : MonoBehaviour
     {
+        [SerializeField] 
+        private TurretLocationType turretLocationType;
+        
         private float _horizontalInput;
         private float _verticalInput;
-
-        private Vector2 rotateDirection;
-
-        [SerializeField] private TurretLocationType turretLocationType;
-
+        private Vector2 _rotateDirection;
         public void SetInputParams(HorizontalInputParams input)
         {
             _horizontalInput = input.MovementVector.x;
@@ -21,11 +20,11 @@ namespace Controllers
         }
         private void Rotate()
         {
-            rotateDirection = new Vector2(_horizontalInput, _verticalInput).normalized;
-            if (rotateDirection.sqrMagnitude == 0)
+            _rotateDirection = new Vector2(_horizontalInput, _verticalInput).normalized;
+            if (_rotateDirection.sqrMagnitude == 0)
                 return;
 
-            float angle = Mathf.Atan2(rotateDirection.x,rotateDirection.y) * Mathf.Rad2Deg;
+            float angle = Mathf.Atan2(_rotateDirection.x,_rotateDirection.y) * Mathf.Rad2Deg;
 
             if (!(angle < 60) || !(angle > -60)) return;
 

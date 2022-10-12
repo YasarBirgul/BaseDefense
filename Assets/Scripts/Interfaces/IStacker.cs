@@ -9,7 +9,6 @@ namespace Interfaces
         void GetStack(GameObject stackableObj);
         void GetAllStack(IStack stack);
         void RemoveStack(IStackable stackable);
-
         void ResetStack(IStackable stackable);
     }
 }

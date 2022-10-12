@@ -1,11 +1,12 @@
 ﻿using Abstract;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.Turret
 {
     public class TurretDetectionController : MonoBehaviour
     {
-        [SerializeField] private TurretShootController shootController;
+        [SerializeField] 
+        private TurretShootController shootController;
         private void OnTriggerEnter(Collider other)
         {
             if (!other.TryGetComponent(out IDamageable damageable)) return;

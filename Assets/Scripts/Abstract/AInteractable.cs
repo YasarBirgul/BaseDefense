@@ -2,7 +2,7 @@
 
 namespace Interfaces
 {
-    public abstract class IInteractable : MonoBehaviour
+    public abstract class AInteractable : MonoBehaviour
     {
         
     }

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace AIBrains.EnemyBrain
+namespace AIBrains.EnemyBrain.States
 {
     public class Chase : IState
     {
@@ -11,7 +11,8 @@ namespace AIBrains.EnemyBrain
         private readonly EnemyAIBrain _enemyAIBrain;
         private static readonly int Speed = Animator.StringToHash("Speed");
         private static readonly int Run = Animator.StringToHash("Run");
-
+        private const float _runSpeed = 6.256048f;
+        
         public Chase(EnemyAIBrain enemyAIBrain,NavMeshAgent agent,Animator animator)
         {
             _enemyAIBrain = enemyAIBrain;
@@ -28,7 +29,7 @@ namespace AIBrains.EnemyBrain
 
             _navMeshAgent.SetDestination(_enemyAIBrain.CurrentTarget.position);
             _animator.SetTrigger(Run);
-            _navMeshAgent.speed = 6.256048f;
+            _navMeshAgent.speed = _runSpeed;
         }
         public void OnExit()
         {

@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Controllers.Player
 {
-    [RequireComponent(typeof(StackController))]
+    [RequireComponent(typeof(StackController.StackController))]
     public class MoneyStackerController : AStacker,IReleasePoolObject
     {
         #region Self Variables
@@ -30,12 +30,11 @@ namespace Controllers.Player
 
         #region Private Variables
 
-        private Sequence GetStackSequence;
+        private Sequence _getStackSequence;
 
-        private int stackListConstCount;
+        private int _stackListConstCount;
 
-        private bool canRemove = true;
-
+        private bool _canRemove = true;
         
         #endregion
 
@@ -56,38 +55,34 @@ namespace Controllers.Player
         }
         public override void GetStack(GameObject stackableObj)
         {   
-            GetStackSequence = DOTween.Sequence();
+            _getStackSequence = DOTween.Sequence();
             var randomBouncePosition =CalculateRandomAddStackPosition();
             var randomRotation = CalculateRandomStackRotation();
             
-            GetStackSequence.Append(stackableObj.transform.DOLocalMove(randomBouncePosition, .5f));
-            GetStackSequence.Join(stackableObj.transform.DOLocalRotate(randomRotation, .5f)).OnComplete(() =>
+            _getStackSequence.Append(stackableObj.transform.DOLocalMove(randomBouncePosition, .5f));
+            _getStackSequence.Join(stackableObj.transform.DOLocalRotate(randomRotation, .5f)).OnComplete(() =>
             {
                 stackableObj.transform.rotation = Quaternion.LookRotation(transform.forward);
-            
                 StackList.Add(stackableObj);
-            
                 stackableObj.transform.DOLocalMove(positionList[StackList.Count - 1], 0.3f);
             });
-            
         }
         public void OnRemoveAllStack()
         {
-            if(!canRemove)
+            if(!_canRemove)
                 return;
-            canRemove = false;
-            stackListConstCount = StackList.Count;
+            _canRemove = false;
+            _stackListConstCount = StackList.Count;
             RemoveAllStack();
         }
-
         private async void RemoveAllStack()
         {
             if (StackList.Count == 0)
             {
-                canRemove = true;
+                _canRemove = true;
                 return;
             }
-            if(StackList.Count >= stackListConstCount -6)
+            if(StackList.Count >= _stackListConstCount -6)
             {
                 RemoveStackAnimation(StackList[StackList.Count - 1]);
                 StackList.TrimExcess();
@@ -101,18 +96,18 @@ namespace Controllers.Player
                     RemoveStackAnimation(StackList[i]);
                     StackList.TrimExcess();
                 }
-                canRemove = true;
+                _canRemove = true;
             }
         }
 
         private void RemoveStackAnimation(GameObject removedStack)
         {
-            GetStackSequence = DOTween.Sequence();
+            _getStackSequence = DOTween.Sequence();
             var randomRemovedStackPosition = CalculateRandomRemoveStackPosition();
             var randomRemovedStackRotation = CalculateRandomStackRotation();
             
-            GetStackSequence.Append(removedStack.transform.DOLocalMove(randomRemovedStackPosition, .2f));
-            GetStackSequence.Join(removedStack.transform.DOLocalRotate(randomRemovedStackRotation, .2f)).OnComplete(() =>
+            _getStackSequence.Append(removedStack.transform.DOLocalMove(randomRemovedStackPosition, .2f));
+            _getStackSequence.Join(removedStack.transform.DOLocalRotate(randomRemovedStackRotation, .2f)).OnComplete(() =>
             {
                 removedStack.transform.rotation = Quaternion.LookRotation(transform.forward);
 

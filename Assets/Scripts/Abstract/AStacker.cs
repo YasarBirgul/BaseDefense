@@ -7,7 +7,6 @@ namespace Abstract
     public abstract class AStacker : MonoBehaviour, IStacker
     {
         public  List<GameObject> StackList = new List<GameObject>();
-        
         public virtual void SetStackHolder(Transform otherTransform)
         {
             otherTransform.SetParent(transform);

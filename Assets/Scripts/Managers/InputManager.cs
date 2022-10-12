@@ -26,7 +26,6 @@ namespace Managers
 
         private InputData _data;
         private bool _hasTouched;
-        
         private InputHandlers _inputHandlers = InputHandlers.Character;
 
         #endregion
@@ -68,10 +67,6 @@ namespace Managers
                 _hasTouched = true;
             }
             if (!_hasTouched) return;
-         // InputSignals.Instance.onInputDragged?.Invoke(new HorizontalInputParams()
-         //  {
-         //      MovementVector = new Vector2(joystickInput.Horizontal, joystickInput.Vertical)
-         //  });
             HandleJoystickInput();
             _hasTouched = joystickInput.Direction.sqrMagnitude > 0;
             

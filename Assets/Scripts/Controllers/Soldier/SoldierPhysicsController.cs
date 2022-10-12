@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Controllers.Soldier
 { 
-    public class SoldierPhysicsController : IInteractable
+    public class SoldierPhysicsController : AInteractable
     {
         
     }

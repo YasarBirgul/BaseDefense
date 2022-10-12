@@ -4,7 +4,7 @@ using Enums.GameStates;
 using Managers;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.Player
 {
     public class PlayerShootingController : MonoBehaviour
     {

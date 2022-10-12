@@ -11,12 +11,11 @@ namespace AIBrains.SoldierBrain.States
         private SoldierAIBrain _soldierAIBrain;
         private NavMeshAgent _navMeshAgent;
         private float _fireRate=0.4f;
-        private float _attackTime = 0.5f;
+        private const float _attackTime = 0.5f;
         private Animator _animator;
-        private static readonly int Attacked = Animator.StringToHash("Attack");
-        private static readonly int Speed = Animator.StringToHash("Speed");
-        private static readonly int HasTarget = Animator.StringToHash("HasTarget");
-        private BulletFireController bulletFireController;
+        private static readonly int _speed = Animator.StringToHash("Speed");
+        private static readonly int _hasTarget = Animator.StringToHash("HasTarget");
+        private BulletFireController _bulletFireController;
 
         public Attack(SoldierAIBrain soldierAIBrain,NavMeshAgent navMeshAgent,Animator animator)
         {
@@ -43,7 +42,7 @@ namespace AIBrains.SoldierBrain.States
         }
         private void LookTarget()
         {
-            _animator.SetFloat(Speed,_navMeshAgent.velocity.magnitude);
+            _animator.SetFloat(_speed,_navMeshAgent.velocity.magnitude);
             
             var enemyPosition = _soldierAIBrain.EnemyTarget.transform;
             
@@ -58,17 +57,17 @@ namespace AIBrains.SoldierBrain.States
         }
         public void OnEnter()
         {
-             bulletFireController = new BulletFireController(WeaponTypes.Pistol);
+             _bulletFireController = new BulletFireController(WeaponTypes.Pistol);
             _navMeshAgent.speed = 1.801268E-05f;
-            _animator.SetBool(HasTarget,true);
+            _animator.SetBool(_hasTarget,true);
         }
         public void OnExit()
         {
-            _animator.SetBool(HasTarget,false);
+            _animator.SetBool(_hasTarget,false);
         }
         private void FireBullets()
         {
-            bulletFireController.FireBullets(_soldierAIBrain.WeaponHolder);
+            _bulletFireController.FireBullets(_soldierAIBrain.WeaponHolder);
         }
         
         private void SetEnemyTargetTransform()

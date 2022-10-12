@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Controllers.Gate
 {
-    public class GatePhysicsController : IInteractable
+    public class GatePhysicsController : AInteractable
     {
         #region Self Variables
 
@@ -26,14 +26,14 @@ namespace Controllers.Gate
         #endregion
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out IInteractable interactable))
+            if (other.TryGetComponent(out AInteractable interactable))
             {
                 manager.GateOpen(true);
             }
         }
         private void OnTriggerExit(Collider other)
         {
-            if (other.TryGetComponent(out IInteractable interactable))
+            if (other.TryGetComponent(out AInteractable interactable))
             {
                 manager.GateOpen(false);
             }

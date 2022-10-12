@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Abstract;
 using Controllers;
+using Controllers.Player;
 using Data.UnityObject;
 using Data.ValueObject.PlayerData;
 using Data.ValueObject.WeaponData;

@@ -22,7 +22,7 @@ namespace Controllers.Player
 
         #region Private Variables
 
-        private bool canPay=true;
+        private bool _canPay=true;
         
         #endregion
 
@@ -34,7 +34,7 @@ namespace Controllers.Player
                 CollectMoney(stackable);
                 CoreGameSignals.Instance.onMoneyScoreUpdate.Invoke(+1);
             }
-            else if (other.TryGetComponent<IInteractable>(out IInteractable interactable))
+            else if (other.TryGetComponent<AInteractable>(out AInteractable interactable))
             {
                 moneyStackerController.OnRemoveAllStack();
             }
@@ -52,7 +52,7 @@ namespace Controllers.Player
             while (true)
             {
                 CoreGameSignals.Instance.onMoneyScoreUpdate.Invoke(-1);
-                if (HasMoney && canPay)
+                if (HasMoney && _canPay)
                 {
                     await Task.Delay(100);
                     continue;
@@ -62,9 +62,9 @@ namespace Controllers.Player
         }
         public async void StopPayment()
         {
-            canPay = false;
+            _canPay = false;
             await Task.Delay(200);
-            canPay = true;
+            _canPay = true;
         }
         #endregion
     }

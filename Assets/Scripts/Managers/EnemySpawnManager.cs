@@ -34,13 +34,13 @@ namespace Managers
 
         #region Private Variables
         
-        private EnemyTypes enemyType;
+        private EnemyTypes _enemyType;
         
-        private NavMeshTriangulation triangulation;
+        private NavMeshTriangulation _triangulation;
         
-        private GameObject _EnemyAIObj;
+        private GameObject _enemyAIObj;
         
-        private EnemyAIBrain _EnemyAIBrain;
+        private EnemyAIBrain _enemyAIBrain;
         
         #endregion
         
@@ -113,8 +113,8 @@ namespace Managers
         }
         public GameObject GetObject(PoolType poolName)
         {
-            _EnemyAIObj = PoolSignals.Instance.onGetObjectFromPool?.Invoke(poolName);
-            return _EnemyAIObj;
+            _enemyAIObj = PoolSignals.Instance.onGetObjectFromPool?.Invoke(poolName);
+            return _enemyAIObj;
         }
     }
 }

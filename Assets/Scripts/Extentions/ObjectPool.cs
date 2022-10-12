@@ -6,7 +6,7 @@ namespace Extentions
 {
     public class ObjectPool<T>: AbstractObjectPool
     {
-         private readonly List<T> _currentStock;
+        private readonly List<T> _currentStock;
         private readonly Func<T> _factoryMethod;
         private readonly bool _isDynamic;
         private readonly Action<T> _turnOnCallback;

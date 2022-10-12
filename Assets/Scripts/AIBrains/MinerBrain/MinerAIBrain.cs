@@ -88,9 +88,10 @@ namespace AIBrains.MinerBrain
             var idleState=new MinerIdleState(this,MinerManager); 
             var dropGemState=new DropGemState(this); 
             _stateMachine = new StateMachine();
+            
             At(minerReadyState,moveToMine,IsGameStarted());
-            At(moveToMine,mineGemSourceState,()=>moveToMine.IsReachedToTarget&&CurrentTargetType==GemMineType.Mine);//su iki state tek move stat oldugu icin tekrar tekrar calisiyor
-            At(moveToMine,cartGemSourceState,()=>moveToMine.IsReachedToTarget&&CurrentTargetType==GemMineType.Cart);//su iki state tek move stat oldugu icin tekrar tekrar calisiyor
+            At(moveToMine,mineGemSourceState,()=>moveToMine.IsReachedToTarget&&CurrentTargetType==GemMineType.Mine);
+            At(moveToMine,cartGemSourceState,()=>moveToMine.IsReachedToTarget&&CurrentTargetType==GemMineType.Cart);
             At(mineGemSourceState,moveToGemHolder,()=>mineGemSourceState.IsMiningTimeUp);
             At(cartGemSourceState,moveToGemHolder,()=>cartGemSourceState.IsMiningTimeUp);
             At(moveToGemHolder,dropGemState,()=>moveToGemHolder.IsReachedToTarget);
@@ -98,6 +99,7 @@ namespace AIBrains.MinerBrain
             _stateMachine.AddAnyTransition(idleState,IsDropZoneFull());
             At(idleState,moveToMine,IsDropZoneNotFull());
             _stateMachine.SetState(minerReadyState);
+            
             void At(IState to, IState from, Func<bool> condition) => _stateMachine.AddTransition(to, from, condition);
             Func<bool> IsDropZoneFull() => () => isDropZoneFull;
             Func<bool> IsGameStarted() => () => true;

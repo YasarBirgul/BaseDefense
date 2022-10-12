@@ -7,7 +7,7 @@ using Enums;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.StackController
 {
     public class StackController : AStack
     {
@@ -16,29 +16,35 @@ namespace Controllers
         #region Serialized Variables
         
         
-        [SerializeField] private StackingSystem stackingSystem;
+        [SerializeField] 
+        private StackingSystem stackingSystem;
 
         [ShowIf("stackingSystem", Enums.StackingSystem.Static)] 
-        [SerializeField] private StackAreaType stackAreaType;
+        [SerializeField] 
+        private StackAreaType stackAreaType;
         
-       
         [ShowIf("stackingSystem",Enums.StackingSystem.Static)]
-        [SerializeField] private GridData stackAreaGridData;
+        [SerializeField]
+        private GridData stackAreaGridData;
     
         [ShowIf("stackingSystem",Enums.StackingSystem.Dynamic)]
-        [SerializeField] private StackerType stackerType;
+        [SerializeField] 
+        private StackerType stackerType;
         
         
         [ShowIf("stackingSystem",Enums.StackingSystem.Dynamic)]
-        [SerializeField] private GridData stackerGridData;
+        [SerializeField] 
+        private GridData stackerGridData;
 
-        [SerializeField] private MoneyStackerController moneyStackerController;
+        [SerializeField]
+        private MoneyStackerController moneyStackerController;
 
         #endregion
 
         #region Private Variables
         
-        [ShowInInspector] private List<Vector3> gridPositionsData = new List<Vector3>();
+        [ShowInInspector] 
+        private List<Vector3> _gridPositionsData = new List<Vector3>();
         
         private Vector3 _gridPositions;
 
@@ -119,13 +125,13 @@ namespace Controllers
                         modZ * _gridData.Offset.z);
                     
                 }
-                gridPositionsData.Add(_gridPositions);
+                _gridPositionsData.Add(_gridPositions);
                 
             }
         } 
         public override void SendGridDataToStacker()
         {
-            moneyStackerController.GetStackPositions(gridPositionsData);
+            moneyStackerController.GetStackPositions(_gridPositionsData);
         }
     }
 }

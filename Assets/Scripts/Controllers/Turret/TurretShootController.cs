@@ -7,19 +7,23 @@ using Enums;
 using Enums.Turret;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.Turret
 {
     public class TurretShootController : MonoBehaviour
     {
-       [SerializeField] private TurretLocationType turretLocationType;
-        [SerializeField] private BulletFireController fireController;
-        [SerializeField] private WeaponTypes weaponType = WeaponTypes.Turret;
-        [SerializeField] private List<GameObject> damageables;
-        [SerializeField] private Transform weaponHolder;
-        [SerializeField] public CapsuleCollider DetectionCollider;
-
-        public bool readyToAttack { get; set; }
+        public CapsuleCollider DetectionCollider;
         
+        [SerializeField]
+        private TurretLocationType turretLocationType;
+        [SerializeField] 
+        private WeaponTypes weaponType = WeaponTypes.Turret;
+        [SerializeField] 
+        private List<GameObject> damageables;
+        [SerializeField] 
+        private Transform weaponHolder;
+        public bool readyToAttack { get; set; }
+        private BulletFireController fireController;
+       
         private const float _fireRate = 1.6f;
 
         private float maxRadius = 14f;
@@ -46,29 +50,22 @@ namespace Controllers
             damageables.Remove(damageable);
             damageables.TrimExcess();
         }
-
         public void RemoveTarget()
         {
             if (damageables.Count == 0) return;
             damageables.RemoveAt(0);
             damageables.TrimExcess();
         }
-        
-
         public void ShootTheTarget()
         {
             if (!readyToAttack)
                 return;
             
-            if (damageables.Count != 0) // Check bullet count
+            if (damageables.Count != 0)
             {
-                // Vector3 direction = damageables[0].GetTransform().position - transform.position;
-                //
-                // Quaternion enemyRotation = Quaternion.LookRotation(direction, Vector3.up);
                 StartCoroutine(FireBullet());
             }
         }
-
         public async void EnLargeDetectionRadius()
         {
             if (Math.Abs(maxRadius - minRadius) < _tolerance)
@@ -85,7 +82,6 @@ namespace Controllers
             await Task.Delay(100);
             EnLargeDetectionRadius();
         }
-
         public async void DeSizeDetectionRadius()
         {
             if (Math.Abs(maxRadius - minRadius) < _tolerance)
@@ -98,12 +94,9 @@ namespace Controllers
                 maxRadius -= stepRate;
                 DetectionCollider.radius = maxRadius;
             }
-
             await Task.Delay(100);
             DeSizeDetectionRadius();
         }
-        
-
         private IEnumerator FireBullet()
         {
             yield return new WaitForSeconds(_fireRate);

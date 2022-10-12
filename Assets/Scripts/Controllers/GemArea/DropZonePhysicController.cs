@@ -18,7 +18,7 @@ namespace Controllers
                 }
                 gemStackerController.GetStack(stackable.SendToStack(),stackable.SendToStack().transform);
             }
-            else if (other.TryGetComponent<IInteractable>(out IInteractable interactable))
+            else if (other.TryGetComponent<AInteractable>(out AInteractable interactable))
             {
                 gemStackerController.OnRemoveAllStack(other.transform);
             }

@@ -2,7 +2,7 @@
 using Enums.GameStates;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.Player
 {
     public class PlayerMeshController : MonoBehaviour
     {
@@ -14,9 +14,12 @@ namespace Controllers
 
         #region Serialized Variables,
          
-        [SerializeField] private Transform manager;
-        [SerializeField] private MeshRenderer weaponMeshRenderer;
-        [SerializeField] private MeshRenderer sideMeshRenderer;
+        [SerializeField]
+        private Transform manager;
+        [SerializeField] 
+        private MeshRenderer weaponMeshRenderer;
+        [SerializeField]
+        private MeshRenderer sideMeshRenderer;
 
         #endregion
 

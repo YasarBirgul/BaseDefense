@@ -2,7 +2,7 @@ using Interfaces;
 
 namespace Concrete
 {
-    public class PlayerInteractable:IInteractable
+    public class PlayerAInteractable:AInteractable
     {
         
     }

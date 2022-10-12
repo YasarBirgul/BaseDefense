@@ -5,7 +5,6 @@ using AIBrains.SoldierBrain.States;
 using Data.UnityObject;
 using Data.ValueObject.AIData;
 using Interfaces;
-using Sirenix.OdinInspector;
 using StateBehaviour;
 using UnityEngine;
 using UnityEngine.AI;
@@ -23,7 +22,7 @@ namespace AIBrains.SoldierBrain
         public bool HasReachedFrontYard;
         public bool HasEnemyTarget = false;
         
-        public Transform TentPosition; 
+        public Transform TentPosition;
         public Transform FrontYardStartPosition;
         public List<IDamageable> enemyList = new List<IDamageable>();
         public Transform EnemyTarget;
@@ -33,19 +32,16 @@ namespace AIBrains.SoldierBrain
         #endregion
 
         #region Serialized Variables
-        [SerializeField] private Animator animator;
+        [SerializeField]
+        private Animator animator;
+        
         #endregion
         #region Private Variables
         private NavMeshAgent _navMeshAgent;
-        [ShowInInspector] private List<IDamageable> _damagablesList;
+        
         [Header("Data")]
         private SoldierAIData _data;
-        private int _damage;
-        private float _soldierSpeed;
-        private float _attackRadius;
-        private float _attackDelay;
-        private int _health;
-        private Transform _spawnPoint;
+
         private StateMachine _stateMachine;
         private Vector3 _slotTransform;
 

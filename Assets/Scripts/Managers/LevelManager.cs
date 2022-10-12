@@ -26,9 +26,12 @@ namespace Managers
         [Space]
         [SerializeField]
         private GameObject levelHolder;
+        
         [SerializeField] 
         private LevelLoaderCommand levelLoaderCommand;
-        [SerializeField] private ClearActiveLevelCommand clearActiveLevelCommand;
+        
+        [SerializeField] 
+        private ClearActiveLevelCommand clearActiveLevelCommand;
 
         #endregion
 
