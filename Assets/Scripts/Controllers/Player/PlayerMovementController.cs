@@ -80,5 +80,10 @@ namespace Controllers
             Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
             rigidbody.rotation = Quaternion.RotateTowards(rigidbody.rotation, toRotation,30);
         }
+        public void DisableMovement()
+        {
+            rigidbody.velocity = Vector3.zero;
+            transform.rotation = new Quaternion(0, 0, 0, 0);
+        }
     }
 }

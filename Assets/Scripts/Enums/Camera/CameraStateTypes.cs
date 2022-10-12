@@ -3,6 +3,7 @@
     public enum CameraStateTypes
     {
         GameCamera,
+        TurretCamera,
         FinalCamera
     }
 }

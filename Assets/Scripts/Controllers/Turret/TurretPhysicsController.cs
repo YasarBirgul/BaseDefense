@@ -9,7 +9,7 @@ namespace Controllers
     public class TurretPhysicsController : MonoBehaviour
     {
         [SerializeField] private TurretLocationType turretLocationType;
-        [SerializeField] private BoxCollider collider;
+        [SerializeField] private new BoxCollider collider;
         [SerializeField] private TurretShootController turretShootController;
 
         private void OnTriggerEnter(Collider other)

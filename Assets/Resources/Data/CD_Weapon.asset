@@ -45,3 +45,11 @@ MonoBehaviour:
     AttackRate: 0
     WeaponLevel: 1
     Bullet: {fileID: 0}
+  - WeaponType: 4
+    WeaponMesh: {fileID: 3270599724914898183, guid: 04c121150583af948b27d7c8b0960e2d, type: 3}
+    HasSideMesh: 0
+    SideMesh: {fileID: 0}
+    Damage: 25
+    AttackRate: 0
+    WeaponLevel: 1
+    Bullet: {fileID: 0}

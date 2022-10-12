@@ -20,7 +20,7 @@ namespace Controllers
 
         public bool readyToAttack { get; set; }
         
-        private const float _fireRate = 0.3f;
+        private const float _fireRate = 1.6f;
 
         private float maxRadius = 14f;
 

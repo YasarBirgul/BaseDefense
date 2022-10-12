@@ -18,8 +18,7 @@ namespace Managers
         [SerializeField]
         private List<TurretMovementController> turretMovementControllers = new List<TurretMovementController>(6);
 
-        [SerializeField] private WeaponTypes weaponTypes = WeaponTypes.Turret;
-        
+        //  [SerializeField] private WeaponTypes weaponTypes = WeaponTypes.Turret;
         // [SerializeField]
         // private TurretOtoAtackController _otoAtackController;
         // [SerializeField]

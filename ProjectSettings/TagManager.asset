@@ -9,6 +9,7 @@ TagManager:
   - Bullet
   - MineLure
   - MineExplosion
+  - Gem
   layers:
   - Default
   - TransparentFX
@@ -32,7 +33,7 @@ TagManager:
   - PlayerDetection
   - Gate
   - 
-  - 
+  - TurretEnemyDetection
   - 
   - 
   - 

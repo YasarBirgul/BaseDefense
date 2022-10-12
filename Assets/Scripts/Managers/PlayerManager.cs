@@ -6,6 +6,7 @@ using Data.ValueObject.PlayerData;
 using Data.ValueObject.WeaponData;
 using Enums;
 using Enums.GameStates;
+using Enums.Input;
 using Keys;
 using Signals;
 using UnityEngine;
@@ -80,10 +81,12 @@ namespace Managers
         private void SubscribeEvents()
         {
             InputSignals.Instance.onInputDragged += OnGetInputValues;
+            InputSignals.Instance.onInputHandlerChange += OnDisableMovement;
         }
         private void UnsubscribeEvents()
         {
             InputSignals.Instance.onInputDragged -= OnGetInputValues;
+            InputSignals.Instance.onInputHandlerChange -= OnDisableMovement;
         }
         private void OnDisable()
         {
@@ -114,6 +117,13 @@ namespace Managers
             {
                 var transformEnemy = EnemyList[0].GetTransform();
                 movementController.RotatePlayerToTarget(transformEnemy);
+            }
+        }
+        private void OnDisableMovement(InputHandlers ınputHandlers)
+        {
+            if (ınputHandlers == InputHandlers.Turret)
+            {
+                movementController.DisableMovement();
             }
         }
     }
