@@ -13,12 +13,8 @@ namespace Controllers
         public List<Vector3> PositionList=new List<Vector3>();
 
         [SerializeField] private float radiusAround;
-        
-        private float stackDelay = 0.5f;
 
         private Sequence GetStackSequence;
-
-        private int stackListOrder = 0;
 
         private int stackListConstCount;
 

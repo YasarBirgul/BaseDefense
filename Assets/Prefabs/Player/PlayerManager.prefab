@@ -666,7 +666,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62a8459b64046ebb909a7f489d43bc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyTransformParent: {fileID: 7414854890768826635}
   stackingSystem: 1
   stackAreaType: 0
   stackAreaGridData:

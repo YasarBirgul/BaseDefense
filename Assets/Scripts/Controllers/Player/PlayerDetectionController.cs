@@ -9,8 +9,6 @@ namespace Controllers.Player
     {
         [SerializeField] 
         private PlayerManager manager;
-        
-        private bool _detectionEnabled=false;
         private void OnTriggerEnter(Collider other)
         {
             if (manager.CurrentAreaType == AreaType.BaseDefense) return;

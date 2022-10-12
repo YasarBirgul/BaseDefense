@@ -19,8 +19,7 @@ namespace Controllers.Bullet
 
         private const float fireDelay = 0.05f;
         private const float fireSpeed = 70;
-
-        private bool bulletHasFired=false;
+        
         #endregion
 
         #region Private Variables
@@ -36,7 +35,6 @@ namespace Controllers.Bullet
         private void FireBullet()
         {
             rigidbody.AddRelativeForce(Vector3.forward * fireSpeed, ForceMode.VelocityChange);
-            bulletHasFired = false;
         }
         private void OnDisable()
         {

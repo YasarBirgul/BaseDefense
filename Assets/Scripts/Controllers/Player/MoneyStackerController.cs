@@ -30,11 +30,7 @@ namespace Controllers.Player
 
         #region Private Variables
 
-        private float stackDelay = 0.5f;
-
         private Sequence GetStackSequence;
-
-        private int stackListOrder = 0;
 
         private int stackListConstCount;
 

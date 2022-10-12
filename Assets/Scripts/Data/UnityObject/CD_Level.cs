@@ -14,15 +14,13 @@ namespace Data.UnityObject
         public string Key ="LevelData";
         public CD_Level()
         {
-            
-            
+
         } 
         public CD_Level(int levelId,List<LevelData> levelDatas, ScoreData scoreData)
         {
             LevelId = levelId;
             LevelDatas = levelDatas;
             ScoreData = scoreData;
-
         }
         public string GetKey()
         {

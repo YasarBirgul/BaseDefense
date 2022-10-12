@@ -6,13 +6,14 @@ namespace Concrete
     public class StackableMoney : AStackable
     {
         [SerializeField] 
-        private Rigidbody rigidbody;
+        private new Rigidbody rigidbody;
         [SerializeField]
-        private BoxCollider collider;
+        private new BoxCollider collider;
         private void OnEnable()
         {
             SendPosition(transform);
             collider.enabled = true;
+            rigidbody.isKinematic = false;
             rigidbody.useGravity = true;
         }
         public override void SetInit(Transform initTransform, Vector3 position)

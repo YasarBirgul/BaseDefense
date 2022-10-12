@@ -47,13 +47,6 @@ namespace Controllers.Soldier
                 soldierAIBrain.enemyList.Remove(damagable);
                 soldierAIBrain.enemyList.TrimExcess();
             }
-            // 1.Enemies ontrigger exit yapıp tekrar enter tetikleyebilirler. Tekrar tetiklediklerinde listede iki
-            // tane aynı objeden oluyor. Öldürdüğüm esnada da null bir obje oluyor. Bu sebeple listeden ontrigger exitte
-            // çıkartmak lazım ki tekrar trigger edildiklerinde listeye alalım...
-            
-            // Bu durumda bu arkadaşlar bizim attack radius`muzun ışına çıkmış oluyorlar eğer bunlarla aramızdaki fark attack
-            // radiustan büyük ise bu arkadaşların güncel pozisyonuna trigger olana kadar yürümemiz gerekiyor.
-            // Chase etmek gerekiyor.
         }
     }
 }

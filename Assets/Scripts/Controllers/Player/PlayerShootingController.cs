@@ -26,7 +26,6 @@ namespace Controllers
             manager.HasEnemyTarget = true;
             Shoot();
         }
-
         private void EnemyTargetStatus()
         {
             if (manager.EnemyList.Count != 0)
@@ -38,7 +37,6 @@ namespace Controllers
                 manager.HasEnemyTarget = false;
             }
         }
-
         private void RemoveTarget()
         {
             if (manager.EnemyList.Count == 0) return;

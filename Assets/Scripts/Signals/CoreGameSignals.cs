@@ -1,5 +1,7 @@
 ﻿using System;
+using Enums.Turret;
 using Extentions;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace Signals
@@ -24,5 +26,16 @@ namespace Signals
          public UnityAction<int> onDiamondScoreUpdate = delegate {  };
         public Func<bool> onHasEnoughMoney= delegate { return default;}; 
         public Func<int> onGetDiamondAmount= delegate { return default;}; 
+        
+        public UnityAction onEnterTurret = delegate {  };
+
+        public UnityAction onLevel = delegate {  };
+
+        public UnityAction onFinish = delegate {  };
+        
+        public UnityAction onCharacterInputRelease = delegate {  };
+        
+        public UnityAction<TurretLocationType,GameObject> onSetCurrentTurret = delegate(TurretLocationType arg0, GameObject o) {  };
+
     }
 }
