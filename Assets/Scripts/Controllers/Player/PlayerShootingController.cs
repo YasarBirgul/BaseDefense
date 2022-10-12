@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Controllers.Bullet;
+using Enums.GameStates;
 using Managers;
 using UnityEngine;
 
@@ -47,7 +48,7 @@ namespace Controllers
         }
         private void Shoot()
         {
-            if(!manager.EnemyTarget) 
+            if(!manager.EnemyTarget || manager.CurrentAreaType == AreaType.BaseDefense) 
                 return;
             if (manager.EnemyList[0].IsDead)
             {

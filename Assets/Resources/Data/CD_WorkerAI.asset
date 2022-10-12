@@ -15,8 +15,8 @@ MonoBehaviour:
   WorkerAIData:
     WorkerAITypes:
     - WorkerType: 0
-      CapacityOrDamage: 0
-      Speed: 0
+      CapacityOrDamage: 3
+      Speed: 1
       StartTarget: {fileID: 0}
       SoldierAIData:
         SoldierType: 0
@@ -28,9 +28,9 @@ MonoBehaviour:
         Health: 0
         SpawnPoint: {fileID: 0}
     - WorkerType: 1
-      CapacityOrDamage: 20
+      CapacityOrDamage: 3
       Speed: 20
-      StartTarget: {fileID: 2904688958819217405, guid: 9fbb7ce7f8c84f841bb20ce867576184, type: 3}
+      StartTarget: {fileID: 8228190479126306765, guid: b9c4e540767297e429605bc32ef1c2fd, type: 3}
       SoldierAIData:
         SoldierType: 0
         SoldierPrefab: {fileID: 0}
@@ -41,8 +41,8 @@ MonoBehaviour:
         Health: 0
         SpawnPoint: {fileID: 0}
     - WorkerType: 2
-      CapacityOrDamage: 0
-      Speed: 0
+      CapacityOrDamage: 3
+      Speed: 1
       StartTarget: {fileID: 0}
       SoldierAIData:
         SoldierType: 0
