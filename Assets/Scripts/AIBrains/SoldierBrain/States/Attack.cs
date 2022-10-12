@@ -28,7 +28,7 @@ namespace AIBrains.SoldierBrain.States
         {
             if (_soldierAIBrain.DamageableEnemy.IsDead)
             {
-                _soldierAIBrain.RemoveTarget();
+                RemoveTarget();
             }
             if (_soldierAIBrain.EnemyTarget != null)
             {
@@ -69,6 +69,32 @@ namespace AIBrains.SoldierBrain.States
         private void FireBullets()
         {
             bulletFireController.FireBullets(_soldierAIBrain.WeaponHolder);
+        }
+        
+        private void SetEnemyTargetTransform()
+        {
+            _soldierAIBrain.EnemyTarget = _soldierAIBrain.enemyList[0].GetTransform();
+            _soldierAIBrain.DamageableEnemy = _soldierAIBrain.enemyList[0];
+            _soldierAIBrain.HasEnemyTarget = true;
+        }
+        private void EnemyTargetStatus()
+        {
+            if (_soldierAIBrain.enemyList.Count != 0)
+            {
+                SetEnemyTargetTransform();
+            }
+            else
+            {
+                _soldierAIBrain.HasEnemyTarget = false;
+            }
+        } 
+        private void RemoveTarget()
+        {
+            if (_soldierAIBrain.enemyList.Count == 0) return;
+            _soldierAIBrain.enemyList.RemoveAt(0);
+            _soldierAIBrain.enemyList.TrimExcess();
+            _soldierAIBrain.EnemyTarget = null;
+            EnemyTargetStatus();
         }
     }
 }

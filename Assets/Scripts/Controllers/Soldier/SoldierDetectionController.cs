@@ -31,7 +31,9 @@ namespace Controllers.Soldier
                 soldierAIBrain.enemyList.Add(damagable);
                 if (soldierAIBrain.EnemyTarget == null)
                 {
-                    soldierAIBrain.SetEnemyTargetTransform();
+                    soldierAIBrain.EnemyTarget = soldierAIBrain.enemyList[0].GetTransform();
+                    soldierAIBrain.DamageableEnemy = soldierAIBrain.enemyList[0];
+                    soldierAIBrain.HasEnemyTarget = true;
                 }
             }
         }

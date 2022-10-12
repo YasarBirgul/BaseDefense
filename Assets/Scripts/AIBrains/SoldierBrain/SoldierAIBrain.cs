@@ -124,30 +124,5 @@ namespace AIBrains.SoldierBrain
         {
             HasSoldiersActivated = true;
         }
-        public void SetEnemyTargetTransform()
-        {
-            EnemyTarget = enemyList[0].GetTransform();
-            DamageableEnemy = enemyList[0];
-            HasEnemyTarget = true;
-        }
-        public void EnemyTargetStatus()
-        {
-            if (enemyList.Count != 0)
-            {
-               SetEnemyTargetTransform();
-            }
-            else
-            {
-                HasEnemyTarget = false;
-            }
-        }
-        public void RemoveTarget()
-        {
-            if (enemyList.Count == 0) return;
-            enemyList.RemoveAt(0);
-            enemyList.TrimExcess();
-            EnemyTarget = null;
-            EnemyTargetStatus();
-        }
     }
 }
