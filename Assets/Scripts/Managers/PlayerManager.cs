@@ -126,5 +126,9 @@ namespace Managers
                 movementController.DisableMovement();
             }
         }
+        public void SetTurretAnim(bool onTurret)
+        {
+            animationController.PlayTurretAnimation(onTurret);
+        }
     }
 }

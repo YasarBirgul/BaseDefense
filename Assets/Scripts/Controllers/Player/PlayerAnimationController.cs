@@ -56,6 +56,12 @@ namespace Controllers
         {
             animator = GetComponent<Animator>();
         }
+
+        public void PlayTurretAnimation(bool onTurretHold)
+        {
+            animator.SetLayerWeight(2,onTurretHold ? 1 : 0);
+        }
+        
         public void PlayAnimation(HorizontalInputParams inputParams)
         { 
             if (playerManager.CurrentAreaType == AreaType.BattleOn)

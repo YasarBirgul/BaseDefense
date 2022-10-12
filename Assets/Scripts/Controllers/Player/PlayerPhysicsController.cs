@@ -32,12 +32,20 @@ namespace Controllers
             {
                 GateEnter(other);
             }
+            if (other.TryGetComponent(out TurretPhysicsController turretPhysicsController))
+            {
+                playerManager.SetTurretAnim(true);
+            }
         }
         private void OnTriggerExit(Collider other)
         {
             if (other.TryGetComponent(out GatePhysicsController physicsController))
             {
                 GateExit(other);
+            }
+            if (other.TryGetComponent(out TurretPhysicsController turretPhysicsController))
+            {
+                playerManager.SetTurretAnim(false);
             }
         }
         private void GateEnter(Collider other)
