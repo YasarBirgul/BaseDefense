@@ -45,7 +45,8 @@ namespace Managers
         private int _soldierAmount;
         [ShowInInspector] private List<Vector3> _slotTransformList = new List<Vector3>();
         private int _tentCapacity;
-        
+        private List<SoldierAIBrain> _soldierList=new List<SoldierAIBrain>();
+
         #endregion
 
         #endregion
@@ -103,6 +104,13 @@ namespace Managers
         #endregion
         private void OnSoldierActivation()
         {
+            var soldierCount = _soldierList.Count-1;
+            for (var i = 0; i < soldierCount+1; i++)
+            {
+                _soldierList[soldierCount-i].HasSoldiersActivated = true;
+                _soldierList.RemoveAt(soldierCount - i);
+                _soldierList.TrimExcess();
+            }
             _isTentAvaliable = true;
             _data.CurrentSoldierAmount = 0;
         }
@@ -110,6 +118,7 @@ namespace Managers
         {
             var soldierAIPrefab = GetObject(PoolType.SoldierAI);
             var soldierBrain = soldierAIPrefab.GetComponent<SoldierAIBrain>();
+            _soldierList.Add(soldierBrain);
             SetSlotZoneTransformsToSoldiers(soldierBrain);
         }
         

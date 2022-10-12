@@ -238,7 +238,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7743554230451147456
 Transform:
   m_ObjectHideFlags: 0
@@ -297,6 +297,7 @@ MonoBehaviour:
   FrontYardStartPosition: {fileID: 0}
   EnemyTarget: {fileID: 0}
   WeaponHolder: {fileID: 3414026346241949250}
+  HasSoldiersActivated: 0
   physicsController: {fileID: 7073478314082187542}
   animator: {fileID: 3751244273130144068}
 --- !u!54 &4779203118049603027

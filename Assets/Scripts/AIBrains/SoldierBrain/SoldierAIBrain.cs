@@ -6,7 +6,6 @@ using Controllers.Soldier;
 using Data.UnityObject;
 using Data.ValueObject.AIData;
 using Interfaces;
-using Signals;
 using Sirenix.OdinInspector;
 using StateBehaviour;
 using UnityEngine;
@@ -31,11 +30,11 @@ namespace AIBrains.SoldierBrain
         public Transform EnemyTarget;
         public IDamageable DamageableEnemy;
         public Transform WeaponHolder;
+        public bool HasSoldiersActivated;
         #endregion
 
         #region Serialized Variables
-
-        [SerializeField] private SoldierPhysicsController physicsController;
+        
         [SerializeField] private Animator animator;
         #endregion
 
@@ -54,7 +53,6 @@ namespace AIBrains.SoldierBrain
         private Transform _spawnPoint;
         private StateMachine _stateMachine;
         private Vector3 _slotTransform;
-        private bool HasSoldiersActivated;
 
 
         #endregion
@@ -99,30 +97,10 @@ namespace AIBrains.SoldierBrain
         private void Update() =>  _stateMachine.UpdateIState();
 
         #region Event Subscription
-        private void OnEnable()
-        {
-            SubscribeEvents();
-        }
-        private void SubscribeEvents()
-        {
-            AISignals.Instance.onSoldierActivation += OnSoldierActivation;
-        }
-        private void UnsubscribeEvents()
-        {
-            AISignals.Instance.onSoldierActivation -= OnSoldierActivation;
-        }
-        private void OnDisable()
-        {
-            UnsubscribeEvents();
-        }
         #endregion
         public void GetSlotTransform(Vector3 slotTransfrom)
         {
             _slotTransform = slotTransfrom;
-        }
-        private void OnSoldierActivation()
-        {
-            HasSoldiersActivated = true;
         }
     }
 }
