@@ -1,7 +1,7 @@
 ﻿using AIBrains.EnemyBrain;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.AI.Enemy
 {
     public class EnemyPhysicsDetectionController : MonoBehaviour
     {

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using AIBrains.EnemyBrain;
 using Enums;
@@ -40,6 +39,7 @@ namespace Managers
         private NavMeshTriangulation triangulation;
         
         private GameObject _EnemyAIObj;
+        
         private EnemyAIBrain _EnemyAIBrain;
         
         #endregion

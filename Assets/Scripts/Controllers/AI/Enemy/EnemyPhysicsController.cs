@@ -3,7 +3,7 @@ using AIBrains.EnemyBrain;
 using Interfaces;
 using UnityEngine;
 
-namespace Controllers.Enemy
+namespace Controllers.AI.Enemy
 {
     public class EnemyPhysicsController : MonoBehaviour,IDamageable
     {

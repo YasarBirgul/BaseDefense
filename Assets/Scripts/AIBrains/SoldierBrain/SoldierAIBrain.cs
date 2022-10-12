@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Abstract;
 using AIBrains.SoldierBrain.States;
-using Controllers.Soldier;
 using Data.UnityObject;
 using Data.ValueObject.AIData;
 using Interfaces;
@@ -34,14 +33,10 @@ namespace AIBrains.SoldierBrain
         #endregion
 
         #region Serialized Variables
-        
         [SerializeField] private Animator animator;
         #endregion
-
         #region Private Variables
-        
         private NavMeshAgent _navMeshAgent;
-       
         [ShowInInspector] private List<IDamageable> _damagablesList;
         [Header("Data")]
         private SoldierAIData _data;
@@ -53,7 +48,6 @@ namespace AIBrains.SoldierBrain
         private Transform _spawnPoint;
         private StateMachine _stateMachine;
         private Vector3 _slotTransform;
-
 
         #endregion
         #endregion
