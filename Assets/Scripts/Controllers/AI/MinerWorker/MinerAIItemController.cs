@@ -6,7 +6,7 @@ using Interfaces;
 using Signals;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.AI.MinerWorker
 {
     public class MinerAIItemController : MonoBehaviour,IGetPoolObject,IReleasePoolObject
     {
@@ -14,14 +14,17 @@ namespace Controllers
 
         #region Public Variables
 
-        public Dictionary<MinerItems, GameObject> ItemList = new Dictionary<MinerItems, GameObject>();
+        private Dictionary<MinerItems, GameObject> _itemList = new Dictionary<MinerItems, GameObject>();
 
         #endregion
         #region Serialized Variables
 
-        [SerializeField] private GameObject pickaxe;
-        [SerializeField] private GameObject gem;
-        [SerializeField] private Transform gemHolder;
+        [SerializeField]
+        private GameObject pickaxe;
+        [SerializeField] 
+        private GameObject gem;
+        [SerializeField]
+        private Transform gemHolder;
 
         #endregion
         #endregion
@@ -34,22 +37,22 @@ namespace Controllers
         }
         private void CloseAllObject()
         {
-            for (int index = 0; index < ItemList.Count; index++)
+            for (int index = 0; index < _itemList.Count; index++)
             {
-                ItemList.ElementAt(index).Value.SetActive(false);
+                _itemList.ElementAt(index).Value.SetActive(false);
             }
         }
         private void AddToDictionary()
         {
-            ItemList.Add(MinerItems.Gem, gem);
-            ItemList.Add(MinerItems.Pickaxe, pickaxe);
+            _itemList.Add(MinerItems.Gem, gem);
+            _itemList.Add(MinerItems.Pickaxe, pickaxe);
         }
 
         public void OpenItem(MinerItems currentItem)
         {
             if (MinerItems.Pickaxe == currentItem)
             {
-                ItemList[currentItem].SetActive(true);
+                _itemList[currentItem].SetActive(true);
             }
             if (MinerItems.None==currentItem)
             {
@@ -70,7 +73,7 @@ namespace Controllers
         {
             if (MinerItems.Pickaxe == currentItem)
             {
-               ItemList[currentItem].SetActive(false);
+               _itemList[currentItem].SetActive(false);
             }
         } 
         public GameObject GetObject(PoolType poolName)

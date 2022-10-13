@@ -12,10 +12,8 @@ namespace Controllers.Player
         
         #endregion
 
-        #region Serialized Variables,
-         
-        [SerializeField]
-        private Transform manager;
+        #region Serialized Variables
+        
         [SerializeField] 
         private MeshRenderer weaponMeshRenderer;
         [SerializeField]
@@ -30,8 +28,6 @@ namespace Controllers.Player
         #endregion
 
         #endregion
-        
-        
         public void SetWeaponData(WeaponData weaponData)
         {
             _data = weaponData;

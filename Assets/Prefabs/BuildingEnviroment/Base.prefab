@@ -5051,17 +5051,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8caecf129c5f4e0fbf85f1dd22d51914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OpenUpExtentions:
+  openUpExtentions:
   - {fileID: 7884569656751722664}
   - {fileID: 5776973010739355139}
   - {fileID: 8470329856244483779}
   - {fileID: 8701105757620588993}
-  CloseDownExtentions:
+  closeDownExtentions:
   - {fileID: 8498835335566799987}
   - {fileID: 7885563870793063649}
   - {fileID: 2711997043096367834}
   - {fileID: 2372628656572690261}
-  PaymentZoneList:
+  paymentZoneList:
   - {fileID: 6658401704972492442}
   - {fileID: 8448314109376360543}
   - {fileID: 6679205540212801887}

@@ -1,6 +1,7 @@
 ﻿using System;
 using Abstract;
 using Controllers;
+using Controllers.Mine;
 using UnityEngine;
 
 namespace Managers

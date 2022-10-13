@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Data.ValueObject.LevelData;
+using Data.ValueObject.ScoreData;
 using Interfaces;
 using UnityEngine;
 

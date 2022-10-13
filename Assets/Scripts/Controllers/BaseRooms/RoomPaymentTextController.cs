@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace Controllers.Payment
+namespace Controllers.BaseRooms
 {
     public class RoomPaymentTextController: MonoBehaviour
     {

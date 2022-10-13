@@ -56,15 +56,15 @@ namespace Managers
         {
             minerAIBrain.IsDropZoneFullStatus=_state;
         }
+        
+        private void UnSubscribeEvents()
+        {
+            DropzoneSignals.Instance.onDropZoneFull -= OnDropZoneFull;
+        }
 
         private void OnDisable()
         {
             UnSubscribeEvents();
-        }
-
-        private void UnSubscribeEvents()
-        {
-            DropzoneSignals.Instance.onDropZoneFull -= OnDropZoneFull;
         }
 
         #endregion

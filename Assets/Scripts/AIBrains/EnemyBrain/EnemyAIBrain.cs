@@ -34,9 +34,6 @@ namespace AIBrains.EnemyBrain
         [SerializeField]
         private EnemyTypes enemyType;
 
-        [SerializeField]
-        private List<Transform> targetList;
-
         #endregion
 
         #region Private Variables
@@ -78,7 +75,7 @@ namespace AIBrains.EnemyBrain
             var navMeshAgent = GetComponent<NavMeshAgent>();
             
             var search = new Search(this,navMeshAgent,spawnPosition);
-            var attack = new Attack(navMeshAgent,animator);
+            var attack = new Attack(animator);
             var move = new Move(this,navMeshAgent,animator);
             var death = new Death(navMeshAgent,animator,this,enemyType);
             var chase = new Chase(this,navMeshAgent,animator);
@@ -105,12 +102,10 @@ namespace AIBrains.EnemyBrain
             Func<bool> TargetNull() => () => CurrentTarget == null;
             Func<bool> IsDead() => () => Health <= 0;
         }
-        
         private void Update()
         {   
             _stateMachine.UpdateIState();
         }
-        
         public void SetTarget(Transform target)
         {
             if (target == CurrentTarget)

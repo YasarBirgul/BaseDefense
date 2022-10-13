@@ -1,7 +1,5 @@
-﻿using Commands;
-using Commands.LevelCommands;
+﻿using Commands.LevelCommands;
 using Data.UnityObject;
-using Data.ValueObject.LevelData;
 using Signals;
 using UnityEngine;
 
@@ -70,7 +68,6 @@ namespace Managers
         {
             _levelID++;
             SaveLevelID(_levelID);
-            //UISignals
             CoreGameSignals.Instance.onReset?.Invoke();
         }
 

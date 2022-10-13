@@ -1,25 +1,25 @@
 ﻿using System.Collections.Generic;
-using Enums;
+using Enums.BaseArea;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.BaseRooms
 { 
     public class BaseExtentionController : MonoBehaviour
     {
         [SerializeField]
-        private List<GameObject> OpenUpExtentions = new List<GameObject>();
+        private List<GameObject> openUpExtentions = new List<GameObject>();
         [SerializeField]
-        private List<GameObject> CloseDownExtentions=new List<GameObject>();
+        private List<GameObject> closeDownExtentions=new List<GameObject>();
         
-        public List<GameObject> PaymentZoneList=new List<GameObject>();
+        public List<GameObject> paymentZoneList=new List<GameObject>();
         public void ChangeExtentionVisibility(BaseRoomTypes baseRoomType)
         {
-            OpenUpExtentions[(int)baseRoomType].SetActive(true);
-            CloseDownExtentions[(int)baseRoomType].SetActive(false);
-            PaymentZoneList[(int)baseRoomType].gameObject.SetActive(false);
-            if (PaymentZoneList.Count <= (int) baseRoomType + 2) return;
+            openUpExtentions[(int)baseRoomType].SetActive(true);
+            closeDownExtentions[(int)baseRoomType].SetActive(false);
+            paymentZoneList[(int)baseRoomType].gameObject.SetActive(false);
+            if (paymentZoneList.Count <= (int) baseRoomType + 2) return;
             {
-                PaymentZoneList[(int)baseRoomType + 2].gameObject.SetActive(true);
+                paymentZoneList[(int)baseRoomType + 2].gameObject.SetActive(true);
             }
         }
     }

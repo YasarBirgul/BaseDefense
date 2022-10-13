@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Data.UnityObject;
 using Data.ValueObject;
+using Data.ValueObject.HostageData;
 using Data.ValueObject.LevelData;
 using Enum;
 using Enums;

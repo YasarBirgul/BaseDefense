@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Data;
 using Data.UnityObject;
 using Data.ValueObject.LevelData;
+using Data.ValueObject.ScoreData;
 using Interfaces;
 using Signals;
 using Sirenix.OdinInspector;
@@ -25,15 +25,13 @@ namespace Managers
 
         [ShowInInspector] 
         private CD_Level cdLevel;
-        
-        // [SerializeField] private CD_Enemy cdEnemy;
 
         #endregion
         
         #region Private Variables
         
         private int _levelID;
-        private int _uniqueID = 345;
+        private int _uniqueID = 345; // Unique ID is created temporary for testing save system.
         
         private LevelData _levelData;
         private BaseRoomData _baseRoomData;

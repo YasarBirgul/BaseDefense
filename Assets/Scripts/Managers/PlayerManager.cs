@@ -63,11 +63,7 @@ namespace Managers
         }
         private PlayerData GetPlayerData() => Resources.Load<CD_Player>("Data/CD_Player").PlayerData;
         private WeaponData GetWeaponData() => Resources.Load<CD_Weapon>("Data/CD_Weapon").WeaponData[(int)WeaponType];
-        private void Init()
-        {
-            CurrentAreaType = AreaType.BaseDefense;
-            SetDataToControllers();
-        }
+        private void Init() => SetDataToControllers();
         private void SetDataToControllers()
         {
             movementController.SetMovementData(_data.PlayerMovementData);
@@ -98,13 +94,7 @@ namespace Managers
         {
             movementController.UpdateInputValues(inputParams);
             animationController.PlayAnimation(inputParams);
-            if (!HasEnemyTarget) return;
             AimEnemy();
-        }
-        public void CheckAreaStatus(AreaType AreaStatus)
-        {
-            CurrentAreaType = AreaStatus;
-            meshController.ChangeAreaStatus(AreaStatus);
         }
         public void SetEnemyTarget()
         {
@@ -112,24 +102,9 @@ namespace Managers
             animationController.AimTarget(true);
             AimEnemy();
         }
-        private void AimEnemy()
-        { 
-            if (EnemyList.Count != 0)
-            {
-                var transformEnemy = EnemyList[0].GetTransform();
-                movementController.RotatePlayerToTarget(transformEnemy);
-            }
-        }
-        private void OnDisableMovement(InputHandlers ınputHandlers)
-        {
-            if (ınputHandlers == InputHandlers.Turret)
-            {
-                movementController.DisableMovement();
-            }
-        }
-        public void SetTurretAnim(bool onTurret)
-        {
-            animationController.PlayTurretAnimation(onTurret);
-        }
+        private void AimEnemy() => movementController.LookAtTarget(!HasEnemyTarget ? null : EnemyList[0]?.GetTransform());
+        public void CheckAreaStatus(AreaType areaType) => meshController.ChangeAreaStatus(CurrentAreaType = areaType);
+        private void OnDisableMovement(InputHandlers inputHandler) => movementController.DisableMovement(inputHandler);
+        public void SetTurretAnim(bool onTurret) => animationController.PlayTurretAnimation(onTurret);
     }
 }

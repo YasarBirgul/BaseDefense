@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Interfaces
+namespace Abstract
 {
     public abstract class AInteractable : MonoBehaviour
     {

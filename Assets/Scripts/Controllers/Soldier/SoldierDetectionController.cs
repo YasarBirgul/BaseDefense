@@ -22,6 +22,7 @@ namespace Controllers.Soldier
         #region Private Variables
         
         #endregion
+        
         #endregion
         private void OnTriggerEnter(Collider other)
         {

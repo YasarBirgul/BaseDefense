@@ -1,5 +1,5 @@
 ﻿using System;
-using Data.ValueObject.AIDatas;
+using Data.ValueObject.AIData.WorkerAIData;
 using Enums;
 using Extentions;
 using UnityEngine;

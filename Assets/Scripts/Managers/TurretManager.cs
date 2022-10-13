@@ -14,7 +14,8 @@ namespace Managers
         #region Self Variables
         #region SerializeField Variables
 
-        [SerializeField] private GameObject player;
+        [SerializeField]
+        private GameObject player;
         
         [SerializeField]
         private List<TurretMovementController> turretMovementControllers = new List<TurretMovementController>(6);
@@ -29,13 +30,11 @@ namespace Managers
         #region Private Variables
         
         private TurretMovementController _currentMovementController;
-        
-        
+
         #endregion
 
         #endregion
         
-
         #region Event Subscription
         private void OnEnable() => SubscribeEvents();
 
@@ -72,8 +71,7 @@ namespace Managers
         
         #endregion
 
-        #region Character on the Turret
-
+        #region CharacterOnTurret
         private void CharacterParentChange()  
         {
             player.transform.SetParent(_currentMovementController.transform);
@@ -88,18 +86,15 @@ namespace Managers
             player.transform.SetParent(null);
             CoreGameSignals.Instance.onLevel?.Invoke();
             _currentMovementController.transform.rotation = new Quaternion(0, 0, 0, 0);
-        }
-
+        } 
         private void OnGetCurrentTurretMovementController(TurretLocationType type,GameObject _player)
         {
             player = _player;
             _currentMovementController = turretMovementControllers[(int)type];
             CharacterParentChange();
         }
-        
         private void OnGetInputValues(HorizontalInputParams value) => _currentMovementController?.SetInputParams(value);
-
-        #endregion 
         
+        #endregion
     }
 }

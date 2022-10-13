@@ -1,6 +1,7 @@
 ﻿using System;
 using Data.ValueObject.LevelData;
 using Enums;
+using Enums.BaseArea;
 using Extentions;
 using UnityEngine.Events;
 

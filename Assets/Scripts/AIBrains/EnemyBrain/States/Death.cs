@@ -25,7 +25,7 @@ namespace AIBrains.EnemyBrain.States
         private readonly Animator _animator;
         private EnemyAIBrain _enemyAIBrain;
         private EnemyTypes _enemyType;
-        private static readonly int Die = Animator.StringToHash("Die");
+        private static readonly int _die = Animator.StringToHash("Die");
 
         #endregion
         
@@ -45,7 +45,7 @@ namespace AIBrains.EnemyBrain.States
         {
             EnemyDead();
             _navMeshAgent.enabled = false;
-            _animator.SetTrigger(Die);
+            _animator.SetTrigger(_die);
             for (int i = 0; i < 3; i++)
             {
                 var createObj = GetObject(PoolType.Money);

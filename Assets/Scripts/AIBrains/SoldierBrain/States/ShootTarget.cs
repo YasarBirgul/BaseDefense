@@ -1,7 +1,6 @@
-﻿using Abstract;
-using Interfaces;
+﻿using Interfaces;
 
-namespace AIBrains.SoldierBrain
+namespace AIBrains.SoldierBrain.States
 {
     public class ShootTarget : IState
     { 

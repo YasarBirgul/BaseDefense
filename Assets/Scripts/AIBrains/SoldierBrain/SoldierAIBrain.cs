@@ -36,6 +36,7 @@ namespace AIBrains.SoldierBrain
         private Animator animator;
         
         #endregion
+        
         #region Private Variables
         private NavMeshAgent _navMeshAgent;
         
@@ -58,7 +59,7 @@ namespace AIBrains.SoldierBrain
         private void GetStateReferences()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
-            var idle = new Idle(this,TentPosition,_navMeshAgent,animator);
+            var idle = new Idle(TentPosition,_navMeshAgent);
             var moveToSlotZone = new MoveToSlotZone(this,_navMeshAgent,HasReachedSlotTarget,_slotTransform,animator);
             var wait = new Wait(animator,_navMeshAgent);
             var moveToFrontYard = new MoveToFrontYard(this,_navMeshAgent,FrontYardStartPosition,animator);
@@ -85,12 +86,6 @@ namespace AIBrains.SoldierBrain
             Func<bool> hasNoEnemyTarget() => () => !HasEnemyTarget;
         }
         private void Update() =>  _stateMachine.UpdateIState();
-
-        #region Event Subscription
-        #endregion
-        public void GetSlotTransform(Vector3 slotTransfrom)
-        {
-            _slotTransform = slotTransfrom;
-        }
+        public void GetSlotTransform(Vector3 slotTransfrom)=>  _slotTransform = slotTransfrom;
     }
 }

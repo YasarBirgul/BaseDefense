@@ -2,7 +2,7 @@
 using Managers;
 using UnityEngine;
 
-namespace Controllers.Payment
+namespace Controllers.BaseRooms
 {
     public class RoomPaymentPhysicsController : MonoBehaviour
     {

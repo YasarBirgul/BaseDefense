@@ -99,7 +99,6 @@ namespace Controllers.Player
                 _canRemove = true;
             }
         }
-
         private void RemoveStackAnimation(GameObject removedStack)
         {
             _getStackSequence = DOTween.Sequence();

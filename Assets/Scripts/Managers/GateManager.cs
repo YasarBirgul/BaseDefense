@@ -15,8 +15,6 @@ namespace Managers
         
         [SerializeField]
         private GateMovementController movementController;
-        [SerializeField] 
-        private GatePhysicsController physicsController;
 
         #endregion
 

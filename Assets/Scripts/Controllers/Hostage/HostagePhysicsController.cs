@@ -1,9 +1,8 @@
-using System;
 using Enum;
 using Managers;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.Hostage
 {
     public class HostagePhysicsController : MonoBehaviour
     {
@@ -11,7 +10,6 @@ namespace Controllers
         private MinerManager minerManager;
         private void OnTriggerEnter(Collider other)
         {
-
             if (other.CompareTag("Player") && minerManager._currentType == HostageType.HostageWaiting)
             {
                 

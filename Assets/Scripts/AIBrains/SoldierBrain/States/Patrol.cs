@@ -1,9 +1,8 @@
-﻿using Abstract;
-using Interfaces;
+﻿using Interfaces;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace AIBrains.SoldierBrain
+namespace AIBrains.SoldierBrain.States
 {
     public class Patrol : IState
     {

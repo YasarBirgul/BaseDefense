@@ -1,15 +1,14 @@
 ﻿using Managers;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Controllers
+namespace Controllers.Mine
 {
     public class MinePhysicsController : MonoBehaviour
     {
         #region Self Variables
 
         #region Serialized Variables
-            [FormerlySerializedAs("mineManager")] [SerializeField]
+            [SerializeField]
             private MineBombManager mineBombManager;
             [SerializeField]
             private SphereCollider lureCollider;
@@ -20,12 +19,12 @@ namespace Controllers
         #endregion
 
         #region Private Variables
-        private int initalLureSphereSize = 30;
-        private int initalExplosionSphereSize = 10;
-
-        private float timer;
-        private float payOffset=0.1f;
         
+        private const int _initalLureSphereSize = 30;
+        private const int _initalExplosionSphereSize = 10;
+        private const float _payOffset=0.1f;
+        
+        private float _timer;
 
         #endregion
         #endregion
@@ -34,15 +33,15 @@ namespace Controllers
         {
             if (other.CompareTag("Player"))
             {
-                if (timer>payOffset)
+                if (_timer>_payOffset)
                 {
                     // Module will be applied
                     mineBombManager.PayGemToMine();
-                    timer = 0;
+                    _timer = 0;
                 }
                 else
                 {
-                    timer += Time.deltaTime;
+                    _timer += Time.deltaTime;
                 }
             }
         }
@@ -53,7 +52,7 @@ namespace Controllers
             {
                 
                 //gameObject.tag = "MineLure";
-                lureCollider.radius = initalExplosionSphereSize;
+                lureCollider.radius = _initalExplosionSphereSize;
                 lureCollider.enabled = true;
             }
             else
@@ -67,7 +66,7 @@ namespace Controllers
             if (_state)
             {
                //gameObject.tag = "MineExplosion";
-               lureCollider.radius = initalLureSphereSize;
+               lureCollider.radius = _initalLureSphereSize;
                 explosionCollider.enabled = true;
             }
             else

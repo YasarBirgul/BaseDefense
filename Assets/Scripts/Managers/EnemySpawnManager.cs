@@ -22,13 +22,12 @@ namespace Managers
         [SerializeField]
         private Transform spawnTransform;
         
+        [SerializeField]
+        private int numberOfEnemiesToSpawn = 50;
+        
         #endregion
     
         #region Public Variables
-        
-        public int NumberOfEnemiesToSpawn = 50;
-        
-        public float SpawnDelay = 2;
         
         #endregion
 
@@ -41,6 +40,8 @@ namespace Managers
         private GameObject _enemyAIObj;
         
         private EnemyAIBrain _enemyAIBrain;
+        
+        private const float _spawnDelay = 2;
         
         #endregion
         
@@ -85,11 +86,11 @@ namespace Managers
         }
         private IEnumerator SpawnEnemies()
         {
-            WaitForSeconds wait = new WaitForSeconds(SpawnDelay);
+            WaitForSeconds wait = new WaitForSeconds(_spawnDelay);
             
             int spawnedEnemies = 0;
 
-            while (spawnedEnemies < NumberOfEnemiesToSpawn)
+            while (spawnedEnemies < numberOfEnemiesToSpawn)
             {
                 DoSpawnEnemy();
                 spawnedEnemies++;
@@ -107,7 +108,6 @@ namespace Managers
                     randomType = (int)EnemyTypes.RedEnemy;
                 }
             }
-
             var poolType = (PoolType) System.Enum.Parse(typeof(PoolType), ((EnemyTypes) randomType).ToString());
             GetObject(poolType);
         }

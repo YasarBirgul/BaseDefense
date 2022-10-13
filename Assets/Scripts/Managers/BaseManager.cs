@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using Controllers;
+using Controllers.BaseRooms;
 using Data.ValueObject.LevelData;
-using Enums;
+using Enums.BaseArea;
 using Enums.Turret;
 using Signals;
 using Sirenix.OdinInspector;
@@ -47,7 +47,6 @@ namespace Managers
                 ChangeVisibility(room.BaseRoomType);
             }
         }
-        
         #region Event Subscription
         private void OnEnable()
         {

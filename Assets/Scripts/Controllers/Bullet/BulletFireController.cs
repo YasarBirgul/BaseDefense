@@ -4,8 +4,7 @@ using Signals;
 using UnityEngine;
 
 namespace Controllers.Bullet
-{ 
-    public class BulletFireController : IGetPoolObject
+{ public class BulletFireController : IGetPoolObject
     {
         private WeaponTypes _weaponType;
         public BulletFireController(WeaponTypes weaponType)

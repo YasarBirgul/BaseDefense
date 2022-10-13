@@ -12,8 +12,7 @@ namespace AIBrains.EnemyBrain.States
         private readonly Animator _animator;
         private readonly float _attackRange;
         private readonly float _chaseSpeed;
-        private bool _attackOnPlayer; 
-
+        private bool _attackOnPlayer;
         public MoveToBomb(NavMeshAgent navmeshAgent, Animator animator)
         {
            

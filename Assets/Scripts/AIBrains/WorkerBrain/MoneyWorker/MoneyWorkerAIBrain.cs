@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using AIBrains.WorkerBrain.MoneyWorker.States;
 using Controllers.AI.MoneyWorker;
-using Data.ValueObject.AIDatas;
+using Data.ValueObject.AIData.WorkerAIData;
 using Enums;
 using Interfaces;
 using Signals;
@@ -158,7 +158,6 @@ namespace AIBrains.WorkerBrain.MoneyWorker
             if (_currentStock < _workerTypeData.CapacityOrDamage)
                 _currentStock++;
         }
-
         public void RemoveAllStock()
         {
             for (int i = 0; i < _workerTypeData.CapacityOrDamage; i++)
@@ -168,10 +167,7 @@ namespace AIBrains.WorkerBrain.MoneyWorker
                 else
                     _currentStock = 0;
             }
-            
         }
-
         #endregion
-
     }
 }

@@ -1,8 +1,8 @@
 using System;
-using Abstract;
 using AIBrains.MinerBrain.States;
 using Commands;
 using Controllers;
+using Controllers.AI.MinerWorker;
 using Enum;
 using Enums.AI.Miner;
 using Interfaces;
@@ -15,7 +15,6 @@ namespace AIBrains.MinerBrain
 {
     public class MinerAIBrain : MonoBehaviour
     {
-
         #region SelfVariables
         public Vector3 ManipulatedTarget;
         #region Public Variables
@@ -24,30 +23,22 @@ namespace AIBrains.MinerBrain
         public Transform GemHolder;
         public MinerManager MinerManager;
         public float GemCollectionOffset=5;
-        public bool IsDropZoneFullStatus
-        {
-            get => isDropZoneFull;
-            set => isDropZoneFull = value;
-        }
+        public MinerAIItemController MinerAIItemController;
+        public bool IsDropZoneFullStatus { get => isDropZoneFull; set => isDropZoneFull = value; }
 
         private bool isDropZoneFull;
 
         #endregion
 
         #region Serialized Variables
-
-        [SerializeField] private Animator animator;
         
-
         #endregion
 
         #region Private Variables
 
         private StateMachine _stateMachine;
         private FindRandomPointOnCircleCommand _findRandomPointOnCircleCommand;
-        public MinerAIItemController MinerAIItemController;
-        //public List<var>
-
+        
         #endregion
 
         #endregion
@@ -56,12 +47,10 @@ namespace AIBrains.MinerBrain
             _findRandomPointOnCircleCommand=new FindRandomPointOnCircleCommand();
             GetStatesReferences();
         }
-
         private void Start()
         {
             SetTargetForMine();
         }
-
         public void SetTargetForMine()
         {
             GemHolder = MineBaseSignals.Instance.onGetGemHolderPos?.Invoke();
@@ -77,7 +66,6 @@ namespace AIBrains.MinerBrain
             }
             ManipulatedTarget= GemHolder.position+transform.TransformDirection(new Vector3(0,0,-3f));
         }
-
         private void GetStatesReferences()
         {
             var minerReadyState = new MinerReadyState();
@@ -105,7 +93,6 @@ namespace AIBrains.MinerBrain
             Func<bool> IsGameStarted() => () => true;
             Func<bool> IsDropZoneNotFull() => () => isDropZoneFull==false;
         }
-
         private void Update() => _stateMachine.UpdateIState();
     }
 }

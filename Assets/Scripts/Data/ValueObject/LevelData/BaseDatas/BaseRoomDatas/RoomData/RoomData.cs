@@ -1,5 +1,6 @@
 ﻿using System;
 using Enums;
+using Enums.BaseArea;
 using Enums.Turret;
 
 namespace Data.ValueObject.LevelData

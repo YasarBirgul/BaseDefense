@@ -6,7 +6,7 @@ using Enums;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.GemArea
 {
     public class GemDropZoneStackController : AStack
     {
@@ -14,25 +14,32 @@ namespace Controllers
 
         #region Serialized Variables
 
-        [SerializeField] private Transform StackTransformParent;
+        [SerializeField] 
+        private Transform stackTransformParent;
         
-        [SerializeField] private StackingSystem stackingSystem;
+        [SerializeField] 
+        private StackingSystem stackingSystem;
 
         [ShowIf("stackingSystem", StackingSystem.Static)] 
-        [SerializeField] private StackAreaType stackAreaType;
+        [SerializeField]
+        private StackAreaType stackAreaType;
         
        
         [ShowIf("stackingSystem",StackingSystem.Static)]
-        [SerializeField] private GridData stackAreaGridData;
+        [SerializeField] 
+        private GridData stackAreaGridData;
     
         [ShowIf("stackingSystem",StackingSystem.Dynamic)]
-        [SerializeField] private StackerType stackerType;
+        [SerializeField]
+        private StackerType stackerType;
         
         
         [ShowIf("stackingSystem",StackingSystem.Dynamic)]
-        [SerializeField] private GridData stackerGridData;
+        [SerializeField] 
+        private GridData stackerGridData;
 
-        [SerializeField] private GemStackerController gemStackerController;
+        [SerializeField] 
+        private GemStackerController gemStackerController;
 
         #endregion
 
@@ -60,7 +67,6 @@ namespace Controllers
             SetGrid();
             SendGridDataToStacker();
         }
-
         private void GetData()
         {
             if (stackingSystem == StackingSystem.Dynamic)
@@ -72,24 +78,18 @@ namespace Controllers
                 stackAreaGridData = GetAreaStackGridData();
             }
         }
-        
         private GridData GetStackerGridData()
         {
             return Resources.Load<CD_Stack>("Data/CD_Stack").StackDatas[(int)stackingSystem].DynamicGridDatas[(int)stackerType];
         }
-
         private GridData GetAreaStackGridData()
         {
             return Resources.Load<CD_Stack>("Data/CD_Stack").StackDatas[(int)stackingSystem].StaticGridDatas[(int)stackAreaType];
         }
-
-      
         public override void SetStackHolder(GameObject gameObject)
         {
             gameObject.transform.SetParent(transform);
         }
-        
-        
         public override void SetGrid()
         {
             if (stackingSystem == StackingSystem.Static)
@@ -114,16 +114,13 @@ namespace Controllers
                 }
                 else
                 {
-                    var position = StackTransformParent.localPosition;
+                    var position = stackTransformParent.localPosition;
                         _gridPositions = new Vector3(modX * _gridData.Offset.x+position.x,divideXZ * _gridData.Offset.y+position.y,
                         modZ * _gridData.Offset.z+position.z);
-                    
                 }
                 gridPositionsData.Add(_gridPositions);
-                
             }
         }
-        
         public override void SendGridDataToStacker()
         {
             gemStackerController.GetStackPositions(gridPositionsData);

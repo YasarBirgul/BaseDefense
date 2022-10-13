@@ -71,6 +71,7 @@ namespace Managers
             _hasTouched = joystickInput.Direction.sqrMagnitude > 0;
             
         }
+        #region JoystickInputChange
         private void HandleJoystickInput()
         {
             switch (_inputHandlers)
@@ -106,5 +107,6 @@ namespace Managers
                     throw new ArgumentOutOfRangeException();
             }
         }
+        #endregion
     }
 }

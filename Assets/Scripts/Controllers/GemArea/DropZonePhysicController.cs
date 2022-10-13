@@ -1,7 +1,8 @@
+using Abstract;
 using Interfaces;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.GemArea
 {
     public class DropZonePhysicController : MonoBehaviour
     {

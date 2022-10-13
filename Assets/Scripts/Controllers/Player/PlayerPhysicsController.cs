@@ -1,4 +1,5 @@
-﻿using Controllers.Gate;
+﻿using Abstract;
+using Controllers.Gate;
 using Controllers.Turret;
 using Enums.GameStates;
 using Interfaces;
