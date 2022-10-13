@@ -1636,7 +1636,6 @@ MonoBehaviour:
   GemHolder: {fileID: 0}
   MinerManager: {fileID: 5825511027792451470}
   GemCollectionOffset: 5
-  animator: {fileID: 3283443471028985095}
   MinerAIItemController: {fileID: 6200906789036766925}
 --- !u!114 &5825511027792451470
 MonoBehaviour:
@@ -1650,9 +1649,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c47575fd8f844fb7bf5a730973fb90d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minerAIBrain: {fileID: 5825511027792451465}
-  CurrentType: 2
+  MinerAIBrain: {fileID: 5825511027792451465}
   animator: {fileID: 3283443471028985095}
+  _currentType: 1
 --- !u!1 &5843940532216981353
 GameObject:
   m_ObjectHideFlags: 0

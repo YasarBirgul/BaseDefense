@@ -8,11 +8,11 @@ namespace Managers
     {
         #region Self Variables
 
-        #region Public Variables
+        #region Private Variables
         
         #endregion
 
-        #region Private Variables
+        #region PUblic Variables
 
         public BuyablesData Data;
 

@@ -5,5 +5,6 @@
         AmmoStackArea,
         GemStackArea,
         SoldierStackArea,
+        MoneyWorkerStackArea
     }
 }

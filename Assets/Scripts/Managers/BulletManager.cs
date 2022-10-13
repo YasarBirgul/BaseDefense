@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Controllers.Bullet;
+﻿using Controllers.Bullet;
 using Data.UnityObject;
 using Data.ValueObject.WeaponData;
 using Enums;
@@ -19,8 +18,10 @@ namespace Managers
 
         #region Serialized Variables
 
-        [SerializeField] private WeaponTypes weaponType;
-        [SerializeField] private BulletPhysicsControllers physicsController;
+        [SerializeField] 
+        private WeaponTypes weaponType;
+        [SerializeField] 
+        private BulletPhysicsControllers physicsController;
         
         #endregion
 
@@ -35,16 +36,14 @@ namespace Managers
         {
             _data = GetBulletData();
             SetDataToControllers();
-            SetBackToPool();
+        }
+        private void OnEnable()
+        {
+            Invoke(nameof(SetBulletToPool),1f);
         }
         private WeaponData GetBulletData() => Resources.Load<CD_Weapon>("Data/CD_Weapon").WeaponData[(int)weaponType];
         private void SetDataToControllers() => physicsController.GetData(_data);
         public void ReleaseObject(GameObject obj, PoolType poolName)=>PoolSignals.Instance.onReleaseObjectFromPool.Invoke(poolName,obj);
-        private async void SetBackToPool()
-        {
-            await Task.Delay(1000);
-            SetBulletToPool();
-        }
         public void SetBulletToPool()
         {
             var poolName = (PoolType)System.Enum.Parse(typeof(PoolType),weaponType.ToString());

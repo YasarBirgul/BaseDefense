@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using DG.Tweening;
 using UnityEngine;
 
 namespace Controllers.Bullet
@@ -18,7 +17,9 @@ namespace Controllers.Bullet
         [SerializeField]
         private new Rigidbody rigidbody;
 
-        private bool bulletHasFired=false;
+        private const float fireDelay = 0.05f;
+        private const float fireSpeed = 70;
+        
         #endregion
 
         #region Private Variables
@@ -28,19 +29,12 @@ namespace Controllers.Bullet
         #endregion
         private void OnEnable()
         {
-            bulletHasFired = true;
+            DOVirtual.DelayedCall(fireDelay, () => FireBullet());
         }
-        private void FixedUpdate()
+        
+        private void FireBullet()
         {
-            if (!bulletHasFired)
-                return;
-            FireBullet();
-        }
-        private async void FireBullet()
-        {
-            await Task.Delay(10);
-            rigidbody.AddRelativeForce(Vector3.forward * 70, ForceMode.VelocityChange);
-            bulletHasFired = false;
+            rigidbody.AddRelativeForce(Vector3.forward * fireSpeed, ForceMode.VelocityChange);
         }
         private void OnDisable()
         {

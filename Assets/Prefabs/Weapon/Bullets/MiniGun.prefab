@@ -196,7 +196,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7483674433485694525}
   - component: {fileID: 7631204320091998803}
-  m_Layer: 0
+  - component: {fileID: 5650275664423789912}
+  m_Layer: 14
   m_Name: PhysicsController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,6 +231,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletManager: {fileID: 8031984349662251925}
+--- !u!136 &5650275664423789912
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7730301452498832329}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.18
+  m_Height: 0.51210093
+  m_Direction: 2
+  m_Center: {x: 0.016682386, y: 0, z: 0.17832571}
 --- !u!1001 &7425523510243291090
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -14,9 +14,7 @@ namespace Managers
         #region Serialized Variables
         
         [SerializeField]
-        private GateMeshController meshController;
-        [SerializeField] 
-        private GatePhysicsController physicsController;
+        private GateMovementController movementController;
 
         #endregion
 
@@ -28,7 +26,7 @@ namespace Managers
 
         public void GateOpen(bool GateOpenStatus)
         {
-            meshController.TurnGateOpen(GateOpenStatus);
+            movementController.TurnGateOpen(GateOpenStatus);
         }
     }
 }

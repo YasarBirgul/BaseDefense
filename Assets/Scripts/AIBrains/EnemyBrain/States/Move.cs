@@ -1,5 +1,4 @@
-﻿using Abstract;
-using Interfaces;
+﻿using Interfaces;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,58 +6,38 @@ namespace AIBrains.EnemyBrain.States
 {
     public class Move : IState
     {
-        #region Self Variables
-
-        #region Public Variables
-        
-        public float TimeStuck;
-        
-        #endregion
-
-        #region Serialized Variables
-
-        #endregion
-
-        #region Private Variables
-
         private readonly EnemyAIBrain _enemyAIBrain;
         private readonly NavMeshAgent _navMeshAgent;
         private readonly Animator _animator;
-        private static readonly int Speed = Animator.StringToHash("Speed");
         private Vector3 _lastPosition = Vector3.zero;
-        private readonly float _moveSpeed;
-        private static readonly int Run = Animator.StringToHash("Run");
 
-        #endregion
-        
-        #endregion
-        public Move(NavMeshAgent navMeshAgent,Animator animator,EnemyAIBrain enemyAIBrain,float moveSpeed)
+        private float _timeStuck;
+        private static readonly int _speed = Animator.StringToHash("Speed");
+        private static readonly int _run = Animator.StringToHash("Run");
+        private const float _chaseSpeed=2.202521f;
+        public Move(EnemyAIBrain enemyAIBrain,NavMeshAgent agent,Animator animator)
         {
-            _navMeshAgent = navMeshAgent;
-            _animator = animator;
             _enemyAIBrain = enemyAIBrain;
-            _moveSpeed = moveSpeed;
+            _navMeshAgent = agent;
+            _animator = animator;
         }
         public void Tick()
         {
             if (Vector3.Distance(_enemyAIBrain.transform.position, _lastPosition) <= 0f)
-            {
-                TimeStuck += Time.deltaTime;
-
-                _lastPosition = _enemyAIBrain.transform.position;
-                _animator.SetFloat(Speed,_navMeshAgent.velocity.magnitude);
-            }
+                _timeStuck += Time.deltaTime;
+            _lastPosition = _enemyAIBrain.transform.position;
+            _animator.SetFloat(_speed,_navMeshAgent.velocity.magnitude);
         }
         public void OnEnter()
         {
             _navMeshAgent.enabled = true;
-            _navMeshAgent.SetDestination(_enemyAIBrain._turretTarget.position);
-            _navMeshAgent.speed = 1.529528f;
-            _animator.SetTrigger(Run);
+            _navMeshAgent.SetDestination(_enemyAIBrain.TurretTarget.position);
+            _animator.SetTrigger(_run);
+            _navMeshAgent.speed = _chaseSpeed;
         }
         public void OnExit()
         {
-           
+            
         }
     }
 }

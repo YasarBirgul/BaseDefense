@@ -14,7 +14,8 @@ namespace Controllers.MilitaryBase
 
         #region Serialized Variables
 
-        [SerializeField] private MilitaryBaseManager manager;
+        [SerializeField]
+        private MilitaryBaseManager manager;
         
         #endregion
 

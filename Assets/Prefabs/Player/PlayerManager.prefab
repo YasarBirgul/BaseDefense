@@ -666,7 +666,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62a8459b64046ebb909a7f489d43bc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyTransformParent: {fileID: 7414854890768826635}
   stackingSystem: 1
   stackAreaType: 0
   stackAreaGridData:
@@ -1165,7 +1164,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!114 &589220352
 MonoBehaviour:
@@ -1492,7 +1491,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cac5693d05194fa093e436870ea617b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 3713571008269248073}
   weaponMeshRenderer: {fileID: 4360250655400319478}
   sideMeshRenderer: {fileID: 1379874625}
 --- !u!1 &4231892013577837143

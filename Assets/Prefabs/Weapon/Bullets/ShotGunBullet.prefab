@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2725546755933409228}
   - component: {fileID: 7343974099556902294}
   - component: {fileID: 6990459842346991360}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PhysicsController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,10 +55,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.05383298
-  m_Height: 0.41834432
+  m_Radius: 0.24
+  m_Height: 0.62652665
   m_Direction: 2
-  m_Center: {x: 0, y: -0.0020073317, z: 0.19270855}
+  m_Center: {x: 0, y: -0.0020073354, z: 0.041614622}
 --- !u!1 &3545470273353383339
 GameObject:
   m_ObjectHideFlags: 0

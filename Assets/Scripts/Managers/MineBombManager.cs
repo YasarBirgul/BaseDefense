@@ -1,11 +1,12 @@
 ﻿using System;
 using Abstract;
 using Controllers;
+using Controllers.Mine;
 using UnityEngine;
 
 namespace Managers
 {
-    public class MineBombManager : MonoBehaviour, IDamageble
+    public class MineBombManager : MonoBehaviour, IDamageable
     {
         #region Self Variables
 
@@ -16,7 +17,6 @@ namespace Managers
         public int LureTime;
         public int MineCountDownTime;
         public int ExplosionDamage;
-        
         
         #endregion
 

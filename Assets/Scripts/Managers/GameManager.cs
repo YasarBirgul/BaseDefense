@@ -8,7 +8,7 @@ namespace Managers
         private void Awake()
         {
             Application.targetFrameRate = 60;
-            GameOpen();
+            GameOnPlay();
         } 
         private void Start()
         {
@@ -18,7 +18,7 @@ namespace Managers
         {
             if (IsPaused) CoreGameSignals.Instance.onApplicationPause?.Invoke();
         }
-        private void GameOpen()
+        private void GameOnPlay()
         {
             CoreGameSignals.Instance.onGameOpen?.Invoke();
         }

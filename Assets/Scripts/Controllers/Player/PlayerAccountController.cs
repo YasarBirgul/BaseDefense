@@ -1,4 +1,6 @@
 ﻿using System.Threading.Tasks;
+using Abstract;
+using Concrete;
 using Interfaces;
 using Signals;
 using UnityEngine;
@@ -22,19 +24,23 @@ namespace Controllers.Player
 
         #region Private Variables
 
-        private bool canPay=true;
+        private bool _canPay=true;
         
         #endregion
 
         #endregion
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent<IStackable>(out IStackable stackable))
+            if (other.TryGetComponent<StackableMoney>(out StackableMoney stackable))
             {
                 CollectMoney(stackable);
                 CoreGameSignals.Instance.onMoneyScoreUpdate.Invoke(+1);
             }
-            else if (other.TryGetComponent<IInteractable>(out IInteractable interactable))
+            if (other.TryGetComponent<StackableGem>(out StackableGem stackableGem))
+            {
+                
+            }
+            else if (other.TryGetComponent<AInteractable>(out AInteractable interactable))
             {
                 moneyStackerController.OnRemoveAllStack();
             }
@@ -52,7 +58,7 @@ namespace Controllers.Player
             while (true)
             {
                 CoreGameSignals.Instance.onMoneyScoreUpdate.Invoke(-1);
-                if (HasMoney && canPay)
+                if (HasMoney && _canPay)
                 {
                     await Task.Delay(100);
                     continue;
@@ -62,9 +68,9 @@ namespace Controllers.Player
         }
         public async void StopPayment()
         {
-            canPay = false;
+            _canPay = false;
             await Task.Delay(200);
-            canPay = true;
+            _canPay = true;
         }
         #endregion
     }

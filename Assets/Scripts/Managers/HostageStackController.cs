@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Controllers;
+using Controllers.Player;
 using DG.Tweening;
 using Enum;
 using Enums;
@@ -76,7 +77,7 @@ namespace Managers
         {
             foreach (var hostage in hostageBaseManager.StackedHostageList)
             {
-                hostage.minerAIBrain.enabled=true;
+                hostage.MinerAIBrain.enabled=true;
 
             }
             hostageBaseManager.StackedHostageList.Clear();

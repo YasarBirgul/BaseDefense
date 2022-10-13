@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Data.ValueObject.LevelData
+namespace Data.ValueObject.LevelData.FrontYardDatas.StageData
 {
     [Serializable]
     public class StageData

@@ -7,8 +7,11 @@ namespace Managers
     public class UIManager : MonoBehaviour
     {
         #region Self Variables
-        #region Public Vars
+        
+        #region Public Variables
+        
         #endregion
+        
         #region Serializefield Variables
         
         [SerializeField] 
@@ -20,7 +23,7 @@ namespace Managers
 
         #endregion
 
-        #region Private Vars
+        #region Private Variables
 
         #endregion
 
@@ -37,8 +40,8 @@ namespace Managers
             SubscribeEvents();
         } 
         private void SubscribeEvents()
-        {
-          //  CoreGameSignals.Instance.onGameOpen += OnGameOpen;
+        { 
+            //  CoreGameSignals.Instance.onGameOpen += OnGameOpen;
             UISignals.Instance.onOpenPanel += OnOpenPanel;
             UISignals.Instance.onClosePanel += OnClosePanel;
             UISignals.Instance.onSetGemScoreText += OnSetGemScoreText;
@@ -46,7 +49,7 @@ namespace Managers
         } 
         private void UnsubscribeEvents()
         {
-         //   CoreGameSignals.Instance.onGameOpen += OnGameOpen;
+         // CoreGameSignals.Instance.onGameOpen += OnGameOpen;
             UISignals.Instance.onOpenPanel -= OnOpenPanel;
             UISignals.Instance.onClosePanel -= OnClosePanel;
             UISignals.Instance.onSetGemScoreText -= OnSetGemScoreText;

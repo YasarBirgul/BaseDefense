@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Data
+namespace Data.ValueObject.ScoreData
 {
     [Serializable]
     public struct ScoreData

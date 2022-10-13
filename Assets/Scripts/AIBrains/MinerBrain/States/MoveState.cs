@@ -1,4 +1,3 @@
-using Abstract;
 using Enum;
 using Enums.AI.Miner;
 using Interfaces;
@@ -9,8 +8,8 @@ namespace AIBrains.MinerBrain.States
 {
     public class MoveState:IState
     {
-        public bool IsReachedToTarget=>isReachedToTarget;
-        private bool isReachedToTarget=false;
+        public bool IsReachedToTarget=>_isReachedToTarget;
+        private bool _isReachedToTarget=false;
         private MinerAnimationStates _minerAnimationStates;
         private MinerItems _minerItems;
         private MinerManager _minerManager;
@@ -22,9 +21,7 @@ namespace AIBrains.MinerBrain.States
             _minerItems = minerItems;
             _minerAnimationStates = minerAnimationStates;
             _minerManager = minerManager;
-
         }
-
         public void Tick()
         {
              if (_minerAIBrain.CurrentTarget != null)
@@ -33,40 +30,33 @@ namespace AIBrains.MinerBrain.States
                 RotateToTarget();
                 if (_minerAIBrain.transform.position == _minerAIBrain.ManipulatedTarget)
                 {
-                    isReachedToTarget = true;
+                    _isReachedToTarget = true;
                 }
                 else
                 {
-                    isReachedToTarget = false;
+                    _isReachedToTarget = false;
                 }
              }
         }
-       
         private void MoveToTarget()
         {
-            
             _minerAIBrain.transform.position = Vector3.MoveTowards(_minerAIBrain.transform.position,_minerAIBrain.ManipulatedTarget,0.05f);
         }
-
         private void RotateToTarget()
         {
             if (_minerAIBrain.CurrentTarget.position- _minerAIBrain.transform.position != Vector3.zero)
             {
                 _minerAIBrain.transform.forward =_minerAIBrain.CurrentTarget.position- _minerAIBrain.transform.position;
             }
-        }
-
+        } 
         public void OnEnter()
         {
             _minerAIBrain.MinerAIItemController.OpenItem(_minerItems);
             _minerManager.ChangeAnimation(_minerAnimationStates);
-           
         }
-      
         public void OnExit()
         {
-           
-            isReachedToTarget = false;
+            _isReachedToTarget = false;
         }
     }
 }

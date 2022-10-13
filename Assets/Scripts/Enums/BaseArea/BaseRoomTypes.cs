@@ -1,4 +1,4 @@
-﻿namespace Enums
+﻿namespace Enums.BaseArea
 { 
     public enum BaseRoomTypes
     {

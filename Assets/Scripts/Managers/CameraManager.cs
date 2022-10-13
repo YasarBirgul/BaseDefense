@@ -16,15 +16,13 @@ namespace Managers
         #region Serialized Variables
 
         [SerializeField] private CinemachineStateDrivenCamera stateCam;
-        
+        [SerializeField] private Animator animator;
         #endregion
 
         #region Private Variables
         
         private Vector3 _initialPosition;
         
-        private  Animator _animator;
-
         private CameraStateTypes _cameraStateType;
         
         private PlayerManager _playerManager;
@@ -32,10 +30,7 @@ namespace Managers
         #endregion
 
         #endregion
-        private void Awake()
-        {
-            _animator = GetComponent<Animator>();
-        }
+        
         #region Event Subscriptions
         private void OnEnable()
         {
@@ -44,10 +39,16 @@ namespace Managers
         private void SubscribeEvents()
         {
             CoreGameSignals.Instance.onReadyToPlay += OnReadyToPlay;
+            CoreGameSignals.Instance.onEnterTurret += OnEnterTurret;
+            CoreGameSignals.Instance.onLevel += OnLevel;
+            CoreGameSignals.Instance.onFinish += OnFinish;
         }
         private void UnsubscribeEvents()
         {
             CoreGameSignals.Instance.onReadyToPlay -= OnReadyToPlay;
+            CoreGameSignals.Instance.onEnterTurret -= OnEnterTurret;
+            CoreGameSignals.Instance.onLevel -= OnLevel;
+            CoreGameSignals.Instance.onFinish += OnFinish;
         }
         private void OnDisable()
         {
@@ -63,6 +64,25 @@ namespace Managers
             if(!_playerManager)
                 _playerManager = FindObjectOfType<PlayerManager>();
             stateCam.Follow = _playerManager.transform;
+        }
+        private void OnEnterTurret()
+        {
+            ChangeCamera(CameraStateTypes.TurretCamera);
+           // stateCam.Follow = null;
+        }
+        private void OnLevel()
+        {   
+            stateCam.Follow = _playerManager.transform;
+            ChangeCamera(CameraStateTypes.GameCamera);
+        }
+        private void OnFinish()
+        {   
+            stateCam.Follow = _playerManager.transform;
+            ChangeCamera(CameraStateTypes.FinalCamera);
+        }
+        private void ChangeCamera(CameraStateTypes cameraType)
+        {
+            animator.Play(cameraType.ToString());
         }
     }
 }

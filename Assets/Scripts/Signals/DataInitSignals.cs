@@ -1,6 +1,7 @@
 ﻿using System;
 using Data;
 using Data.ValueObject.LevelData;
+using Data.ValueObject.ScoreData;
 using Extentions;
 using UnityEngine.Events;
 

@@ -14,8 +14,7 @@ namespace Managers
         #region Self Variables
 
         #region Public Variables
-
-
+        
         #endregion
 
         #endregion
@@ -32,12 +31,10 @@ namespace Managers
             _data = GetData();
             InitializePools();
         }
-        
         private SerializedDictionary<PoolType, PoolData> GetData()
         {
             return Resources.Load<CD_Pool>("Data/CD_Pool").poolDataDictionary;
         }
-
         private void InitializePools()
         {
             for (int index = 0; index < _data.Count; index++)
@@ -46,25 +43,21 @@ namespace Managers
                 InitPool(((PoolType)index), _data[((PoolType)index)].initalAmount, _data[((PoolType)index)].isDynamic);
             }
         }
-        
         #region Event Subscription
         private void OnEnable()
         {
             SubscribeEvents();
         }
-
         private void SubscribeEvents()
         {
             PoolSignals.Instance.onGetObjectFromPool += OnGetObjectFromPoolType;
             PoolSignals.Instance.onReleaseObjectFromPool += OnReleaseObjectFromPool;
-
         }
         private void UnsubscribeEvents()
         {
             PoolSignals.Instance.onGetObjectFromPool -= OnGetObjectFromPoolType;
             PoolSignals.Instance.onReleaseObjectFromPool -= OnReleaseObjectFromPool;
         }
-
         private void OnDisable()
         {
             UnsubscribeEvents();
@@ -76,14 +69,14 @@ namespace Managers
             _listCountCache = (int) poolType;
             return ObjectPoolManager.Instance.GetObject<GameObject>(poolType.ToString());
         }
-
         private void OnReleaseObjectFromPool(PoolType poolType,GameObject obj)
         {
             _listCountCache = (int) poolType;
             obj.transform.parent = this.transform;
+            obj.transform.position = Vector3.zero;
+            obj.transform.rotation = new Quaternion(0, 0, 0, 0).normalized;
             ObjectPoolManager.Instance.ReturnObject<GameObject>(obj, poolType.ToString());
         }
-
         private void InitPool(PoolType poolType, int initalAmount, bool isDynamic)
         {
             ObjectPoolManager.Instance.AddObjectPool<GameObject>(FactoryMethod, TurnOnObject, TurnOffObject, poolType.ToString(), initalAmount, isDynamic);

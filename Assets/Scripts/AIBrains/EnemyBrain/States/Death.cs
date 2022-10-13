@@ -1,5 +1,4 @@
-﻿using Abstract;
-using DG.Tweening;
+﻿using DG.Tweening;
 using Enums;
 using Interfaces;
 using Signals;
@@ -26,7 +25,7 @@ namespace AIBrains.EnemyBrain.States
         private readonly Animator _animator;
         private EnemyAIBrain _enemyAIBrain;
         private EnemyTypes _enemyType;
-        private static readonly int Die = Animator.StringToHash("Die");
+        private static readonly int _die = Animator.StringToHash("Die");
 
         #endregion
         
@@ -46,18 +45,18 @@ namespace AIBrains.EnemyBrain.States
         {
             EnemyDead();
             _navMeshAgent.enabled = false;
-            _animator.SetTrigger(Die);
+            _animator.SetTrigger(_die);
             for (int i = 0; i < 3; i++)
             {
                 var createObj = GetObject(PoolType.Money);
                 createObj.transform.position = _enemyAIBrain.transform.position + new Vector3(0,3,0);
             }
-        }
+        } 
         public void OnExit()
         {
             
         }
-        public void EnemyDead()
+        private void EnemyDead()
         {
             var poolType = (PoolType)System.Enum.Parse(typeof(PoolType), _enemyType.ToString());
             DOVirtual.DelayedCall(1f, () =>

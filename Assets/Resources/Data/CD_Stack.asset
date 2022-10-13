@@ -33,6 +33,12 @@ MonoBehaviour:
       GridSize: {x: 5, y: 1, z: 1}
       Offset: {x: 2, y: 2, z: 3}
       DrawnedMesh: {fileID: 0}
+    - isDynamic: 0
+      StackerType: 0
+      StackAreaType: 3
+      GridSize: {x: 5, y: 1, z: 1}
+      Offset: {x: 2, y: 2, z: 2}
+      DrawnedMesh: {fileID: 0}
     DynamicGridDatas: []
   - StackingSystem: 1
     StaticGridDatas: []

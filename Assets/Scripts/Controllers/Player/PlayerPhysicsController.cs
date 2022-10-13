@@ -1,13 +1,14 @@
 ﻿using Abstract;
 using Controllers.Gate;
+using Controllers.Turret;
 using Enums.GameStates;
 using Interfaces;
 using Managers;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.Player
 {
-    public class PlayerPhysicsController : IInteractable
+    public class PlayerPhysicsController : AInteractable
     {
         #region Self Variables
 
@@ -33,12 +34,20 @@ namespace Controllers
             {
                 GateEnter(other);
             }
+            if (other.TryGetComponent(out TurretPhysicsController turretPhysicsController))
+            {
+                playerManager.SetTurretAnim(true);
+            }
         }
         private void OnTriggerExit(Collider other)
         {
             if (other.TryGetComponent(out GatePhysicsController physicsController))
             {
                 GateExit(other);
+            }
+            if (other.TryGetComponent(out TurretPhysicsController turretPhysicsController))
+            {
+                playerManager.SetTurretAnim(false);
             }
         }
         private void GateEnter(Collider other)
@@ -53,7 +62,6 @@ namespace Controllers
             gameObject.layer = LayerMask.NameToLayer(playerIsGoingToFrontYard ? "PlayerFrontYard" : "PlayerBase");
             playerManager.CheckAreaStatus(playerIsGoingToFrontYard ? AreaType.BattleOn : AreaType.BaseDefense);
             if(!playerIsGoingToFrontYard) return;
-         //   playerManager.DamagebleEnemy = null;
             playerManager.HasEnemyTarget = false;
             playerManager.EnemyList.Clear();
         }

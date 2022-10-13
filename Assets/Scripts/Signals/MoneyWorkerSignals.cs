@@ -1,7 +1,6 @@
 using Extentions;
 using UnityEngine.Events;
 using UnityEngine;
-using Data.ValueObject.AIDatas;
 using System;
 using Enums;
 

@@ -8,7 +8,6 @@ namespace Concrete
         public override GameObject SendToStack()
         {
             return transform.gameObject;
-
         }
     }
 }

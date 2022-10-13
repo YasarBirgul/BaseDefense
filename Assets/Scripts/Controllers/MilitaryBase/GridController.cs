@@ -16,26 +16,33 @@ namespace Controllers.MilitaryBase
 
         #region Serialized Variables
 
-        [SerializeField] private Transform gridTransformParent;
+        [SerializeField] 
+        private Transform gridTransformParent;
         
-        [SerializeField] private StackingSystem stackingSystem;
+        [SerializeField]
+        private StackingSystem stackingSystem;
 
         [ShowIf("stackingSystem", Enums.StackingSystem.Static)] 
-        [SerializeField] private StackAreaType stackAreaType;
+        [SerializeField] 
+        private StackAreaType stackAreaType;
         
        
         [ShowIf("stackingSystem",Enums.StackingSystem.Static)]
-        [SerializeField] private GridData stackAreaGridData;
+        [SerializeField] 
+        private GridData stackAreaGridData;
     
         [ShowIf("stackingSystem",Enums.StackingSystem.Dynamic)]
-        [SerializeField] private StackerType stackerType;
+        [SerializeField] 
+        private StackerType stackerType;
         
         
         [ShowIf("stackingSystem",Enums.StackingSystem.Dynamic)]
         [ReadOnly]
-        [SerializeField] private GridData stackerGridData;
+        [SerializeField]
+        private GridData stackerGridData;
 
-        [SerializeField] private MilitaryBaseManager militaryBaseManager;
+        [SerializeField] 
+        private MilitaryBaseManager militaryBaseManager;
 
         #endregion
 
@@ -96,26 +103,36 @@ namespace Controllers.MilitaryBase
                 _gridData = stackerGridData;
             }
             var gridCount = _gridData.GridSize.x *_gridData.GridSize.y * _gridData.GridSize.z;
+            SetGridPosition(gridCount);
+        }
+
+        private void SetGridPosition(int gridCount)
+        {
             for (int i = 0; i < gridCount; i++)
             {
-                var modX = (int)(i % _gridData.GridSize.x);
-                var divideZ =(int) (i / _gridData.GridSize.x); 
-                var modZ = (int)(divideZ % _gridData.GridSize.z); 
-                var divideXZ = (int)(i / (_gridData.GridSize.x * _gridData.GridSize.z));
-                if (_gridData.isDynamic)
-                {
-                    _gridPositions = new Vector3(modX * _gridData.Offset.x,
-                        modZ * _gridData.Offset.z,divideXZ * _gridData.Offset.y);
-                }
-                else
-                {
-                    var position = gridTransformParent.transform.position;
-                    _gridPositions = new Vector3(modX * _gridData.Offset.x + position.x,divideXZ * _gridData.Offset.y+position.y,
-                        modZ * _gridData.Offset.z+ position.z);
-                }
-                gridPositionsData.Add(_gridPositions);
+                var modX = (int) (i % _gridData.GridSize.x);
+                var divideZ = (int) (i / _gridData.GridSize.x);
+                var modZ = (int) (divideZ % _gridData.GridSize.z);
+                var divideXZ = (int) (i / (_gridData.GridSize.x * _gridData.GridSize.z));
+                SetGridPositionsList(modX, modZ, divideXZ);
             }
         }
+        private void SetGridPositionsList(int modX, int modZ, int divideXZ)
+        {
+            if (_gridData.isDynamic)
+            {
+                _gridPositions = new Vector3(modX * _gridData.Offset.x,
+                    modZ * _gridData.Offset.z, divideXZ * _gridData.Offset.y);
+            }
+            else
+            {
+                var position = gridTransformParent.transform.position;
+                _gridPositions = new Vector3(modX * _gridData.Offset.x + position.x, divideXZ * _gridData.Offset.y + position.y,
+                    modZ * _gridData.Offset.z + position.z);
+            }
+            gridPositionsData.Add(_gridPositions);
+        }
+
         public override void SendGridDataToStacker()
         {
            militaryBaseManager.GetStackPositions(gridPositionsData);

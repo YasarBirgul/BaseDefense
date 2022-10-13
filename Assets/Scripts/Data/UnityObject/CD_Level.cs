@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Data.ValueObject.LevelData;
+using Data.ValueObject.ScoreData;
 using Interfaces;
 using UnityEngine;
 
@@ -14,15 +15,13 @@ namespace Data.UnityObject
         public string Key ="LevelData";
         public CD_Level()
         {
-            
-            
+
         } 
         public CD_Level(int levelId,List<LevelData> levelDatas, ScoreData scoreData)
         {
             LevelId = levelId;
             LevelDatas = levelDatas;
             ScoreData = scoreData;
-
         }
         public string GetKey()
         {

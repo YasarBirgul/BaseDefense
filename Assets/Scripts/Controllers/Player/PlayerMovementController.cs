@@ -1,9 +1,10 @@
 ﻿using Data.ValueObject.PlayerData;
+using Enums.Input;
 using Keys;
 using Managers;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.Player
 {
     public class PlayerMovementController : MonoBehaviour
     {
@@ -15,8 +16,11 @@ namespace Controllers
 
         #region Serialized Variables
 
-        [SerializeField] private new Rigidbody rigidbody;
-        [SerializeField] private PlayerManager manager;
+        [SerializeField]
+        private new Rigidbody rigidbody;
+        [SerializeField]
+        private PlayerManager manager;
+        
         #endregion
 
         #region Private Variables
@@ -40,8 +44,9 @@ namespace Controllers
             EnableMovement(_inputVector.sqrMagnitude > 0);
         }
 
-        public void RotatePlayerToTarget(Transform enemyTarget)
+        public void LookAtTarget(Transform enemyTarget)
         {
+            if(enemyTarget == null) return;
             transform.LookAt(enemyTarget, Vector3.up*3f);
         }
         
@@ -76,6 +81,12 @@ namespace Controllers
             if (movementDirection == Vector3.zero) return;
             Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
             rigidbody.rotation = Quaternion.RotateTowards(rigidbody.rotation, toRotation,30);
+        }
+        public void DisableMovement(InputHandlers inputHandlers)
+        {
+            if(inputHandlers != InputHandlers.Turret) return;
+            rigidbody.velocity = Vector3.zero;
+            transform.rotation = new Quaternion(0, 0, 0, 0);
         }
     }
 }

@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using Abstract;
 using Controllers;
+using Controllers.Player;
 using Data.UnityObject;
 using Data.ValueObject.PlayerData;
 using Data.ValueObject.WeaponData;
 using Enums;
 using Enums.GameStates;
+using Enums.Input;
 using Keys;
 using Signals;
 using UnityEngine;
@@ -22,7 +24,7 @@ namespace Managers
         
         public WeaponTypes WeaponType;
         
-        public List<IDamageble> EnemyList = new List<IDamageble>();
+        public List<IDamageable> EnemyList = new List<IDamageable>();
         
         public Transform EnemyTarget;
         
@@ -49,8 +51,6 @@ namespace Managers
         private PlayerData _data;
 
         private WeaponData _weaponData;
-
-        private AreaType _nextState = AreaType.BattleOn;
         
         #endregion
         
@@ -63,11 +63,7 @@ namespace Managers
         }
         private PlayerData GetPlayerData() => Resources.Load<CD_Player>("Data/CD_Player").PlayerData;
         private WeaponData GetWeaponData() => Resources.Load<CD_Weapon>("Data/CD_Weapon").WeaponData[(int)WeaponType];
-        private void Init()
-        {
-            CurrentAreaType = AreaType.BaseDefense;
-            SetDataToControllers();
-        }
+        private void Init() => SetDataToControllers();
         private void SetDataToControllers()
         {
             movementController.SetMovementData(_data.PlayerMovementData);
@@ -82,10 +78,12 @@ namespace Managers
         private void SubscribeEvents()
         {
             InputSignals.Instance.onInputDragged += OnGetInputValues;
+            InputSignals.Instance.onInputHandlerChange += OnDisableMovement;
         }
         private void UnsubscribeEvents()
         {
             InputSignals.Instance.onInputDragged -= OnGetInputValues;
+            InputSignals.Instance.onInputHandlerChange -= OnDisableMovement;
         }
         private void OnDisable()
         {
@@ -96,13 +94,7 @@ namespace Managers
         {
             movementController.UpdateInputValues(inputParams);
             animationController.PlayAnimation(inputParams);
-            if (!HasEnemyTarget) return;
             AimEnemy();
-        }
-        public void CheckAreaStatus(AreaType AreaStatus)
-        {
-            CurrentAreaType = AreaStatus;
-            meshController.ChangeAreaStatus(AreaStatus);
         }
         public void SetEnemyTarget()
         {
@@ -110,13 +102,9 @@ namespace Managers
             animationController.AimTarget(true);
             AimEnemy();
         }
-        private void AimEnemy()
-        { 
-            if (EnemyList.Count != 0)
-            {
-                var transformEnemy = EnemyList[0].GetTransform();
-                movementController.RotatePlayerToTarget(transformEnemy);
-            }
-        }
+        private void AimEnemy() => movementController.LookAtTarget(!HasEnemyTarget ? null : EnemyList[0]?.GetTransform());
+        public void CheckAreaStatus(AreaType areaType) => meshController.ChangeAreaStatus(CurrentAreaType = areaType);
+        private void OnDisableMovement(InputHandlers inputHandler) => movementController.DisableMovement(inputHandler);
+        public void SetTurretAnim(bool onTurret) => animationController.PlayTurretAnimation(onTurret);
     }
 }

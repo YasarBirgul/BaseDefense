@@ -1,9 +1,8 @@
 ﻿using Data.ValueObject.WeaponData;
 using Enums.GameStates;
-using Keys;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.Player
 {
     public class PlayerMeshController : MonoBehaviour
     {
@@ -13,11 +12,12 @@ namespace Controllers
         
         #endregion
 
-        #region Serialized Variables,
-         
-        [SerializeField] private Transform manager;
-        [SerializeField] private MeshRenderer weaponMeshRenderer;
-        [SerializeField] private MeshRenderer sideMeshRenderer;
+        #region Serialized Variables
+        
+        [SerializeField] 
+        private MeshRenderer weaponMeshRenderer;
+        [SerializeField]
+        private MeshRenderer sideMeshRenderer;
 
         #endregion
 
@@ -28,8 +28,6 @@ namespace Controllers
         #endregion
 
         #endregion
-        
-        
         public void SetWeaponData(WeaponData weaponData)
         {
             _data = weaponData;

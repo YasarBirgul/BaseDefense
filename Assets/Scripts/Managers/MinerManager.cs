@@ -12,7 +12,7 @@ namespace Managers
 
         #region Public Variables
 
-        public MinerAIBrain minerAIBrain { get; private set; }
+        public MinerAIBrain MinerAIBrain;
         
         #endregion
 
@@ -54,17 +54,17 @@ namespace Managers
 
         private void OnDropZoneFull(bool _state)
         {
-            minerAIBrain.IsDropZoneFullStatus=_state;
+            MinerAIBrain.IsDropZoneFullStatus=_state;
+        }
+        
+        private void UnSubscribeEvents()
+        {
+            DropzoneSignals.Instance.onDropZoneFull -= OnDropZoneFull;
         }
 
         private void OnDisable()
         {
             UnSubscribeEvents();
-        }
-
-        private void UnSubscribeEvents()
-        {
-            DropzoneSignals.Instance.onDropZoneFull -= OnDropZoneFull;
         }
 
         #endregion

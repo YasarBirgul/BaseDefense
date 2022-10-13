@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using Abstract;
 using AIBrains.SoldierBrain.States;
-using Controllers.Soldier;
 using Data.UnityObject;
 using Data.ValueObject.AIData;
 using Interfaces;
-using Signals;
-using Sirenix.OdinInspector;
 using StateBehaviour;
 using UnityEngine;
 using UnityEngine.AI;
@@ -25,38 +22,30 @@ namespace AIBrains.SoldierBrain
         public bool HasReachedFrontYard;
         public bool HasEnemyTarget = false;
         
-        public Transform TentPosition; 
+        public Transform TentPosition;
         public Transform FrontYardStartPosition;
-        public List<IDamageble> enemyList = new List<IDamageble>();
+        public List<IDamageable> enemyList = new List<IDamageable>();
         public Transform EnemyTarget;
-        public IDamageble DamagebleEnemy;
+        public IDamageable DamageableEnemy;
         public Transform WeaponHolder;
+        public bool HasSoldiersActivated;
         #endregion
 
         #region Serialized Variables
-
-        [SerializeField] private SoldierPhysicsController physicsController;
-        [SerializeField] private Animator animator;
-        #endregion
-
-        #region Private Variables
+        [SerializeField]
+        private Animator animator;
         
+        #endregion
+        
+        #region Private Variables
         private NavMeshAgent _navMeshAgent;
-       
-        [ShowInInspector] private List<IDamageble> _damagablesList;
+        
         [Header("Data")]
         private SoldierAIData _data;
-        private int _damage;
-        private float _soldierSpeed;
-        private float _attackRadius;
-        private float _attackDelay;
-        private int _health;
-        private Transform _spawnPoint;
+
         private StateMachine _stateMachine;
         private Vector3 _slotTransform;
-        private bool HasSoldiersActivated;
-
-
+        
         #endregion
         #endregion
         private void Awake()
@@ -70,7 +59,7 @@ namespace AIBrains.SoldierBrain
         private void GetStateReferences()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
-            var idle = new Idle(this,TentPosition,_navMeshAgent,animator);
+            var idle = new Idle(TentPosition,_navMeshAgent);
             var moveToSlotZone = new MoveToSlotZone(this,_navMeshAgent,HasReachedSlotTarget,_slotTransform,animator);
             var wait = new Wait(animator,_navMeshAgent);
             var moveToFrontYard = new MoveToFrontYard(this,_navMeshAgent,FrontYardStartPosition,animator);
@@ -97,57 +86,6 @@ namespace AIBrains.SoldierBrain
             Func<bool> hasNoEnemyTarget() => () => !HasEnemyTarget;
         }
         private void Update() =>  _stateMachine.UpdateIState();
-
-        #region Event Subscription
-        private void OnEnable()
-        {
-            SubscribeEvents();
-        }
-        private void SubscribeEvents()
-        {
-            AISignals.Instance.onSoldierActivation += OnSoldierActivation;
-        }
-        private void UnsubscribeEvents()
-        {
-            AISignals.Instance.onSoldierActivation -= OnSoldierActivation;
-        }
-        private void OnDisable()
-        {
-            UnsubscribeEvents();
-        }
-        #endregion
-        public void GetSlotTransform(Vector3 slotTransfrom)
-        {
-            _slotTransform = slotTransfrom;
-        }
-        private void OnSoldierActivation()
-        {
-            HasSoldiersActivated = true;
-        }
-        public void SetEnemyTargetTransform()
-        {
-            EnemyTarget = enemyList[0].GetTransform();
-            DamagebleEnemy = enemyList[0];
-            HasEnemyTarget = true;
-        }
-        public void EnemyTargetStatus()
-        {
-            if (enemyList.Count != 0)
-            {
-               SetEnemyTargetTransform();
-            }
-            else
-            {
-                HasEnemyTarget = false;
-            }
-        }
-        public void RemoveTarget()
-        {
-            if (enemyList.Count == 0) return;
-            enemyList.RemoveAt(0);
-            enemyList.TrimExcess();
-            EnemyTarget = null;
-            EnemyTargetStatus();
-        }
+        public void GetSlotTransform(Vector3 slotTransfrom)=>  _slotTransform = slotTransfrom;
     }
 }

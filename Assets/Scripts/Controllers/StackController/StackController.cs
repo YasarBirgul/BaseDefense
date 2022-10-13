@@ -7,39 +7,46 @@ using Enums;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.StackController
 {
     public class StackController : AStack
     {
-         #region Self Variables
+        #region Self Variables
 
+        #region Public Variables
+        
+        #endregion 
+        
         #region Serialized Variables
 
-        [SerializeField] private Transform moneyTransformParent;
-        
-        [SerializeField] private StackingSystem stackingSystem;
+        [SerializeField] 
+        private StackingSystem stackingSystem;
 
         [ShowIf("stackingSystem", Enums.StackingSystem.Static)] 
-        [SerializeField] private StackAreaType stackAreaType;
+        [SerializeField] 
+        private StackAreaType stackAreaType;
         
-       
         [ShowIf("stackingSystem",Enums.StackingSystem.Static)]
-        [SerializeField] private GridData stackAreaGridData;
+        [SerializeField]
+        private GridData stackAreaGridData;
     
         [ShowIf("stackingSystem",Enums.StackingSystem.Dynamic)]
-        [SerializeField] private StackerType stackerType;
-        
+        [SerializeField] 
+        private StackerType stackerType;
         
         [ShowIf("stackingSystem",Enums.StackingSystem.Dynamic)]
-        [SerializeField] private GridData stackerGridData;
+        [SerializeField] 
+        private GridData stackerGridData;
 
-        [SerializeField] private MoneyStackerController moneyStackerController;
+        [SerializeField]
+        private MoneyStackerController moneyStackerController;
 
         #endregion
 
         #region Private Variables
         
-        [ShowInInspector] private List<Vector3> gridPositionsData = new List<Vector3>();
+        [ShowInInspector] 
+        private List<Vector3> _gridPositionsData = new List<Vector3>();
         
         private Vector3 _gridPositions;
 
@@ -49,19 +56,13 @@ namespace Controllers
 
         #endregion
 
-        #region Public Variables
-        
         #endregion
-        
-        #endregion
-        
         private void Awake()
         {
             GetData();
             SetGrid();
             SendGridDataToStacker();
         }
-
         private void GetData()
         {
             if (stackingSystem == StackingSystem.Dynamic)
@@ -73,24 +74,18 @@ namespace Controllers
                 stackAreaGridData = GetAreaStackGridData();
             }
         }
-        
         private GridData GetStackerGridData()
         {
             return Resources.Load<CD_Stack>("Data/CD_Stack").StackDatas[(int)stackingSystem].DynamicGridDatas[(int)stackerType];
         }
-
         private GridData GetAreaStackGridData()
         {
             return Resources.Load<CD_Stack>("Data/CD_Stack").StackDatas[(int)stackingSystem].StaticGridDatas[(int)stackAreaType];
         }
-
-      
         public override void SetStackHolder(GameObject gameObject)
         {
             gameObject.transform.SetParent(transform);
         }
-        
-        
         public override void SetGrid()
         {
             if (stackingSystem == StackingSystem.Static)
@@ -102,30 +97,35 @@ namespace Controllers
                 _gridData = stackerGridData;
             }
             var gridCount = _gridData.GridSize.x *_gridData.GridSize.y * _gridData.GridSize.z;
+            SetGridPositions(gridCount);
+        }
+        private void SetGridPositions(int gridCount)
+        {
             for (int i = 0; i < gridCount; i++)
             {
-                var modX = (int)(i % _gridData.GridSize.x);
-                var divideZ =(int) (i / _gridData.GridSize.x); 
-                var modZ = (int)(divideZ % _gridData.GridSize.z); 
-                var divideXZ = (int)(i / (_gridData.GridSize.x * _gridData.GridSize.z));
-                if (_gridData.isDynamic)
-                {
-                    _gridPositions = new Vector3(modX * _gridData.Offset.x,
-                        modZ * _gridData.Offset.z,divideXZ * _gridData.Offset.y);
-                }
-                else
-                {
-                    _gridPositions = new Vector3(modX * _gridData.Offset.x,divideXZ * _gridData.Offset.y,
-                        modZ * _gridData.Offset.z);
-                    
-                }
-                gridPositionsData.Add(_gridPositions);
-                
+                var modX = (int) (i % _gridData.GridSize.x);
+                var divideZ = (int) (i / _gridData.GridSize.x);
+                var modZ = (int) (divideZ % _gridData.GridSize.z);
+                var divideXZ = (int) (i / (_gridData.GridSize.x * _gridData.GridSize.z));
+                SetGridPositionsToList(modX, modZ, divideXZ);
             }
-        } 
+        }
+        private void SetGridPositionsToList(int modX, int modZ, int divideXZ)
+        {
+            if (_gridData.isDynamic)
+            {
+                _gridPositions = new Vector3(modX * _gridData.Offset.x,modZ * _gridData.Offset.z,divideXZ * _gridData.Offset.y);
+            }
+            else
+            {
+                _gridPositions = new Vector3(modX * _gridData.Offset.x, divideXZ * _gridData.Offset.y, modZ * _gridData.Offset.z);
+            }
+            _gridPositionsData.Add(_gridPositions);
+        }
+
         public override void SendGridDataToStacker()
         {
-            moneyStackerController.GetStackPositions(gridPositionsData);
+            moneyStackerController.GetStackPositions(_gridPositionsData);
         }
     }
 }

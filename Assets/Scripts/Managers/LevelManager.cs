@@ -1,7 +1,5 @@
-﻿using Commands;
-using Commands.LevelCommands;
+﻿using Commands.LevelCommands;
 using Data.UnityObject;
-using Data.ValueObject.LevelData;
 using Signals;
 using UnityEngine;
 
@@ -26,9 +24,12 @@ namespace Managers
         [Space]
         [SerializeField]
         private GameObject levelHolder;
+        
         [SerializeField] 
         private LevelLoaderCommand levelLoaderCommand;
-        [SerializeField] private ClearActiveLevelCommand clearActiveLevelCommand;
+        
+        [SerializeField] 
+        private ClearActiveLevelCommand clearActiveLevelCommand;
 
         #endregion
 
@@ -67,7 +68,6 @@ namespace Managers
         {
             _levelID++;
             SaveLevelID(_levelID);
-            //UISignals
             CoreGameSignals.Instance.onReset?.Invoke();
         }
 

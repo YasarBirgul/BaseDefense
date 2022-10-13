@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using AIBrains.EnemyBrain;
 using Enums;
@@ -17,24 +16,32 @@ namespace Managers
 
         #region Serialized Variables
 
+        [SerializeField]
+        private List<Transform> randomTargetTransform;
+
+        [SerializeField]
+        private Transform spawnTransform;
+        
+        [SerializeField]
+        private int numberOfEnemiesToSpawn = 50;
+        
         #endregion
     
         #region Public Variables
-        
-        public int NumberOfEnemiesToSpawn = 50;
-        
-        public float SpawnDelay = 2;
         
         #endregion
 
         #region Private Variables
         
-        private EnemyTypes enemyType;
+        private EnemyTypes _enemyType;
         
-        private NavMeshTriangulation triangulation;
+        private NavMeshTriangulation _triangulation;
         
-        private GameObject _EnemyAIObj;
-        private EnemyAIBrain _EnemyAIBrain;
+        private GameObject _enemyAIObj;
+        
+        private EnemyAIBrain _enemyAIBrain;
+        
+        private const float _spawnDelay = 2;
         
         #endregion
         
@@ -44,13 +51,46 @@ namespace Managers
         {
             StartCoroutine(SpawnEnemies());
         }
+
+        #region Event Subscription
+        private void OnEnable()
+        {
+            SubscribeEvents();
+        }
+        private void SubscribeEvents()
+        {
+            AISignals.Instance.getSpawnTransform += SetSpawnTransform;
+            AISignals.Instance.getRandomTransform += SetRandomTransform;
+        }
+
+        private void UnsubscribeEvents()
+        {
+            AISignals.Instance.getSpawnTransform -= SetSpawnTransform;
+            AISignals.Instance.getRandomTransform -= SetRandomTransform;
+        }
+
+        private void OnDisable()
+        {
+            UnsubscribeEvents();
+        }
+
+        #endregion
+        private Transform SetSpawnTransform()
+        {
+            return spawnTransform;
+        }
+
+        private Transform SetRandomTransform()
+        {
+            return randomTargetTransform[Random.Range(0,randomTargetTransform.Count)];
+        }
         private IEnumerator SpawnEnemies()
         {
-            WaitForSeconds wait = new WaitForSeconds(SpawnDelay);
+            WaitForSeconds wait = new WaitForSeconds(_spawnDelay);
             
             int spawnedEnemies = 0;
 
-            while (spawnedEnemies < NumberOfEnemiesToSpawn)
+            while (spawnedEnemies < numberOfEnemiesToSpawn)
             {
                 DoSpawnEnemy();
                 spawnedEnemies++;
@@ -68,14 +108,13 @@ namespace Managers
                     randomType = (int)EnemyTypes.RedEnemy;
                 }
             }
-
             var poolType = (PoolType) System.Enum.Parse(typeof(PoolType), ((EnemyTypes) randomType).ToString());
             GetObject(poolType);
         }
         public GameObject GetObject(PoolType poolName)
         {
-            _EnemyAIObj = PoolSignals.Instance.onGetObjectFromPool?.Invoke(poolName);
-            return _EnemyAIObj;
+            _enemyAIObj = PoolSignals.Instance.onGetObjectFromPool?.Invoke(poolName);
+            return _enemyAIObj;
         }
     }
 }

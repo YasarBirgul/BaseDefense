@@ -19,16 +19,15 @@ namespace Controllers.AI.MoneyWorker
             {
                 if (moneyWorkerBrain.IsAvailable())
                 {
-                    AISignals.Instance.onThisMoneyTaken?.Invoke(other.transform);
+                    stackable.IsCollected = true;
+                    AISignals.Instance.onThisMoneyTaken?.Invoke();
                     moneyStackerController.SetStackHolder(stackable.SendToStack().transform);
                     moneyStackerController.GetStack(other.gameObject);
                     moneyWorkerBrain.SetCurrentStock();
-                    //other'a layer de�i�tirme yap�labilir
                 }
             }
             if (other.CompareTag("Gate"))
             {
-                Debug.Log("Zort Gate");
                 moneyStackerController.OnRemoveAllStack();
                 moneyWorkerBrain.RemoveAllStock();
             }

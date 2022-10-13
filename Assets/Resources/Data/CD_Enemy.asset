@@ -16,7 +16,7 @@ MonoBehaviour:
     EnemyList:
     - EnemyType: 0
       Health: 100
-      Damage: 0
+      Damage: 100
       AttackRange: 1.5
       AttackSpeed: 15
       ScaleSize: {x: 1, y: 1, z: 1}

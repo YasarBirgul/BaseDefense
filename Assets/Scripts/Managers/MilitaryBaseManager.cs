@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using AIBrains.SoldierBrain;
-using Data.UnityObject;
 using Data.ValueObject.AIData;
 using Data.ValueObject.LevelData;
 using Enums;
@@ -47,7 +46,8 @@ namespace Managers
         private int _soldierAmount;
         [ShowInInspector] private List<Vector3> _slotTransformList = new List<Vector3>();
         private int _tentCapacity;
-        
+        private List<SoldierAIBrain> _soldierList=new List<SoldierAIBrain>();
+
         #endregion
 
         #endregion
@@ -81,6 +81,7 @@ namespace Managers
                 GetSoldier();
             }
         }
+        
         #region Event Subscription
         private void OnEnable()
         {
@@ -89,22 +90,30 @@ namespace Managers
         private void SubscribeEvents()
         {
             AISignals.Instance.onSoldierActivation += OnSoldierActivation;
+            AISignals.Instance.onSoldierAmountUpgrade += OnSoldierAmountUpgrade;
             CoreGameSignals.Instance.onApplicationQuit += OnApplicationQuit;
-            //  DataInitSignals.Instance.onLoadMilitaryBaseData += OnLoadData;
         }
         private void UnsubscribeEvents()
         {
             AISignals.Instance.onSoldierActivation -= OnSoldierActivation;
+            AISignals.Instance.onSoldierAmountUpgrade -= OnSoldierAmountUpgrade;
             CoreGameSignals.Instance.onApplicationQuit -= OnApplicationQuit;
-          //  DataInitSignals.Instance.onLoadMilitaryBaseData -= OnLoadData;
         }
         private void OnDisable()
         {
             UnsubscribeEvents();
         }
+        
         #endregion
         private void OnSoldierActivation()
         {
+            var soldierCount = _soldierList.Count-1;
+            for (var i = 0; i < soldierCount+1; i++)
+            {
+                _soldierList[soldierCount-i].HasSoldiersActivated = true;
+                _soldierList.RemoveAt(soldierCount - i);
+                _soldierList.TrimExcess();
+            }
             _isTentAvaliable = true;
             _data.CurrentSoldierAmount = 0;
         }
@@ -112,6 +121,7 @@ namespace Managers
         {
             var soldierAIPrefab = GetObject(PoolType.SoldierAI);
             var soldierBrain = soldierAIPrefab.GetComponent<SoldierAIBrain>();
+            _soldierList.Add(soldierBrain);
             SetSlotZoneTransformsToSoldiers(soldierBrain);
         }
         
@@ -132,23 +142,25 @@ namespace Managers
             {
                 _isBaseAvaliable = false;
             }
-        }
-        
-        [Button]
-        public void UpdateSoldierAmount()
+        } 
+        private void OnSoldierAmountUpgrade()
         {
-            Debug.Log(_tentCapacity);
+            UpdateSoldierAmount();
+        }
+        private async void UpdateSoldierAmount()
+        {
             if(!_isTentAvaliable) return;
             if (_data.CurrentSoldierAmount < _data.TentCapacity)
             {
                 GetSoldier();
                 _data.CurrentSoldierAmount += 1;
+                await Task.Delay(100);
+                UpdateSoldierAmount();
             }
             else
             {
                 _isTentAvaliable= false;
                 _data.CurrentSoldierAmount = 0;
-                Debug.Log(_data.CurrentSoldierAmount);
             }
         }
         public void GetStackPositions(List<Vector3> gridPositionData)

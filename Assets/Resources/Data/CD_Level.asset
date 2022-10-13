@@ -108,6 +108,6 @@ MonoBehaviour:
         HostagePlaces: []
   LevelId: 0
   ScoreData:
-    MoneyScore: 1000
-    DiamondScore: 20
+    MoneyScore: 500
+    DiamondScore: 400
   Key: LevelData

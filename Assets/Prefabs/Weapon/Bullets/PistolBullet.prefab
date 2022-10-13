@@ -88,7 +88,7 @@ TrailRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5141339768904831981}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 0
@@ -228,10 +228,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.09219957
-  m_Height: 0.19494456
+  m_Radius: 0.12639567
+  m_Height: 0.50718784
   m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0.08347581}
+  m_Center: {x: 0, y: 0, z: 0.16809136}
 --- !u!114 &2461786831918718762
 MonoBehaviour:
   m_ObjectHideFlags: 0

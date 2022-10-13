@@ -1,4 +1,3 @@
-using Abstract;
 using Enums.AI.Miner;
 using Interfaces;
 using Managers;
@@ -15,18 +14,15 @@ namespace AIBrains.MinerBrain.States
             _minerAIBrain = minerAIBrain;
             _minerManager = minerManager;
         }
-
         public void Tick()
         {
             
         }
-
         public void OnEnter()
         {
             _minerAIBrain.SetTargetForMine();
             _minerManager.ChangeAnimation(MinerAnimationStates.Idle);
         }
-
         public void OnExit()
         {
             

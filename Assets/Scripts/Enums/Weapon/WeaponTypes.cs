@@ -6,5 +6,6 @@
         Riffle,
         ShotGun,
         MiniGun,
+        Turret,
     }
 }
