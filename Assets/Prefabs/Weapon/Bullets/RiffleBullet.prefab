@@ -278,7 +278,7 @@ GameObject:
   - component: {fileID: 2027311627929833781}
   - component: {fileID: 555821506523576393}
   - component: {fileID: 2811316017684161650}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: PhysicsController
   m_TagString: Untagged
   m_Icon: {fileID: 0}

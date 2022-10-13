@@ -33,7 +33,7 @@ namespace AIBrains.SoldierBrain.States
         } 
         public void OnEnter()
         {
-            frontYardRandomPos = new Vector3(Random.Range(-15,15), 0, Random.Range(10, 20));
+            frontYardRandomPos = new Vector3(Random.Range(-20,20), 0, Random.Range(15, 25));
             _animator.SetTrigger(Attacked);
             _navMeshAgent.speed = 1.5f;
             _animator.SetFloat(Speed,_navMeshAgent.velocity.magnitude);

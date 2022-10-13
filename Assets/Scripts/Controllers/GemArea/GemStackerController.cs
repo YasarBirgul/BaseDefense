@@ -63,7 +63,6 @@ namespace Controllers.GemArea
             if(!_canRemove)
                 return;
             
-            
             _canRemove = false;
             
             _stackListConstCount = StackList.Count;
@@ -106,7 +105,7 @@ namespace Controllers.GemArea
                 removedStack.transform.rotation = Quaternion.LookRotation(targetTransform.forward);
                             StackList.Remove(removedStack);
                 //removedStack.transform.parent=targetTransform;           
-                removedStack.transform.DOMove(targetTransform.localPosition+new Vector3(0,targetTransform.localScale.y*2,0), .1f).OnComplete(() =>
+                removedStack.transform.parent.DOMove(targetTransform.localPosition+new Vector3(0,targetTransform.localScale.y*2,0), .1f).OnComplete(() =>
                 {
                     
                     removedStack.transform.DOScale(Vector3.zero, 0.2f);

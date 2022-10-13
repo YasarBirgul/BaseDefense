@@ -1,4 +1,5 @@
 using Abstract;
+using Concrete;
 using Interfaces;
 using UnityEngine;
 
@@ -10,9 +11,8 @@ namespace Controllers.GemArea
         private GemStackerController gemStackerController;
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent<IStackable>(out IStackable stackable))
+            if (other.TryGetComponent<StackableGem>(out StackableGem stackable))
             {
-            
                 if (gemStackerController.PositionList.Count <= gemStackerController.StackList.Count)
                 {
                     return;
