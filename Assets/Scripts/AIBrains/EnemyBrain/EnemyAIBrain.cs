@@ -80,6 +80,7 @@ namespace AIBrains.EnemyBrain
             var death = new Death(navMeshAgent,animator,this,enemyType);
             var chase = new Chase(this,navMeshAgent,animator);
             var moveToBomb = new MoveToBomb(navMeshAgent,animator);
+            var baseAttack = new BaseAttack(navMeshAgent, animator);
             
             _stateMachine = new StateMachine();
             
@@ -88,7 +89,9 @@ namespace AIBrains.EnemyBrain
             At(chase,attack,AttackRange()); 
             At(attack,chase,AttackOffRange()); 
             At(chase,move,TargetNull());
-
+            At(move,baseAttack,IsEnemyReachedBase());
+            At(baseAttack,chase,IsTargetChange());
+            
             _stateMachine.AddAnyTransition(death,  IsDead());
             _stateMachine.AddAnyTransition(moveToBomb, ()=>IsBombSettled);
             
@@ -101,6 +104,8 @@ namespace AIBrains.EnemyBrain
             Func<bool> AttackOffRange() => () => CurrentTarget != null && (transform.position - CurrentTarget.transform.position).sqrMagnitude > Mathf.Pow(navMeshAgent.stoppingDistance,2);
             Func<bool> TargetNull() => () => CurrentTarget == null;
             Func<bool> IsDead() => () => Health <= 0;
+            Func<bool> IsEnemyReachedBase() => () => CurrentTarget == TurretTarget && (transform.position - CurrentTarget.transform.position).sqrMagnitude < Mathf.Pow(navMeshAgent.stoppingDistance,2);
+            Func<bool> IsTargetChange() => () => CurrentTarget != TurretTarget;
         }
         private void Update()
         {   

@@ -114,12 +114,10 @@ namespace Controllers.GemArea
             });
              
         }
-
         public override void ResetStack(IStackable stackable)
         {
             base.ResetStack(stackable);
         }
-
         public void GetStackPositions(List<Vector3> stackPositions)
         {
             PositionList = stackPositions;
