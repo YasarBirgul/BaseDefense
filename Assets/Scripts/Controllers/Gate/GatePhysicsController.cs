@@ -1,4 +1,5 @@
 ﻿using Abstract;
+using Controllers.AI.MoneyWorker;
 using Managers;
 using UnityEngine;
 
@@ -25,14 +26,14 @@ namespace Controllers.Gate
         #endregion
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out AInteractable interactable))
+            if (other.TryGetComponent(out AInteractable interactable) || other.TryGetComponent(out MoneyWorkerPhysicController moneyWorkerPhysicController))
             {
                 manager.GateOpen(true);
             }
         }
         private void OnTriggerExit(Collider other)
         {
-            if (other.TryGetComponent(out AInteractable interactable))
+            if (other.TryGetComponent(out AInteractable interactable)|| other.TryGetComponent(out MoneyWorkerPhysicController moneyWorkerPhysicController))
             {
                 manager.GateOpen(false);
             }

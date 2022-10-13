@@ -11,7 +11,7 @@ namespace AIBrains.EnemyBrain.States
         private readonly EnemyAIBrain _enemyAIBrain;
         private static readonly int _speed = Animator.StringToHash("Speed");
         private static readonly int _run = Animator.StringToHash("Run");
-        private const float _runSpeed = 6.256048f;
+        private const float _runSpeed = 6.328234f;
         public Chase(EnemyAIBrain enemyAIBrain,NavMeshAgent agent,Animator animator)
         {
             _enemyAIBrain = enemyAIBrain;

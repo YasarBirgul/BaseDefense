@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using AIBrains.SoldierBrain;
 using Data.ValueObject.AIData;
 using Data.ValueObject.LevelData;
@@ -89,11 +90,13 @@ namespace Managers
         private void SubscribeEvents()
         {
             AISignals.Instance.onSoldierActivation += OnSoldierActivation;
+            AISignals.Instance.onSoldierAmountUpgrade += OnSoldierAmountUpgrade;
             CoreGameSignals.Instance.onApplicationQuit += OnApplicationQuit;
         }
         private void UnsubscribeEvents()
         {
             AISignals.Instance.onSoldierActivation -= OnSoldierActivation;
+            AISignals.Instance.onSoldierAmountUpgrade -= OnSoldierAmountUpgrade;
             CoreGameSignals.Instance.onApplicationQuit -= OnApplicationQuit;
         }
         private void OnDisable()
@@ -139,16 +142,20 @@ namespace Managers
             {
                 _isBaseAvaliable = false;
             }
+        } 
+        private void OnSoldierAmountUpgrade()
+        {
+            UpdateSoldierAmount();
         }
-        
-        [Button]
-        public void UpdateSoldierAmount()
+        private async void UpdateSoldierAmount()
         {
             if(!_isTentAvaliable) return;
             if (_data.CurrentSoldierAmount < _data.TentCapacity)
             {
                 GetSoldier();
                 _data.CurrentSoldierAmount += 1;
+                await Task.Delay(100);
+                UpdateSoldierAmount();
             }
             else
             {

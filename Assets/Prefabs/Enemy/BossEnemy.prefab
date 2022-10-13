@@ -1427,16 +1427,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fa1c994705b429fbd4c5feb4d67b407, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerTarget: {fileID: 0}
-  _turretTarget: {fileID: 0}
-  MineTarget: {fileID: 0}
-  NavMeshAgent: {fileID: 1837053086526059140}
-  Health: 0
-  EnemyType: 3
+  IsBombSettled: 0
   CurrentTarget: {fileID: 0}
+  TurretTarget: {fileID: 0}
+  spawnPosition: {fileID: 0}
   enemyType: 3
-  physicsDetectionController: {fileID: 325352589472048178}
-  animator: {fileID: 4976932396909305934}
 --- !u!195 &1837053086526059140
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1447,7 +1442,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 5.273528
+  m_Speed: 6.328234
   m_Acceleration: 35
   avoidancePriority: 50
   m_AngularSpeed: 360

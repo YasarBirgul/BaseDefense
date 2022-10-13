@@ -72,6 +72,8 @@ namespace AIBrains.SoldierBrain.States
         
         private void SetEnemyTargetTransform()
         {
+            _soldierAIBrain.HasEnemyTarget = false;
+            if(_soldierAIBrain.enemyList.Count ==0) return;
             _soldierAIBrain.EnemyTarget = _soldierAIBrain.enemyList[0].GetTransform();
             _soldierAIBrain.DamageableEnemy = _soldierAIBrain.enemyList[0];
             _soldierAIBrain.HasEnemyTarget = true;

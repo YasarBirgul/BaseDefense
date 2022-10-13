@@ -3,6 +3,7 @@ using UnityEngine;
 using Signals;
 using System.Linq;
 using AIBrains.WorkerBrain.MoneyWorker;
+using Concrete;
 using Data.UnityObject;
 using Data.ValueObject.AIData.WorkerAIData;
 using Enums;
@@ -11,16 +12,18 @@ using Interfaces;
 
 namespace Managers
 {
-    public class MoneyWorkerManager : MonoBehaviour ,IGetPoolObject, IReleasePoolObject
+    public class MoneyWorkerManager : MonoBehaviour ,IGetPoolObject,IReleasePoolObject
     {
-        #region Self variables 
+      #region Self variables 
 
         #region Private Variables
 
         [ShowInInspector]
-        private List<Transform> _targetList = new List<Transform>();
+        private List<StackableMoney> _targetList = new List<StackableMoney>();
         [ShowInInspector]
         private List<MoneyWorkerAIBrain> _workerList = new List<MoneyWorkerAIBrain>();
+        [ShowInInspector]
+        private List<Vector3> _slotTransformList = new List<Vector3>();
 
         #endregion
 
@@ -38,16 +41,16 @@ namespace Managers
             AISignals.Instance.onGetTransformMoney += OnSendMoneyPositionToWorkers;
             AISignals.Instance.onThisMoneyTaken += OnThisMoneyTaken;
             AISignals.Instance.onSetMoneyPosition += OnAddMoneyPositionToList;
-            AISignals.Instance.OnMyMoneyTaken += OnMyMoneyTaken;
+            //MoneyWorkerSignals.Instance.onSendWaitPosition += OnSendWaitPosition;
         }
 
         private void UnsubscribeEvents()
         {
             AISignals.Instance.onGetMoneyAIData -= OnGetWorkerAIData;
+            AISignals.Instance.onGetTransformMoney -= OnSendMoneyPositionToWorkers;
             AISignals.Instance.onThisMoneyTaken -= OnThisMoneyTaken;
             AISignals.Instance.onSetMoneyPosition -= OnAddMoneyPositionToList;
-            AISignals.Instance.onGetTransformMoney -= OnSendMoneyPositionToWorkers;
-            AISignals.Instance.OnMyMoneyTaken -= OnMyMoneyTaken;
+            //MoneyWorkerSignals.Instance.onSendWaitPosition -= OnSendWaitPosition;
         }
 
         private void OnDisable()
@@ -59,43 +62,23 @@ namespace Managers
         {
             return Resources.Load<CD_WorkerAI>("Data/CD_WorkerAI").WorkerAIData.WorkerAITypes[(int)type];
         }
-        
-        private void OnAddMoneyPositionToList(Transform pos)
+
+        private void OnAddMoneyPositionToList(StackableMoney pos)
         {
             _targetList.Add(pos);
         }
 
         private Transform OnSendMoneyPositionToWorkers(Transform workerTransform)
         {
-            /*if (_workerList[0].transform == workerTransform)
-            {
-                var _targetT = _targetList.OrderBy(t => Vector3.Distance(t.transform.position, workerTransform.position))
-                .Take(1)
-                .FirstOrDefault();
-                _targetList.Remove(_targetT);
-                Debug.Log("worker 0");
-                return _targetT;
-            }
-            else if (_workerList[1].transform == workerTransform)
-            {*/
-                var _targetT = _targetList.OrderBy(t => Vector3.Distance(t.transform.position, workerTransform.position))
-                .Take(_targetList.Count)
-                .OrderBy(t => UnityEngine.Random.Range(0,int.MaxValue))
-                .LastOrDefault();
-                _targetList.Remove(_targetT);
-                return _targetT;
-            /*}
-            else
-            {
-                int randomIndex = Random.Range(10,_targetList.Count-10);
-                var _targetT = _targetList.OrderBy(t => Vector3.Distance(t.transform.position, workerTransform.position))
-                .Take(1)
-                .OrderBy(t => randomIndex)
-                .FirstOrDefault(); 
-                _targetList.Remove(_targetT);
-                return _targetT;
-            }*/
+            if (_targetList.Count == 0)
+                return null;
 
+            var _targetT = _targetList.OrderBy(t => (t.transform.position - workerTransform.transform.position).sqrMagnitude)
+            .Where(t => !t.IsSelected)
+            .Take(_targetList.Count - 1)
+            .LastOrDefault();
+            _targetT.IsSelected = true;
+            return _targetT.transform;
         }
 
         private void SendMoneyPositionToWorkers(Transform workerTransform)
@@ -103,41 +86,40 @@ namespace Managers
             OnSendMoneyPositionToWorkers(workerTransform);
         }
 
-        private void OnThisMoneyTaken(Transform gO)
+        private void OnThisMoneyTaken()
         {
+            var removedObj = _targetList.Where(t => t.IsCollected).FirstOrDefault();
+            _targetList.Remove(removedObj);
+            _targetList.TrimExcess();
+
             for (int i = 0; i < _workerList.Count; i++)
             {
-                if (_workerList[i].CurrentTarget == gO)
+                if (_workerList[i].CurrentTarget == removedObj)
                 {
                     SendMoneyPositionToWorkers(_workerList[i].transform);
                 }
-                else
-                {
-                    if (_targetList.Contains(gO))
-                    {
-                        _targetList.Remove(gO);
-                    }
-                }
+            }
+        } 
+        public void GetStackPositions(List<Vector3> gridPos)
+        {
+            for (int i = 0; i < gridPos.Count; i++)
+            {
+                _slotTransformList.Add(gridPos[i]);
             }
         }
-
-        private Transform OnMyMoneyTaken(Transform gameOTransform, Transform workerTransform)
+        private void SetWorkerPosition(MoneyWorkerAIBrain workerAIBrain)
         {
-            if (_targetList.Contains(gameOTransform))
-            {
-                return gameOTransform;
-            }
-            else
-            {
-                return OnSendMoneyPositionToWorkers(workerTransform);
-            }
+             workerAIBrain.SetInitPosition(_slotTransformList[0]);
+            _slotTransformList.RemoveAt(0);
+            _slotTransformList.TrimExcess();
         }
         [Button("Add Money Worker")]
         private void CreateMoneyWorker()
         {
             var obj = GetObject(PoolType.MoneyWorkerAI) ;
-            obj.transform.position = Vector3.zero;
-            _workerList.Add(obj.GetComponent<MoneyWorkerAIBrain>());
+            var objComp = obj.GetComponent<MoneyWorkerAIBrain>();
+            _workerList.Add(objComp);
+            SetWorkerPosition(objComp);
         }
         [Button("Release Worker")]
         private void ReleaseMoneyWorker()
@@ -158,6 +140,10 @@ namespace Managers
         public GameObject GetObject(PoolType poolName)
         {
             return PoolSignals.Instance.onGetObjectFromPool?.Invoke(poolName);
+        }
+        public void GenerateSoldier()
+        {
+            CreateMoneyWorker();
         }
     }
 }

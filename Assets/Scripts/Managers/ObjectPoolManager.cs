@@ -16,7 +16,6 @@ namespace Managers
                 return _instance;
             }
         }
-
         private readonly Dictionary<string, AbstractObjectPool> _pools;
 
         /// <summary>

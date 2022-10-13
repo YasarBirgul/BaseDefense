@@ -24,7 +24,7 @@ namespace Controllers.Turret
         public bool readyToAttack { get; set; }
         private BulletFireController fireController;
        
-        private const float _fireRate = 1.6f;
+        private const float _fireRate = 0.8f;
 
         private float maxRadius = 14f;
 

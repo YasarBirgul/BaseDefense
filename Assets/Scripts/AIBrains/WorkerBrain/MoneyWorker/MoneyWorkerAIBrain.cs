@@ -41,6 +41,7 @@ namespace AIBrains.WorkerBrain.MoneyWorker
         private WorkerAITypeData _workerTypeData;
         private Animator _animator;
         private NavMeshAgent _navmeshAgent;
+        private Vector3 waitPos;
 
         #region States
 
@@ -56,7 +57,7 @@ namespace AIBrains.WorkerBrain.MoneyWorker
         #region Worker Game Variables
         [ShowInInspector]
         private int _currentStock = 0;
-        private float _delay = 0.05f;
+        private const float _delay = 0.05f;
 
         #endregion
 
@@ -68,11 +69,9 @@ namespace AIBrains.WorkerBrain.MoneyWorker
         {
             _workerTypeData = GetWorkerType();
             SetWorkerComponentVariables();
-            InitWorker();
-            GetReferenceStates();
         }
         #region Data Jobs
-
+        
         private WorkerAITypeData GetWorkerType()
         {
             return AISignals.Instance.onGetMoneyAIData?.Invoke(workerType);
@@ -84,16 +83,19 @@ namespace AIBrains.WorkerBrain.MoneyWorker
             _animator = GetComponentInChildren<Animator>();
         }
         #endregion
-
+        private void Start()
+        {
+            GetReferenceStates();
+        }
         #region Worker State Jobs
 
         private void GetReferenceStates()
         {
             _searchState = new SearchState(_navmeshAgent, _animator, this);
-            _moveToGateState = new MoveToGateState(_navmeshAgent, _animator, ref _workerTypeData.StartTarget);
+            _moveToGateState = new MoveToGateState(_navmeshAgent, _animator, waitPos,_workerTypeData.MaxSpeed);
             _waitOnGateState = new WaitOnGateState(_navmeshAgent, _animator, this);
-            _stackMoneyState = new StackMoneyState(_navmeshAgent, _animator, this);
-            _dropMoneyOnGateState = new DropMoneyOnGateState(_navmeshAgent, _animator, ref _workerTypeData.StartTarget);
+            _stackMoneyState = new StackMoneyState(_navmeshAgent, _animator, this,_workerTypeData.MaxSpeed);
+            _dropMoneyOnGateState = new DropMoneyOnGateState(_navmeshAgent, _animator,waitPos);
 
             _stateMachine = new StateMachine();
 
@@ -117,10 +119,6 @@ namespace AIBrains.WorkerBrain.MoneyWorker
         #endregion
 
         #region General Jobs
-        private void InitWorker()
-        {
-
-        }
         public bool IsAvailable() => _currentStock < _workerTypeData.CapacityOrDamage;
 
         public void SetDest()
@@ -148,11 +146,8 @@ namespace AIBrains.WorkerBrain.MoneyWorker
             if(isStartedSearch)
                 StartCoroutine(SearchTarget());
             else
-            {
                 StopCoroutine(SearchTarget());
-            }
         }
-
         public void SetCurrentStock()
         {
             if (_currentStock < _workerTypeData.CapacityOrDamage)
@@ -167,6 +162,10 @@ namespace AIBrains.WorkerBrain.MoneyWorker
                 else
                     _currentStock = 0;
             }
+        }
+        public void SetInitPosition(Vector3 slotPosition)
+        {
+            waitPos = slotPosition;
         }
         #endregion
     }

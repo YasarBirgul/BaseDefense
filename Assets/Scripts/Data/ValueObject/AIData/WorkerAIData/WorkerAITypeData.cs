@@ -1,7 +1,6 @@
 using System;
 using Enums;
 using Sirenix.OdinInspector;
-using UnityEngine;
 
 namespace Data.ValueObject.AIData.WorkerAIData
 {
@@ -14,10 +13,13 @@ namespace Data.ValueObject.AIData.WorkerAIData
         public int CapacityOrDamage;
         
         [HideIf("WorkerType", WorkerType.SoldierAI)]
-        public float Speed;
+        public float MaxSpeed;
         
         [HideIf("WorkerType", WorkerType.SoldierAI)]
-        public Transform StartTarget;
+        public float MinSpeed;
+        
+        [HideIf("WorkerType", WorkerType.SoldierAI)]
+        public int CurrentWorkerValue;
         
         [ShowIf("WorkerType", WorkerType.SoldierAI)]
         public SoldierAIData SoldierAIData;

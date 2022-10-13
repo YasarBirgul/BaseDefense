@@ -45,7 +45,7 @@ namespace AIBrains.SoldierBrain
 
         private StateMachine _stateMachine;
         private Vector3 _slotTransform;
-
+        
         #endregion
         #endregion
         private void Awake()

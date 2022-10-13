@@ -9,9 +9,11 @@ namespace Concrete
         private new Rigidbody rigidbody;
         [SerializeField]
         private new BoxCollider collider;
+        public override bool IsSelected { get; set; }
+        public override bool IsCollected { get; set; }
         private void OnEnable()
         {
-            SendPosition(transform);
+            SendStackable(this);
             collider.enabled = true;
             rigidbody.isKinematic = false;
             rigidbody.useGravity = true;

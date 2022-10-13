@@ -43,13 +43,15 @@ namespace Controllers.Soldier
         {
             if (other.TryGetComponent(out IDamageable damagable))
             {
+                if(soldierAIBrain.enemyList.Count == 0) return;
+                soldierAIBrain.enemyList.Remove(damagable);
+                soldierAIBrain.enemyList.TrimExcess();
                 if (soldierAIBrain.enemyList.Count == 0)
                 {
                     soldierAIBrain.EnemyTarget = null;
+                    soldierAIBrain.HasEnemyTarget = false;
                 }
                 damagable.IsTaken = false;
-                soldierAIBrain.enemyList.Remove(damagable);
-                soldierAIBrain.enemyList.TrimExcess();
             }
         }
     }
