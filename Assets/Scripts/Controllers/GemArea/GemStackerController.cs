@@ -72,15 +72,12 @@ namespace Controllers.GemArea
 
         private async void RemoveAllStack(Transform targetTransform)
         {
-            
             if (StackList.Count == 0)
             {
                 DropzoneSignals.Instance.onDropZoneFull?.Invoke(false);
                 _canRemove = true;
-                return;
             }
-            
-            if(StackList.Count > 0)
+            else
             {
                 RemoveStackAnimation(StackList[StackList.Count - 1],targetTransform);
                 StackList.TrimExcess();
@@ -104,8 +101,8 @@ namespace Controllers.GemArea
             {
                 removedStack.transform.rotation = Quaternion.LookRotation(targetTransform.forward);
                             StackList.Remove(removedStack);
-                //removedStack.transform.parent=targetTransform;           
-                removedStack.transform.parent.DOMove(targetTransform.localPosition+new Vector3(0,targetTransform.localScale.y*2,0), .1f).OnComplete(() =>
+                    
+                removedStack.transform.DOMove(targetTransform.localPosition+new Vector3(0,targetTransform.localScale.y*2,0), .1f).OnComplete(() =>
                 {
                     
                     removedStack.transform.DOScale(Vector3.zero, 0.2f);

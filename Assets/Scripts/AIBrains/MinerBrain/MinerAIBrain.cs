@@ -1,7 +1,6 @@
 using System;
 using AIBrains.MinerBrain.States;
 using Commands;
-using Controllers;
 using Controllers.AI.MinerWorker;
 using Enum;
 using Enums.AI.Miner;

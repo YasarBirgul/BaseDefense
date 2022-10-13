@@ -18,7 +18,6 @@ namespace Managers
         public int MineCountDownTime;
         public int ExplosionDamage;
         
-        
         #endregion
 
         #region Serialized Variables,

@@ -77,7 +77,7 @@ namespace Managers
         {
             foreach (var hostage in hostageBaseManager.StackedHostageList)
             {
-                hostage.minerAIBrain.enabled=true;
+                hostage.MinerAIBrain.enabled=true;
 
             }
             hostageBaseManager.StackedHostageList.Clear();

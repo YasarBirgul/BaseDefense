@@ -107,7 +107,7 @@ namespace Managers
            int randomMineTargetIndex=Random.Range(0, minePlaces.Count + cartPlaces.Count);
            return randomMineTargetIndex>= minePlaces.Count
                ? Tuple.Create(cartPlaces[randomMineTargetIndex % cartPlaces.Count],GemMineType.Cart)
-               :Tuple.Create(minePlaces[randomMineTargetIndex],GemMineType.Mine);//Tuple ile enum donecek maden tipine gore animasyon degisecek stateler uzerinden
+               :Tuple.Create(minePlaces[randomMineTargetIndex],GemMineType.Mine);
        }
        public GameObject GetObject(PoolType poolName)
        {

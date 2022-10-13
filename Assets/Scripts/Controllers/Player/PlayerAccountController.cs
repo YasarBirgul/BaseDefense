@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Abstract;
+using Concrete;
 using Interfaces;
 using Signals;
 using UnityEngine;
@@ -30,10 +31,14 @@ namespace Controllers.Player
         #endregion
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent<IStackable>(out IStackable stackable))
+            if (other.TryGetComponent<StackableMoney>(out StackableMoney stackable))
             {
                 CollectMoney(stackable);
                 CoreGameSignals.Instance.onMoneyScoreUpdate.Invoke(+1);
+            }
+            if (other.TryGetComponent<StackableGem>(out StackableGem stackableGem))
+            {
+                
             }
             else if (other.TryGetComponent<AInteractable>(out AInteractable interactable))
             {
