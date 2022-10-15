@@ -65,7 +65,7 @@ namespace Controllers.Player
                 var velocity = rigidbody.velocity; 
                 velocity = new Vector3(_inputVector.x,velocity.y, _inputVector.y)*_data.PlayerSpeed;
                 rigidbody.velocity = velocity;
-                if (!manager.HasEnemyTarget)
+                if (!manager.EnemyTarget)
                 {
                     RotatePlayer();
                 }

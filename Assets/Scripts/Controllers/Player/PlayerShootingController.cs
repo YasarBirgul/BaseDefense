@@ -24,7 +24,6 @@ namespace Controllers.Player
         public void SetEnemyTargetTransform()
         {
             manager.EnemyTarget = manager.EnemyList[0].GetTransform();
-            manager.HasEnemyTarget = true;
             Shoot();
         }
         private void EnemyTargetStatus()
@@ -35,7 +34,7 @@ namespace Controllers.Player
             }
             else
             {
-                manager.HasEnemyTarget = false;
+                manager.EnemyTarget = null;
             }
         }
         private void RemoveTarget()

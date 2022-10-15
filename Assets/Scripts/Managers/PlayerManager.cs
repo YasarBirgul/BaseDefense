@@ -26,8 +26,6 @@ namespace Managers
         public List<IDamageable> EnemyList = new List<IDamageable>();
         
         public Transform EnemyTarget;
-        
-        public bool HasEnemyTarget = false;
 
         #endregion
 
@@ -101,6 +99,7 @@ namespace Managers
         {
             movementController.UpdateInputValues(inputParams);
             animationController.PlayAnimation(inputParams);
+            movementController.LookAtTarget(!EnemyTarget ? null : EnemyList[0]?.GetTransform());
             AimEnemy();
         }
         public void SetEnemyTarget()
@@ -113,7 +112,7 @@ namespace Managers
         private int OnGetHealthValue() => _data.PlayerHealth;
         public void SetOutDoorHealth() => UISignals.Instance.onOutDoorHealthOpen?.Invoke();
         public void IncreaseHealth() => healthController.IncreaseHealth();
-        private void AimEnemy() => movementController.LookAtTarget(!HasEnemyTarget ? null : EnemyList[0]?.GetTransform());
+        private void AimEnemy() => movementController.LookAtTarget(!EnemyTarget ? null : EnemyList[0]?.GetTransform());
         public void CheckAreaStatus(AreaType areaType) => meshController.ChangeAreaStatus(CurrentAreaType = areaType);
         private void OnDisableMovement(InputHandlers inputHandler) => movementController.DisableMovement(inputHandler);
         public void SetTurretAnim(bool onTurret) => animationController.PlayTurretAnimation(onTurret);

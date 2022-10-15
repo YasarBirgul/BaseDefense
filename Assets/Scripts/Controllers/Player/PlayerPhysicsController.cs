@@ -67,8 +67,13 @@ namespace Controllers.Player
                 return;
             }
             playerManager.SetOutDoorHealth();
-            playerManager.HasEnemyTarget = false;
+            int enemyListCount = playerManager.EnemyList.Count;
+            for (int i = 0; i < enemyListCount; i++)
+            {
+                playerManager.EnemyList[i].IsTaken = false;
+            }
             playerManager.EnemyList.Clear();
+            playerManager.EnemyTarget = null;
         }
     }
 }
