@@ -87,10 +87,10 @@ namespace Managers
         {
             DataInitSignals.Instance.onSaveLevelID += OnSyncLevelID;
             CoreGameSignals.Instance.onLevelInitialize += OnSyncLevel;
-            DataInitSignals.Instance.onSaveBaseRoomData += SyncBaseRoomDatas;
-            DataInitSignals.Instance.onSaveMineBaseData += SyncMineBaseDatas;
-            DataInitSignals.Instance.onSaveMilitaryBaseData += SyncMilitaryBaseData;
-            DataInitSignals.Instance.onSaveBuyablesData += SyncBuyablesData;
+            DataInitSignals.Instance.onSaveBaseRoomData += OnSyncBaseRoomDatas;
+            DataInitSignals.Instance.onSaveMineBaseData += OnSyncMineBaseDatas;
+            DataInitSignals.Instance.onSaveMilitaryBaseData += OnSyncMilitaryBaseData;
+            DataInitSignals.Instance.onSaveBuyablesData += OnSyncBuyablesData;
             DataInitSignals.Instance.onSaveScoreData += OnSycnScoreData;
 
             DataInitSignals.Instance.onLoadMilitaryBaseData += OnLoadMilitaryBaseData;
@@ -98,17 +98,16 @@ namespace Managers
             DataInitSignals.Instance.onLoadBuyablesData += OnLoadBuyablesData;
             DataInitSignals.Instance.onLoadMineBaseData += OnLoadMineBaseData;
             DataInitSignals.Instance.onLoadScoreData += OnLoadScoreData;
-            CoreGameSignals.Instance.onApplicationQuit += OnApplicationQuit;
         }
 
         private void UnsubscribeEvents()
         {
             DataInitSignals.Instance.onSaveLevelID -= OnSyncLevelID;
             CoreGameSignals.Instance.onLevelInitialize -= OnSyncLevel;
-            DataInitSignals.Instance.onSaveBaseRoomData -= SyncBaseRoomDatas;
-            DataInitSignals.Instance.onSaveMineBaseData -= SyncMineBaseDatas;
-            DataInitSignals.Instance.onSaveMilitaryBaseData -= SyncMilitaryBaseData;
-            DataInitSignals.Instance.onSaveBuyablesData -= SyncBuyablesData;
+            DataInitSignals.Instance.onSaveBaseRoomData -= OnSyncBaseRoomDatas;
+            DataInitSignals.Instance.onSaveMineBaseData -= OnSyncMineBaseDatas;
+            DataInitSignals.Instance.onSaveMilitaryBaseData -= OnSyncMilitaryBaseData;
+            DataInitSignals.Instance.onSaveBuyablesData -= OnSyncBuyablesData;
             DataInitSignals.Instance.onSaveScoreData -= OnSycnScoreData;
             
             DataInitSignals.Instance.onLoadMilitaryBaseData -= OnLoadMilitaryBaseData;
@@ -164,22 +163,22 @@ namespace Managers
         {
             _levelID = levelID;
         }
-        private void SyncBaseRoomDatas(BaseRoomData baseRoomData)
+        private void OnSyncBaseRoomDatas(BaseRoomData baseRoomData)
         {
             _baseRoomData = baseRoomData;
         }
 
-        private void SyncMineBaseDatas(MineBaseData mineBaseData)
+        private void OnSyncMineBaseDatas(MineBaseData mineBaseData)
         {
             _mineBaseData = mineBaseData;
         }
 
-        private void SyncMilitaryBaseData(MilitaryBaseData militaryBaseData)
+        private void OnSyncMilitaryBaseData(MilitaryBaseData militaryBaseData)
         {
             _militaryBaseData = militaryBaseData;
         }
         
-        private void SyncBuyablesData(BuyablesData buyablesData)
+        private void OnSyncBuyablesData(BuyablesData buyablesData)
         {
             _buyablesData = buyablesData;
         }
@@ -195,11 +194,6 @@ namespace Managers
         {
             Save(_uniqueID);
         }
-        private void OnApplicationQuit()
-        {
-            Save(_uniqueID);
-        }
-        
         #region Level Save - Load 
 
         public void Save(int uniqueId)
@@ -219,5 +213,10 @@ namespace Managers
             _scoreData = cdLevel.ScoreData;
         }
         #endregion
+        
+        private void OnApplicationQuit()
+        {
+            Save(_uniqueID);
+        }
     }
 }

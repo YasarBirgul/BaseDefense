@@ -1,3 +1,4 @@
+using System;
 using AIBrains.WorkerBrain.MoneyWorker;
 using Controllers.Player;
 using Interfaces;
@@ -21,16 +22,17 @@ namespace Controllers.AI.MoneyWorker
                 {
                     stackable.IsCollected = true;
                     AISignals.Instance.onThisMoneyTaken?.Invoke();
+                    CoreGameSignals.Instance.onMoneyScoreUpdate.Invoke(1);
                     moneyStackerController.SetStackHolder(stackable.SendToStack().transform);
                     moneyStackerController.GetStack(other.gameObject);
                     moneyWorkerBrain.SetCurrentStock();
                 }
             }
-            if (other.CompareTag("Gate"))
-            {
-                moneyStackerController.OnRemoveAllStack();
-                moneyWorkerBrain.RemoveAllStock();
-            }
+        }
+        private void OnTriggerExit(Collider other)
+        {
+            moneyStackerController.OnRemoveAllStack();
+            moneyWorkerBrain.RemoveAllStock();
         }
     } 
 }

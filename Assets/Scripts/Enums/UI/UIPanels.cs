@@ -1,6 +1,11 @@
 ﻿public enum UIPanels
 {
-    levelPanel,
-    PlayPanel,
+    StartPanel,
+    LevelPanel,
     NextLevelPanel,
+    WeaponShopPanel,
+    PlayerUpgradePanel,
+    SoldierUpgradePanel,
+    WorkerUpgradePanel,
+    HealthBarPanel,
 }

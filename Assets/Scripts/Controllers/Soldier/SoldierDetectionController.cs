@@ -1,5 +1,6 @@
 ﻿using Abstract;
 using AIBrains.SoldierBrain;
+using Interfaces;
 using UnityEngine;
 
 namespace Controllers.Soldier

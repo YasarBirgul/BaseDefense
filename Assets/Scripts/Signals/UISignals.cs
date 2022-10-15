@@ -7,4 +7,7 @@ public class UISignals : MonoSingleton<UISignals>
     public UnityAction<UIPanels> onClosePanel=delegate {  };
     public UnityAction<int> onSetMoneyScoreText = delegate {  }; 
     public UnityAction<int> onSetGemScoreText = delegate {  };
+    
+    public UnityAction onOutDoorHealthOpen =delegate {  };
+    public UnityAction onHealthVisualClose = delegate {  };
 }

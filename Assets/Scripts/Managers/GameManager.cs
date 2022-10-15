@@ -24,7 +24,7 @@ namespace Managers
         }
         private void ReadyToPlay()
         {
-            CoreGameSignals.Instance.onReadyToPlay?.Invoke();
+          //  CoreGameSignals.Instance.onReadyToPlay?.Invoke();
         }
         private void OnApplicationQuit()
         {

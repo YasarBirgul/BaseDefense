@@ -50,7 +50,7 @@ namespace AIBrains.SoldierBrain.States
 
             Quaternion lookRotation = Quaternion.LookRotation(lookDirection, Vector3.up);
 
-            var slerpRotation = Quaternion.Slerp(_soldierAIBrain.transform.rotation, lookRotation,3f*Time.deltaTime);
+            var slerpRotation = Quaternion.Slerp(_soldierAIBrain.transform.rotation, lookRotation,10f*Time.deltaTime);
 
             _soldierAIBrain.transform.rotation = slerpRotation;
             

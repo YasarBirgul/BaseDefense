@@ -55,6 +55,7 @@ namespace Controllers.Player
         }
         public override void GetStack(GameObject stackableObj)
         {   
+            
             _getStackSequence = DOTween.Sequence();
             var randomBouncePosition =CalculateRandomAddStackPosition();
             var randomRotation = CalculateRandomStackRotation();
@@ -65,6 +66,7 @@ namespace Controllers.Player
                 stackableObj.transform.rotation = Quaternion.LookRotation(transform.forward);
                 StackList.Add(stackableObj);
                 stackableObj.transform.DOLocalMove(positionList[StackList.Count - 1], 0.3f);
+                stackableObj.transform.localRotation = new Quaternion(0,0,0,0).normalized;
             });
         }
         public void OnRemoveAllStack()

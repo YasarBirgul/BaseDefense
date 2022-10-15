@@ -8,6 +8,7 @@ using Data.ValueObject.WeaponData;
 using Enums;
 using Enums.GameStates;
 using Enums.Input;
+using Interfaces;
 using Keys;
 using Signals;
 using UnityEngine;
@@ -44,6 +45,9 @@ namespace Managers
         private PlayerShootingController shootingController;
         [SerializeField]
         private PlayerMovementController movementController;
+        [SerializeField] 
+        private PlayerHealthController healthController;
+        
         #endregion
 
         #region Private Variables
@@ -69,6 +73,7 @@ namespace Managers
             movementController.SetMovementData(_data.PlayerMovementData);
             weaponController.SetWeaponData(_weaponData);
             meshController.SetWeaponData(_weaponData);
+            healthController.SetHealthData(_data);
         }
         #region Event Subscription
         private void OnEnable()
@@ -77,14 +82,16 @@ namespace Managers
         }
         private void SubscribeEvents()
         {
+            CoreGameSignals.Instance.onGetHealthValue += OnGetHealthValue;
             InputSignals.Instance.onInputDragged += OnGetInputValues;
             InputSignals.Instance.onInputHandlerChange += OnDisableMovement;
         }
         private void UnsubscribeEvents()
         {
+            CoreGameSignals.Instance.onGetHealthValue -= OnGetHealthValue;
             InputSignals.Instance.onInputDragged -= OnGetInputValues;
             InputSignals.Instance.onInputHandlerChange -= OnDisableMovement;
-        }
+        } 
         private void OnDisable()
         {
             UnsubscribeEvents();
@@ -102,6 +109,10 @@ namespace Managers
             animationController.AimTarget(true);
             AimEnemy();
         }
+
+        private int OnGetHealthValue() => _data.PlayerHealth;
+        public void SetOutDoorHealth() => UISignals.Instance.onOutDoorHealthOpen?.Invoke();
+        public void IncreaseHealth() => healthController.IncreaseHealth();
         private void AimEnemy() => movementController.LookAtTarget(!HasEnemyTarget ? null : EnemyList[0]?.GetTransform());
         public void CheckAreaStatus(AreaType areaType) => meshController.ChangeAreaStatus(CurrentAreaType = areaType);
         private void OnDisableMovement(InputHandlers inputHandler) => movementController.DisableMovement(inputHandler);

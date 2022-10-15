@@ -1,5 +1,6 @@
 ﻿using Abstract;
 using Enums.GameStates;
+using Interfaces;
 using Managers;
 using UnityEngine;
 

@@ -130,7 +130,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 702010006323261221}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 12.138, y: -65, z: -87.273}
 --- !u!1 &1013446144
 GameObject:
@@ -159,7 +159,6 @@ Transform:
   m_LocalPosition: {x: -0.000093006776, y: 1.9699335, z: -0.0077466965}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1853677453558678612}
   - {fileID: 702010006323261221}
   m_Father: {fileID: 5937356065129926815}
   m_RootOrder: 4
@@ -328,7 +327,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 702010006323261221}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 97}
 --- !u!33 &1379874627
 MeshFilter:
@@ -464,7 +463,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 702010006323261221}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -6.063, y: 76.557, z: 91.446}
 --- !u!1 &1890459487
 GameObject:
@@ -590,6 +589,50 @@ Transform:
   m_Father: {fileID: 2176904579933466635}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &151382000928469601
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5779841160424115940}
+  - component: {fileID: 6133511529243608389}
+  m_Layer: 0
+  m_Name: PlayerHealthController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5779841160424115940
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151382000928469601}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3713571008269248073}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6133511529243608389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151382000928469601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa766a2f5230456886ccb6ea41dc8383, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerManager: {fileID: 8495928147545377426}
 --- !u!1 &187830956556787551
 GameObject:
   m_ObjectHideFlags: 0
@@ -1231,6 +1274,7 @@ Transform:
   - {fileID: 1448915204418317122}
   - {fileID: 5937356065129926815}
   - {fileID: 708541005}
+  - {fileID: 5779841160424115940}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1255,6 +1299,7 @@ MonoBehaviour:
   weaponController: {fileID: 1868632370789283655}
   shootingController: {fileID: 708541006}
   movementController: {fileID: 421403684888451369}
+  healthController: {fileID: 6133511529243608389}
 --- !u!114 &421403684888451369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2435,11 +2480,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8641556267561854089}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.337, z: 1.37}
+  m_LocalRotation: {x: -0, y: -0, z: -4.3368082e-19, w: 1}
+  m_LocalPosition: {x: 0, y: 0.35299996, z: 0.54699975}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1013446145}
+  m_Father: {fileID: 702010006323261221}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8687902700734290681
@@ -2561,11 +2606,12 @@ Transform:
   m_LocalPosition: {x: 0, y: -0.015999973, z: 0.82300013}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1853677453558678612}
   - {fileID: 869373654}
   - {fileID: 1540112758}
   - {fileID: 1379874624}
   m_Father: {fileID: 1013446145}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1520260012926688250
 MeshFilter:

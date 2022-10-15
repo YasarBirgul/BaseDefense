@@ -24,9 +24,17 @@ namespace Managers
         private List<MoneyWorkerAIBrain> _workerList = new List<MoneyWorkerAIBrain>();
         [ShowInInspector]
         private List<Vector3> _slotTransformList = new List<Vector3>();
-
+        
         #endregion
 
+        #region Serialized Variables
+
+        [SerializeField] 
+        private Transform moneyWorkerStartTransform;
+
+        #endregion
+        
+        
         #endregion
 
         #region Event Subscriptions
@@ -102,14 +110,15 @@ namespace Managers
         } 
         public void GetStackPositions(List<Vector3> gridPos)
         {
-            for (int i = 0; i < gridPos.Count; i++)
-            {
-                _slotTransformList.Add(gridPos[i]);
+            int gridCount = gridPos.Count;
+            for (int i = 0; i < gridCount; i++)
+            { 
+              _slotTransformList.Add(gridPos[i]+moneyWorkerStartTransform.position);
             }
         }
         private void SetWorkerPosition(MoneyWorkerAIBrain workerAIBrain)
         {
-             workerAIBrain.SetInitPosition(_slotTransformList[0]);
+             workerAIBrain.SetInitPosition(_slotTransformList[0]+moneyWorkerStartTransform.position);
             _slotTransformList.RemoveAt(0);
             _slotTransformList.TrimExcess();
         }

@@ -1,8 +1,6 @@
-﻿using AIBrains.EnemyBrain;
-using AIBrains.SoldierBrain;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Abstract
+namespace Interfaces
 {
     public interface IDamageable
     {
