@@ -38,14 +38,16 @@ namespace Managers
         }
         private void SubscribeEvents()
         {
-            CoreGameSignals.Instance.onReadyToPlay += OnReadyToPlay;
+           // CoreGameSignals.Instance.onReadyToPlay += OnReadyToPlay;
+            CoreGameSignals.Instance.onLevelInitialize += OnLevelInitialize;
             CoreGameSignals.Instance.onEnterTurret += OnEnterTurret;
             CoreGameSignals.Instance.onLevel += OnLevel;
             CoreGameSignals.Instance.onFinish += OnFinish;
         }
         private void UnsubscribeEvents()
         {
-            CoreGameSignals.Instance.onReadyToPlay -= OnReadyToPlay;
+           // CoreGameSignals.Instance.onReadyToPlay -= OnReadyToPlay;
+            CoreGameSignals.Instance.onLevelInitialize -= OnLevelInitialize;
             CoreGameSignals.Instance.onEnterTurret -= OnEnterTurret;
             CoreGameSignals.Instance.onLevel -= OnLevel;
             CoreGameSignals.Instance.onFinish += OnFinish;
@@ -55,7 +57,7 @@ namespace Managers
             UnsubscribeEvents();
         }
         #endregion
-        private void OnReadyToPlay()
+        private void OnLevelInitialize()
         {
             OnSetCameraTarget();
         }
@@ -68,7 +70,6 @@ namespace Managers
         private void OnEnterTurret()
         {
             ChangeCamera(CameraStateTypes.TurretCamera);
-           // stateCam.Follow = null;
         }
         private void OnLevel()
         {   

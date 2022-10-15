@@ -125,6 +125,7 @@ namespace Managers
         [Button("Add Money Worker")]
         private void CreateMoneyWorker()
         {
+            if(_workerList.Count == 3) return;
             var obj = GetObject(PoolType.MoneyWorkerAI) ;
             var objComp = obj.GetComponent<MoneyWorkerAIBrain>();
             _workerList.Add(objComp);

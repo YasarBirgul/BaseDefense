@@ -1,4 +1,5 @@
 ﻿using Interfaces;
+using Signals;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,6 +13,7 @@ namespace AIBrains.EnemyBrain.States
         private static readonly int _run = Animator.StringToHash("Run");
         private float _attackTimer = 1f;
         private const float _refreshValue = 1f;
+        private const int enemyAttackPower=10;
         public Attack(Animator animator)
         {
             _animator = animator;
@@ -20,6 +22,7 @@ namespace AIBrains.EnemyBrain.States
         {
             _attackTimer -= Time.deltaTime;
             if (!(_attackTimer <= 0)) return;
+            CoreGameSignals.Instance.onTakeDamage.Invoke(enemyAttackPower);
             _animator.SetTrigger(_attack);
             _attackTimer = _refreshValue;
         }

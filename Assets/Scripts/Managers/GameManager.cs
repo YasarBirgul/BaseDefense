@@ -9,7 +9,7 @@ namespace Managers
         {
             Application.targetFrameRate = 60;
             GameOnPlay();
-        } 
+        }
         private void Start()
         {
             ReadyToPlay();

@@ -61,15 +61,12 @@ namespace Controllers.Player
             IncreaseHealth();
 
         }
-        private void OnTakeDamage(int damage)
+        public void OnTakeDamage(int damage)
         {
-            if (_health == 0)
-            {
-                UISignals.Instance.onHealthVisualClose?.Invoke();
-                return;
-            }
             _health -= damage;
             CoreGameSignals.Instance.onHealthUpgrade?.Invoke(_health);
+            if (_health != 0) return;
+            UISignals.Instance.onHealthVisualClose?.Invoke();
         }
     }
 }

@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using Abstract;
-using Controllers;
 using Controllers.Player;
 using Data.UnityObject;
 using Data.ValueObject.PlayerData;
@@ -83,12 +81,14 @@ namespace Managers
         private void SubscribeEvents()
         {
             CoreGameSignals.Instance.onGetHealthValue += OnGetHealthValue;
+            CoreGameSignals.Instance.onTakeDamage += OnTakeDamage;
             InputSignals.Instance.onInputDragged += OnGetInputValues;
             InputSignals.Instance.onInputHandlerChange += OnDisableMovement;
         }
         private void UnsubscribeEvents()
         {
             CoreGameSignals.Instance.onGetHealthValue -= OnGetHealthValue;
+            CoreGameSignals.Instance.onTakeDamage -= OnTakeDamage;
             InputSignals.Instance.onInputDragged -= OnGetInputValues;
             InputSignals.Instance.onInputHandlerChange -= OnDisableMovement;
         } 
@@ -109,7 +109,7 @@ namespace Managers
             animationController.AimTarget(true);
             AimEnemy();
         }
-
+        private void OnTakeDamage(int damage) => healthController.OnTakeDamage(damage);
         private int OnGetHealthValue() => _data.PlayerHealth;
         public void SetOutDoorHealth() => UISignals.Instance.onOutDoorHealthOpen?.Invoke();
         public void IncreaseHealth() => healthController.IncreaseHealth();
