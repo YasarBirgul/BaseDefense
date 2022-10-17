@@ -27,6 +27,7 @@ namespace Managers
         private InputData _data;
         private bool _hasTouched;
         private InputHandlers _inputHandlers = InputHandlers.Character;
+        private bool _readyToPlay;
 
         #endregion
         
@@ -40,10 +41,12 @@ namespace Managers
         private void SubscribeEvents()
         {
             InputSignals.Instance.onInputHandlerChange += OnInputHandlerChange;
+            CoreGameSignals.Instance.onReadyToPlay += OnReadyToPlay;
         }
         private void UnsubscribeEvents()
         {
             InputSignals.Instance.onInputHandlerChange -= OnInputHandlerChange;
+            CoreGameSignals.Instance.onReadyToPlay += OnReadyToPlay;
         }
 
         private void OnInputHandlerChange(InputHandlers inputHandlers)
@@ -57,8 +60,13 @@ namespace Managers
 
         #endregion Event Subscriptions
         private void Update()
+        { 
+            if (_readyToPlay) 
+                JoystickInputUpdate();
+        } 
+        private void OnReadyToPlay()
         {
-            JoystickInputUpdate();
+            _readyToPlay = true;
         }
         private void JoystickInputUpdate()
         {
@@ -69,7 +77,6 @@ namespace Managers
             if (!_hasTouched) return;
             HandleJoystickInput();
             _hasTouched = joystickInput.Direction.sqrMagnitude > 0;
-            
         }
         #region JoystickInputChange
         private void HandleJoystickInput()

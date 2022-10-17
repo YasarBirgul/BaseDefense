@@ -19,14 +19,22 @@ namespace Managers
         #region Private Variables
 
         [ShowInInspector]
-        private List<StackableMoney> _targetList = new List<StackableMoney>();
+        private List<StackableBaseMoney> _targetList = new List<StackableBaseMoney>();
         [ShowInInspector]
         private List<MoneyWorkerAIBrain> _workerList = new List<MoneyWorkerAIBrain>();
         [ShowInInspector]
         private List<Vector3> _slotTransformList = new List<Vector3>();
-
+        
         #endregion
 
+        #region Serialized Variables
+
+        [SerializeField] 
+        private Transform moneyWorkerStartTransform;
+
+        #endregion
+        
+        
         #endregion
 
         #region Event Subscriptions
@@ -63,7 +71,7 @@ namespace Managers
             return Resources.Load<CD_WorkerAI>("Data/CD_WorkerAI").WorkerAIData.WorkerAITypes[(int)type];
         }
 
-        private void OnAddMoneyPositionToList(StackableMoney pos)
+        private void OnAddMoneyPositionToList(StackableBaseMoney pos)
         {
             _targetList.Add(pos);
         }
@@ -102,20 +110,22 @@ namespace Managers
         } 
         public void GetStackPositions(List<Vector3> gridPos)
         {
-            for (int i = 0; i < gridPos.Count; i++)
-            {
-                _slotTransformList.Add(gridPos[i]);
+            int gridCount = gridPos.Count;
+            for (int i = 0; i < gridCount; i++)
+            { 
+              _slotTransformList.Add(gridPos[i]+moneyWorkerStartTransform.position);
             }
         }
         private void SetWorkerPosition(MoneyWorkerAIBrain workerAIBrain)
         {
-             workerAIBrain.SetInitPosition(_slotTransformList[0]);
+             workerAIBrain.SetInitPosition(_slotTransformList[0]+moneyWorkerStartTransform.position);
             _slotTransformList.RemoveAt(0);
             _slotTransformList.TrimExcess();
         }
         [Button("Add Money Worker")]
         private void CreateMoneyWorker()
         {
+            if(_workerList.Count == 3) return;
             var obj = GetObject(PoolType.MoneyWorkerAI) ;
             var objComp = obj.GetComponent<MoneyWorkerAIBrain>();
             _workerList.Add(objComp);

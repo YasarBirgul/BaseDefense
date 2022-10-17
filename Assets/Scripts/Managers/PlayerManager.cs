@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using Abstract;
-using Controllers;
 using Controllers.Player;
 using Data.UnityObject;
 using Data.ValueObject.PlayerData;
@@ -8,6 +6,7 @@ using Data.ValueObject.WeaponData;
 using Enums;
 using Enums.GameStates;
 using Enums.Input;
+using Interfaces;
 using Keys;
 using Signals;
 using UnityEngine;
@@ -27,9 +26,8 @@ namespace Managers
         public List<IDamageable> EnemyList = new List<IDamageable>();
         
         public Transform EnemyTarget;
-        
-        public bool HasEnemyTarget = false;
 
+        public IDamageable Damageable;
         #endregion
 
         #region Serialized Variables
@@ -44,6 +42,9 @@ namespace Managers
         private PlayerShootingController shootingController;
         [SerializeField]
         private PlayerMovementController movementController;
+        [SerializeField] 
+        private PlayerHealthController healthController;
+        
         #endregion
 
         #region Private Variables
@@ -69,6 +70,7 @@ namespace Managers
             movementController.SetMovementData(_data.PlayerMovementData);
             weaponController.SetWeaponData(_weaponData);
             meshController.SetWeaponData(_weaponData);
+            healthController.SetHealthData(_data);
         }
         #region Event Subscription
         private void OnEnable()
@@ -77,14 +79,18 @@ namespace Managers
         }
         private void SubscribeEvents()
         {
+            CoreGameSignals.Instance.onGetHealthValue += OnGetHealthValue;
+            CoreGameSignals.Instance.onTakePlayerDamage += OnTakeDamage;
             InputSignals.Instance.onInputDragged += OnGetInputValues;
             InputSignals.Instance.onInputHandlerChange += OnDisableMovement;
         }
         private void UnsubscribeEvents()
         {
+            CoreGameSignals.Instance.onGetHealthValue -= OnGetHealthValue;
+            CoreGameSignals.Instance.onTakePlayerDamage -= OnTakeDamage;
             InputSignals.Instance.onInputDragged -= OnGetInputValues;
             InputSignals.Instance.onInputHandlerChange -= OnDisableMovement;
-        }
+        } 
         private void OnDisable()
         {
             UnsubscribeEvents();
@@ -94,6 +100,7 @@ namespace Managers
         {
             movementController.UpdateInputValues(inputParams);
             animationController.PlayAnimation(inputParams);
+            movementController.LookAtTarget(!EnemyTarget ? null : EnemyList[0]?.GetTransform());
             AimEnemy();
         }
         public void SetEnemyTarget()
@@ -102,7 +109,11 @@ namespace Managers
             animationController.AimTarget(true);
             AimEnemy();
         }
-        private void AimEnemy() => movementController.LookAtTarget(!HasEnemyTarget ? null : EnemyList[0]?.GetTransform());
+        private void OnTakeDamage(int damage) => healthController.OnTakeDamage(damage);
+        private int OnGetHealthValue() => _data.PlayerHealth;
+        public void SetOutDoorHealth() => UISignals.Instance.onOutDoorHealthOpen?.Invoke();
+        public void IncreaseHealth() => healthController.IncreaseHealth();
+        private void AimEnemy() => movementController.LookAtTarget(!EnemyTarget ? null : EnemyList[0]?.GetTransform());
         public void CheckAreaStatus(AreaType areaType) => meshController.ChangeAreaStatus(CurrentAreaType = areaType);
         private void OnDisableMovement(InputHandlers inputHandler) => movementController.DisableMovement(inputHandler);
         public void SetTurretAnim(bool onTurret) => animationController.PlayTurretAnimation(onTurret);

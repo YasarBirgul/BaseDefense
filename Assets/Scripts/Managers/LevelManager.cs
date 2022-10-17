@@ -1,4 +1,4 @@
-﻿using Commands.LevelCommands;
+﻿using Controllers.Level;
 using Data.UnityObject;
 using Signals;
 using UnityEngine;
@@ -26,10 +26,10 @@ namespace Managers
         private GameObject levelHolder;
         
         [SerializeField] 
-        private LevelLoaderCommand levelLoaderCommand;
+        private LevelLoaderController levelLoaderController;
         
         [SerializeField] 
-        private ClearActiveLevelCommand clearActiveLevelCommand;
+        private ClearActiveLevelController clearActiveLevelController;
 
         #endregion
 
@@ -83,12 +83,12 @@ namespace Managers
         private void OnInitializeLevel()
         {
             int newlevelData = _levelID % Resources.Load<CD_Level>("Data/CD_Level").LevelDatas.Count;
-            levelLoaderCommand.InitializeLevel(newlevelData,levelHolder.transform);
+            levelLoaderController.InitializeLevel(newlevelData,levelHolder.transform);
         }
 
         private void OnClearActiveLevel()
         {
-            clearActiveLevelCommand.ClearActiveLevel(levelHolder.transform);
+            clearActiveLevelController.ClearActiveLevel(levelHolder.transform);
         }
     }
 }

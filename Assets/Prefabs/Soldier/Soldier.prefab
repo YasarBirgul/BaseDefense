@@ -230,15 +230,15 @@ GameObject:
   m_Component:
   - component: {fileID: 7743554230451147456}
   - component: {fileID: 7521015103435969422}
-  - component: {fileID: 3675097192823064913}
   - component: {fileID: 4779203118049603027}
+  - component: {fileID: 3675097192823064913}
   m_Layer: 0
   m_Name: Soldier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7743554230451147456
 Transform:
   m_ObjectHideFlags: 0
@@ -263,7 +263,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 345493145078521190}
-  m_Enabled: 0
+  m_Enabled: 1
   m_AgentTypeID: -334000983
   m_Radius: 0.5
   m_Speed: 5.273528
@@ -278,28 +278,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 2
---- !u!114 &3675097192823064913
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 345493145078521190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83a674c1316a40218ed09beff98fce87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HasReachedSlotTarget: 0
-  HasReachedFrontYard: 0
-  HasEnemyTarget: 0
-  TentPosition: {fileID: 0}
-  FrontYardStartPosition: {fileID: 0}
-  EnemyTarget: {fileID: 0}
-  WeaponHolder: {fileID: 3414026346241949250}
-  HasSoldiersActivated: 0
-  physicsController: {fileID: 7073478314082187542}
-  animator: {fileID: 3751244273130144068}
 --- !u!54 &4779203118049603027
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -316,6 +294,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 4
   m_CollisionDetection: 0
+--- !u!114 &3675097192823064913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 345493145078521190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83a674c1316a40218ed09beff98fce87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HasReachedSlotTarget: 0
+  HasReachedFrontYard: 0
+  Health: 0
+  TentPosition: {fileID: 0}
+  FrontYardStartPosition: {fileID: 0}
+  EnemyTarget: {fileID: 0}
+  WeaponHolder: {fileID: 3414026346241949250}
+  HasSoldiersActivated: 0
+  animator: {fileID: 3751244273130144068}
+  navMeshAgent: {fileID: 7521015103435969422}
 --- !u!1 &465225024773077089
 GameObject:
   m_ObjectHideFlags: 0
@@ -1751,6 +1751,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b20b5f0621a34804abc727cfa065b4a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soldierAIBrain: {fileID: 3675097192823064913}
 --- !u!1 &7297265650617905708
 GameObject:
   m_ObjectHideFlags: 0

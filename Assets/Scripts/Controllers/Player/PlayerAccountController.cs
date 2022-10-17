@@ -31,12 +31,12 @@ namespace Controllers.Player
         #endregion
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent<StackableMoney>(out StackableMoney stackable))
+            if (other.TryGetComponent<StackableBaseMoney>(out StackableBaseMoney stackable))
             {
                 CollectMoney(stackable);
                 CoreGameSignals.Instance.onMoneyScoreUpdate.Invoke(+1);
             }
-            if (other.TryGetComponent<StackableGem>(out StackableGem stackableGem))
+            if (other.TryGetComponent<StackableBaseGem>(out StackableBaseGem stackableGem))
             {
                 
             }

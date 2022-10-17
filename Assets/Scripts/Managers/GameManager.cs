@@ -9,7 +9,7 @@ namespace Managers
         {
             Application.targetFrameRate = 60;
             GameOnPlay();
-        } 
+        }
         private void Start()
         {
             ReadyToPlay();
@@ -24,7 +24,7 @@ namespace Managers
         }
         private void ReadyToPlay()
         {
-            CoreGameSignals.Instance.onReadyToPlay?.Invoke();
+          //  CoreGameSignals.Instance.onReadyToPlay?.Invoke();
         }
         private void OnApplicationQuit()
         {

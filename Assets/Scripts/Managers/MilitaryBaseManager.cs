@@ -91,13 +91,11 @@ namespace Managers
         {
             AISignals.Instance.onSoldierActivation += OnSoldierActivation;
             AISignals.Instance.onSoldierAmountUpgrade += OnSoldierAmountUpgrade;
-            CoreGameSignals.Instance.onApplicationQuit += OnApplicationQuit;
         }
         private void UnsubscribeEvents()
         {
             AISignals.Instance.onSoldierActivation -= OnSoldierActivation;
             AISignals.Instance.onSoldierAmountUpgrade -= OnSoldierAmountUpgrade;
-            CoreGameSignals.Instance.onApplicationQuit -= OnApplicationQuit;
         }
         private void OnDisable()
         {
@@ -147,6 +145,7 @@ namespace Managers
         {
             UpdateSoldierAmount();
         }
+        [Button]
         private async void UpdateSoldierAmount()
         {
             if(!_isTentAvaliable) return;

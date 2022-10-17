@@ -46,11 +46,6 @@ namespace Managers
         #endregion
         
         #endregion
-       
-        private void Awake()
-        {
-            StartCoroutine(SpawnEnemies());
-        }
 
         #region Event Subscription
         private void OnEnable()
@@ -59,22 +54,28 @@ namespace Managers
         }
         private void SubscribeEvents()
         {
+            CoreGameSignals.Instance.onReadyToPlay += OnReadyToPlay;
             AISignals.Instance.getSpawnTransform += SetSpawnTransform;
             AISignals.Instance.getRandomTransform += SetRandomTransform;
         }
 
         private void UnsubscribeEvents()
         {
+            CoreGameSignals.Instance.onReadyToPlay -= OnReadyToPlay;
             AISignals.Instance.getSpawnTransform -= SetSpawnTransform;
             AISignals.Instance.getRandomTransform -= SetRandomTransform;
         }
-
         private void OnDisable()
         {
             UnsubscribeEvents();
         }
 
         #endregion
+
+        private void OnReadyToPlay()
+        {
+            StartCoroutine(SpawnEnemies());
+        }
         private Transform SetSpawnTransform()
         {
             return spawnTransform;

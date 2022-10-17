@@ -2,8 +2,8 @@
 using Controllers.Gate;
 using Controllers.Turret;
 using Enums.GameStates;
-using Interfaces;
 using Managers;
+using Signals;
 using UnityEngine;
 
 namespace Controllers.Player
@@ -61,9 +61,19 @@ namespace Controllers.Player
             var playerIsGoingToFrontYard = other.transform.position.z < transform.position.z;
             gameObject.layer = LayerMask.NameToLayer(playerIsGoingToFrontYard ? "PlayerFrontYard" : "PlayerBase");
             playerManager.CheckAreaStatus(playerIsGoingToFrontYard ? AreaType.BattleOn : AreaType.BaseDefense);
-            if(!playerIsGoingToFrontYard) return;
-            playerManager.HasEnemyTarget = false;
+            if (!playerIsGoingToFrontYard)
+            {
+                playerManager.IncreaseHealth();
+                return;
+            }
+            playerManager.SetOutDoorHealth();
+            int enemyListCount = playerManager.EnemyList.Count;
+            for (int i = 0; i < enemyListCount; i++)
+            {
+                playerManager.EnemyList[i].IsTaken = false;
+            }
             playerManager.EnemyList.Clear();
+            playerManager.EnemyTarget = null;
         }
     }
 }

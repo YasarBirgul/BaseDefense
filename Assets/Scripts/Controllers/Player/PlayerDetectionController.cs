@@ -1,5 +1,6 @@
 ﻿using Abstract;
 using Enums.GameStates;
+using Interfaces;
 using Managers;
 using UnityEngine;
 
@@ -14,13 +15,12 @@ namespace Controllers.Player
             if (manager.CurrentAreaType == AreaType.BaseDefense) return;
             if (other.TryGetComponent(out IDamageable damagable))
             {
-                if(damagable.IsTaken) return;
-                  manager.EnemyList.Add(damagable);
-                  damagable.IsTaken = true;
-                  if ( manager.EnemyTarget == null)
-                  {
-                      manager.SetEnemyTarget();
-                  }
+                if(damagable.IsDead || damagable.IsTaken) return;
+                manager.EnemyList.Add(damagable);
+                if ( manager.EnemyTarget == null)
+                {
+                    manager.SetEnemyTarget();
+                }
             }
         }
         private void OnTriggerExit(Collider other)
@@ -33,7 +33,6 @@ namespace Controllers.Player
                 if (manager.EnemyList.Count == 0)
                 {
                     manager.EnemyTarget = null;
-                    manager.HasEnemyTarget = false;
                 }
             }
         }
