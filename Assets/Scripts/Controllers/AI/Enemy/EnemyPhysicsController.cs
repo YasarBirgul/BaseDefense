@@ -1,4 +1,5 @@
-﻿using AIBrains.EnemyBrain;
+﻿using System.Net.Configuration;
+using AIBrains.EnemyBrain;
 using Interfaces;
 using UnityEngine;
 
@@ -8,9 +9,11 @@ namespace Controllers.AI.Enemy
     {
         [SerializeField] 
         private EnemyAIBrain enemyAIBrain;
-        public bool IsTaken { get; set; }
+        public bool IsTaken { get { return _isTaken;}  set{ } }
         public bool IsDead { get; set; }
 
+        private bool _isTaken;
+        
         private void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent(out IDamager IDamager))

@@ -22,7 +22,7 @@ namespace AIBrains.EnemyBrain
         public bool IsBombSettled;
         public Transform CurrentTarget;
         public Transform TurretTarget;
-        public int Health { get => _health; set => _health = value; } 
+        public int Health {get => _health; set => _health = value;}
         
         public PlayerPhysicsController PlayerPhysicsController;
         public SoldierHealthController SoldierHealthController;
@@ -60,7 +60,7 @@ namespace AIBrains.EnemyBrain
         private void Awake()
         {   
             _data = GetEnemyAIData();
-            Health = _data.Health;
+            _health = _data.Health;
             spawnPosition = AISignals.Instance.getSpawnTransform?.Invoke();
             CurrentTarget = AISignals.Instance.getRandomTransform?.Invoke();
             GetStatesReferences();
@@ -70,7 +70,7 @@ namespace AIBrains.EnemyBrain
             GetComponentInChildren<IDamageable>().IsDead = false;
             TurretTarget = CurrentTarget;
             _stateMachine.SetState(_search);
-            Health = _data.Health;
+            _health = _data.Health;
         }
         private EnemyTypeData GetEnemyAIData() => Resources.Load<CD_Enemy>("Data/CD_Enemy").EnemyAIData.EnemyList[(int)enemyType];
         private void GetStatesReferences()

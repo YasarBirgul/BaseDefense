@@ -28,5 +28,6 @@ namespace Abstract
             
         }
         public abstract GameObject SendToStack();
+        
     }
 }

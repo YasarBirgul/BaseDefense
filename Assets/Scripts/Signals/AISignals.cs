@@ -10,7 +10,6 @@ namespace Signals
 {
     public class AISignals : MonoSingleton<AISignals>
     {
-      
         public Func<WorkerType, WorkerAITypeData> onGetMoneyAIData = delegate { return null; };
         public UnityAction onSendMoneyPositionToWorkers = delegate { };
         public UnityAction<StackableBaseMoney> onSetMoneyPosition = delegate { };
