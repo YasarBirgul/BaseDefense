@@ -1,5 +1,4 @@
-﻿using Concrete;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Interfaces
 {
@@ -11,7 +10,6 @@ namespace Interfaces
         void EmitParticle();
         void PlayAnimation();
         GameObject SendToStack();
-        void SendStackable(StackableMoney stackableMoney);
         bool IsSelected { get; set; }
         bool IsCollected { get; set; }
     }

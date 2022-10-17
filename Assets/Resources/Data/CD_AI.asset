@@ -15,9 +15,6 @@ MonoBehaviour:
   AmmoWorkerAIData:
     Capacity: 0
     WorkerSpeed: 0
-  MoneyWorkerAIData:
-    Capacity: 0
-    WorkerSpeed: 0
   MineWorkerAIData:
     Capacity: 0
     WorkerSpeed: 0
@@ -28,5 +25,5 @@ MonoBehaviour:
     SoldierSpeed: 10
     AttackRadius: 10
     AttackDelay: 2
-    Health: 100
+    Health: 40
     SpawnPoint: {fileID: 0}

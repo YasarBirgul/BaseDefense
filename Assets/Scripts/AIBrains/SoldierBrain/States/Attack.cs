@@ -24,7 +24,7 @@ namespace AIBrains.SoldierBrain.States
             _animator = animator;
         } 
         public void Tick()
-        {
+        { 
             if (_soldierAIBrain.DamageableEnemy.IsDead)
             {
                 RemoveTarget();
@@ -53,7 +53,6 @@ namespace AIBrains.SoldierBrain.States
             var slerpRotation = Quaternion.Slerp(_soldierAIBrain.transform.rotation, lookRotation,10f*Time.deltaTime);
 
             _soldierAIBrain.transform.rotation = slerpRotation;
-            
         }
         public void OnEnter()
         {
@@ -63,7 +62,7 @@ namespace AIBrains.SoldierBrain.States
         }
         public void OnExit()
         {
-            _animator.SetBool(_hasTarget,false);
+            
         }
         private void FireBullets()
         {
@@ -72,11 +71,18 @@ namespace AIBrains.SoldierBrain.States
         
         private void SetEnemyTargetTransform()
         {
-            _soldierAIBrain.HasEnemyTarget = false;
-            if(_soldierAIBrain.enemyList.Count ==0) return;
-            _soldierAIBrain.EnemyTarget = _soldierAIBrain.enemyList[0].GetTransform();
             _soldierAIBrain.DamageableEnemy = _soldierAIBrain.enemyList[0];
-            _soldierAIBrain.HasEnemyTarget = true;
+            if (_soldierAIBrain.DamageableEnemy.IsTaken)
+            {
+                _soldierAIBrain.EnemyTarget = null;
+                RemoveTarget();
+            }
+            else
+            {
+                _soldierAIBrain.DamageableEnemy.IsTaken = true;
+                if(_soldierAIBrain.enemyList.Count ==0) return;
+                _soldierAIBrain.EnemyTarget = _soldierAIBrain.DamageableEnemy.GetTransform();
+            }
         }
         private void EnemyTargetStatus()
         {
@@ -86,7 +92,7 @@ namespace AIBrains.SoldierBrain.States
             }
             else
             {
-                _soldierAIBrain.HasEnemyTarget = false;
+                _soldierAIBrain.EnemyTarget = null;
             }
         } 
         private void RemoveTarget()

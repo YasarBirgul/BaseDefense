@@ -12,6 +12,7 @@ namespace AIBrains.EnemyBrain.States
         private static readonly int _speed = Animator.StringToHash("Speed");
         private static readonly int _run = Animator.StringToHash("Run");
         private const float _runSpeed = 6.328234f;
+        private float _timer = 0.1f;
         public Chase(EnemyAIBrain enemyAIBrain,NavMeshAgent agent,Animator animator)
         {
             _enemyAIBrain = enemyAIBrain;
@@ -22,10 +23,22 @@ namespace AIBrains.EnemyBrain.States
         {
             _navMeshAgent.destination = _enemyAIBrain.CurrentTarget.position;
             _animator.SetFloat(_speed,_navMeshAgent.velocity.magnitude);
+            _timer -= Time.deltaTime;
+            if (_timer <= 0)
+            {
+                if (_enemyAIBrain.SoldierHealthController != null)
+                {
+                    if (_enemyAIBrain.SoldierHealthController.IsDead)
+                    {
+                        _enemyAIBrain.SetTarget(null); 
+                    }
+                } 
+                // if(_enemyAIBrain.PlayerPhysicsController)  // Player Is Dead scenario should be implemented.
+                _timer = 0.1f;
+            }
         }
         public void OnEnter()
         {
-
             _navMeshAgent.SetDestination(_enemyAIBrain.CurrentTarget.position);
             _animator.SetTrigger(_run);
             _navMeshAgent.speed = _runSpeed;

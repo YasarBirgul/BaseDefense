@@ -11,7 +11,6 @@ namespace AIBrains.EnemyBrain.States
         private readonly EnemyAIBrain _enemyAIBrain;
         private static readonly int Attack1 = Animator.StringToHash("Attack");
         private float _attackTimer = 2f;
-
         public BaseAttack(NavMeshAgent agent,Animator animator)
         {
             _navMeshAgent = agent;
@@ -24,11 +23,10 @@ namespace AIBrains.EnemyBrain.States
             _animator.SetTrigger(Attack1);
             _attackTimer = 2f;
         }
-
         public void OnEnter()
         {
+            
         }
-
         public void OnExit()
         {
         }

@@ -1,4 +1,5 @@
-﻿using Interfaces;
+﻿using Controllers.Soldier;
+using Interfaces;
 using Signals;
 using UnityEngine;
 using UnityEngine.AI;
@@ -13,26 +14,28 @@ namespace AIBrains.EnemyBrain.States
         private static readonly int _run = Animator.StringToHash("Run");
         private float _attackTimer = 1f;
         private const float _refreshValue = 1f;
-        private const int enemyAttackPower=10;
-        public Attack(Animator animator)
+        private bool _attackPlayer;
+        public Attack(Animator animator,EnemyAIBrain enemyAIBrain)
         {
             _animator = animator;
+            _enemyAIBrain = enemyAIBrain;
         }
         public void Tick()
         {
             _attackTimer -= Time.deltaTime;
             if (!(_attackTimer <= 0)) return;
-            CoreGameSignals.Instance.onTakeDamage.Invoke(enemyAttackPower);
+            _enemyAIBrain.HitDamage();
             _animator.SetTrigger(_attack);
             _attackTimer = _refreshValue;
         }
         public void OnEnter()
         {
-            
+           
         }
         public void OnExit()
         {
             _animator.SetTrigger(_run);
         }
+        
     }
 }

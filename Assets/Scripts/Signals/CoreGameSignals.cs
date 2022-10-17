@@ -41,6 +41,7 @@ namespace Signals
         public Func<int> onGetHealthValue= delegate { return default;};
         public UnityAction<int> onHealthUpgrade  =delegate {  };
         
-        public UnityAction<int> onTakeDamage= delegate {  };
+        public UnityAction<int> onTakePlayerDamage= delegate {  };
+        public UnityAction<int> onTakeSoldierDamage = delegate {  };
     }
 }

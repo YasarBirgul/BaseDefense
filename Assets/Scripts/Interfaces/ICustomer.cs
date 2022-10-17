@@ -3,8 +3,7 @@
     public interface ICustomer
     {
         public bool HasMoney { get; set; }
-        void MakePayment();
-
-       void StopPayment();
+        void MakePayment(); 
+        void StopPayment();
     }
 }

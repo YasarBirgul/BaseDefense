@@ -29,14 +29,13 @@ namespace Controllers.Soldier
         {
             if (other.TryGetComponent(out IDamageable damagable))
             {
-                if(damagable.IsTaken) return;
-                damagable.IsTaken = true;
+                if(damagable.IsTaken || damagable.IsDead) return;
                 soldierAIBrain.enemyList.Add(damagable);
+                damagable.IsTaken = true;
                 if (soldierAIBrain.EnemyTarget == null)
                 {
                     soldierAIBrain.EnemyTarget = soldierAIBrain.enemyList[0].GetTransform();
                     soldierAIBrain.DamageableEnemy = soldierAIBrain.enemyList[0];
-                    soldierAIBrain.HasEnemyTarget = true;
                 }
             }
         }
@@ -50,7 +49,6 @@ namespace Controllers.Soldier
                 if (soldierAIBrain.enemyList.Count == 0)
                 {
                     soldierAIBrain.EnemyTarget = null;
-                    soldierAIBrain.HasEnemyTarget = false;
                 }
                 damagable.IsTaken = false;
             }

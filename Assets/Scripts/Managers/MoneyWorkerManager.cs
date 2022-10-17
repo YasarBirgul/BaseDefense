@@ -19,7 +19,7 @@ namespace Managers
         #region Private Variables
 
         [ShowInInspector]
-        private List<StackableMoney> _targetList = new List<StackableMoney>();
+        private List<StackableBaseMoney> _targetList = new List<StackableBaseMoney>();
         [ShowInInspector]
         private List<MoneyWorkerAIBrain> _workerList = new List<MoneyWorkerAIBrain>();
         [ShowInInspector]
@@ -71,7 +71,7 @@ namespace Managers
             return Resources.Load<CD_WorkerAI>("Data/CD_WorkerAI").WorkerAIData.WorkerAITypes[(int)type];
         }
 
-        private void OnAddMoneyPositionToList(StackableMoney pos)
+        private void OnAddMoneyPositionToList(StackableBaseMoney pos)
         {
             _targetList.Add(pos);
         }

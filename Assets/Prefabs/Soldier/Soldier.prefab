@@ -238,7 +238,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7743554230451147456
 Transform:
   m_ObjectHideFlags: 0
@@ -308,7 +308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HasReachedSlotTarget: 0
   HasReachedFrontYard: 0
-  HasEnemyTarget: 0
+  Health: 0
   TentPosition: {fileID: 0}
   FrontYardStartPosition: {fileID: 0}
   EnemyTarget: {fileID: 0}
@@ -1751,6 +1751,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b20b5f0621a34804abc727cfa065b4a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soldierAIBrain: {fileID: 3675097192823064913}
 --- !u!1 &7297265650617905708
 GameObject:
   m_ObjectHideFlags: 0

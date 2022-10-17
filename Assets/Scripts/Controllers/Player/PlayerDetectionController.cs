@@ -17,7 +17,6 @@ namespace Controllers.Player
             {
                 if(damagable.IsDead || damagable.IsTaken) return;
                 manager.EnemyList.Add(damagable);
-                damagable.IsTaken = true;
                 if ( manager.EnemyTarget == null)
                 {
                     manager.SetEnemyTarget();

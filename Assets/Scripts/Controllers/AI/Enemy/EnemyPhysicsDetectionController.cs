@@ -1,5 +1,7 @@
 ﻿using AIBrains.EnemyBrain;
 using Controllers.Player;
+using Controllers.Soldier;
+using Interfaces;
 using UnityEngine;
 
 namespace Controllers.AI.Enemy
@@ -23,20 +25,41 @@ namespace Controllers.AI.Enemy
         private Transform _detectedMine;
         
         #endregion
+        
         #endregion
         private void OnTriggerEnter(Collider other)
         { 
             if (other.TryGetComponent(out PlayerPhysicsController physicsController))
             {
-                enemyAIBrain.SetTarget(other.transform.parent);
+                PickOneTarget(other);
+                enemyAIBrain.CachePlayer(physicsController);
+                enemyAIBrain.CacheSoldier(null);
+            }
+            if (other.TryGetComponent(out SoldierHealthController soldierHealthController))
+            {
+                enemyAIBrain.CachePlayer(null);
+                PickOneTarget(other);
+                enemyAIBrain.CacheSoldier(soldierHealthController);
             }
         }
         private void OnTriggerExit(Collider other)
         { 
-            if (other.TryGetComponent(out PlayerPhysicsController physicsController))
+            if (other.TryGetComponent(out PlayerPhysicsController physicsController) )
             {
-                enemyAIBrain.CurrentTarget = null;
                 enemyAIBrain.SetTarget(null);
+                enemyAIBrain.CachePlayer(null);
+            }
+            if (other.TryGetComponent(out IDamageable Idamageable))
+            {
+                enemyAIBrain.SetTarget(null);
+                enemyAIBrain.CacheSoldier(null);
+            }
+        }
+        private void PickOneTarget(Collider other)
+        {
+            if (enemyAIBrain.CurrentTarget == enemyAIBrain.TurretTarget)
+            {
+                enemyAIBrain.SetTarget(other.transform);
             }
         }
     }

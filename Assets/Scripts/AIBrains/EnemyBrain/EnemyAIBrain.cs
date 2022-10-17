@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using AIBrains.EnemyBrain.States;
+using Controllers.Player;
+using Controllers.Soldier;
 using Data.UnityObject;
 using Data.ValueObject.AIData;
 using Enums;
 using Interfaces;
-using Managers;
 using Signals;
 using StateBehaviour;
 using UnityEngine;
@@ -23,7 +23,10 @@ namespace AIBrains.EnemyBrain
         public Transform CurrentTarget;
         public Transform TurretTarget;
         public int Health { get => _health; set => _health = value; } 
-
+        
+        public PlayerPhysicsController PlayerPhysicsController;
+        public SoldierHealthController SoldierHealthController;
+        
         #endregion
         
         #region Serialized Variables
@@ -34,6 +37,12 @@ namespace AIBrains.EnemyBrain
         [SerializeField]
         private EnemyTypes enemyType;
 
+        [SerializeField]
+        private NavMeshAgent navMeshAgent;
+
+        [SerializeField]
+        private Animator animator;
+
         #endregion
 
         #region Private Variables
@@ -41,6 +50,8 @@ namespace AIBrains.EnemyBrain
         private int _health;
         private EnemyTypeData _data;
         private StateMachine _stateMachine;
+        private const int _enemyAttackPower=10;
+        private Search _search;
 
         #endregion
         
@@ -50,32 +61,22 @@ namespace AIBrains.EnemyBrain
         {   
             _data = GetEnemyAIData();
             Health = _data.Health;
+            spawnPosition = AISignals.Instance.getSpawnTransform?.Invoke();
+            CurrentTarget = AISignals.Instance.getRandomTransform?.Invoke();
+            GetStatesReferences();
         }
         private void OnEnable()
         {
-            spawnPosition = AISignals.Instance.getSpawnTransform?.Invoke();
-            
-            CurrentTarget = AISignals.Instance.getRandomTransform?.Invoke();
-            
+            GetComponentInChildren<IDamageable>().IsDead = false;
             TurretTarget = CurrentTarget;
-
+            _stateMachine.SetState(_search);
             Health = _data.Health;
         }
-        private void Start()
-        {   
-            GetStatesReferences();
-        }
-
         private EnemyTypeData GetEnemyAIData() => Resources.Load<CD_Enemy>("Data/CD_Enemy").EnemyAIData.EnemyList[(int)enemyType];
-        
         private void GetStatesReferences()
         {
-            
-            var animator = GetComponentInChildren<Animator>();
-            var navMeshAgent = GetComponent<NavMeshAgent>();
-            
-            var search = new Search(this,navMeshAgent,spawnPosition);
-            var attack = new Attack(animator);
+            _search = new Search(this,navMeshAgent,spawnPosition);
+            var attack = new Attack(animator,this);
             var move = new Move(this,navMeshAgent,animator);
             var death = new Death(navMeshAgent,animator,this,enemyType);
             var chase = new Chase(this,navMeshAgent,animator);
@@ -84,7 +85,7 @@ namespace AIBrains.EnemyBrain
             
             _stateMachine = new StateMachine();
             
-            At(search,move,HasInitTarget());
+            At(_search,move,HasInitTarget());
             At(move,chase,HasTargetTurret()); 
             At(chase,attack,AttackRange()); 
             At(attack,chase,AttackOffRange()); 
@@ -95,11 +96,11 @@ namespace AIBrains.EnemyBrain
             _stateMachine.AddAnyTransition(death,  IsDead());
             _stateMachine.AddAnyTransition(moveToBomb, ()=>IsBombSettled);
             
-            _stateMachine.SetState(search);
+           // _stateMachine.SetState(_search);
             
             void At(IState to, IState from, Func<bool> condition) => _stateMachine.AddTransition(to, from, condition);
             Func<bool> HasInitTarget() => () => TurretTarget != null;
-            Func<bool> HasTargetTurret() => () => CurrentTarget != null && CurrentTarget.TryGetComponent(out PlayerManager player);
+            Func<bool> HasTargetTurret() => () => CurrentTarget != null && (CurrentTarget.TryGetComponent(out PlayerPhysicsController playerPhysicsController) || CurrentTarget.TryGetComponent(out SoldierHealthController soldierHealthController));
             Func<bool> AttackRange() => () => CurrentTarget != null  && (transform.position- CurrentTarget.transform.position).sqrMagnitude < Mathf.Pow(navMeshAgent.stoppingDistance,2);
             Func<bool> AttackOffRange() => () => CurrentTarget != null && (transform.position - CurrentTarget.transform.position).sqrMagnitude > Mathf.Pow(navMeshAgent.stoppingDistance,2);
             Func<bool> TargetNull() => () => CurrentTarget == null;
@@ -117,11 +118,36 @@ namespace AIBrains.EnemyBrain
             {
                 return;
             }
-            
             CurrentTarget = target;
-
             if (CurrentTarget != null) return;
             CurrentTarget = TurretTarget;
+            SoldierHealthController = null;
+            PlayerPhysicsController = null;
+        }
+        public void CacheSoldier(SoldierHealthController soldierHealthController)
+        {
+            if (soldierHealthController == SoldierHealthController) return;
+            SoldierHealthController = soldierHealthController;
+        } 
+        public void CachePlayer(PlayerPhysicsController playerPhysicsController)
+        {
+            PlayerPhysicsController = playerPhysicsController;
+        }
+        public void HitDamage()
+        {
+            if (SoldierHealthController != null)
+            {
+                int soldierHealth = SoldierHealthController.TakeDamage(_enemyAttackPower);
+                if (soldierHealth <= 0)
+                {
+                    SoldierHealthController = null;
+                    SetTarget(TurretTarget);
+                }
+            }
+            if(PlayerPhysicsController != null)
+            {
+                CoreGameSignals.Instance.onTakePlayerDamage.Invoke(_enemyAttackPower);
+            }
         }
     }
 }

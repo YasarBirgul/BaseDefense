@@ -28,7 +28,7 @@ namespace Controllers.AI.Enemy
         {
             if (enemyAIBrain.Health > 0)
             {
-                enemyAIBrain.Health =  enemyAIBrain.Health - damage;
+                enemyAIBrain.Health =- damage;
                 if (enemyAIBrain.Health == 0)
                 {
                     IsDead = true;

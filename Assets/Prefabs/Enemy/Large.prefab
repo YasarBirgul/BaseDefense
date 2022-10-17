@@ -1216,8 +1216,12 @@ MonoBehaviour:
   IsBombSettled: 0
   CurrentTarget: {fileID: 0}
   TurretTarget: {fileID: 0}
+  PlayerPhysicsController: {fileID: 0}
+  SoldierHealthController: {fileID: 0}
   spawnPosition: {fileID: 0}
   enemyType: 2
+  navMeshAgent: {fileID: 1086255469645399492}
+  animator: {fileID: 6015749386641348366}
 --- !u!195 &1086255469645399492
 NavMeshAgent:
   m_ObjectHideFlags: 0

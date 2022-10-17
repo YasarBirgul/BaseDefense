@@ -27,6 +27,7 @@ namespace Managers
         
         public Transform EnemyTarget;
 
+        public IDamageable Damageable;
         #endregion
 
         #region Serialized Variables
@@ -79,14 +80,14 @@ namespace Managers
         private void SubscribeEvents()
         {
             CoreGameSignals.Instance.onGetHealthValue += OnGetHealthValue;
-            CoreGameSignals.Instance.onTakeDamage += OnTakeDamage;
+            CoreGameSignals.Instance.onTakePlayerDamage += OnTakeDamage;
             InputSignals.Instance.onInputDragged += OnGetInputValues;
             InputSignals.Instance.onInputHandlerChange += OnDisableMovement;
         }
         private void UnsubscribeEvents()
         {
             CoreGameSignals.Instance.onGetHealthValue -= OnGetHealthValue;
-            CoreGameSignals.Instance.onTakeDamage -= OnTakeDamage;
+            CoreGameSignals.Instance.onTakePlayerDamage -= OnTakeDamage;
             InputSignals.Instance.onInputDragged -= OnGetInputValues;
             InputSignals.Instance.onInputHandlerChange -= OnDisableMovement;
         } 

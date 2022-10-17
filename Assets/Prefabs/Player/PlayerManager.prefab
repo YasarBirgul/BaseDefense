@@ -1293,7 +1293,6 @@ MonoBehaviour:
   CurrentAreaType: 0
   WeaponType: 0
   EnemyTarget: {fileID: 0}
-  HasEnemyTarget: 0
   meshController: {fileID: 1429477786026016514}
   animationController: {fileID: 3256136071381465238}
   weaponController: {fileID: 1868632370789283655}

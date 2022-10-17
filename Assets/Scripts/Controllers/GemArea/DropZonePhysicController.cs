@@ -11,7 +11,7 @@ namespace Controllers.GemArea
         private GemStackerController gemStackerController;
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent<StackableGem>(out StackableGem stackable))
+            if (other.TryGetComponent<StackableBaseGem>(out StackableBaseGem stackable))
             {
                 if (gemStackerController.PositionList.Count <= gemStackerController.StackList.Count)
                 {

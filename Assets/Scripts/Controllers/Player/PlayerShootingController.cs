@@ -23,8 +23,17 @@ namespace Controllers.Player
         }
         public void SetEnemyTargetTransform()
         {
-            manager.EnemyTarget = manager.EnemyList[0].GetTransform();
-            Shoot();
+            manager.Damageable = manager.EnemyList[0];
+            if (manager.Damageable.IsTaken)
+            {
+                RemoveTarget();
+            }
+            else
+            {
+                manager.Damageable.IsTaken = true;
+                manager.EnemyTarget = manager.Damageable.GetTransform();
+                Shoot();
+            }
         }
         private void EnemyTargetStatus()
         {
