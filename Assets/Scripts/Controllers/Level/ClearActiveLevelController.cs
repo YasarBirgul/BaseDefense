@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Commands.LevelCommands
+namespace Controllers.Level
 {
-    public class ClearActiveLevelCommand : MonoBehaviour
+    public class ClearActiveLevelController : MonoBehaviour
     { 
         public void ClearActiveLevel(Transform levelHolder)
         {
