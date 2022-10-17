@@ -7,6 +7,8 @@ namespace Data.ValueObject.AIData.WorkerAIData
     [Serializable]
     public class WorkerAITypeData
     {
+        // Can be changed As Struct
+        
         public WorkerType WorkerType;
        
         [HideIf("WorkerType", WorkerType.SoldierAI)]
