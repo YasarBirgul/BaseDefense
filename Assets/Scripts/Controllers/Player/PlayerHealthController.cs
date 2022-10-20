@@ -67,6 +67,8 @@ namespace Controllers.Player
             CoreGameSignals.Instance.onHealthUpgrade?.Invoke(_health);
             if (_health != 0) return;
             UISignals.Instance.onHealthVisualClose?.Invoke();
+            _health = 0;
+            playerManager.ResetPlayer();
         }
     }
 }

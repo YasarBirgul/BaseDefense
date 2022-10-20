@@ -42,11 +42,13 @@ namespace Managers
         {
             InputSignals.Instance.onInputHandlerChange += OnInputHandlerChange;
             CoreGameSignals.Instance.onReadyToPlay += OnReadyToPlay;
+            CoreGameSignals.Instance.onReset += OnReset;
         }
         private void UnsubscribeEvents()
         {
+            CoreGameSignals.Instance.onReset -= OnReset;
             InputSignals.Instance.onInputHandlerChange -= OnInputHandlerChange;
-            CoreGameSignals.Instance.onReadyToPlay += OnReadyToPlay;
+            CoreGameSignals.Instance.onReadyToPlay -= OnReadyToPlay;
         }
 
         private void OnInputHandlerChange(InputHandlers inputHandlers)
@@ -115,5 +117,9 @@ namespace Managers
             }
         }
         #endregion
+        private void OnReset()
+        {
+            _readyToPlay = false;
+        }
     }
 }

@@ -12,6 +12,8 @@ namespace Controllers.Player
         #region Self Variables
 
         #region Public Variables
+
+        public Collider AccountCollider;
         
         #endregion
 
@@ -40,7 +42,7 @@ namespace Controllers.Player
             {
                 
             }
-            else if (other.TryGetComponent<AInteractable>(out AInteractable interactable))
+            else if (other.TryGetComponent<InteractableBase>(out InteractableBase interactable))
             {
                 moneyStackerController.OnRemoveAllStack();
             }
@@ -53,6 +55,7 @@ namespace Controllers.Player
         
         #region Paying Interaction
         public bool HasMoney { get => CoreGameSignals.Instance.onHasEnoughMoney.Invoke(); set { } }
+        
         public async void MakePayment()
         {
             while (true)

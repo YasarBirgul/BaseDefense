@@ -1705,7 +1705,7 @@ GameObject:
   - component: {fileID: 7820662336288677291}
   - component: {fileID: 7073478314082187542}
   m_Layer: 13
-  m_Name: SoldierPhysicController
+  m_Name: SoldierHealthController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

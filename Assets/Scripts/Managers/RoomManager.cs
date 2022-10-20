@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Controllers.BaseRooms;
 using Data.ValueObject.LevelData;
-using Enums;
 using Enums.BaseArea;
 using Enums.Turret;
 using Interfaces;
@@ -20,7 +19,6 @@ namespace Managers
               
         #endregion
         
-       
         #region Serialized Variables
         
         [SerializeField] 

@@ -15,7 +15,11 @@ namespace Concrete
         public override bool IsCollected { get; set; }
         private void OnEnable()
         {
+            EditPhysics();
             DOVirtual.DelayedCall(0.1f, () => AISignals.Instance.onSetMoneyPosition?.Invoke(this));
+        }
+        public void EditPhysics()
+        {
             collider.enabled = true;
             rigidbody.isKinematic = false;
             rigidbody.useGravity = true;

@@ -2,7 +2,7 @@ using Abstract;
 
 namespace Concrete
 {
-    public class PlayerAInteractable:AInteractable
+    public class PlayerInteractableBase:InteractableBase
     {
         
     }

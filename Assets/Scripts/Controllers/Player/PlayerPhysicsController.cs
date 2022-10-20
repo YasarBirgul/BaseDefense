@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Controllers.Player
 {
-    public class PlayerPhysicsController : AInteractable
+    public class PlayerPhysicsController : InteractableBase
     {
         #region Self Variables
 
@@ -64,16 +64,20 @@ namespace Controllers.Player
             if (!playerIsGoingToFrontYard)
             {
                 playerManager.IncreaseHealth();
+                int enemyListCount = playerManager.EnemyList.Count;
+                for (int i = 0; i < enemyListCount; i++)
+                {
+                    playerManager.EnemyList[i].IsTaken = false;
+                }
+                playerManager.EnemyList.Clear();
+                playerManager.EnemyTarget = null;   
                 return;
             }
             playerManager.SetOutDoorHealth();
-            int enemyListCount = playerManager.EnemyList.Count;
-            for (int i = 0; i < enemyListCount; i++)
-            {
-                playerManager.EnemyList[i].IsTaken = false;
-            }
-            playerManager.EnemyList.Clear();
-            playerManager.EnemyTarget = null;
+        }
+        public void ResetPlayerLayer()
+        {
+            gameObject.layer = LayerMask.NameToLayer("PlayerBase");
         }
     }
 }

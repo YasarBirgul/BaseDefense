@@ -154,5 +154,17 @@ namespace Controllers.Player
         { 
             PoolSignals.Instance.onReleaseObjectFromPool.Invoke(poolName,obj);
         }
+        public async void ResetStack()
+        {
+            if (StackList.Count == 0)
+            {
+                return;
+            }
+            StackList[0].transform.SetParent(null);
+            StackList.Remove(StackList[0]);
+            StackList.TrimExcess();
+            await Task.Delay(10);
+            ResetStack();
+        }
     }
 }

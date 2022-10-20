@@ -24,7 +24,6 @@ namespace Managers
         private TextMeshProUGUI gemText;
         [SerializeField] 
         private TextMeshProUGUI healthText;
-        
         [SerializeField] 
         private Scrollbar HealthBar;
       

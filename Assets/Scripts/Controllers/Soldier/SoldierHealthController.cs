@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Controllers.Soldier
 { 
-    public class SoldierHealthController : AInteractable, IDamageable
+    public class SoldierHealthController : InteractableBase, IDamageable
     {
         [SerializeField] 
         private SoldierAIBrain soldierAIBrain;

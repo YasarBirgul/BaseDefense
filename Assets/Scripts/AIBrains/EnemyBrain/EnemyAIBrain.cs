@@ -96,8 +96,8 @@ namespace AIBrains.EnemyBrain
             _stateMachine.AddAnyTransition(death,  IsDead());
             _stateMachine.AddAnyTransition(moveToBomb, ()=>IsBombSettled);
             
-           // _stateMachine.SetState(_search);
-            
+            // _stateMachine.SetState(_search);
+           
             void At(IState to, IState from, Func<bool> condition) => _stateMachine.AddTransition(to, from, condition);
             
             Func<bool> HasInitTarget() => () => TurretTarget != null;

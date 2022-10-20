@@ -39,6 +39,7 @@ namespace Managers
         private void SubscribeEvents()
         {
            // CoreGameSignals.Instance.onReadyToPlay += OnReadyToPlay;
+            CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onLevelInitialize += OnLevelInitialize;
             CoreGameSignals.Instance.onEnterTurret += OnEnterTurret;
             CoreGameSignals.Instance.onLevel += OnLevel;
@@ -47,6 +48,7 @@ namespace Managers
         private void UnsubscribeEvents()
         {
            // CoreGameSignals.Instance.onReadyToPlay -= OnReadyToPlay;
+            CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onLevelInitialize -= OnLevelInitialize;
             CoreGameSignals.Instance.onEnterTurret -= OnEnterTurret;
             CoreGameSignals.Instance.onLevel -= OnLevel;
@@ -84,6 +86,12 @@ namespace Managers
         private void ChangeCamera(CameraStateTypes cameraType)
         {
             animator.Play(cameraType.ToString());
+        }
+
+        private void OnReset()
+        {
+            ChangeCamera(CameraStateTypes.GameCamera);
+            OnSetCameraTarget();
         }
     }
 }

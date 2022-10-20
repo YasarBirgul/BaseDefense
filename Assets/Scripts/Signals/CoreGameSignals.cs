@@ -43,5 +43,7 @@ namespace Signals
         
         public UnityAction<int> onTakePlayerDamage= delegate {  };
         public UnityAction<int> onTakeSoldierDamage = delegate {  };
+        
+        public UnityAction onResetPlayerStack = delegate {  };
     }
 }

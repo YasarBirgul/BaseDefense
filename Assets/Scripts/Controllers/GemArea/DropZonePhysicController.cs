@@ -19,7 +19,7 @@ namespace Controllers.GemArea
                 }
                 gemStackerController.GetStack(stackable.SendToStack(),stackable.SendToStack().transform);
             }
-            else if (other.TryGetComponent<AInteractable>(out AInteractable interactable))
+            else if (other.TryGetComponent<InteractableBase>(out InteractableBase interactable))
             {
                 gemStackerController.OnRemoveAllStack(other.transform);
             }

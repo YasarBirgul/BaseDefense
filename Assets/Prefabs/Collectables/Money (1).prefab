@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3854513426724619148}
   - component: {fileID: 1738752383088493727}
   - component: {fileID: 6386560525675601678}
+  - component: {fileID: 2018825231765406092}
   m_Layer: 17
   m_Name: Money (1)
   m_TagString: Untagged
@@ -77,6 +78,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 1738752383088493727}
   collider: {fileID: 3854513426724619148}
+--- !u!114 &2018825231765406092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6542216981385537143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39d039022bea4917ba7220e5aef59116, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stackableMoney: {fileID: 6386560525675601678}
 --- !u!1001 &7505008217405485789
 PrefabInstance:
   m_ObjectHideFlags: 0

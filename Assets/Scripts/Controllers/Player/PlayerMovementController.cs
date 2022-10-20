@@ -47,7 +47,7 @@ namespace Controllers.Player
         public void LookAtTarget(Transform enemyTarget)
         {
             if(enemyTarget == null) return;
-            transform.LookAt(enemyTarget, Vector3.up*3f);
+            transform.LookAt(new Vector3(enemyTarget.position.x,0,enemyTarget.position.z), Vector3.up*3f);
         }
         
         private void EnableMovement(bool movementStatus)
@@ -87,6 +87,12 @@ namespace Controllers.Player
             if(inputHandlers != InputHandlers.Turret) return;
             rigidbody.velocity = Vector3.zero;
             transform.rotation = new Quaternion(0, 0, 0, 0);
+        }
+        private void LateUpdate()
+        {
+            if (manager.EnemyTarget == null) 
+                return; 
+            LookAtTarget(manager.EnemyList[0].GetTransform());
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Abstract
 {
-    public abstract class AInteractable : MonoBehaviour
+    public abstract class InteractableBase : MonoBehaviour
     {
         
     }
