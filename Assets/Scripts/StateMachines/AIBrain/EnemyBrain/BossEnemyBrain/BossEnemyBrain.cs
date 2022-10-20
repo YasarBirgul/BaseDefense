@@ -5,6 +5,7 @@ using System;
 using Sirenix.OdinInspector;
 using Enums;
 using Controllers;
+using Controllers.Boss;
 using Data.UnityObject;
 using Data.ValueObject.AIData;
 using StateBehaviour;
@@ -36,7 +37,8 @@ namespace StateMachines.AIBrain.Enemy
         [BoxGroup("Serializable Variables")]
         [SerializeField]
         private Transform bombHolder;
-
+        [SerializeField]
+        private BossHealthController _healthController;
 
         #endregion
 
@@ -62,6 +64,7 @@ namespace StateMachines.AIBrain.Enemy
         {
             _enemyAIData = GetAIData();
             _enemyTypeData = GetEnemyType();
+            _healthController.SetHealth(_enemyTypeData.Health);
             SetEnemyVariables(); 
             GetReferenceStates();
         }

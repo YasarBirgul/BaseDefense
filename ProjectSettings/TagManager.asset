@@ -10,6 +10,7 @@ TagManager:
   - MineLure
   - MineExplosion
   - Gem
+  - Ground
   layers:
   - Default
   - TransparentFX

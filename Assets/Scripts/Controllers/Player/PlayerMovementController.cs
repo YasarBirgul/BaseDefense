@@ -43,13 +43,11 @@ namespace Controllers.Player
             _inputVector = inputParams.MovementVector;
             EnableMovement(_inputVector.sqrMagnitude > 0);
         }
-
-        public void LookAtTarget(Transform enemyTarget)
+        private void LookAtTarget(Transform enemyTarget)
         {
             if(enemyTarget == null) return;
             transform.LookAt(new Vector3(enemyTarget.position.x,0,enemyTarget.position.z), Vector3.up*3f);
         }
-        
         private void EnableMovement(bool movementStatus)
         {
             _isReadyToMove = movementStatus;
@@ -57,7 +55,7 @@ namespace Controllers.Player
         private void FixedUpdate()
         {
             PlayerMove();
-        }
+        } 
         private void PlayerMove()
         {
             if (_isReadyToMove)
@@ -74,7 +72,7 @@ namespace Controllers.Player
             {
                 rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, 0);
             }
-        }
+        } 
         private void RotatePlayer()
         {
             Vector3 movementDirection = new Vector3(_inputVector.x, 0, _inputVector.y);
@@ -84,13 +82,15 @@ namespace Controllers.Player
         }
         public void DisableMovement(InputHandlers inputHandlers)
         {
-            if(inputHandlers != InputHandlers.Turret) return;
             rigidbody.velocity = Vector3.zero;
+            rigidbody.angularVelocity = Vector3.zero;
+            rigidbody.angularDrag = 0f;
             transform.rotation = new Quaternion(0, 0, 0, 0);
-        }
+            _isReadyToMove = false;
+        } 
         private void LateUpdate()
-        {
-            if (manager.EnemyTarget == null) 
+        { 
+            if (manager.EnemyTarget == null || manager.EnemyList.Count == 0) 
                 return; 
             LookAtTarget(manager.EnemyList[0].GetTransform());
         }
