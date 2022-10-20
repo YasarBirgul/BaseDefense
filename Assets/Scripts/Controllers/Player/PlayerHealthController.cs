@@ -64,11 +64,13 @@ namespace Controllers.Player
         public void OnTakeDamage(int damage)
         {
             _health -= damage;
+            if (_health <= 0)
+            { 
+                _health = 0;
+                UISignals.Instance.onHealthVisualClose?.Invoke();
+                playerManager.ResetPlayer();
+            } 
             CoreGameSignals.Instance.onHealthUpgrade?.Invoke(_health);
-            if (_health != 0) return;
-            UISignals.Instance.onHealthVisualClose?.Invoke();
-            _health = 0;
-            playerManager.ResetPlayer();
         }
     }
 }

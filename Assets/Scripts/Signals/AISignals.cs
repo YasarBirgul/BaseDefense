@@ -23,5 +23,7 @@ namespace Signals
         
         public UnityAction onSoldierActivation = delegate {  };
         public UnityAction onSoldierAmountUpgrade  =delegate {  };
+        
+        public UnityAction onOpenPortal  =delegate {  };
     }
 }

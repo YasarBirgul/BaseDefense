@@ -117,7 +117,7 @@ namespace Managers
             shootingController.SetEnemyTargetTransform();
             animationController.AimTarget(true);
         }
-        private void OnTakeDamage(int damage) => healthController.OnTakeDamage(damage);
+        public void OnTakeDamage(int damage) => healthController.OnTakeDamage(damage);
         private int OnGetHealthValue() => _data.PlayerHealth;
         public void SetOutDoorHealth() => UISignals.Instance.onOutDoorHealthOpen?.Invoke();
         public void IncreaseHealth() => healthController.IncreaseHealth();

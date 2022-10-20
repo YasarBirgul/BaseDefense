@@ -18,7 +18,9 @@ namespace Enums
         Riffle,
         ShotGun,
         MiniGun,
-        Turret
+        Turret,
+        Bomb,
+        Boss
         
     } 
 }

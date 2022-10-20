@@ -15,13 +15,13 @@ namespace StateMachines.AIBrain.Enemy.States
 
         private readonly BossEnemyBrain _bossEnemyBrain;
         private readonly Animator _animator;
-        private readonly EnemyType _enemyType;
+        private readonly EnemyTypes _enemyType;
 
         #endregion
 
         #endregion
 
-        public BossDeathState(Animator animator, BossEnemyBrain bossEnemyBrain, EnemyType enemyType)
+        public BossDeathState(Animator animator, BossEnemyBrain bossEnemyBrain, EnemyTypes enemyType)
         {
             _bossEnemyBrain = bossEnemyBrain;
             _animator = animator;
@@ -31,7 +31,7 @@ namespace StateMachines.AIBrain.Enemy.States
         {
             Debug.Log("Boss Death Enter");
             _animator.SetTrigger("Death");
-            EnemySignals.Instance.onOpenPortal?.Invoke();
+            AISignals.Instance.onOpenPortal?.Invoke();
             //Level Completed
         }
 

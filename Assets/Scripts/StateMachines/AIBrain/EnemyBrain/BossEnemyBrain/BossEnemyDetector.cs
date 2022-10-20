@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Controllers.Player;
 using UnityEngine;
 using Managers;
 using StateMachines.AIBrain.Enemy;

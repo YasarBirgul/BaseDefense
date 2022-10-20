@@ -30,10 +30,7 @@ public class ThrowEventController : MonoBehaviour, IReleasePoolObject, IGetPoolO
 
     [SerializeField]
     private BombPhysicController bombPhysicController;
-
-    [SerializeField]
-    private bool isPathActiveRunTime = true;
-
+    
     public GameObject SpriteTarget;
 
     #endregion
@@ -84,7 +81,7 @@ public class ThrowEventController : MonoBehaviour, IReleasePoolObject, IGetPoolO
     {
         float distY = bossBrain.PlayerTarget.position.y - _throwBomb.transform.position.y; // y (yukseklik)'de ki yer degistirme
         Vector3 distXZ = new Vector3(bossBrain.PlayerTarget.position.x - _throwBomb.transform.position.x, 0, bossBrain.PlayerTarget.position.z - _throwBomb.transform.position.z); //  x and z yer degistirme
-        float time = Mathf.Sqrt(-2 * _throwData.Height / _throwData.Gravity) + Mathf.Sqrt(2 * (distY - _throwData.Height) / _throwData.Gravity); // kok (-2 * yukseklik / yercekimi kuvveti) + kok (2* (yukseklik farký - offset yukseklik) / yercekimi kuvveti)
+        float time = Mathf.Sqrt(-2 * _throwData.Height / _throwData.Gravity) + Mathf.Sqrt(2 * (distY - _throwData.Height) / _throwData.Gravity); // kok (-2 * yukseklik / yercekimi kuvveti) + kok (2* (yukseklik farkï¿½ - offset yukseklik) / yercekimi kuvveti)
         Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * _throwData.Gravity * _throwData.Height); // y de ki velocity hesabi
         Vector3 velocityXZ = distXZ / time; // zamana bagli olarak alacagi yol 
 
@@ -94,9 +91,15 @@ public class ThrowEventController : MonoBehaviour, IReleasePoolObject, IGetPoolO
     }
     private void DeactiveSpriteTargetDelay()
     {
-        bombPhysicController.enabled = true;
-        SpriteTarget.SetActive(false);
-        bombPhysicController.enabled = false;
+        if (bombPhysicController)
+        {
+            bombPhysicController.enabled = true;
+            bombPhysicController.enabled = false;
+        }
+        if (SpriteTarget.activeInHierarchy)
+        {
+            SpriteTarget.SetActive(false);
+        }
     }
 
     /*

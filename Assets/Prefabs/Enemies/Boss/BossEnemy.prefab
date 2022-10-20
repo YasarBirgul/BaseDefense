@@ -131,7 +131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2833854586905137785}
   - component: {fileID: 7613285509802026759}
-  m_Layer: 18
+  m_Layer: 11
   m_Name: BossPhysicBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -715,6 +715,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bombHolder: {fileID: 8986287383595011284}
   bossBrain: {fileID: 8986287384279758475}
+  bombPhysicController: {fileID: 0}
   isPathActiveRunTime: 1
   SpriteTarget: {fileID: 0}
 --- !u!1 &5249041220852981566
@@ -1528,7 +1529,7 @@ GameObject:
   - component: {fileID: 8986287385174017235}
   - component: {fileID: 8986287385174017234}
   - component: {fileID: 8986287385174017237}
-  m_Layer: 17
+  m_Layer: 15
   m_Name: BossEnemyDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}

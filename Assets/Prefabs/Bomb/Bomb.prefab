@@ -12,13 +12,13 @@ GameObject:
   - component: {fileID: 8332804733236168197}
   - component: {fileID: 8985456716922754798}
   - component: {fileID: 2212383694047462279}
-  m_Layer: 23
+  m_Layer: 24
   m_Name: Bomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &445013897161806029
 Transform:
   m_ObjectHideFlags: 0
@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 5619930522692175203}
   - component: {fileID: 7178294310077088717}
   - component: {fileID: 6056636291323986479}
-  m_Layer: 23
+  m_Layer: 24
   m_Name: Physic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6056636291323986479
 MonoBehaviour:
@@ -272,6 +272,10 @@ PrefabInstance:
     - target: {fileID: 389972561583142955, guid: a6a02baceacd0a34892152a14a057b79, type: 3}
       propertyPath: m_Name
       value: Toon Explosion
+      objectReference: {fileID: 0}
+    - target: {fileID: 389972561583142955, guid: a6a02baceacd0a34892152a14a057b79, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6a02baceacd0a34892152a14a057b79, type: 3}

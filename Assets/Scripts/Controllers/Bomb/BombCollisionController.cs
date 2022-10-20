@@ -21,8 +21,7 @@ public class BombCollisionController : MonoBehaviour, IReleasePoolObject
     public void ReleaseObject(GameObject obj, PoolType poolType)
     {
         PoolSignals.Instance.onReleaseObjectFromPool(poolType,obj);
-    }
-
+    } 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.TryGetComponent<PlayerManager>(out PlayerManager manager) || collision.gameObject.CompareTag("Ground") )
@@ -31,7 +30,6 @@ public class BombCollisionController : MonoBehaviour, IReleasePoolObject
         }
 
     }
-
     private IEnumerator WaitForTask()
     {
         if (bombParticle)

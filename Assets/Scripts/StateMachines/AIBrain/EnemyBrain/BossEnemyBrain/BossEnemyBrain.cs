@@ -2,10 +2,12 @@ using UnityEngine;
 using Interfaces;
 using StateMachines.AIBrain.Enemy.States;
 using System;
-using Data.ValueObject.AIDatas;
 using Sirenix.OdinInspector;
 using Enums;
 using Controllers;
+using Data.UnityObject;
+using Data.ValueObject.AIData;
+using StateBehaviour;
 
 namespace StateMachines.AIBrain.Enemy
 {
@@ -25,7 +27,7 @@ namespace StateMachines.AIBrain.Enemy
 
         [BoxGroup("Serializable Variables")]
         [SerializeField]
-        private EnemyType enemyType;
+        private EnemyTypes enemyType;
 
         [BoxGroup("Serializable Variables")]
         [SerializeField]
@@ -77,7 +79,7 @@ namespace StateMachines.AIBrain.Enemy
         }
         private EnemyAIData GetAIData()
         {
-            return Resources.Load<CD_EnemyAI>("Data/CD_EnemyAI").EnemyAIData;
+            return Resources.Load<CD_Enemy>("Data/CD_Enemy").EnemyAIData;
         }
         #endregion
 
@@ -91,7 +93,7 @@ namespace StateMachines.AIBrain.Enemy
 
             //Statemachine statelerden sonra tanimlanmali ?
             _stateMachine = new StateMachine();
-
+            
             At(_waitState, _attackState, IAttackPlayer()); 
             At(_attackState, _waitState, INoAttackPlayer()); 
 
@@ -103,12 +105,11 @@ namespace StateMachines.AIBrain.Enemy
             Func<bool> IAttackPlayer() => () => PlayerTarget != null;
             Func<bool> INoAttackPlayer() => () => PlayerTarget == null;
             Func<bool> AmIDead() => () => Health <= 0;
-
         }
 
         #endregion
 
-        private void Update() => _stateMachine.Tick();
+        private void Update() => _stateMachine.UpdateIState();
 
         [Button]
         private void BossDeathState()

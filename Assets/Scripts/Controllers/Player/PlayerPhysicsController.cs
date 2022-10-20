@@ -2,6 +2,7 @@
 using Controllers.Gate;
 using Controllers.Turret;
 using Enums.GameStates;
+using Interfaces;
 using Managers;
 using Signals;
 using UnityEngine;
@@ -37,6 +38,10 @@ namespace Controllers.Player
             if (other.TryGetComponent(out TurretPhysicsController turretPhysicsController))
             {
                 playerManager.SetTurretAnim(true);
+            }
+            if (other.TryGetComponent(out BombPhysicController bombPhysicController))
+            {
+                playerManager.OnTakeDamage(bombPhysicController.Damage());
             }
         }
         private void OnTriggerExit(Collider other)

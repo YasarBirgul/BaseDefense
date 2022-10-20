@@ -25,6 +25,12 @@ namespace Managers
         [SerializeField]
         private int numberOfEnemiesToSpawn = 50;
         
+        [SerializeField]
+        private Transform bossSpawnPos;
+
+        [SerializeField]
+        private GameObject spriteTarget;
+        
         #endregion
     
         #region Public Variables
@@ -75,6 +81,7 @@ namespace Managers
         private void OnReadyToPlay()
         {
             StartCoroutine(SpawnEnemies());
+            SpawnBoss();
         }
         private Transform SetSpawnTransform()
         {
@@ -116,6 +123,12 @@ namespace Managers
         {
             _enemyAIObj = PoolSignals.Instance.onGetObjectFromPool?.Invoke(poolName);
             return _enemyAIObj;
+        }
+        private void SpawnBoss()
+        {
+            var bossObj = GetObject(PoolType.Boss);
+            bossObj.transform.position = bossSpawnPos.position;
+            bossObj.GetComponentInChildren<ThrowEventController>().SpriteTarget = spriteTarget;
         }
     }
 }
