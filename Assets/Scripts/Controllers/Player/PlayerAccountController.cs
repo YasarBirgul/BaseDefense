@@ -21,7 +21,7 @@ namespace Controllers.Player
         
         [SerializeField] 
         private MoneyStackerController moneyStackerController;
-        
+
         #endregion
 
         #region Private Variables
@@ -69,12 +69,18 @@ namespace Controllers.Player
                 break;
             }
         }
+        
         public async void StopPayment()
         {
             _canPay = false;
             await Task.Delay(200);
             _canPay = true;
         }
+        public void PaymentStackAnimation(Transform transform)
+        {
+            moneyStackerController.PaymentStackAnimation(transform);
+        }
+
         #endregion
     }
 }

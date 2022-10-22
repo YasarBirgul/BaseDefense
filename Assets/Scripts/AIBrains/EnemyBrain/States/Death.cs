@@ -44,6 +44,9 @@ namespace AIBrains.EnemyBrain.States
         public void OnEnter()
         {
             EnemyDead();
+            _animator.ResetTrigger("Run");
+            _animator.ResetTrigger("Throw");
+            _animator.ResetTrigger("Attack");
             _animator.SetTrigger(_die);
             for (int i = 0; i < 3; i++)
             {

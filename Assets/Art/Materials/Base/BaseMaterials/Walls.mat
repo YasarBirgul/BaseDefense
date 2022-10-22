@@ -10,8 +10,8 @@ Material:
   m_Name: Walls
   m_Shader: {fileID: 4800000, guid: 733fefdcde0d35f4b822d2935d5a22f4, type: 3}
   m_ShaderKeywords: TCP2_REFLECTIONS_FRESNEL TCP2_RIM_LIGHTING_LIGHTMASK TCP2_UV_NORMALS_FULL
-    _MK_ARTISTIC_PROJECTION_SCREEN_SPACE _MK_ENVIRONMENT_REFLECTIONS_AMBIENT _MK_LIGHT_CEL
-    _MK_RECEIVE_SHADOWS _MK_WRAPPED_DIFFUSE _RECEIVESHADOWS_ON _WRAPPEDLIGHTING_ON
+    _MK_ARTISTIC_PROJECTION_SCREEN_SPACE _MK_COLOR_GRADING_ALBEDO _MK_ENVIRONMENT_REFLECTIONS_AMBIENT
+    _MK_LIGHT_CEL _MK_RECEIVE_SHADOWS _MK_WRAPPED_DIFFUSE _RECEIVESHADOWS_ON _WRAPPEDLIGHTING_ON
   m_LightmapFlags: 6
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -164,7 +164,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _AdvancedTab: 0
+    - _AdvancedTab: 1
     - _AlphaClip: 0
     - _AlphaClipping: 0
     - _AlphaCutoff: 0.5
@@ -178,13 +178,13 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _ColorGrading: 0
+    - _ColorGrading: 1
     - _Contrast: 1
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DiffuseSmoothness: 0
+    - _DiffuseSmoothness: 0.371
     - _DiffuseThresholdOffset: 0.25
     - _DirectIntensityOutline: 1
     - _Dissolve: 0
@@ -256,7 +256,7 @@ Material:
     - _RimSmoothness: 0.5
     - _RimThresholdOffset: 0.25
     - _SampleGI: 0
-    - _Saturation: 1
+    - _Saturation: 1.4
     - _Shininess: 0
     - _SingleIndirectColor: 0
     - _SketchMapScale: 1
@@ -283,7 +283,7 @@ Material:
     - _StencilRef: 0
     - _StencilWriteMask: 255
     - _StencilZFail: 0
-    - _StylizeTab: 0
+    - _StylizeTab: 1
     - _Surface: 0
     - _ThresholdMapScale: 1
     - _UseAlphaTest: 0
@@ -308,13 +308,13 @@ Material:
     - _ZTest: 4
     - _ZWrite: 1
     m_Colors:
-    - _AlbedoColor: {r: 0.735849, g: 0.43879393, b: 0.20478818, a: 1}
+    - _AlbedoColor: {r: 1, g: 0.6013822, b: 0.38599998, a: 1}
     - _BaseColor: {r: 1, g: 0.46450862, b: 0.16470587, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DissolveBorderColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GoochBrightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _GoochDarkColor: {r: 0, g: 0, b: 0, a: 1}
+    - _GoochDarkColor: {r: 0.23584908, g: 0.23584908, b: 0.23584908, a: 1}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
     - _IridescenceColor: {r: 1, g: 1, b: 1, a: 0.5}
     - _MatCapColor: {r: 1, g: 1, b: 1, a: 1}

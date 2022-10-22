@@ -25,6 +25,8 @@ namespace Managers
         private BaseRoomTypes roomType;
         [SerializeField] 
         private RoomPaymentTextController roomPaymentTextController;
+        [SerializeField] 
+        private Transform moneyTarget;
 
         #endregion
         
@@ -51,7 +53,8 @@ namespace Managers
         {
             if(!CustomerOnBuyZone || !customer.HasMoney) return;
             if (_roomData.RoomCost > 0) 
-            {
+            { 
+                customer.PaymentStackAnimation(moneyTarget);
                 _roomData.RoomCost -= payedAmount;
                 await Task.Delay(100);
                 RoomCostUpdate(payedAmount,customer);
